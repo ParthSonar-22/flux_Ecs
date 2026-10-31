@@ -162,14 +162,6 @@ export default function AboutPage() {
                         &ldquo;{member.quote}&rdquo;
                       </p>
                     )}
-                    {member.phone && (
-                      <div className="pt-2 border-t border-ink/20 flex items-center gap-1.5 font-complexity-notation text-xs text-ink font-bold">
-                        <span className="material-symbols-outlined text-[15px] text-brick">call</span>
-                        <a href={`tel:${member.phone.replace(/\s+/g, '')}`} className="hover:underline">
-                          {member.phone}
-                        </a>
-                      </div>
-                    )}
                   </div>
                 </article>
               ))}

@@ -46,32 +46,32 @@ export default function HeroSection() {
             Where ideas flow into{' '}
             <span className="relative inline-block text-brick whitespace-nowrap">
               innovation
-              {/* Hand-drawn full-span student marker scribble covering all below innovation */}
+              {/* Hand-drawn marker scribble extending before the word start and beyond the word end */}
               <svg
                 ref={scribbleRef}
-                className="absolute -bottom-3.5 -left-1.5 w-[calc(100%+14px)] h-4 sm:h-5 overflow-visible pointer-events-none"
-                viewBox="0 0 260 16"
+                className="absolute -bottom-3.5 sm:-bottom-4 -left-4 sm:-left-6 w-[calc(100%+32px)] sm:w-[calc(100%+48px)] h-5 sm:h-6 overflow-visible pointer-events-none"
+                viewBox="0 0 320 18"
                 preserveAspectRatio="none"
                 fill="none"
                 aria-hidden="true"
               >
-                {/* Main fluid marker stroke */}
+                {/* Main fluid marker stroke starting before word and reaching beyond */}
                 <path
                   className="scribble-underline"
-                  d="M 1 9 C 45 4, 90 13, 145 8 C 190 3, 225 11, 259 7"
+                  d="M 2 10 C 60 4, 130 16, 200 8 C 250 3, 290 12, 318 8"
                   stroke="var(--brick)"
-                  strokeWidth="4"
+                  strokeWidth="4.5"
                   strokeLinecap="round"
                   fill="none"
                 />
                 {/* Secondary pass for natural hand-drawn marker effect */}
                 <path
                   className="scribble-underline"
-                  d="M 6 12 C 55 8, 120 14, 180 10 C 215 6, 240 12, 255 9"
+                  d="M 10 14 C 75 8, 155 17, 225 10 C 265 6, 295 13, 314 10"
                   stroke="var(--brick)"
-                  strokeWidth="3"
+                  strokeWidth="3.5"
                   strokeLinecap="round"
-                  opacity="0.85"
+                  opacity="0.9"
                   fill="none"
                 />
               </svg>

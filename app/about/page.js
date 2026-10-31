@@ -83,7 +83,9 @@ export default function AboutPage() {
         <section className="w-full px-4 lg:px-margin py-space-xl bg-paper border-b-2 border-ink">
           <div className="max-w-7xl mx-auto flex flex-col space-y-8">
             <div className="border-b border-ink/30 pb-4">
-              <span className="font-handwritten text-xl text-brick block mb-1">Mentorship &amp; Guidance</span>
+              <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+                Mentorship &amp; Guidance
+              </span>
               <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
                 Faculty in-charge
               </h2>
@@ -117,7 +119,9 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto flex flex-col space-y-8">
             <div className="border-b border-ink/30 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
               <div>
-                <span className="font-handwritten text-xl text-brick block mb-1">Core Leadership</span>
+                <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+                  Core Leadership
+                </span>
                 <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
                   Senior Council
                 </h2>
@@ -178,7 +182,9 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto flex flex-col space-y-8">
             <div className="border-b border-ink/30 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
               <div>
-                <span className="font-handwritten text-xl text-brick block mb-1">Rising Talent</span>
+                <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+                  Rising Talent
+                </span>
                 <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
                   Junior Council
                 </h2>
@@ -232,7 +238,9 @@ export default function AboutPage() {
             {/* Address card */}
             <div className="lg:col-span-6 bg-paper border border-ink/30 p-6 lg:p-8 flex flex-col justify-between">
               <div className="space-y-4">
-                <span className="font-handwritten text-xl text-brick block">Campus Location</span>
+                <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+                  Campus Location
+                </span>
                 <h3 className="font-headline-md text-headline-md text-ink leading-snug font-bold">
                   Find us at VESIT
                 </h3>

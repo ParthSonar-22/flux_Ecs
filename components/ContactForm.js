@@ -56,7 +56,7 @@ export default function ContactForm() {
     <div className="bg-card border-2 border-ink shadow-[6px_6px_0px_var(--brick)] p-space-md lg:p-space-lg">
       <div className="border-b-2 border-ink pb-space-sm mb-space-md">
         <div className="flex items-center justify-between">
-          <span className="font-handwritten text-xl text-brick block">
+          <span className="handwritten-eyebrow text-xl sm:text-2xl font-bold text-brick">
             Direct Message
           </span>
           <span className="font-complexity-notation text-xs font-bold text-ink bg-tan px-2 py-0.5 border border-ink">

@@ -88,9 +88,21 @@ body {
   outline: none;
 }
 
-/* Caveat handwritten font utility (used only in photo collage captions) */
+/* Caveat handwritten font utility — bolder, authentic student script */
 .font-handwritten {
   font-family: var(--font-caveat), cursive;
+  font-weight: 700;
+}
+
+/* Handwritten section eyebrow — bolder, larger, and underlined as requested */
+.handwritten-eyebrow {
+  font-family: var(--font-caveat), cursive;
+  font-weight: 700;
+  display: inline-block;
+  text-decoration: underline;
+  text-decoration-color: var(--brick);
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 4px;
 }
 
 /* Photo collage tape strip effect */

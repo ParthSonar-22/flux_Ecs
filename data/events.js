@@ -24,30 +24,101 @@ export const events = [
       label: 'Day 1: Learn the Logic',
       date: '2nd November 2026',
       items: [
-        'Searching and Sorting',
-        'Greedy Algorithms',
-        'Divide and Conquer',
-        'Graph Algorithms',
-        'Interactive Mini-Challenges',
+        'Searching and Sorting Fundamentals',
+        'Greedy Algorithms & Decision Making',
+        'Divide and Conquer Approaches',
+        'Graph Traversal (BFS & DFS)',
+        'Interactive Logic Mini-Challenges',
       ],
     },
     day2: {
       label: 'Day 2: Bid. Solve. Win.',
       date: '3rd November 2026',
       items: [
-        'Strategic Coin Bidding',
-        'Team Challenges',
-        'Steal Deal Rounds',
-        'Bonus Challenge',
-        'Points, Penalties and Rewards',
+        'Strategic Virtual Coin Bidding',
+        'Team Problem Solving Battles',
+        'Steal Deal Bidding Windows',
+        'Bonus Boss Challenge',
+        'Live Leaderboard, Penalties & Rewards',
       ],
     },
+    biddingRules: [
+      {
+        title: 'Virtual Coin Purse',
+        badge: 'Rule 01',
+        description:
+          'Every registered team receives a fixed purse of virtual auction coins at the beginning of Day 2. Coins are used to bid on problem statements of varying point weights.',
+      },
+      {
+        title: 'Open & Blind Bidding Tiers',
+        badge: 'Rule 02',
+        description:
+          'Problems are categorized into Bronze (100 pts), Silver (250 pts), and Gold (500 pts). Teams place bids to lock down problems. The highest bidder secures the problem.',
+      },
+      {
+        title: 'The Steal Deal Window',
+        badge: 'Rule 03',
+        description:
+          'If a team fails to pass test cases on their acquired problem within the designated timer, the problem is unlocked for live steal bids at a discounted coin price.',
+      },
+      {
+        title: 'Net Scoring Formula',
+        badge: 'Rule 04',
+        description:
+          'Final ranking = (Points from passed test cases) - (Total coins spent on auctions). Conservative bidding paired with accurate coding yields the championship score.',
+      },
+    ],
+    syllabus: [
+      {
+        topic: 'Searching & Sorting',
+        desc: 'Binary search variations, rotated arrays, custom comparator sort logic, and two-pointer search patterns.',
+      },
+      {
+        topic: 'Greedy Algorithms',
+        desc: 'Activity selection, interval merging, coin change optimal selection, and greedy decision trees.',
+      },
+      {
+        topic: 'Divide & Conquer',
+        desc: 'Recursive breakdown, merge sort paradigms, binary exponentiation, and peak element discovery.',
+      },
+      {
+        topic: 'Graphs & Breadth/Depth Search',
+        desc: 'Adjacency representations, BFS queue traversal, DFS recursion, and connected component counting.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Do I need prior competitive coding experience?',
+        answer:
+          'Not at all! Day 1 is specifically designed as "Learn the Logic", where senior mentors walk through algorithm patterns with interactive mini-challenges so everyone is prepared for the Day 2 auction.',
+      },
+      {
+        question: 'Can First-Year (FE) ECS students take part?',
+        answer:
+          'Yes, absolutely! Algorithm\'s Auction is open to FE, SE, TE, and BE students of the Department of Electronics & Computer Science. Beginner-friendly problems and mentor support are provided.',
+      },
+      {
+        question: 'What is the team size and composition?',
+        answer:
+          'You can register individually (solo) or as a team of up to 3 students. Solo participants can also be paired with peers during the Day 1 team formation mixer.',
+      },
+      {
+        question: 'What do I need to bring?',
+        answer:
+          'Bring your laptop with an IDE or compiler installed for your preferred language (C++, Python, Java, or C), a charger, and your college ID card.',
+      },
+      {
+        question: 'Will all participants receive certificates?',
+        answer:
+          'Yes. All registered attendees who complete both days will receive an official Certificate of Participation from the Department of Electronics & Computer Science × FLUX-ECS.',
+      },
+    ],
     whatsInItForYou: [
       'Explore algorithms and sharpen your problem-solving skills.',
-      'Build skills useful for future placements.',
-      'Make strategic bids and compete with your peers.',
-      'Challenge yourself, have fun, and aim for the top.',
-      'Earn a Certificate of Participation.',
+      'Build skills useful for future placements and technical rounds.',
+      'Make strategic bids and compete with your department peers.',
+      'Challenge yourself, have fun, and aim for the top of the leaderboard.',
+      'Earn an official Certificate of Participation from VESIT ECS.',
     ],
     note: 'No need to be an expert. Just bring your curiosity and competitive spirit.',
     posterTagline:
@@ -57,84 +128,6 @@ export const events = [
       { name: 'Harsh Patange', role: 'President', phone: '+91 84548 41288' },
       { name: 'Riya Pailwan', role: 'Hardware Head', phone: '+91 81694 56269' },
       { name: 'Aayan Shaikh', role: 'Technical Head', phone: '+91 98674 66475' },
-      { name: 'Paarth Patil', role: 'Sr. Technical Officer', phone: '+91 97024 13348' },
-    ],
-  },
-  {
-    id: 'hardware-bootcamp',
-    slug: 'hardware-bootcamp',
-    title: 'Embedded Sensors & Robotics Bootcamp',
-    posterLine: 'Hands-on wiring, sensor calibration, and microcontroller buses.',
-    shortLine: 'Microcontrollers, Sensor Telemetry & Motor Drivers',
-    status: 'upcoming',
-    startDate: new Date('2026-12-12T13:30:00+05:30'),
-    endDate: new Date('2026-12-12T16:30:00+05:30'),
-    venue: 'Lab 201, VESIT',
-    time: '1:30 pm – 4:30 pm',
-    poster: '/photos/lab201/lab201-1.jpg',
-    presentedBy: 'Department of Electronics and Computer Science × FluxECS',
-    intro:
-      'A practical afternoon workshop in Lab 201 where students wire up ESP32 boards, calibrate ultrasonic and temperature sensors over I²C/SPI, and drive dual DC motors through H-bridge drivers.',
-    highlights: [
-      'ESP32 pinout, GPIO control and PWM modulation',
-      'Interfacing HC-SR04 ultrasonic and DHT-11 sensors',
-      'I²C LCD display communication and telemetry debugging',
-      'Motor driver circuitry (L298N) for robotics prototypes',
-    ],
-    contacts: [
-      { name: 'Riya Pailwan', role: 'Hardware Head', phone: '+91 81694 56269' },
-      { name: 'Atharva Vaidya', role: 'Hardware Officer', phone: '+91 91374 81045' },
-    ],
-  },
-  {
-    id: 'winter-hackathon',
-    slug: 'winter-hackathon',
-    title: 'ECS Winter Project Jam',
-    posterLine: 'Build useful student and department solutions in 24 hours.',
-    shortLine: '24-Hour Hardware & Software Innovation Sprint',
-    status: 'upcoming',
-    startDate: new Date('2027-01-16T10:00:00+05:30'),
-    endDate: new Date('2027-01-17T14:00:00+05:30'),
-    venue: 'Labs 201 & 203, VESIT',
-    time: '10:00 am – 2:00 pm (Next Day)',
-    poster: '/photos/lab203/lab203-1.jpg',
-    presentedBy: 'Department of Electronics and Computer Science × FluxECS',
-    intro:
-      'A collaborative 2-day hackathon where teams of ECS students build working prototypes tackling smart campus utilities, automated lab inventory tracking, and assistive technology.',
-    highlights: [
-      'Problem statements provided by faculty and seniors',
-      'Hardware component kits provided on-site in Lab 201',
-      'Senior mentors available around the clock for architecture reviews',
-      'Live project demonstrations and evaluation before department jury',
-    ],
-    contacts: [
-      { name: 'Aayan Shaikh', role: 'Technical Head', phone: '+91 98674 66475' },
-      { name: 'Parth Sonar', role: 'Web Master', phone: '+91 90048 29013' },
-    ],
-  },
-  {
-    id: 'placement-dsa-circle',
-    slug: 'placement-dsa-circle',
-    title: 'Placement DSA & Mock Circles',
-    posterLine: 'From two-pointers to dynamic programming with placed seniors.',
-    shortLine: 'Senior-Guided Coding Patterns & Interview Prep',
-    status: 'upcoming',
-    startDate: new Date('2027-02-06T14:00:00+05:30'),
-    endDate: new Date('2027-02-06T17:00:00+05:30'),
-    venue: 'Lab 215, VESIT',
-    time: '2:00 pm – 5:00 pm',
-    poster: '/photos/lab215/lab215-1.jpg',
-    presentedBy: 'Department of Electronics and Computer Science × FluxECS',
-    intro:
-      'An intensive peer session in Lab 215 where placed final-year seniors break down high-frequency interview patterns, conduct 1-on-1 mock interviews, and review student resumes.',
-    highlights: [
-      'Patterns breakdown: Sliders, Trees, Graphs & Dynamic Programming',
-      '1-on-1 whiteboarding and live problem solving',
-      'Resume critique and GitHub portfolio audit',
-      'Open Q&A on balancing academics with internship search',
-    ],
-    contacts: [
-      { name: 'Harsh Patange', role: 'President', phone: '+91 84548 41288' },
       { name: 'Paarth Patil', role: 'Sr. Technical Officer', phone: '+91 97024 13348' },
     ],
   },
@@ -273,49 +266,35 @@ export const clubPillars = [
   },
 ]
 
-export const termRoadmap = [
+// 4-Stage Algorithm's Auction Pipeline replaces the unconfirmed future events
+export const tournamentPipeline = [
   {
-    period: 'August 2026',
-    status: 'Concluded',
-    title: 'Senior VLSI & Hardware Demos',
-    venue: 'Lab 201',
-    description: 'FPGA state machines, RF transceivers, and motor chassis live bench.',
+    phase: '01',
+    stage: 'Registration & Team Formation',
+    venue: 'Google Forms / Online',
+    schedule: 'Open until 1st Nov 2026',
+    description: 'Solo participants and teams of up to 3 students register. Solo attendees paired up on Day 1.',
   },
   {
-    period: 'September 2026',
-    status: 'Concluded',
-    title: 'IoTA Induction Exhibition',
-    venue: 'Labs 201, 203 & 215',
-    description: 'Multi-lab showcase welcoming newly admitted first-year ECS students.',
-  },
-  {
-    period: 'November 2026',
-    status: 'Active Flagship',
-    title: "Algorithm's Auction 2.0",
+    phase: '02',
+    stage: 'Day 1: Learn the Logic',
     venue: '2nd Floor, VESIT',
-    description: '2-day competitive coding, logic challenges, and strategic auction bidding.',
-    isHighlighted: true,
+    schedule: '2nd Nov 2026 · 1:00 pm',
+    description: 'Master searching, greedy, divide & conquer and graph patterns with live mentor-led mini challenges.',
   },
   {
-    period: 'December 2026',
-    status: 'Upcoming',
-    title: 'Embedded Sensors Bootcamp',
-    venue: 'Lab 201',
-    description: 'Hands-on wiring, I²C bus calibration, and motor control workshop.',
+    phase: '03',
+    stage: 'Day 2: Live Coin Auction & Bidding',
+    venue: '2nd Floor, VESIT',
+    schedule: '3rd Nov 2026 · 1:00 pm',
+    description: 'Manage virtual coin purses, bid on problem tiers, trigger steal deal windows, and submit test cases.',
   },
   {
-    period: 'January 2027',
-    status: 'Upcoming',
-    title: 'ECS Winter Project Jam',
-    venue: 'Labs 201 & 203',
-    description: '24-hour student engineering sprint building campus tools & solutions.',
-  },
-  {
-    period: 'February 2027',
-    status: 'Upcoming',
-    title: 'Placement DSA & Mock Circles',
-    venue: 'Lab 215',
-    description: 'Weekly peer mock interviews, LeetCode patterns, and resume reviews.',
+    phase: '04',
+    stage: 'Evaluation, Leaderboard & Awards',
+    venue: '2nd Floor, VESIT',
+    schedule: '3rd Nov 2026 · 3:00 pm',
+    description: 'Automated test suite evaluation, net coin scoring, trophy presentation, and certificates for all.',
   },
 ]
 

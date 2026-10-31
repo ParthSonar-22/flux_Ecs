@@ -15,7 +15,9 @@ export default function FeaturedEvent() {
       <div className="max-w-7xl mx-auto">
         {/* Simple heading with handwritten label */}
         <div className="mb-space-sm">
-          <span className="font-handwritten text-2xl text-brick block">Mark your calendar</span>
+          <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+            Mark your calendar
+          </span>
           <h2 className="font-headline-lg text-headline-lg text-ink font-bold">
             Upcoming: Algorithm&apos;s Auction
           </h2>

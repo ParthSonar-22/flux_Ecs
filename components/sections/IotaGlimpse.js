@@ -31,7 +31,9 @@ export default function IotaGlimpse() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-space-md pb-3 gap-3 border-b border-ink/30">
           <div>
-            <span className="font-handwritten text-xl text-brick block mb-0.5">Induction Retrospective</span>
+            <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+              Induction Retrospective
+            </span>
             <h2 className="font-headline-md text-headline-md text-ink font-bold">
               IoTA Archives — 7th September 2026
             </h2>

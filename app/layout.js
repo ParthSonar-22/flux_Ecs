@@ -24,6 +24,7 @@ const spaceMono = Space_Mono({
 
 const caveat = Caveat({
   subsets: ['latin'],
+  weight: ['400', '600', '700'],
   display: 'swap',
   variable: '--font-caveat',
 })

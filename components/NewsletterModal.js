@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react'
 
+let openModalFn = () => {}
+
 export function openNewsletterModal() {
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(new CustomEvent('open-newsletter'))
-  }
+  openModalFn()
 }
 
 export default function NewsletterModal() {
@@ -16,14 +16,23 @@ export default function NewsletterModal() {
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
-    const handleOpen = () => {
+    openModalFn = () => {
       setIsOpen(true)
       setStatus('idle')
       setErrorMessage('')
+      setEmail('')
     }
-    window.addEventListener('open-newsletter', handleOpen)
-    return () => window.removeEventListener('open-newsletter', handleOpen)
   }, [])
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -45,11 +54,11 @@ export default function NewsletterModal() {
         setEmail('')
       } else {
         setStatus('error')
-        setErrorMessage(data.error || 'Failed to subscribe. Please try again.')
+        setErrorMessage(data.error || 'Subscription failed. Please try again.')
       }
-    } catch (err) {
+    } catch {
       setStatus('error')
-      setErrorMessage('Network error. Please try again later.')
+      setErrorMessage('Network error. Please check your connection.')
     }
   }
 
@@ -57,18 +66,17 @@ export default function NewsletterModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-ink/60 backdrop-blur-sm transition-opacity duration-200"
-      onClick={() => setIsOpen(false)}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/60 backdrop-blur-sm"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) setIsOpen(false)
+      }}
     >
-      <div
-        className="w-full max-w-md bg-paper border-2 border-ink p-6 shadow-[6px_6px_0px_var(--brick)] relative transition-transform duration-200"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="relative w-full max-w-md border-2 border-ink bg-paper p-6 shadow-[8px_8px_0px_var(--brick)]">
         {/* Close Button */}
         <button
           type="button"
           onClick={() => setIsOpen(false)}
-          className="absolute top-4 right-4 w-8 h-8 border-2 border-ink bg-card flex items-center justify-center text-ink hover:bg-tan active:translate-x-0.5 active:translate-y-0.5"
+          className="absolute top-4 right-4 w-8 h-8 border-2 border-ink bg-card flex items-center justify-center text-ink hover:bg-tan active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
           aria-label="Close modal"
         >
           <span className="material-symbols-outlined text-[18px]">close</span>
@@ -76,31 +84,31 @@ export default function NewsletterModal() {
 
         <div className="mb-4">
           <span className="inline-block px-2 py-0.5 border border-ink bg-tan text-ink text-[11px] font-bold uppercase tracking-wider font-complexity-notation mb-2">
-            Dispatch Registry
+            FLUX-ECS Updates
           </span>
           <h3 className="font-headline-sm text-headline-sm text-ink font-bold">
-            Subscribe to Newsletter
+            Get Club Updates
           </h3>
           <p className="font-body-sm text-body-sm text-muted mt-1">
-            Receive official announcements, technical dispatches, and workshop schedules directly in your inbox.
+            Receive event announcements, workshop schedules, and project logs directly in your inbox.
           </p>
         </div>
 
         {status === 'success' ? (
-          <div className="border-2 border-ink bg-card p-4 text-center mt-4">
-            <span className="material-symbols-outlined text-brick text-[32px] mb-1">
+          <div className="border-2 border-ink bg-card p-4 text-center mt-4 space-y-2">
+            <span className="material-symbols-outlined text-brick text-[32px]">
               check_circle
             </span>
             <p className="font-headline-sm text-[1.1rem] font-bold text-ink">
-              Subscription Confirmed
+              You&apos;re Subscribed!
             </p>
-            <p className="font-body-sm text-muted mt-1">
-              You are now enrolled in the FLUX-ECS dispatch registry.
+            <p className="font-body-sm text-muted">
+              We&apos;ll keep you posted on upcoming competitions and lab workshops.
             </p>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="mt-4 px-4 py-1.5 border-2 border-ink bg-brick text-paper font-label-smallcaps uppercase font-bold text-[12px] shadow-[2px_2px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5"
+              className="mt-4 px-4 py-1.5 border-2 border-ink bg-brick text-paper font-label-smallcaps uppercase font-bold text-[12px] shadow-[2px_2px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 cursor-pointer"
             >
               Done
             </button>
@@ -130,10 +138,10 @@ export default function NewsletterModal() {
                 id="newsletter-email"
                 type="email"
                 required
-                placeholder="student.2023ecs@ves.ac.in"
+                placeholder="2025.studentname@ves.ac.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 border-2 border-ink bg-card text-ink placeholder-muted focus:outline-none focus:border-brick font-body-md text-body-md"
+                className="w-full px-3 py-2 border-2 border-ink bg-card text-ink placeholder-muted/60 focus:outline-none focus:border-brick font-body-md text-body-md"
               />
             </div>
 
@@ -146,9 +154,9 @@ export default function NewsletterModal() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full py-2.5 border-2 border-ink bg-brick text-paper font-label-smallcaps uppercase tracking-wider font-bold shadow-[3px_3px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 active:shadow-none transition-all disabled:opacity-50"
+              className="w-full py-2.5 border-2 border-ink bg-brick text-paper font-label-smallcaps uppercase tracking-wider font-bold shadow-[3px_3px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 active:shadow-none transition-all disabled:opacity-50 cursor-pointer"
             >
-              {status === 'loading' ? 'Transmitting...' : 'Register Email'}
+              {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
             </button>
           </form>
         )}

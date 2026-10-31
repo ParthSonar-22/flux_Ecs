@@ -8,12 +8,13 @@ export const events = [
     title: "Algorithm's Auction",
     posterLine: 'Every move is a strategy. Every bid is a gamble.',
     shortLine: 'Think. Bid. Solve. Win.',
-    status: 'upcoming', // computed at runtime via isPast()
+    status: 'upcoming',
     startDate: new Date('2026-11-02T13:00:00+05:30'),
     endDate: new Date('2026-11-03T15:30:00+05:30'),
     venue: '2nd Floor, VESIT',
     time: '1:00 pm – 3:30 pm',
-    poster: '/posters/algorithms-auction.jpg', // TODO: place file in public/posters/
+    poster: '/posters/algorithms-auction.jpg',
+    timelineImage: '/posters/algorithm-timeline.jpg',
     presentedBy: 'Department of Electronics and Computer Science × FluxECS',
     registerUrl:
       'https://docs.google.com/forms/d/e/1FAIpQLSfp5CY1X37Z6CC40Q5R4YRrEb1Rcd4Z9ux6VyNmWGDVnvh5RA/viewform?usp=dialog',
@@ -56,6 +57,84 @@ export const events = [
       { name: 'Harsh Patange', role: 'President', phone: '+91 84548 41288' },
       { name: 'Riya Pailwan', role: 'Hardware Head', phone: '+91 81694 56269' },
       { name: 'Aayan Shaikh', role: 'Technical Head', phone: '+91 98674 66475' },
+      { name: 'Paarth Patil', role: 'Sr. Technical Officer', phone: '+91 97024 13348' },
+    ],
+  },
+  {
+    id: 'hardware-bootcamp',
+    slug: 'hardware-bootcamp',
+    title: 'Embedded Sensors & Robotics Bootcamp',
+    posterLine: 'Hands-on wiring, sensor calibration, and microcontroller buses.',
+    shortLine: 'Microcontrollers, Sensor Telemetry & Motor Drivers',
+    status: 'upcoming',
+    startDate: new Date('2026-12-12T13:30:00+05:30'),
+    endDate: new Date('2026-12-12T16:30:00+05:30'),
+    venue: 'Lab 201, VESIT',
+    time: '1:30 pm – 4:30 pm',
+    poster: '/photos/lab201/lab201-1.jpg',
+    presentedBy: 'Department of Electronics and Computer Science × FluxECS',
+    intro:
+      'A practical afternoon workshop in Lab 201 where students wire up ESP32 boards, calibrate ultrasonic and temperature sensors over I²C/SPI, and drive dual DC motors through H-bridge drivers.',
+    highlights: [
+      'ESP32 pinout, GPIO control and PWM modulation',
+      'Interfacing HC-SR04 ultrasonic and DHT-11 sensors',
+      'I²C LCD display communication and telemetry debugging',
+      'Motor driver circuitry (L298N) for robotics prototypes',
+    ],
+    contacts: [
+      { name: 'Riya Pailwan', role: 'Hardware Head', phone: '+91 81694 56269' },
+      { name: 'Atharva Vaidya', role: 'Hardware Officer', phone: '+91 91374 81045' },
+    ],
+  },
+  {
+    id: 'winter-hackathon',
+    slug: 'winter-hackathon',
+    title: 'ECS Winter Project Jam',
+    posterLine: 'Build useful student and department solutions in 24 hours.',
+    shortLine: '24-Hour Hardware & Software Innovation Sprint',
+    status: 'upcoming',
+    startDate: new Date('2027-01-16T10:00:00+05:30'),
+    endDate: new Date('2027-01-17T14:00:00+05:30'),
+    venue: 'Labs 201 & 203, VESIT',
+    time: '10:00 am – 2:00 pm (Next Day)',
+    poster: '/photos/lab203/lab203-1.jpg',
+    presentedBy: 'Department of Electronics and Computer Science × FluxECS',
+    intro:
+      'A collaborative 2-day hackathon where teams of ECS students build working prototypes tackling smart campus utilities, automated lab inventory tracking, and assistive technology.',
+    highlights: [
+      'Problem statements provided by faculty and seniors',
+      'Hardware component kits provided on-site in Lab 201',
+      'Senior mentors available around the clock for architecture reviews',
+      'Live project demonstrations and evaluation before department jury',
+    ],
+    contacts: [
+      { name: 'Aayan Shaikh', role: 'Technical Head', phone: '+91 98674 66475' },
+      { name: 'Parth Sonar', role: 'Web Master', phone: '+91 90048 29013' },
+    ],
+  },
+  {
+    id: 'placement-dsa-circle',
+    slug: 'placement-dsa-circle',
+    title: 'Placement DSA & Mock Circles',
+    posterLine: 'From two-pointers to dynamic programming with placed seniors.',
+    shortLine: 'Senior-Guided Coding Patterns & Interview Prep',
+    status: 'upcoming',
+    startDate: new Date('2027-02-06T14:00:00+05:30'),
+    endDate: new Date('2027-02-06T17:00:00+05:30'),
+    venue: 'Lab 215, VESIT',
+    time: '2:00 pm – 5:00 pm',
+    poster: '/photos/lab215/lab215-1.jpg',
+    presentedBy: 'Department of Electronics and Computer Science × FluxECS',
+    intro:
+      'An intensive peer session in Lab 215 where placed final-year seniors break down high-frequency interview patterns, conduct 1-on-1 mock interviews, and review student resumes.',
+    highlights: [
+      'Patterns breakdown: Sliders, Trees, Graphs & Dynamic Programming',
+      '1-on-1 whiteboarding and live problem solving',
+      'Resume critique and GitHub portfolio audit',
+      'Open Q&A on balancing academics with internship search',
+    ],
+    contacts: [
+      { name: 'Harsh Patange', role: 'President', phone: '+91 84548 41288' },
       { name: 'Paarth Patil', role: 'Sr. Technical Officer', phone: '+91 97024 13348' },
     ],
   },
@@ -130,6 +209,113 @@ export const events = [
       { src: '/photos/lab203/lab203-1.jpg', label: 'Lab 203' },
       { src: '/photos/lab215/lab215-1.jpg', label: 'Lab 215' },
     ],
+  },
+  {
+    id: 'senior-hardware-exhibit',
+    slug: 'senior-hardware-exhibit',
+    title: 'Senior Hardware & Robotics Showcase',
+    shortLine: 'RF Telemetry & VHDL Logic Synthesis',
+    status: 'past',
+    startDate: new Date('2026-08-22T11:00:00+05:30'),
+    endDate: new Date('2026-08-22T16:00:00+05:30'),
+    venue: 'Lab 201, VESIT',
+    time: '11:00 am – 4:00 pm',
+    poster: '/photos/lab201/lab201-1.jpg',
+    cover: '/photos/lab201/lab201-1.jpg',
+    intro:
+      'Senior ECS students opened Lab 201 to demonstrate custom 433MHz RF transceivers, VHDL state-machine synthesis on FPGA boards, and autonomous obstacle-navigating robotic chassis for second and third-year students.',
+    projects: [
+      'Custom RF transmitter-receiver modules tested with frequency analyzer',
+      'Dual H-bridge chassis control using PWM speed modulation',
+      'FPGA LED and 7-segment countdown counter synthesis in Vivado',
+      'Power supply and bench multimeter calibration for student projects',
+    ],
+    credits: [
+      'Yogesh Pandit Sir, Council In-charge',
+      'Riya Pailwan, Hardware Head',
+      'Senior project teams & ECS lab technicians',
+    ],
+  },
+]
+
+export const clubPillars = [
+  {
+    number: '01',
+    title: 'Competitive Coding & Auctions',
+    lab: 'Dept. 2nd Floor',
+    summary:
+      'From algorithmic screening rounds to live coin bidding in Algorithm\'s Auction — combining DSA problem solving with fast game theory and peer strategy.',
+    tags: ['Algorithms', 'Logic Rounds', 'Bidding Strategy'],
+  },
+  {
+    number: '02',
+    title: 'Hardware & Embedded Labs',
+    lab: 'Lab 201',
+    summary:
+      'Hands-on bench work with ESP32, Arduino, ultrasonic sensors, motor drivers, and FPGA kits. Translating schematics and breadboards into physical hardware.',
+    tags: ['ESP32', 'Sensors', 'VLSI & FPGA', 'Robotics'],
+  },
+  {
+    number: '03',
+    title: 'Software & Applied AI',
+    lab: 'Lab 203',
+    summary:
+      'Real-time computer vision classifiers, full-stack student portals, API services, and open-source hackathons built by and for ECS students.',
+    tags: ['React', 'Python & Vision', 'REST APIs', 'Cloud'],
+  },
+  {
+    number: '04',
+    title: 'Mentorship & Placement Circles',
+    lab: 'Lab 215',
+    summary:
+      'Senior-to-junior guidance sessions covering LeetCode problem patterns, GitHub portfolios, technical mock interviews, and balancing coursework.',
+    tags: ['DSA Prep', 'Mock Interviews', 'Career Q&A'],
+  },
+]
+
+export const termRoadmap = [
+  {
+    period: 'August 2026',
+    status: 'Concluded',
+    title: 'Senior VLSI & Hardware Demos',
+    venue: 'Lab 201',
+    description: 'FPGA state machines, RF transceivers, and motor chassis live bench.',
+  },
+  {
+    period: 'September 2026',
+    status: 'Concluded',
+    title: 'IoTA Induction Exhibition',
+    venue: 'Labs 201, 203 & 215',
+    description: 'Multi-lab showcase welcoming newly admitted first-year ECS students.',
+  },
+  {
+    period: 'November 2026',
+    status: 'Active Flagship',
+    title: "Algorithm's Auction 2.0",
+    venue: '2nd Floor, VESIT',
+    description: '2-day competitive coding, logic challenges, and strategic auction bidding.',
+    isHighlighted: true,
+  },
+  {
+    period: 'December 2026',
+    status: 'Upcoming',
+    title: 'Embedded Sensors Bootcamp',
+    venue: 'Lab 201',
+    description: 'Hands-on wiring, I²C bus calibration, and motor control workshop.',
+  },
+  {
+    period: 'January 2027',
+    status: 'Upcoming',
+    title: 'ECS Winter Project Jam',
+    venue: 'Labs 201 & 203',
+    description: '24-hour student engineering sprint building campus tools & solutions.',
+  },
+  {
+    period: 'February 2027',
+    status: 'Upcoming',
+    title: 'Placement DSA & Mock Circles',
+    venue: 'Lab 215',
+    description: 'Weekly peer mock interviews, LeetCode patterns, and resume reviews.',
   },
 ]
 

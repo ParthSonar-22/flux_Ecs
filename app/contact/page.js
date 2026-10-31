@@ -17,8 +17,9 @@ export default function ContactPage() {
         <section className="w-full bg-paper border-b-2 border-ink px-4 lg:px-margin py-space-lg lg:py-space-xl">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-end">
             <div className="lg:col-span-8 flex flex-col space-y-4">
+              <span className="font-handwritten text-2xl text-brick block">Get in touch with FLUX-ECS</span>
               <h1 className="font-display-hero text-display-hero text-ink leading-[0.95] tracking-tight font-bold">
-                Say hi
+                Contact Us
               </h1>
               <p className="font-body-lg text-body-lg text-muted max-w-2xl pt-2">
                 Questions about events, workshops or anything else? Fill in the form below or reach us directly.

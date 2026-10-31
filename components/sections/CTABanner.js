@@ -39,7 +39,7 @@ export default function CTABanner() {
             href="/contact"
             className="inline-flex items-center justify-center px-6 py-3 border-2 border-ink bg-tan text-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_var(--ink)] transition-all font-bold"
           >
-            Say hi
+            Contact Us
           </Link>
         </div>
 

@@ -39,19 +39,19 @@ export default function BlogNewsletterForm() {
     <div className="border-2 border-ink bg-card p-6 shadow-[6px_6px_0px_var(--brick)] relative">
       <div className="flex items-center gap-2 font-complexity-notation text-brick mb-2 text-xs font-bold uppercase tracking-wider">
         <span className="material-symbols-outlined text-[16px]">mail</span>
-        <span>CIRCULATION COURIER</span>
+        <span>NEWSLETTER</span>
       </div>
       <h3 className="font-headline-sm text-headline-sm text-ink mb-2 font-bold">
-        Subscribe to The Dispatch
+        Subscribe for Updates
       </h3>
       <p className="font-body-sm text-body-sm text-muted mb-5 leading-relaxed">
-        Register your email to receive technical articles, workshop briefs, and announcements directly from the FLUX-ECS secretariat.
+        Register your email to receive technical articles, workshop briefs, and announcements directly from the FLUX-ECS club.
       </p>
 
       {status === 'success' ? (
         <div className="p-3 border border-ink bg-paper text-ink font-complexity-notation text-xs flex items-center gap-2">
           <span className="material-symbols-outlined text-brick text-[18px]">verified</span>
-          <span>DISPATCH CONFIRMED: Subscribed successfully.</span>
+          <span>Subscribed successfully! We will keep you updated.</span>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -70,16 +70,16 @@ export default function BlogNewsletterForm() {
               htmlFor="blog-sub-email"
               className="font-label-smallcaps text-label-smallcaps text-muted uppercase tracking-wider block mb-1 font-bold"
             >
-              Academic Dispatch E-mail
+              VESIT / Personal Email
             </label>
             <input
               id="blog-sub-email"
               type="email"
               required
-              placeholder="student.ecs@ves.ac.in"
+              placeholder="2025.studentname@ves.ac.in"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border-2 border-ink bg-paper text-ink font-body-md text-sm placeholder-muted focus:outline-none focus:border-brick"
+              className="w-full px-3 py-2 border-2 border-ink bg-paper text-ink font-body-md text-sm placeholder-muted/60 focus:outline-none focus:border-brick"
             />
           </div>
 
@@ -95,14 +95,14 @@ export default function BlogNewsletterForm() {
             className="mt-2 w-full py-2.5 px-4 border-2 border-ink bg-brick text-paper font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[3px_3px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2 font-bold cursor-pointer disabled:opacity-50"
           >
             <span className="material-symbols-outlined text-[18px]">outgoing_mail</span>
-            <span>{status === 'loading' ? 'Registering...' : 'Ratify Subscription'}</span>
+            <span>{status === 'loading' ? 'Subscribing...' : 'Subscribe'}</span>
           </button>
         </form>
       )}
 
       <div className="mt-4 pt-3 border-t border-ink/30 flex items-center justify-between font-complexity-notation text-[10px] text-muted">
-        <span>VESIT ECS CHARTER</span>
-        <span>ZERO SPAM CADENCE</span>
+        <span>VESIT ECS</span>
+        <span>NO SPAM</span>
       </div>
     </div>
   )

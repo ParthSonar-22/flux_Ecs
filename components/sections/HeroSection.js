@@ -1,41 +1,11 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import { openNewsletterModal } from '@/components/NewsletterModal'
-
-const collagePhotos = [
-  {
-    src: '/iota/lab201.png',
-    caption: 'Lab 201',
-    rotate: '-3deg',
-    zIndex: 1,
-    top: '10px',
-    left: '0px',
-    tape: { top: '-8px', left: '20px', rotate: '-3deg' },
-  },
-  {
-    src: '/iota/lab203.png',
-    caption: 'Lab 203',
-    rotate: '2deg',
-    zIndex: 3,
-    top: '40px',
-    left: '80px',
-    tape: { top: '-8px', right: '20px', rotate: '2deg' },
-  },
-  {
-    src: '/iota/lab215.png',
-    caption: 'Lab 215',
-    rotate: '-1deg',
-    zIndex: 2,
-    top: '20px',
-    left: '160px',
-    tape: null,
-  },
-]
 
 export default function HeroSection() {
   const containerRef = useRef(null)
@@ -64,33 +34,44 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="w-full bg-paper border-b-2 border-ink py-space-xl px-4 lg:px-margin relative"
+      className="w-full bg-paper border-b-2 border-ink py-space-xl px-4 lg:px-margin relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
         {/* Left Column: Text */}
-        <div className="lg:col-span-6 flex flex-col justify-center space-y-space-md pr-0 lg:pr-space-md pt-8 lg:pt-16">
+        <div className="lg:col-span-6 flex flex-col justify-center space-y-space-md pr-0 lg:pr-space-md pt-4 lg:pt-8 z-20">
           <h1
             ref={headlineRef}
             className="font-display-hero text-display-hero text-ink leading-none tracking-tight"
           >
             Where ideas flow into{' '}
-            <span className="relative inline-block text-brick">
+            <span className="relative inline-block text-brick whitespace-nowrap">
               innovation
-              {/* Hand-drawn SVG scribble underline */}
+              {/* Hand-drawn full-span student marker scribble covering all below innovation */}
               <svg
                 ref={scribbleRef}
-                className="absolute left-0 -bottom-2 w-full overflow-visible"
-                height="10"
-                viewBox="0 0 200 10"
+                className="absolute -bottom-3.5 -left-1.5 w-[calc(100%+14px)] h-4 sm:h-5 overflow-visible pointer-events-none"
+                viewBox="0 0 260 16"
+                preserveAspectRatio="none"
                 fill="none"
                 aria-hidden="true"
               >
+                {/* Main fluid marker stroke */}
                 <path
                   className="scribble-underline"
-                  d="M2 6 C30 2, 60 9, 100 5 C140 1, 170 8, 198 5"
+                  d="M 1 9 C 45 4, 90 13, 145 8 C 190 3, 225 11, 259 7"
                   stroke="var(--brick)"
-                  strokeWidth="2.5"
+                  strokeWidth="4"
                   strokeLinecap="round"
+                  fill="none"
+                />
+                {/* Secondary pass for natural hand-drawn marker effect */}
+                <path
+                  className="scribble-underline"
+                  d="M 6 12 C 55 8, 120 14, 180 10 C 215 6, 240 12, 255 9"
+                  stroke="var(--brick)"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  opacity="0.85"
                   fill="none"
                 />
               </svg>
@@ -117,101 +98,134 @@ export default function HeroSection() {
             >
               Get Updates
             </button>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-5 py-3 border-2 border-ink bg-tan text-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_var(--ink)] transition-all font-bold"
+            >
+              Contact Us
+            </Link>
           </div>
 
           {/* Small info strip with real facts only */}
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-2 text-muted">
-            <span className="font-complexity-notation text-xs">Dept. of ECS, VESIT</span>
-            <span className="text-brick">·</span>
+            <span className="font-complexity-notation text-xs font-bold text-ink">Dept. of ECS, VESIT</span>
+            <span className="text-brick font-bold">·</span>
             <span className="font-complexity-notation text-xs">Chembur, Mumbai</span>
-            <span className="text-brick">·</span>
-            <span className="font-complexity-notation text-xs">Acad. Year 2026</span>
+            <span className="text-brick font-bold">·</span>
+            <span className="font-complexity-notation text-xs">Acad. Year 2026–27</span>
           </div>
         </div>
 
-        {/* Right Column: Photo Collage */}
-        <div className="lg:col-span-6 flex justify-center lg:justify-end">
+        {/* Right Column: Generous Photo Collage (Covers the right side to eliminate white space) */}
+        <div className="lg:col-span-6 flex justify-center lg:justify-end w-full pt-6 lg:pt-0">
           <div
-            className="relative"
-            style={{ width: '360px', height: '300px', marginBottom: '-40px' }}
+            className="relative w-full max-w-[620px] lg:max-w-none h-[420px] sm:h-[460px] lg:h-[480px]"
+            style={{ marginBottom: '-20px' }}
           >
-            {/* Photo 1 — Lab 201 */}
+            {/* Photo 1 — Lab 201 Hardware (back left) */}
             <div
-              className="absolute bg-paper border-2 border-ink p-2 shadow-md"
+              className="absolute bg-paper border-2 border-ink p-2 sm:p-2.5 shadow-lg transition-transform hover:z-40 hover:scale-105"
               style={{
-                width: '200px',
-                top: '10px',
-                left: '0px',
-                transform: 'rotate(-3deg)',
-                zIndex: 1,
+                width: '60%',
+                top: '15px',
+                left: '-8px',
+                transform: 'rotate(-3.5deg)',
+                zIndex: 10,
               }}
             >
               {/* Tape strip */}
               <div
                 className="tape-strip"
-                style={{ top: '-9px', left: '50%', transform: 'translateX(-50%) rotate(-3deg)' }}
+                style={{ top: '-10px', left: '30%', transform: 'rotate(-4deg)' }}
               />
-              <div className="relative w-full h-36 overflow-hidden bg-tan border border-ink/20">
+              <div className="relative w-full aspect-[4/3] overflow-hidden bg-tan border border-ink/30">
                 <Image
-                  src="/iota/lab201.png"
-                  alt="Lab 201 hardware session"
+                  src="/photos/lab201/lab201-1.jpg"
+                  alt="Lab 201 hardware bench at IoTA"
                   fill
                   className="object-cover"
-                  sizes="200px"
+                  sizes="(max-width: 768px) 60vw, 360px"
+                  priority
                 />
               </div>
-              <p className="font-handwritten text-lg text-ink text-center pt-1">Lab 201</p>
-            </div>
-
-            {/* Photo 2 — Lab 203 (front) */}
-            <div
-              className="absolute bg-paper border-2 border-ink p-2 shadow-md"
-              style={{
-                width: '210px',
-                top: '35px',
-                left: '105px',
-                transform: 'rotate(2deg)',
-                zIndex: 3,
-              }}
-            >
-              {/* Tape strip */}
-              <div
-                className="tape-strip"
-                style={{ top: '-9px', right: '20px', transform: 'rotate(2deg)' }}
-              />
-              <div className="relative w-full h-38 overflow-hidden bg-tan border border-ink/20" style={{ height: '148px' }}>
-                <Image
-                  src="/iota/lab203.png"
-                  alt="Lab 203 software session"
-                  fill
-                  className="object-cover"
-                  sizes="210px"
-                />
+              <div className="pt-2 px-1 flex items-baseline justify-between">
+                <span className="font-handwritten text-xl text-ink font-bold">Lab 201</span>
+                <span className="font-complexity-notation text-[10px] text-brick uppercase font-bold">Hardware &amp; IoT</span>
               </div>
-              <p className="font-handwritten text-lg text-ink text-center pt-1">Lab 203</p>
             </div>
 
-            {/* Photo 3 — Lab 215 (back right) */}
+            {/* Photo 3 — Lab 215 Senior Talks (back right) */}
             <div
-              className="absolute bg-paper border-2 border-ink p-2 shadow-md"
+              className="absolute bg-paper border-2 border-ink p-2 sm:p-2.5 shadow-lg transition-transform hover:z-40 hover:scale-105"
               style={{
-                width: '190px',
+                width: '56%',
                 top: '0px',
-                right: '0px',
-                transform: 'rotate(-1deg)',
-                zIndex: 2,
+                right: '-8px',
+                transform: 'rotate(2deg)',
+                zIndex: 20,
               }}
             >
-              <div className="relative w-full h-32 overflow-hidden bg-tan border border-ink/20">
+              {/* Tape strip */}
+              <div
+                className="tape-strip"
+                style={{ top: '-10px', right: '25%', transform: 'rotate(2deg)' }}
+              />
+              <div className="relative w-full aspect-[4/3] overflow-hidden bg-tan border border-ink/30">
                 <Image
-                  src="/iota/lab215.png"
-                  alt="Lab 215 senior talks"
+                  src="/photos/lab215/lab215-1.jpg"
+                  alt="Lab 215 Senior fresher interaction"
                   fill
                   className="object-cover"
-                  sizes="190px"
+                  sizes="(max-width: 768px) 55vw, 340px"
+                  priority
                 />
               </div>
-              <p className="font-handwritten text-lg text-ink text-center pt-1">Lab 215</p>
+              <div className="pt-2 px-1 flex items-baseline justify-between">
+                <span className="font-handwritten text-xl text-ink font-bold">Lab 215</span>
+                <span className="font-complexity-notation text-[10px] text-brick uppercase font-bold">Mentorship</span>
+              </div>
+            </div>
+
+            {/* Photo 2 — Lab 203 Software (front center/hero of collage) */}
+            <div
+              className="absolute bg-paper border-2 border-ink p-2.5 sm:p-3 shadow-xl transition-transform hover:z-40 hover:scale-105"
+              style={{
+                width: '66%',
+                bottom: '10px',
+                left: '17%',
+                transform: 'rotate(-1deg)',
+                zIndex: 30,
+              }}
+            >
+              {/* Tape strip */}
+              <div
+                className="tape-strip"
+                style={{ top: '-11px', left: '40%', transform: 'rotate(3deg)' }}
+              />
+              <div className="relative w-full aspect-[4/3] overflow-hidden bg-tan border border-ink/30">
+                <Image
+                  src="/photos/lab203/lab203-1.jpg"
+                  alt="Lab 203 Software project presentations"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 65vw, 380px"
+                  priority
+                />
+              </div>
+              <div className="pt-2 px-1 flex items-baseline justify-between">
+                <span className="font-handwritten text-xl text-ink font-bold">Lab 203</span>
+                <span className="font-complexity-notation text-[10px] text-brick uppercase font-bold">Software &amp; AI</span>
+              </div>
+            </div>
+
+            {/* Student handwritten sticky tag on the bottom right */}
+            <div
+              className="absolute -bottom-3 right-0 bg-tan border-2 border-ink px-3 py-1.5 shadow-[2px_2px_0px_var(--ink)] z-35 hidden sm:block"
+              style={{ transform: 'rotate(-2.5deg)' }}
+            >
+              <span className="font-handwritten text-lg text-ink font-bold block leading-none">
+                VESIT ECS Labs · 2026–27
+              </span>
             </div>
           </div>
         </div>

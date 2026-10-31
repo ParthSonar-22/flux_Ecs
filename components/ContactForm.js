@@ -44,7 +44,7 @@ export default function ContactForm() {
         })
       } else {
         setStatus('error')
-        setErrorMessage(data.error || 'Failed to dispatch message.')
+        setErrorMessage(data.error || 'Failed to send message.')
       }
     } catch {
       setStatus('error')
@@ -56,18 +56,18 @@ export default function ContactForm() {
     <div className="bg-card border-2 border-ink shadow-[6px_6px_0px_var(--brick)] p-space-md lg:p-space-lg">
       <div className="border-b-2 border-ink pb-space-sm mb-space-md">
         <div className="flex items-center justify-between">
-          <span className="font-label-smallcaps text-xs uppercase tracking-widest text-brick font-bold">
-            TRANSMISSION TERMINAL
+          <span className="font-handwritten text-xl text-brick block">
+            Direct Message
           </span>
           <span className="font-complexity-notation text-xs font-bold text-ink bg-tan px-2 py-0.5 border border-ink">
-            PARITY CHECK: OK
+            VESIT ECS
           </span>
         </div>
         <h2 className="font-headline-md text-headline-md text-ink uppercase tracking-tight mt-1 font-bold">
-          Submit Editorial Dispatch
+          Send Us a Message
         </h2>
         <p className="font-body-md text-body-md text-muted">
-          Complete all marked coordinates. Student requests will receive a stewardship response from the council.
+          Got questions about events, workshops, or club activities? Drop your details below and our council will get back to you.
         </p>
       </div>
 
@@ -77,17 +77,17 @@ export default function ContactForm() {
             verified
           </span>
           <h3 className="font-headline-sm text-xl font-bold text-ink">
-            Dispatch Lodged in Ledger
+            Message Sent Successfully
           </h3>
           <p className="font-body-md text-muted max-w-md mx-auto">
-            Message sent. We will get back to you.
+            Thanks for reaching out! A council member will reply to your email shortly.
           </p>
           <button
             type="button"
             onClick={() => setStatus('idle')}
             className="mt-4 px-6 py-2 border-2 border-ink bg-brick text-paper font-label-smallcaps uppercase tracking-wider text-xs font-bold shadow-[2px_2px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5"
           >
-            Send Another Dispatch
+            Send Another Message
           </button>
         </div>
       ) : (
@@ -110,7 +110,7 @@ export default function ContactForm() {
                 className="font-label-smallcaps text-xs uppercase tracking-wider text-ink block font-bold"
                 htmlFor="sender-name"
               >
-                Correspondent Full Name <span className="text-brick">*</span>
+                Your Full Name <span className="text-brick">*</span>
               </label>
               <input
                 id="sender-name"
@@ -128,7 +128,7 @@ export default function ContactForm() {
                 className="font-label-smallcaps text-xs uppercase tracking-wider text-ink block font-bold"
                 htmlFor="sender-email"
               >
-                Email Address (@ves.ac.in preferred) <span className="text-brick">*</span>
+                VESIT / Personal Email <span className="text-brick">*</span>
               </label>
               <input
                 id="sender-email"
@@ -137,7 +137,7 @@ export default function ContactForm() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="name.year@ves.ac.in"
+                placeholder="2025.studentname@ves.ac.in"
                 className="w-full bg-paper border-2 border-ink px-3 py-2.5 font-complexity-notation text-sm text-ink placeholder:text-muted/50 focus:outline-none focus:border-brick transition-colors"
               />
             </div>
@@ -150,7 +150,7 @@ export default function ContactForm() {
                 className="font-label-smallcaps text-xs uppercase tracking-wider text-ink block font-bold"
                 htmlFor="academic-year"
               >
-                Academic Year Standing <span className="text-brick">*</span>
+                Academic Year <span className="text-brick">*</span>
               </label>
               <div className="relative">
                 <select
@@ -189,6 +189,7 @@ export default function ContactForm() {
                   className="w-full appearance-none bg-paper border-2 border-ink px-3 py-2.5 font-complexity-notation text-sm text-ink focus:outline-none focus:border-brick transition-colors cursor-pointer"
                 >
                   <option value="Algorithm's Auction">Algorithm&apos;s Auction</option>
+                  <option value="Event / Workshop Inquiry">Event / Workshop Inquiry</option>
                   <option value="General question">General question</option>
                   <option value="Collaboration or sponsorship">Collaboration or sponsorship</option>
                 </select>
@@ -199,13 +200,13 @@ export default function ContactForm() {
             </div>
           </div>
 
-          {/* Row 3: Dispatch Payload / Message */}
+          {/* Row 3: Message */}
           <div className="space-y-1.5">
             <label
               className="font-label-smallcaps text-xs uppercase tracking-wider text-ink block font-bold"
               htmlFor="dispatch-message"
             >
-              Dispatch Text / Formal Inquiry <span className="text-brick">*</span>
+              Your Message <span className="text-brick">*</span>
             </label>
             <textarea
               id="dispatch-message"
@@ -214,7 +215,7 @@ export default function ContactForm() {
               rows={6}
               value={formData.message}
               onChange={handleChange}
-              placeholder="State your technical problem statement, team registration query, or inquiry..."
+              placeholder="Ask about team registrations, rules, event dates, or upcoming workshops..."
               className="w-full bg-paper border-2 border-ink p-3 font-body-md text-ink placeholder:text-muted/50 focus:outline-none focus:border-brick transition-colors"
             />
           </div>
@@ -232,13 +233,13 @@ export default function ContactForm() {
               disabled={status === 'loading'}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-brick text-paper font-label-smallcaps text-label-smallcaps uppercase tracking-wider border-2 border-ink shadow-[6px_6px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0px_var(--ink)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all font-bold cursor-pointer disabled:opacity-50"
             >
-              <span>{status === 'loading' ? 'Transmitting...' : 'Send Message'}</span>
+              <span>{status === 'loading' ? 'Sending...' : 'Send Message'}</span>
               <span className="material-symbols-outlined text-[18px]">send</span>
             </button>
             <div className="flex items-center gap-2 text-muted">
-              <span className="material-symbols-outlined text-[16px]">lock</span>
+              <span className="material-symbols-outlined text-[16px]">mail</span>
               <span className="font-complexity-notation text-[11px] uppercase tracking-wider">
-                Direct Council Transmission
+                Direct to flux.ecs@ves.ac.in
               </span>
             </div>
           </div>

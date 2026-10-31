@@ -174,7 +174,7 @@ export default function BlogPage() {
                     → Who we are
                   </Link>
                   <Link href="/contact" className="block text-ink hover:text-brick font-bold">
-                    → Say hi
+                    → Contact Us
                   </Link>
                 </div>
               </div>

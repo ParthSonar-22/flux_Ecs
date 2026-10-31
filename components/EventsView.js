@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { events } from '@/data/events'
+import { events, clubPillars, termRoadmap, isPast } from '@/data/events'
 import { WHATSAPP_URL } from '@/data/site'
-import { faculty, seniorCouncil, juniorCouncil } from '@/data/team'
+import { openNewsletterModal } from '@/components/NewsletterModal'
 
 export default function EventsView() {
   const searchParams = useSearchParams()
@@ -19,61 +19,182 @@ export default function EventsView() {
     }
   }, [searchParams])
 
+  const upcomingList = events.filter((e) => !isPast(e))
+  const pastList = events.filter((e) => isPast(e))
+
   const algo = events.find((e) => e.slug === 'algorithms-auction') || events[0]
   const iota = events.find((e) => e.slug === 'iota-archives') || events[1]
+  const hardwareExhibit = events.find((e) => e.slug === 'senior-hardware-exhibit')
+
+  const otherUpcoming = upcomingList.filter((e) => e.slug !== 'algorithms-auction')
 
   return (
     <div className="flex flex-col w-full">
-      {/* Page header */}
+      {/* Page Header & What We Do Showcase */}
       <section className="w-full px-4 lg:px-margin py-space-lg lg:py-space-xl bg-paper border-b-2 border-ink">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div className="space-y-3">
-            <span className="font-handwritten text-xl text-brick block">Events &amp; Workshops</span>
-            <h1 className="font-display-hero text-headline-lg lg:text-display-hero text-ink leading-none tracking-tight font-bold">
-              What we do
-            </h1>
-            <p className="font-body-lg text-body-lg text-muted max-w-2xl">
-              Competitive coding tournaments, hands-on hardware exhibitions, and student interaction sessions.
-            </p>
+        <div className="max-w-7xl mx-auto space-y-8">
+          {/* Top Title and Tab Switcher */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-ink/20">
+            <div className="space-y-3">
+              <span className="font-handwritten text-xl text-brick block">Events &amp; Workshops</span>
+              <h1 className="font-display-hero text-headline-lg lg:text-display-hero text-ink leading-none tracking-tight font-bold">
+                What we do
+              </h1>
+              <p className="font-body-lg text-body-lg text-muted max-w-2xl">
+                Competitive coding tournaments, hands-on hardware exhibitions, peer project jams, and senior mentorship.
+              </p>
+            </div>
+
+            {/* Tab switcher */}
+            <div className="flex items-center border-2 border-ink bg-card p-1 self-start md:self-end">
+              <button
+                type="button"
+                onClick={() => setActiveTab('upcoming')}
+                className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${
+                  activeTab === 'upcoming'
+                    ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
+                    : 'text-ink hover:text-brick'
+                }`}
+              >
+                Upcoming ({upcomingList.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('past')}
+                className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${
+                  activeTab === 'past'
+                    ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
+                    : 'text-ink hover:text-brick'
+                }`}
+              >
+                Past Activities ({pastList.length})
+              </button>
+            </div>
           </div>
 
-          {/* Simple Tab switcher */}
-          <div className="flex items-center border-2 border-ink bg-card p-1 self-start md:self-end">
-            <button
-              type="button"
-              onClick={() => setActiveTab('upcoming')}
-              className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${
-                activeTab === 'upcoming'
-                  ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
-                  : 'text-ink hover:text-brick'
-              }`}
-            >
-              Upcoming (1)
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('past')}
-              className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${
-                activeTab === 'past'
-                  ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
-                  : 'text-ink hover:text-brick'
-              }`}
-            >
-              Past Events (1)
-            </button>
+          {/* 4 Core Club Activity Pillars */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="font-complexity-notation text-xs uppercase tracking-wider text-brick font-bold">
+                Four Pillars of FLUX-ECS
+              </span>
+              <span className="font-complexity-notation text-xs text-muted">
+                Department of Electronics &amp; Computer Science · VESIT
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {clubPillars.map((pillar) => (
+                <div
+                  key={pillar.number}
+                  className="bg-card border-2 border-ink p-5 flex flex-col justify-between shadow-[3px_3px_0px_var(--ink)] transition-transform hover:-translate-y-0.5"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between border-b border-ink/20 pb-2">
+                      <span className="font-complexity-notation text-xs font-bold text-brick">
+                        {pillar.number}
+                      </span>
+                      <span className="font-complexity-notation text-[11px] px-2 py-0.5 bg-tan border border-ink/30 font-bold text-ink uppercase">
+                        {pillar.lab}
+                      </span>
+                    </div>
+                    <h3 className="font-headline-sm text-lg text-ink font-bold leading-snug">
+                      {pillar.title}
+                    </h3>
+                    <p className="font-body-sm text-xs text-muted leading-relaxed">
+                      {pillar.summary}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 mt-3 border-t border-ink/10 flex flex-wrap gap-1.5">
+                    {pillar.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-complexity-notation text-[10px] px-1.5 py-0.5 bg-paper border border-ink/20 text-ink"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Academic Term Activity Roadmap */}
+          <div className="bg-tan border-2 border-ink p-5 md:p-6 shadow-[4px_4px_0px_var(--ink)] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-ink/20 pb-2">
+              <div>
+                <span className="font-handwritten text-xl text-brick block">Term Activity Roadmap</span>
+                <h4 className="font-headline-sm text-lg text-ink font-bold">
+                  Academic Year 2026–2027 Schedule of Proceedings
+                </h4>
+              </div>
+              <span className="font-complexity-notation text-xs text-muted font-bold">
+                Odd &amp; Even Semesters
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
+              {termRoadmap.map((item, idx) => (
+                <div
+                  key={item.period}
+                  className={`p-3 border-2 border-ink flex flex-col justify-between ${
+                    item.isHighlighted
+                      ? 'bg-paper shadow-[3px_3px_0px_var(--brick)] ring-1 ring-brick'
+                      : item.status === 'Concluded'
+                      ? 'bg-card/70 opacity-90'
+                      : 'bg-card'
+                  }`}
+                >
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="font-complexity-notation text-[11px] font-bold text-ink">
+                        {item.period}
+                      </span>
+                      <span
+                        className={`font-complexity-notation text-[9px] uppercase px-1.5 py-0.5 font-bold ${
+                          item.status === 'Active Flagship'
+                            ? 'bg-brick text-paper'
+                            : item.status === 'Concluded'
+                            ? 'bg-ink text-paper'
+                            : 'bg-tan border border-ink/30 text-ink'
+                        }`}
+                      >
+                        {item.status}
+                      </span>
+                    </div>
+                    <div className="font-headline-sm text-sm text-ink font-bold leading-snug">
+                      {item.title}
+                    </div>
+                    <div className="font-complexity-notation text-[10px] text-brick font-semibold">
+                      {item.venue}
+                    </div>
+                    <p className="font-body-sm text-[11px] text-muted leading-tight">
+                      {item.description}
+                    </p>
+                  </div>
+                  <div className="mt-3 pt-2 border-t border-ink/10 flex items-center justify-between text-[10px] font-complexity-notation text-muted">
+                    <span>Phase 0{idx + 1}</span>
+                    {item.isHighlighted && <span className="text-brick font-bold">● Active Now</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* UPCOMING: Algorithm's Auction */}
+      {/* UPCOMING TAB */}
       {activeTab === 'upcoming' && (
         <div className="w-full px-4 lg:px-margin py-space-xl flex flex-col space-y-space-lg">
+          {/* Flagship: Algorithm's Auction */}
           <article className="relative bg-card border-2 border-ink shadow-[6px_6px_0px_var(--brick)] overflow-hidden">
             {/* Header info bar */}
             <div className="border-b-2 border-ink bg-tan px-6 py-4 flex flex-wrap items-center justify-between gap-4">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="font-complexity-notation text-[11px] px-2.5 py-1 bg-brick text-paper tracking-wider uppercase font-bold">
-                  Upcoming Event
+                  Featured Flagship Tournament
                 </span>
                 <span className="font-complexity-notation text-[12px] tracking-wider uppercase text-ink font-semibold">
                   Department of Electronics &amp; Computer Science × FluxECS
@@ -87,11 +208,11 @@ export default function EventsView() {
 
             {/* Poster + details layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-ink">
-              {/* Poster — Hero element of the card, large & slightly rotated */}
-              <div className="lg:col-span-5 border-b-2 lg:border-b-0 lg:border-r-2 border-ink p-6 md:p-8 bg-paper flex flex-col items-center justify-center">
+              {/* Poster Column */}
+              <div className="lg:col-span-5 border-b-2 lg:border-b-0 lg:border-r-2 border-ink p-6 md:p-8 bg-paper flex flex-col items-center justify-center space-y-4">
                 <div
                   className="relative border-2 border-ink overflow-hidden bg-card w-full shadow-lg"
-                  style={{ transform: 'rotate(-1.5deg)', maxWidth: '400px' }}
+                  style={{ transform: 'rotate(-1.5deg)', maxWidth: '420px' }}
                 >
                   <div className="relative w-full aspect-[698/428] bg-tan">
                     <Image
@@ -100,7 +221,7 @@ export default function EventsView() {
                       fill
                       priority
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 400px"
+                      sizes="(max-width: 768px) 100vw, 420px"
                     />
                   </div>
                   <div className="p-3 bg-paper border-t-2 border-ink text-center">
@@ -110,10 +231,30 @@ export default function EventsView() {
                   </div>
                 </div>
 
-                {/* Sub-caption */}
-                <span className="font-complexity-notation text-xs text-muted mt-4 block text-center">
+                <span className="font-complexity-notation text-xs text-muted block text-center">
                   Official Event Poster · Department of ECS × FLUX-ECS
                 </span>
+
+                {/* Official Schedule Timeline Poster */}
+                {algo.timelineImage && (
+                  <div className="w-full max-w-[420px] bg-card border-2 border-ink p-3 shadow-md">
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-ink/20">
+                      <span className="font-handwritten text-lg text-brick">Official Visual Timeline</span>
+                      <span className="font-complexity-notation text-[11px] uppercase tracking-wider text-muted font-bold">
+                        Day 1 &amp; Day 2
+                      </span>
+                    </div>
+                    <div className="relative w-full aspect-[16/9] overflow-hidden bg-tan border border-ink/20">
+                      <Image
+                        src={algo.timelineImage}
+                        alt="Algorithm's Auction schedule breakdown"
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, 420px"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Details Column */}
@@ -132,7 +273,7 @@ export default function EventsView() {
                   {algo.intro}
                 </p>
 
-                {/* Date / venue / time — monospace for real facts */}
+                {/* Date / venue / time */}
                 <div className="w-full bg-tan border-2 border-ink p-4 flex flex-col md:flex-row md:items-center justify-between divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink text-ink shadow-[2px_2px_0px_var(--ink)]">
                   <div className="pb-3 md:pb-0 md:pr-6 flex items-center gap-3">
                     <span className="material-symbols-outlined text-[24px]">calendar_month</span>
@@ -257,18 +398,101 @@ export default function EventsView() {
               </div>
             </div>
           </article>
+
+          {/* Additional Upcoming Term Activities */}
+          <div className="space-y-4 pt-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b-2 border-ink pb-3">
+              <div>
+                <span className="font-handwritten text-2xl text-brick block">Upcoming Activity Docket</span>
+                <h3 className="font-headline-md text-headline-md text-ink font-bold">
+                  Hands-on Workshops &amp; Hackathons in Even Semester
+                </h3>
+              </div>
+              <span className="font-complexity-notation text-xs text-muted">
+                3 More Scheduled Initiatives
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {otherUpcoming.map((item) => (
+                <div
+                  key={item.id}
+                  className="bg-card border-2 border-ink p-6 shadow-[4px_4px_0px_var(--ink)] flex flex-col justify-between"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between border-b border-ink/20 pb-2">
+                      <span className="font-complexity-notation text-[11px] px-2 py-0.5 bg-brick text-paper font-bold uppercase">
+                        Scheduled
+                      </span>
+                      <span className="font-complexity-notation text-xs font-bold text-ink">
+                        {item.time}
+                      </span>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="font-complexity-notation text-xs text-brick font-bold">
+                        {item.venue}
+                      </div>
+                      <h4 className="font-headline-sm text-xl text-ink font-bold leading-tight">
+                        {item.title}
+                      </h4>
+                      <p className="font-title-editorial text-sm text-muted italic">
+                        {item.shortLine}
+                      </p>
+                    </div>
+
+                    <p className="font-body-sm text-sm text-ink leading-relaxed">
+                      {item.intro}
+                    </p>
+
+                    {item.highlights && (
+                      <div className="bg-paper border border-ink/20 p-3 space-y-1.5">
+                        <span className="font-complexity-notation text-[10px] uppercase text-brick font-bold block">
+                          Agenda Highlights:
+                        </span>
+                        <ul className="space-y-1 font-body-sm text-xs text-ink">
+                          {item.highlights.map((h) => (
+                            <li key={h} className="flex items-start gap-1.5">
+                              <span className="text-brick font-bold">·</span>
+                              <span>{h}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="pt-5 mt-4 border-t border-ink/20 flex flex-col gap-2">
+                    <button
+                      type="button"
+                      onClick={openNewsletterModal}
+                      className="w-full text-center px-4 py-2.5 bg-paper border-2 border-ink text-ink font-label-smallcaps text-xs uppercase tracking-wider font-bold hover:bg-tan transition-colors shadow-[2px_2px_0px_var(--ink)] cursor-pointer"
+                    >
+                      Get Notified When Registration Opens
+                    </button>
+                    {item.contacts && item.contacts[0] && (
+                      <span className="font-complexity-notation text-[11px] text-muted text-center block pt-1">
+                        Coordinator: {item.contacts[0].name} ({item.contacts[0].role})
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 
-      {/* PAST: IoTA Archives (Scrapbook / Photo Album Layout) */}
+      {/* PAST ACTIVITIES TAB */}
       {activeTab === 'past' && (
         <div className="w-full px-4 lg:px-margin py-space-xl flex flex-col space-y-space-lg">
+          {/* IoTA Archives Scrapbook */}
           <article className="relative bg-card border-2 border-ink shadow-[6px_6px_0px_var(--tan)] overflow-hidden">
             {/* Header */}
             <div className="border-b-2 border-ink bg-tan px-6 py-4 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <span className="font-complexity-notation text-[11px] px-2.5 py-1 bg-ink text-paper tracking-wider uppercase font-bold">
-                  Concluded Exhibition
+                  Concluded Induction Exhibition
                 </span>
                 <span className="font-complexity-notation text-[12px] tracking-wider uppercase text-ink font-semibold">
                   First Year (FE) Induction Program · VESIT ECS
@@ -279,7 +503,7 @@ export default function EventsView() {
               </span>
             </div>
 
-            {/* Scrapbook Photo Album Strip — natural aspect ratio, no stretched photos */}
+            {/* Scrapbook Photo Album Strip */}
             <div className="p-6 md:p-10 border-b-2 border-ink bg-paper space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-ink/20 pb-3">
                 <div>
@@ -293,9 +517,9 @@ export default function EventsView() {
                 </span>
               </div>
 
-              {/* 3 Polaroid / Album style cards */}
+              {/* 3 Album cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-                {/* Album Item 1: Lab 201 */}
+                {/* Lab 201 */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between"
                   style={{ transform: 'rotate(-1deg)' }}
@@ -320,7 +544,7 @@ export default function EventsView() {
                   </div>
                 </div>
 
-                {/* Album Item 2: Lab 203 */}
+                {/* Lab 203 */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between"
                   style={{ transform: 'rotate(1.5deg)' }}
@@ -345,7 +569,7 @@ export default function EventsView() {
                   </div>
                 </div>
 
-                {/* Album Item 3: Lab 215 */}
+                {/* Lab 215 */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between"
                   style={{ transform: 'rotate(-0.5deg)' }}
@@ -508,25 +732,74 @@ export default function EventsView() {
                 </div>
               </div>
             </div>
+          </article>
 
-            {/* Footer switcher */}
-            <div className="border-t-2 border-ink bg-tan p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-ink">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[18px]">verified</span>
-                <span className="font-complexity-notation text-[11px] uppercase tracking-wider font-bold">
-                  Induction Exhibition Concluded · September 2026
+          {/* Past Exhibit 2: Senior Hardware Showcase */}
+          {hardwareExhibit && (
+            <article className="relative bg-card border-2 border-ink shadow-[4px_4px_0px_var(--ink)] p-6 md:p-8 space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-ink pb-3">
+                <div>
+                  <span className="font-handwritten text-xl text-brick block">Archival Bench Showcase</span>
+                  <h3 className="font-headline-md text-2xl text-ink font-bold">
+                    {hardwareExhibit.title}
+                  </h3>
+                  <p className="font-title-editorial text-sm text-muted italic">
+                    {hardwareExhibit.shortLine}
+                  </p>
+                </div>
+                <span className="font-complexity-notation text-xs font-bold text-ink">
+                  22nd August 2026 · Lab 201
                 </span>
               </div>
-              <button
-                type="button"
-                onClick={() => setActiveTab('upcoming')}
-                className="font-label-smallcaps text-[11px] uppercase tracking-wider text-brick hover:underline flex items-center gap-1 font-bold cursor-pointer"
-              >
-                <span>View upcoming events</span>
-                <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-              </button>
+
+              <p className="font-body-md text-ink leading-relaxed">
+                {hardwareExhibit.intro}
+              </p>
+
+              {hardwareExhibit.projects && (
+                <div className="bg-paper border border-ink/20 p-4 space-y-2">
+                  <span className="font-complexity-notation text-xs uppercase text-brick font-bold block">
+                    Bench Projects &amp; Demonstrations:
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-body-sm text-xs text-ink">
+                    {hardwareExhibit.projects.map((proj) => (
+                      <div key={proj} className="flex items-start gap-1.5">
+                        <span className="text-brick font-bold">·</span>
+                        <span>{proj}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {hardwareExhibit.credits && (
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-complexity-notation text-xs text-muted pt-2 border-t border-ink/10">
+                  <span className="font-bold text-ink">Led by:</span>
+                  {hardwareExhibit.credits.map((cr) => (
+                    <span key={cr}>{cr}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          )}
+
+          {/* Switch back banner */}
+          <div className="border-2 border-ink bg-tan p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-ink">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px]">verified</span>
+              <span className="font-complexity-notation text-[11px] uppercase tracking-wider font-bold">
+                Concluded Term Proceedings · Department of ECS
+              </span>
             </div>
-          </article>
+            <button
+              type="button"
+              onClick={() => setActiveTab('upcoming')}
+              className="font-label-smallcaps text-xs uppercase tracking-wider text-brick hover:underline flex items-center gap-1 font-bold cursor-pointer"
+            >
+              <span>View upcoming events ({upcomingList.length})</span>
+              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+            </button>
+          </div>
         </div>
       )}
     </div>

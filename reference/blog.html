@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FLUX-ECS | Department of Electronics &amp; Computer Science, VESIT</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"tertiary-container":"#68574d","on-tertiary-container":"#e5cec1","surface-dim":"#e2d9ca","surface-container-high":"#f1e7d8","secondary-fixed-dim":"#dbc2ad","surface-bright":"#fff8f2","outline":"#8c716c","primary":"#85170a","surface-container-highest":"#ebe1d2","on-error":"#ffffff","on-primary-fixed-variant":"#8a1c0d","primary-fixed-dim":"#ffb4a7","error":"#ba1a1a","on-background":"#1f1b12","on-error-container":"#93000a","secondary-fixed":"#f9dec8","error-container":"#ffdad6","on-secondary-fixed":"#26190b","surface-container":"#f7eddd","on-secondary-container":"#735f4d","inverse-on-surface":"#faefe0","tertiary-fixed":"#f6ded0","surface":"#fff8f2","primary-container":"#a6301f","on-primary-fixed":"#400200","on-primary-container":"#ffc5bb","on-surface-variant":"#58413d","tertiary":"#4f4036","on-secondary-fixed-variant":"#554333","on-tertiary-fixed-variant":"#53443a","outline-variant":"#e0bfb9","on-tertiary-fixed":"#251911","secondary":"#6e5b49","on-tertiary":"#ffffff","surface-variant":"#ebe1d2","surface-container-low":"#fdf2e3","primary-fixed":"#ffdad4","background":"#fff8f2","on-primary":"#ffffff","on-surface":"#1f1b12","on-secondary":"#ffffff","inverse-surface":"#353026","tertiary-fixed-dim":"#d9c2b5","secondary-container":"#f6dbc5","surface-container-lowest":"#ffffff","inverse-primary":"#ffb4a7","surface-tint":"#ab3422"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"1.25rem","gutter-mobile":"1rem","space-xs":"0.375rem","space-xl":"3.5rem","space-md":"1.25rem","space-lg":"2rem","gutter":"1.5rem","space-sm":"0.75rem","margin":"3rem"},"fontFamily":{"title-editorial":["Newsreader"],"display-hero-mobile":["EB Garamond"],"headline-md":["EB Garamond"],"body-sm":["Newsreader"],"display-hero":["EB Garamond"],"headline-lg":["EB Garamond"],"body-md":["Newsreader"],"label-smallcaps":["EB Garamond"],"headline-sm":["EB Garamond"],"headline-lg-mobile":["EB Garamond"],"body-lg":["Newsreader"],"complexity-notation":["Space Mono"]},"fontSize":{"title-editorial":["1.375rem",{"lineHeight":"1.4","letterSpacing":"0.01em","fontWeight":"600"}],"display-hero-mobile":["2.75rem",{"lineHeight":"1.1","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-md":["2.25rem",{"lineHeight":"1.25","fontWeight":"500"}],"body-sm":["0.875rem",{"lineHeight":"1.5","fontWeight":"400"}],"display-hero":["4.5rem",{"lineHeight":"1.05","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg":["3rem",{"lineHeight":"1.15","letterSpacing":"-0.015em","fontWeight":"500"}],"body-md":["1rem",{"lineHeight":"1.65","fontWeight":"400"}],"label-smallcaps":["0.875rem",{"lineHeight":"1.2","letterSpacing":"0.14em","fontWeight":"700"}],"headline-sm":["1.75rem",{"lineHeight":"1.3","fontWeight":"600"}],"headline-lg-mobile":["2rem",{"lineHeight":"1.2","letterSpacing":"0em","fontWeight":"500"}],"body-lg":["1.125rem",{"lineHeight":"1.6","fontWeight":"400"}],"complexity-notation":["0.8125rem",{"lineHeight":"1","letterSpacing":"0.04em","fontWeight":"700"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 left-0 w-full z-50 bg-[#EFE5D6]/95 backdrop-blur-md border-b-2 border-[#1B1613]"><div class="h-20 w-full px-4 lg:px-margin flex items-center justify-between gap-4"><div class="flex items-center gap-6"><a class="flex items-center gap-3.5 group" data-path="home" href="#"><img alt="FLUX-ECS Emblem" class="w-10 h-10 object-contain border-2 border-[#1B1613] bg-[#EFE5D6] p-1 shadow-[2px_2px_0px_#A6301F] transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-none" src="https://lh3.googleusercontent.com/aida/AEtjO1VZvRa_zZ8YBQJjfFRv1WvfRY-DF6v03yuCzzkeXsFOG6zcefTk8LOic2EPTwxMZK91TYHTKLrjs_f7sCYsKFe0qAB9kiZwP5gbugImDiI7wipT1ZSrQXzM5NFg8yn_UDRouKFK-SiCBt8hxxD9QMHW4QK-VmTugwQtq6PWdtAyL8TZXtS3hxFyX3uKd6nXpz_d0dE7ByTL-eiOXZFy8MxgDykfVz0lC6AGTptE_JLD9zIjrYMBICqJGRE"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm uppercase tracking-wider text-[#1B1613] leading-none">FLUX-ECS // DEPT. OF ECS • VESIT</span><span class="font-complexity-notation text-[10px] tracking-widest text-on-surface-variant uppercase mt-1">Where Ideas Flow into Innovation</span></div></a></div><nav class="hidden lg:flex items-center gap-1.5 p-1.5 rounded-full border-2 border-[#1B1613] bg-[#EFE5D6]" data-active-classes="bg-[#1B1613] text-[#EFE5D6] font-bold shadow-[2px_2px_0px_#A6301F]"><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="home" href="#">Home</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="events" href="#">Events</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="blog" href="#">Blog</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="about" href="#">About</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#">Contact</a></nav><div class="flex items-center gap-3"><a class="hidden sm:inline-flex items-center justify-center px-4 py-2 border-2 border-[#1B1613] bg-[#EFE5D6] text-[#1B1613] font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[3px_3px_0px_#D2B9A4] hover:bg-surface-container-high transition-transform active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" data-path="newsletter" href="#">Newsletter</a><a class="inline-flex items-center justify-center px-5 py-2 border-2 border-[#1B1613] bg-[#A6301F] text-[#EFE5D6] font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_#1B1613] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#1B1613] transition-all" data-path="events" href="#">Explore Events</a><button aria-label="Toggle Theme" class="w-10 h-10 border-2 border-[#1B1613] bg-[#EFE5D6] flex items-center justify-center text-[#1B1613] shadow-[2px_2px_0px_#1B1613] hover:bg-surface-container-high active:translate-x-0.5 active:translate-y-0.5" type="button"><span class="material-symbols-outlined text-[20px]">contrast</span></button></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<!-- BROADSHEET TICKER / DISPATCH REGISTRY STRIP -->
+<section class="w-full bg-secondary-container text-on-secondary-fixed px-4 lg:px-margin py-2 shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-3 text-complexity-notation font-complexity-notation">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary text-on-primary">
+<span class="material-symbols-outlined text-[14px]">sensors</span>
+<span>LIVE TELETYPE</span>
+</span>
+<span class="truncate">EDITION 01 • REGISTER DISPATCH FOR DEPT. OF ECS // VESIT CHEMBUR</span>
+</div>
+<div class="flex items-center gap-4">
+<span>LATENCY: 12ms</span>
+<span class="hidden md:inline">FREQ: 2.4GHz PROTOTYPE WIRE</span>
+<span class="px-2 py-0.5 rounded bg-surface text-primary font-bold">O(1) ACCESS</span>
+</div>
+</div>
+</section>
+<!-- BROADSHEET MASTHEAD -->
+<header class="w-full bg-surface-container-low px-4 lg:px-margin pt-10 pb-8">
+<div class="w-full max-w-7xl mx-auto flex flex-col items-center text-center">
+<!-- Upper Metadata Dateline -->
+<div class="w-full flex flex-col md:flex-row items-center justify-between gap-2 pb-4 mb-4 text-complexity-notation font-complexity-notation text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span>VOL. I • ISSUE 01</span>
+<span>•</span>
+<span>MUMBAI METROPOLITAN CHARTER</span>
+</div>
+<div class="px-3 py-1 rounded bg-surface-container-high text-primary font-bold tracking-widest uppercase">
+          Department of Electronics &amp; Computer Science • VESIT
+        </div>
+<div class="flex items-center gap-2">
+<span>ACADEMIC YEAR 2026</span>
+<span>•</span>
+<span>CIRCULATION: EXCLUSIVE</span>
+</div>
+</div>
+<!-- Broadsheet Main Title -->
+<div class="py-2">
+<span class="block font-label-smallcaps text-label-smallcaps text-primary tracking-[0.25em] uppercase mb-1">
+          The Official Gazette of the ECS Guild
+        </span>
+<h1 class="font-display-hero text-display-hero text-on-surface uppercase tracking-tight leading-none drop-shadow-sm">
+          The Flux Dispatch
+        </h1>
+<p class="font-title-editorial text-title-editorial italic text-on-surface-variant mt-2 max-w-2xl mx-auto">
+          “Where Ideas Flow into Innovation” — Department News, Build Logs &amp; Event Bulletins
+        </p>
+</div>
+<!-- Masthead Triple Rule Divider Accent -->
+<div class="w-full flex items-center justify-center gap-4 my-6">
+<div class="h-0.5 flex-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-30"></div>
+<span class="font-complexity-notation text-primary px-3 py-1 bg-surface-container rounded font-bold">§ EST. 2024–2026 §</span>
+<div class="h-0.5 flex-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-30"></div>
+</div>
+</div>
+</header>
+<!-- EDITORIAL GRID CONTENT -->
+<main class="w-full px-4 lg:px-margin py-8">
+<div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT + CENTER COLUMN: LEAD STORY & SECONDARY BULLETIN (8 COLS) -->
+<div class="lg:col-span-8 flex flex-col gap-10">
+<!-- LEAD HEADLINE STORY: ALGORITHM'S AUCTION -->
+<article class="bg-surface-container-lowest rounded-xl p-6 lg:p-8 shadow-xl relative overflow-hidden transition-all duration-300 hover:shadow-2xl">
+<!-- Ribbon badge -->
+<div class="absolute top-0 right-0">
+<div class="bg-primary text-on-primary font-label-smallcaps text-label-smallcaps px-4 py-1.5 shadow-md flex items-center gap-1.5 [clip-path:polygon(0_0,100%_0,100%_100%,0_100%,10%_50%)] pl-6">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+<span>SPECIAL CONCLAVE</span>
+</div>
+</div>
+<div class="flex items-center gap-3 text-complexity-notation font-complexity-notation text-on-surface-variant mb-4">
+<span class="px-2 py-0.5 bg-primary-fixed text-on-primary-fixed-variant rounded font-bold">BULLETIN A-1</span>
+<span>PUBLISHED: 28 OCTOBER 2026</span>
+<span>•</span>
+<span class="text-primary font-bold">2ND FLOOR LAB COMPLEX</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight tracking-tight mb-4">
+            Algorithm’s Auction Scheduled for Nov 2–3: 2-Day High-Stakes Logic &amp; Bidding Conclave Set for 2nd Floor Labs
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface mb-6 leading-relaxed">
+            The department’s flagship strategic gaming tournament returns in full mechanical glory. Students will convert runtime optimizations, bitwise operations, and memory bounds into collateral inside a high-decibel live trading floor atmosphere spanning Labs 201 through 205.
+          </p>
+<!-- Visual Feature Image for Auction -->
+<div class="w-full rounded-lg overflow-hidden bg-surface-container-high mb-6 shadow-md relative group">
+<img class="w-full h-80 object-cover filter contrast-125 hover:scale-[1.02] transition-transform duration-500" data-alt="Monochrome lithographic and vintage broadsheet editorial photo depicting computer science students at wooden auction desks analyzing algorithmic charts, retro cathode ray monitors glowing warm amber, circuit schematics pinned to chalkboards in a high-contrast vintage academic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7e1UKvL2Sq-wyhT7VFH-RoCd9vnxtTvxhOv2NGcQGhHbZ3bPNRHihkSq_GRBDHqINDFlUTT_X5xfh1AcgpeGf5d7PGBzeiPZ3iIjiCc9AhRKsv1msX83aShLnsTH_1jDGFq0EfTVJC9yveQYr5xWKsgw9m-C0kix-8TO5y0QrQisxRL13DBBaCbls4JwOfV2BrwN4NXD6aISkqoUN5sDj89jwm1-M7xHzHYTaUdNO"/>
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/60 to-transparent p-4 text-inverse-on-surface flex flex-wrap justify-between items-center text-complexity-notation font-complexity-notation">
+<span>FIG 1.0: BIDDING CADENCE SIMULATION PROTOCOL</span>
+<span class="text-primary-fixed">VENUE: COMPUTER LAB 201 &amp; 203</span>
+</div>
+</div>
+<!-- Agenda / Program Table (Editorial Litho Ledger) -->
+<div class="bg-surface-container rounded-lg p-5 mb-6 shadow-sm">
+<div class="flex items-center justify-between pb-3 mb-3">
+<span class="font-label-smallcaps text-label-smallcaps uppercase text-primary tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                Official Docket Schedule &amp; Execution Tree
+              </span>
+<span class="font-complexity-notation text-complexity-notation text-on-surface-variant font-bold">TOTAL ROUNDS: 04</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Day 1 Card -->
+<div class="bg-surface-container-lowest p-4 rounded shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-headline-sm text-headline-sm text-primary">Day 1</span>
+<span class="font-complexity-notation text-complexity-notation bg-secondary-container px-2 py-0.5 rounded text-on-secondary-fixed">02 NOV // 10:00 IST</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">The Algorithmic Liquidity Stage</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+                    Teams tackle dynamic programming puzzles and logic labyrinths. Points earned dictate credit scores for the subsequent live hardware &amp; runtime bidding exchange.
+                  </p>
+</div>
+<div class="mt-4 pt-2 flex items-center justify-between text-complexity-notation font-complexity-notation text-on-surface-variant">
+<span>METRIC: TIME-COMPLEXITY</span>
+<span class="font-bold text-primary">O(N LOG N)</span>
+</div>
+</div>
+<!-- Day 2 Card -->
+<div class="bg-surface-container-lowest p-4 rounded shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-headline-sm text-headline-sm text-primary">Day 2</span>
+<span class="font-complexity-notation text-complexity-notation bg-secondary-container px-2 py-0.5 rounded text-on-secondary-fixed">03 NOV // 11:30 IST</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">High-Stakes Auction &amp; Showdown</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+                    The floor opens for bidding on runtime accelerators, test cases, and hidden debugging patches. Live board tracking culminates in sudden-death algorithmic duels.
+                  </p>
+</div>
+<div class="mt-4 pt-2 flex items-center justify-between text-complexity-notation font-complexity-notation text-on-surface-variant">
+<span>METRIC: PROFIT/CYCLE</span>
+<span class="font-bold text-primary">O(1) SETTLEMENT</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Registration Dispatch Action Bar -->
+<div class="flex flex-wrap items-center gap-4 pt-2">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded bg-primary text-on-primary font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_#1F1B12] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#1F1B12] transition-all" href="https://forms.gle" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">draw</span>
+<span>Register via Guild Docket (Google Form)</span>
+</a>
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded bg-surface-container-high text-on-surface font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[3px_3px_0px_#8C716C] hover:bg-surface-container-highest transition-all" href="https://chat.whatsapp.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+<span>Enter Telegraph Hub (WhatsApp)</span>
+</a>
+</div>
+</article>
+<!-- SECONDARY FRONT-PAGE BULLETIN: IOTA ARCHIVES -->
+<article class="bg-surface-container-low rounded-xl p-6 lg:p-8 shadow-lg">
+<div class="flex items-center gap-2 text-complexity-notation font-complexity-notation text-on-surface-variant mb-2">
+<span class="text-primary font-bold">HISTORICAL RECORD // DEPT. EXHIBIT</span>
+<span>•</span>
+<span>RETROSPECTIVE CHRONICLE</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-3 leading-snug">
+            IoTA Archives Successfully Welcomes FE Cohort Across Labs 201, 203, and 215
+          </h2>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center my-4">
+<div class="md:col-span-5 rounded-lg overflow-hidden shadow-md">
+<img class="w-full h-56 object-cover" data-alt="Editorial academic sepia-toned archival photograph showing engineering freshmen gathered around microcontrollers, FPGA circuit boards, miniature robotic brawl cars, and oscilloscope waveforms in a brightly lit electronics laboratory at VESIT." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlsKrp_8C75NjiNEHFMxiFGHRqfT1oTyn-MHegDf-ocuMD3AzsOHQp__I7lfID9glgDdYSTErD8N3j_xL9fJvXfB9ETmMWtlTKkTAfRWaAAyds46F-avX1b0P-XiZ0cHQh-M-NFb-8Nu--hM1pjkDF_AP04JwUT4I9YjyIXRCPdhAG0i1S_JNBiVoa2cB6-mYaE5wl1iazYpprEDt-nf4BATEWFTZlX0Zoe2lMpYal"/>
+</div>
+<div class="md:col-span-7 flex flex-col justify-center">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed mb-3">
+                On the 7th of September, the department convened its foundational welcoming exhibition. Guided under the esteemed auspices of <strong>Council In-charge Yogesh Pandit Sir</strong> and orchestrated by <strong>President Harsh</strong> with the senior executive committee, hundreds of First Year candidates crossed the threshold into applied silicon craftsmanship.
+              </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Laboratories 201, 203, and 215 were transformed into live deployment stations featuring bespoke hardware builds: autonomous obstacle-avoidance vehicles, dual-motor brawl combat arenas, FPGA signal generators, and edge AI/ML vision pipelines running directly on microprocessors.
+              </p>
+</div>
+</div>
+<!-- Exhibition Artifacts Inset Ledger -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3">
+<div class="bg-surface-container-lowest p-3 rounded shadow-sm">
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-[18px]">precision_manufacturing</span>
+<span class="font-complexity-notation text-complexity-notation uppercase font-bold">Hardware Sector</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Obstacle car navigation, combat brawl boards, and tactile sensor matrices tested under live loads.</p>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded shadow-sm">
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-[18px]">memory</span>
+<span class="font-complexity-notation text-complexity-notation uppercase font-bold">Silicon Core</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">FPGA arithmetic engines demonstrating sub-microsecond hardware calculation primitives.</p>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded shadow-sm">
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-[18px]">neurology</span>
+<span class="font-complexity-notation text-complexity-notation uppercase font-bold">Software Matrix</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Quantized deep neural networks for real-time edge classification in low-power environments.</p>
+</div>
+</div>
+</article>
+</div>
+<!-- RIGHT SIDEBAR: WIRE NEWSFLASHES & SUBSCRIPTION DESK (4 COLS) -->
+<aside class="lg:col-span-4 flex flex-col gap-8">
+<!-- EDITORIAL SUBSCRIPTION FORM (GAZETTE SUBSCRIPTION) -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-xl relative">
+<div class="flex items-center gap-2 text-complexity-notation font-complexity-notation text-primary mb-2">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+<span>CIRCULATION COURIER</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">
+            Subscribe to The Dispatch
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-5 leading-normal">
+            Enlist your institutional or academic address to receive printed broadsheets, syllabus blueprints, and contest briefs 48 hours prior to public announcements.
+          </p>
+<form class="flex flex-col gap-3" id="newsletter-form" onsubmit="handleDispatchSubscription(event)">
+<div class="flex flex-col gap-1">
+<label class="font-label-smallcaps text-label-smallcaps text-on-surface-variant uppercase tracking-wider" for="subscriber-name">Scholar Name</label>
+<input class="w-full px-3 py-2.5 rounded bg-surface-container text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" id="subscriber-name" placeholder="e.g. Ada Lovelace" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-smallcaps text-label-smallcaps text-on-surface-variant uppercase tracking-wider" for="subscriber-email">Academic Dispatch E-mail</label>
+<input class="w-full px-3 py-2.5 rounded bg-surface-container text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" id="subscriber-email" placeholder="uid.ecs@ves.ac.in" required="" type="email"/>
+</div>
+<div class="flex items-start gap-2 pt-1">
+<input checked="" class="mt-1 accent-primary" id="pref-hardware" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant select-none" for="pref-hardware">
+                Include firmware build logs &amp; FPGA bench testing alerts
+              </label>
+</div>
+<button class="mt-2 w-full py-3 px-4 rounded bg-primary text-on-primary font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_#1F1B12] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#1F1B12] active:translate-x-1 active:translate-y-1 transition-all flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[18px]">outgoing_mail</span>
+<span>Ratify Subscription</span>
+</button>
+</form>
+<!-- Feedback Confirmation Container -->
+<div class="hidden mt-4 p-3 rounded bg-secondary-container text-on-secondary-fixed font-complexity-notation text-complexity-notation flex items-center gap-2" id="subscription-alert">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<span>DISPATCH CONFIRMED: Token stamped in academic ledger.</span>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-complexity-notation font-complexity-notation text-[10px] text-on-surface-variant">
+<span>VESIT ECS CHARTER #26</span>
+<span>ZERO SPAM CADENCE</span>
+</div>
+</div>
+<!-- UPCOMING DOCKET WIRE (TELETYPE FLASHES) -->
+<div class="bg-surface-container rounded-xl p-6 shadow-md">
+<div class="flex items-center justify-between pb-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+<h3 class="font-label-smallcaps text-label-smallcaps uppercase text-on-surface tracking-widest">Upcoming Docket Wire</h3>
+</div>
+<span class="font-complexity-notation text-complexity-notation text-primary font-bold">LIVE SYNC</span>
+</div>
+<div class="space-y-4">
+<!-- Wire Item 1 -->
+<div class="bg-surface-container-lowest p-3.5 rounded shadow-sm hover:translate-x-1 transition-transform">
+<div class="flex items-center justify-between text-complexity-notation font-complexity-notation text-primary text-[11px] mb-1">
+<span>WIRE FLASH // Q1 BOOTCAMP</span>
+<span>OCT 29</span>
+</div>
+<h4 class="font-headline-sm text-[1.15rem] leading-snug text-on-surface mb-1">
+                Hands-on Microcontroller Bootcamps announced for Q1
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                A 3-week immersive laboratory series demystifying ARM Cortex-M architecture, bare-metal C peripherals, and DMA streaming.
+              </p>
+<div class="mt-2 flex items-center gap-2 text-complexity-notation font-complexity-notation text-[10px] text-on-surface-variant">
+<span>CAPACITY: 45 SEATS</span>
+<span>•</span>
+<span class="text-primary font-bold">LAB 205</span>
+</div>
+</div>
+<!-- Wire Item 2 -->
+<div class="bg-surface-container-lowest p-3.5 rounded shadow-sm hover:translate-x-1 transition-transform">
+<div class="flex items-center justify-between text-complexity-notation font-complexity-notation text-primary text-[11px] mb-1">
+<span>WIRE FLASH // FABRICATION</span>
+<span>OCT 27</span>
+</div>
+<h4 class="font-headline-sm text-[1.15rem] leading-snug text-on-surface mb-1">
+                Open lab hours for prototype fabrication in Lab 201
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Guild members gain access to SMD reflow stations, calibrated signal generators, and high-frequency logic analyzers each Wednesday.
+              </p>
+<div class="mt-2 flex items-center gap-2 text-complexity-notation font-complexity-notation text-[10px] text-on-surface-variant">
+<span>SLOT: 16:00 – 19:30</span>
+<span>•</span>
+<span class="text-primary font-bold">PEER-SUPERVISED</span>
+</div>
+</div>
+<!-- Wire Item 3 -->
+<div class="bg-surface-container-lowest p-3.5 rounded shadow-sm hover:translate-x-1 transition-transform">
+<div class="flex items-center justify-between text-complexity-notation font-complexity-notation text-primary text-[11px] mb-1">
+<span>WIRE FLASH // CODING GUILD</span>
+<span>OCT 25</span>
+</div>
+<h4 class="font-headline-sm text-[1.15rem] leading-snug text-on-surface mb-1">
+                Asymptotic Speedrun: Bi-weekly LeetCode Crucible
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Ranked speed-coding bouts every second Friday night on the Discord portal. Live telemetry and complexity audits by senior mentors.
+              </p>
+<div class="mt-2 flex items-center gap-2 text-complexity-notation font-complexity-notation text-[10px] text-on-surface-variant">
+<span>BRACKET: HARD/MED</span>
+<span>•</span>
+<span class="text-primary font-bold">VIRTUAL</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 text-center">
+<span class="font-title-editorial text-title-editorial italic text-on-surface-variant text-sm">
+              “Continuous transmission ensures sovereign algorithmic agility.”
+            </span>
+</div>
+</div>
+<!-- STATISTICAL BENCHMARK WIDGET (DATA VISUALIZATION) -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-lg">
+<div class="flex items-center justify-between pb-2 mb-3">
+<span class="font-label-smallcaps text-label-smallcaps uppercase text-on-surface tracking-wider">Guild Registry Gauge</span>
+<span class="font-complexity-notation text-complexity-notation text-primary font-bold">AY 2025–26</span>
+</div>
+<div class="space-y-3 font-complexity-notation text-complexity-notation">
+<div>
+<div class="flex justify-between text-on-surface-variant mb-1">
+<span>FE INDUCTION COMPLETE</span>
+<span class="font-bold text-on-surface">184 / 200 SCHOLARS</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 92%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-on-surface-variant mb-1">
+<span>AUCTION SEAT ALLOCATION</span>
+<span class="font-bold text-on-surface">76% CAPACITY</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 76%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-on-surface-variant mb-1">
+<span>ACTIVE BUILD REPOSITORIES</span>
+<span class="font-bold text-on-surface">42 PROJECTS</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 84%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 p-2.5 rounded bg-surface-container flex items-center justify-between text-[11px] font-complexity-notation text-on-surface-variant">
+<span>TELEMETRY STAMP:</span>
+<span class="text-primary font-bold">VALIDATED BY SECRETARIAT</span>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- BROADSHEET CITATION FOOTNOTE ACCENT -->
+<section class="w-full bg-surface-container-high py-4 px-4 lg:px-margin mt-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-complexity-notation font-complexity-notation text-on-surface-variant">
+<div class="flex items-center gap-3">
+<span class="text-primary font-bold">FLUX-ECS DISPATCH GAZETTE</span>
+<span>•</span>
+<span>CHIEF EDITOR: ECS EDITORIAL BOARD</span>
+<span>•</span>
+<span>INSPECTION LABS: 201, 203, 215</span>
+</div>
+<div class="flex items-center gap-4">
+<span>VESIT CAMPUS TELETYPE</span>
+<span class="font-bold text-on-surface">§ ARCHIVAL SERIES 2026 §</span>
+</div>
+</div>
+</section>
+<!-- CLIENT-SIDE SCRIPT FOR SUBSCRIPTION DEMO INTERACTION -->
+<script>
+    function handleDispatchSubscription(event) {
+      event.preventDefault();
+      const alertBox = document.getElementById('subscription-alert');
+      const emailInput = document.getElementById('subscriber-email');
+      const nameInput = document.getElementById('subscriber-name');
+
+      if (emailInput && emailInput.value) {
+        alertBox.classList.remove('hidden');
+        alertBox.innerHTML = `
+          <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+          <span>DISPATCH CONFIRMED: Welcome scholar ${nameInput.value || 'Fellow'}. Gazette No. 01 recorded for ${emailInput.value}.</span>
+        `;
+        emailInput.value = '';
+        if (nameInput) nameInput.value = '';
+        setTimeout(() => {
+          alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-[#EFE5D6] border-t-2 border-[#1B1613] text-[#1B1613]"><div class="w-full px-4 lg:px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-gutter pb-space-lg border-b-2 border-[#1B1613]"><div class="md:col-span-4 flex flex-col justify-between pr-0 md:pr-space-md border-b md:border-b-0 md:border-r-2 border-[#1B1613] pb-space-md md:pb-0"><div class="space-y-4"><div class="flex items-center gap-3.5"><img alt="FLUX-ECS Emblem" class="w-10 h-10 object-contain border-2 border-[#1B1613] bg-[#EFE5D6] p-1 shadow-[2px_2px_0px_#A6301F]" src="https://lh3.googleusercontent.com/aida/AEtjO1VZvRa_zZ8YBQJjfFRv1WvfRY-DF6v03yuCzzkeXsFOG6zcefTk8LOic2EPTwxMZK91TYHTKLrjs_f7sCYsKFe0qAB9kiZwP5gbugImDiI7wipT1ZSrQXzM5NFg8yn_UDRouKFK-SiCBt8hxxD9QMHW4QK-VmTugwQtq6PWdtAyL8TZXtS3hxFyX3uKd6nXpz_d0dE7ByTL-eiOXZFy8MxgDykfVz0lC6AGTptE_JLD9zIjrYMBICqJGRE"/><span class="font-headline-sm text-headline-sm uppercase tracking-tight text-[#1B1613]">FLUX-ECS</span></div><p class="font-title-editorial text-title-editorial italic text-primary-container pr-4">“Where Ideas Flow into Innovation”</p><p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">The premier departmental collective of Electronics &amp; Computer Science, fostering algorithmic rigour, hardware craftsmanship, and intellectual inquiry.</p></div><div class="mt-space-md pt-space-sm border-t border-[#1B1613]/30"><span class="font-complexity-notation text-[11px] uppercase tracking-widest text-on-surface-variant block mb-1">Canonical Repository:</span><a class="inline-flex items-center gap-2 font-complexity-notation text-complexity-notation text-primary-container hover:underline" href="https://github.com/Flux-ECS-Club" rel="noopener noreferrer" target="_blank"><span>github.com/Flux-ECS-Club</span><span class="material-symbols-outlined text-[14px]">arrow_outward</span></a></div></div><div class="md:col-span-3 flex flex-col justify-between px-0 md:px-space-md border-b md:border-b-0 md:border-r-2 border-[#1B1613] pb-space-md md:pb-0"><div class="space-y-3"><h3 class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-[#1B1613] border-b border-[#1B1613] pb-1">Gazette Index</h3><nav class="flex flex-col space-y-2"><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="events" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Events</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="blog" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Blog</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="about" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> About</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="contact" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Contact</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="newsletter" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Newsletter</a></nav></div><div class="mt-space-md border-2 border-[#1B1613] bg-[#D2B9A4] p-2.5 shadow-[2px_2px_0px_#1B1613]"><div class="flex items-center justify-between text-[#1B1613]"><span class="font-label-smallcaps text-label-smallcaps uppercase">Terminal Node</span><span class="font-complexity-notation text-[12px] font-bold">ECS-2026</span></div></div></div><div class="md:col-span-5 flex flex-col justify-between pl-0 md:pl-space-md space-y-space-md"><div class="space-y-3"><h3 class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-[#1B1613] border-b border-[#1B1613] pb-1">Department Secretariat &amp; Inquiries</h3><p class="font-body-md text-body-md text-on-surface leading-relaxed">Dept. of Electronics &amp; Computer Science,<br/>VESIT, Chembur, Mumbai 400074,<br/>Maharashtra, India</p><div class="pt-2 space-y-1"><span class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-on-surface-variant block">Official Dispatch:</span><a class="font-complexity-notation text-complexity-notation text-[#1B1613] hover:text-primary-container block underline decoration-primary-container underline-offset-4" href="mailto:flux.ecs@ves.ac.in">flux.ecs@ves.ac.in</a></div></div><div class="space-y-3"><h3 class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-[#1B1613] border-b border-[#1B1613] pb-1">Archival Registry</h3><ul class="space-y-2"><li class="flex items-center justify-between"><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-1.5" href="https://github.com/Flux-ECS-Club" rel="noopener noreferrer" target="_blank"><span class="font-complexity-notation text-xs">•</span> GitHub</a><span class="font-complexity-notation text-[11px] text-on-surface-variant uppercase">[Source Code]</span></li><li class="flex items-center justify-between"><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-1.5" href="https://instagram.com" rel="noopener noreferrer" target="_blank"><span class="font-complexity-notation text-xs">•</span> Instagram</a><span class="font-complexity-notation text-[11px] text-on-surface-variant uppercase">[Exhibitions]</span></li></ul></div></div></div><div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-4"><div class="flex items-center gap-3"><span class="font-complexity-notation text-[12px] uppercase text-[#1B1613]">§ BROADSHEET GAZETTE NO. 26</span><span class="text-primary-container">•</span><span class="font-body-sm text-body-sm text-on-surface-variant">© VESIT 2026. All rights preserved under academic charter.</span></div><div class="flex items-center gap-2 font-complexity-notation text-[11px] text-on-surface-variant uppercase tracking-wider"><span>Complexity Index:</span><span class="px-1.5 py-0.5 border border-[#1B1613] bg-[#EFE5D6] text-[#1B1613] font-bold">O(1)</span></div></div></div></footer></body></html>

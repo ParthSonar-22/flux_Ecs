@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #EFE5D6;
+  --card: #F6EEE1;
+  --tan: #D2B9A4;
+  --ink: #1B1613;
+  --muted: #5A4A40;
+  --brick: #A6301F;
+  --brick-btn: #A6301F;
+}
+
+.dark {
+  --paper: #15110F;
+  --card: #1E1915;
+  --tan: #2B221D;
+  --ink: #EFE5D6;
+  --muted: #B3A394;
+  --brick: #E2593F;
+  --brick-btn: #C23A24;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--paper);
+  color: var(--ink);
+  scroll-behavior: smooth;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Material symbols outlined font settings */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tan);
+  border: 1px solid var(--ink);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--brick);
+  outline-offset: 2px;
+}

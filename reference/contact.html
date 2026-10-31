@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FLUX-ECS | Department of Electronics &amp; Computer Science, VESIT</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"tertiary-container":"#68574d","on-tertiary-container":"#e5cec1","surface-dim":"#e2d9ca","surface-container-high":"#f1e7d8","secondary-fixed-dim":"#dbc2ad","surface-bright":"#fff8f2","outline":"#8c716c","primary":"#85170a","surface-container-highest":"#ebe1d2","on-error":"#ffffff","on-primary-fixed-variant":"#8a1c0d","primary-fixed-dim":"#ffb4a7","error":"#ba1a1a","on-background":"#1f1b12","on-error-container":"#93000a","secondary-fixed":"#f9dec8","error-container":"#ffdad6","on-secondary-fixed":"#26190b","surface-container":"#f7eddd","on-secondary-container":"#735f4d","inverse-on-surface":"#faefe0","tertiary-fixed":"#f6ded0","surface":"#fff8f2","primary-container":"#a6301f","on-primary-fixed":"#400200","on-primary-container":"#ffc5bb","on-surface-variant":"#58413d","tertiary":"#4f4036","on-secondary-fixed-variant":"#554333","on-tertiary-fixed-variant":"#53443a","outline-variant":"#e0bfb9","on-tertiary-fixed":"#251911","secondary":"#6e5b49","on-tertiary":"#ffffff","surface-variant":"#ebe1d2","surface-container-low":"#fdf2e3","primary-fixed":"#ffdad4","background":"#fff8f2","on-primary":"#ffffff","on-surface":"#1f1b12","on-secondary":"#ffffff","inverse-surface":"#353026","tertiary-fixed-dim":"#d9c2b5","secondary-container":"#f6dbc5","surface-container-lowest":"#ffffff","inverse-primary":"#ffb4a7","surface-tint":"#ab3422"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"1.25rem","gutter-mobile":"1rem","space-xs":"0.375rem","space-xl":"3.5rem","space-md":"1.25rem","space-lg":"2rem","gutter":"1.5rem","space-sm":"0.75rem","margin":"3rem"},"fontFamily":{"title-editorial":["Newsreader"],"display-hero-mobile":["EB Garamond"],"headline-md":["EB Garamond"],"body-sm":["Newsreader"],"display-hero":["EB Garamond"],"headline-lg":["EB Garamond"],"body-md":["Newsreader"],"label-smallcaps":["EB Garamond"],"headline-sm":["EB Garamond"],"headline-lg-mobile":["EB Garamond"],"body-lg":["Newsreader"],"complexity-notation":["Space Mono"]},"fontSize":{"title-editorial":["1.375rem",{"lineHeight":"1.4","letterSpacing":"0.01em","fontWeight":"600"}],"display-hero-mobile":["2.75rem",{"lineHeight":"1.1","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-md":["2.25rem",{"lineHeight":"1.25","fontWeight":"500"}],"body-sm":["0.875rem",{"lineHeight":"1.5","fontWeight":"400"}],"display-hero":["4.5rem",{"lineHeight":"1.05","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg":["3rem",{"lineHeight":"1.15","letterSpacing":"-0.015em","fontWeight":"500"}],"body-md":["1rem",{"lineHeight":"1.65","fontWeight":"400"}],"label-smallcaps":["0.875rem",{"lineHeight":"1.2","letterSpacing":"0.14em","fontWeight":"700"}],"headline-sm":["1.75rem",{"lineHeight":"1.3","fontWeight":"600"}],"headline-lg-mobile":["2rem",{"lineHeight":"1.2","letterSpacing":"0em","fontWeight":"500"}],"body-lg":["1.125rem",{"lineHeight":"1.6","fontWeight":"400"}],"complexity-notation":["0.8125rem",{"lineHeight":"1","letterSpacing":"0.04em","fontWeight":"700"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 left-0 w-full z-50 bg-[#EFE5D6]/95 backdrop-blur-md border-b-2 border-[#1B1613]"><div class="h-20 w-full px-4 lg:px-margin flex items-center justify-between gap-4"><div class="flex items-center gap-6"><a class="flex items-center gap-3.5 group" data-path="home" href="#"><img alt="FLUX-ECS Emblem" class="w-10 h-10 object-contain border-2 border-[#1B1613] bg-[#EFE5D6] p-1 shadow-[2px_2px_0px_#A6301F] transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-none" src="https://lh3.googleusercontent.com/aida/AEtjO1VZvRa_zZ8YBQJjfFRv1WvfRY-DF6v03yuCzzkeXsFOG6zcefTk8LOic2EPTwxMZK91TYHTKLrjs_f7sCYsKFe0qAB9kiZwP5gbugImDiI7wipT1ZSrQXzM5NFg8yn_UDRouKFK-SiCBt8hxxD9QMHW4QK-VmTugwQtq6PWdtAyL8TZXtS3hxFyX3uKd6nXpz_d0dE7ByTL-eiOXZFy8MxgDykfVz0lC6AGTptE_JLD9zIjrYMBICqJGRE"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm uppercase tracking-wider text-[#1B1613] leading-none">FLUX-ECS // DEPT. OF ECS • VESIT</span><span class="font-complexity-notation text-[10px] tracking-widest text-on-surface-variant uppercase mt-1">Where Ideas Flow into Innovation</span></div></a></div><nav class="hidden lg:flex items-center gap-1.5 p-1.5 rounded-full border-2 border-[#1B1613] bg-[#EFE5D6]" data-active-classes="bg-[#1B1613] text-[#EFE5D6] font-bold shadow-[2px_2px_0px_#A6301F]"><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="home" href="#">Home</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="events" href="#">Events</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="blog" href="#">Blog</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="about" href="#">About</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#">Contact</a></nav><div class="flex items-center gap-3"><a class="hidden sm:inline-flex items-center justify-center px-4 py-2 border-2 border-[#1B1613] bg-[#EFE5D6] text-[#1B1613] font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[3px_3px_0px_#D2B9A4] hover:bg-surface-container-high transition-transform active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" data-path="newsletter" href="#">Newsletter</a><a class="inline-flex items-center justify-center px-5 py-2 border-2 border-[#1B1613] bg-[#A6301F] text-[#EFE5D6] font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_#1B1613] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#1B1613] transition-all" data-path="events" href="#">Explore Events</a><button aria-label="Toggle Theme" class="w-10 h-10 border-2 border-[#1B1613] bg-[#EFE5D6] flex items-center justify-center text-[#1B1613] shadow-[2px_2px_0px_#1B1613] hover:bg-surface-container-high active:translate-x-0.5 active:translate-y-0.5" type="button"><span class="material-symbols-outlined text-[20px]">contrast</span></button></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<!-- Top Archival Meta Ribbon -->
+<section class="w-full bg-surface-container border-b-2 border-on-surface py-2 px-4 lg:px-margin">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-3">
+<span class="inline-block w-2.5 h-2.5 bg-primary-container"></span>
+<span class="font-complexity-notation text-complexity-notation uppercase tracking-widest text-on-surface">DISPATCH REGISTRY // DOC ID: FLUX-SEC-2026-C</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-complexity-notation text-[11px] uppercase tracking-wider text-on-surface-variant">TELEGRAPH STATUS: ACTIVE</span>
+<span class="font-complexity-notation text-[11px] font-bold px-2 py-0.5 bg-surface text-primary-container border border-on-surface">O(1) TRANSMISSION</span>
+</div>
+</div>
+</section>
+<!-- Editorial Poster Header Section -->
+<section class="w-full bg-surface border-b-2 border-on-surface px-4 lg:px-margin py-space-lg lg:py-space-xl relative overflow-hidden">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-end">
+<div class="lg:col-span-8 flex flex-col space-y-4">
+<div class="flex items-center gap-2">
+<span class="font-complexity-notation text-xs uppercase px-2 py-1 bg-surface-container-high border border-on-surface text-primary-container font-bold tracking-widest">ARCHIVAL DISPATCH № 084</span>
+<span class="font-complexity-notation text-xs text-on-surface-variant uppercase tracking-wider">VESIT ECS SECRETARIAT</span>
+</div>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-primary-container">
+          INQUIRY DISPATCH &amp; SECRETARIAT // VESIT ECS GUILD
+        </p>
+<h1 class="font-display-hero text-display-hero text-on-surface leading-[0.95] tracking-tight">
+          Contact the <span class="italic underline decoration-primary-container decoration-4 underline-offset-8">Council</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl pt-2">
+          Questions regarding competitive events, laboratory access, workshop seats, or project collaborations? Transmit a dispatch directly to our stewards or inspect canonical departmental coordinates below.
+        </p>
+</div>
+<!-- Quick Index Stamp Card -->
+<div class="lg:col-span-4 bg-surface-container-low border-2 border-on-surface p-space-md shadow-[6px_6px_0px_#A6301F] rounded-none relative">
+<div class="absolute -top-3 right-4 px-2 py-0.5 bg-primary-container text-on-primary font-complexity-notation text-[10px] uppercase font-bold tracking-wider">
+          NOTICE P-24
+        </div>
+<div class="space-y-3">
+<div class="flex justify-between items-center border-b border-on-surface/20 pb-2">
+<span class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface">Council Term</span>
+<span class="font-complexity-notation text-xs font-bold text-primary-container">2025–2026 ACADEMIC</span>
+</div>
+<div class="flex justify-between items-center border-b border-on-surface/20 pb-2">
+<span class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface">Operating Floor</span>
+<span class="font-complexity-notation text-xs font-bold">2ND FLOOR, VESIT</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface">Dispatch Window</span>
+<span class="font-complexity-notation text-xs font-bold text-on-surface-variant">08:00 - 18:30 IST</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Body: Two-Column Broadsheet Grid -->
+<section class="w-full px-4 lg:px-margin py-space-xl bg-surface">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- LEFT: Printed Notice Panel (Essential Coordinates & Stewards) -->
+<div class="lg:col-span-5 flex flex-col space-y-space-lg">
+<!-- Authentic Printed Notice Board -->
+<article class="bg-[#F6EEE1] border-2 border-on-surface shadow-[6px_6px_0px_#A6301F] p-space-md lg:p-space-lg relative flex flex-col justify-between">
+<!-- Ribbon Overlay -->
+<div class="absolute -top-3 -left-2 px-4 py-1 bg-primary-container text-[#EFE5D6] font-label-smallcaps text-xs uppercase tracking-widest shadow-[2px_2px_0px_#1B1613]" style="clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%);">
+            OFFICIAL NOTICE // DIRECTORY
+          </div>
+<div class="space-y-space-md pt-2">
+<!-- Header Block -->
+<div class="border-b-2 border-on-surface pb-space-sm">
+<span class="font-complexity-notation text-[11px] text-on-surface-variant uppercase tracking-widest block">DEPT. OF ELECTRONICS &amp; COMPUTER SCIENCE</span>
+<h2 class="font-headline-sm text-headline-sm uppercase text-on-surface mt-1">Secretariat Coordinates</h2>
+</div>
+<!-- Fast Link CTAs -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<a class="flex items-center justify-between p-3 bg-surface border-2 border-on-surface shadow-[3px_3px_0px_#1B1613] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#1B1613] transition-all group" href="mailto:flux.ecs@ves.ac.in">
+<div class="flex flex-col">
+<span class="font-label-smallcaps text-[11px] uppercase tracking-wider text-on-surface-variant">Council Email</span>
+<span class="font-complexity-notation text-xs font-bold text-primary-container truncate">flux.ecs@ves.ac.in</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-primary-container group-hover:translate-x-0.5 transition-transform">mail</span>
+</a>
+<a class="flex items-center justify-between p-3 bg-surface border-2 border-on-surface shadow-[3px_3px_0px_#1B1613] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#1B1613] transition-all group" href="https://github.com/Flux-ECS-Club" rel="noopener noreferrer" target="_blank">
+<div class="flex flex-col">
+<span class="font-label-smallcaps text-[11px] uppercase tracking-wider text-on-surface-variant">Code Base</span>
+<span class="font-complexity-notation text-xs font-bold text-on-surface truncate">Flux-ECS-Club</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-on-surface group-hover:translate-x-0.5 transition-transform">terminal</span>
+</a>
+</div>
+<!-- Instagram Handle Ledger -->
+<div class="bg-secondary-container/60 border border-on-surface p-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-complexity-notation text-primary-container font-bold text-sm">✦</span>
+<span class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface">Exhibitions &amp; Dispatch:</span>
+</div>
+<a class="font-complexity-notation text-xs font-bold text-primary-container hover:underline" href="https://instagram.com/flux.ecs.vesit" rel="noopener noreferrer" target="_blank">
+                @flux.ecs.vesit
+              </a>
+</div>
+<!-- Physical Geographic Block -->
+<div class="space-y-2 border-t border-on-surface/20 pt-space-sm">
+<span class="font-label-smallcaps text-xs uppercase tracking-widest text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary-container">location_on</span>
+                Physical Campus Secretariat
+              </span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+                Department of Electronics &amp; Computer Science,<br/>
+                VESIT, Hashu Advani Memorial Complex,<br/>
+                Collector's Colony, Chembur, Mumbai 400074, Maharashtra.
+              </p>
+</div>
+<!-- Operating Laboratory Strip -->
+<div class="bg-[#D2B9A4] border-2 border-on-surface p-3 shadow-[3px_3px_0px_#1B1613]">
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface font-bold">Active Operating Labs</span>
+<span class="font-complexity-notation text-[10px] uppercase bg-surface px-1.5 py-0.5 border border-on-surface font-bold">2nd Floor</span>
+</div>
+<div class="grid grid-cols-3 gap-2 text-center pt-1 border-t border-on-surface/30">
+<div class="bg-surface py-1 border border-on-surface font-complexity-notation text-xs font-bold text-on-surface">Lab 201</div>
+<div class="bg-surface py-1 border border-on-surface font-complexity-notation text-xs font-bold text-on-surface">Lab 203</div>
+<div class="bg-surface py-1 border border-on-surface font-complexity-notation text-xs font-bold text-on-surface">Lab 215</div>
+</div>
+</div>
+<!-- Council Stewards Phone Registry -->
+<div class="space-y-2 border-t-2 border-on-surface pt-space-sm">
+<div class="flex items-center justify-between pb-1">
+<h3 class="font-label-smallcaps text-xs uppercase tracking-widest text-on-surface font-bold">Stewards Telephone Ledger</h3>
+<span class="font-complexity-notation text-[10px] text-on-surface-variant uppercase">[Voice &amp; WhatsApp]</span>
+</div>
+<div class="divide-y divide-on-surface/20 bg-surface border border-on-surface">
+<!-- Harsh Patange -->
+<div class="p-2.5 flex items-center justify-between">
+<div>
+<p class="font-title-editorial text-sm font-bold text-on-surface">Harsh Patange</p>
+<span class="font-complexity-notation text-[10px] uppercase text-primary-container font-bold">President</span>
+</div>
+<a class="font-complexity-notation text-xs text-on-surface hover:text-primary-container hover:underline" href="tel:+918454841288">
+                    +91 84548 41288
+                  </a>
+</div>
+<!-- Shantanu Gaikwad -->
+<div class="p-2.5 flex items-center justify-between">
+<div>
+<p class="font-title-editorial text-sm font-bold text-on-surface">Shantanu Gaikwad</p>
+<span class="font-complexity-notation text-[10px] uppercase text-on-surface-variant font-bold">Vice President</span>
+</div>
+<a class="font-complexity-notation text-xs text-on-surface hover:text-primary-container hover:underline" href="tel:+917021965356">
+                    +91 70219 65356
+                  </a>
+</div>
+<!-- Riya Pailwan -->
+<div class="p-2.5 flex items-center justify-between">
+<div>
+<p class="font-title-editorial text-sm font-bold text-on-surface">Riya Pailwan</p>
+<span class="font-complexity-notation text-[10px] uppercase text-on-surface-variant font-bold">Hardware Head</span>
+</div>
+<a class="font-complexity-notation text-xs text-on-surface hover:text-primary-container hover:underline" href="tel:+918169456269">
+                    +91 81694 56269
+                  </a>
+</div>
+<!-- Aayan Shaikh -->
+<div class="p-2.5 flex items-center justify-between">
+<div>
+<p class="font-title-editorial text-sm font-bold text-on-surface">Aayan Shaikh</p>
+<span class="font-complexity-notation text-[10px] uppercase text-on-surface-variant font-bold">Technical Head</span>
+</div>
+<a class="font-complexity-notation text-xs text-on-surface hover:text-primary-container hover:underline" href="tel:+919867466475">
+                    +91 98674 66475
+                  </a>
+</div>
+<!-- Paarth Patil -->
+<div class="p-2.5 flex items-center justify-between">
+<div>
+<p class="font-title-editorial text-sm font-bold text-on-surface">Paarth Patil</p>
+<span class="font-complexity-notation text-[10px] uppercase text-on-surface-variant font-bold">Sr. Technical Officer</span>
+</div>
+<a class="font-complexity-notation text-xs text-on-surface hover:text-primary-container hover:underline" href="tel:+919702413348">
+                    +91 97024 13348
+                  </a>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Registry Seal -->
+<div class="mt-space-md pt-2 border-t border-on-surface/30 flex justify-between items-center text-[10px] font-complexity-notation text-on-surface-variant uppercase">
+<span>VESIT ECS CHARTER // SEC-26</span>
+<span>VERIFIED RECORD</span>
+</div>
+</article>
+<!-- Campus Blueprint Architectural Visual -->
+<div class="bg-surface-container border-2 border-on-surface p-space-md shadow-[4px_4px_0px_#1B1613]">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface font-bold">Campus Floorplan Reference</span>
+<span class="font-complexity-notation text-[11px] text-primary-container font-bold">GRID LOC: W-2F</span>
+</div>
+<div class="relative w-full h-44 bg-surface border border-on-surface overflow-hidden flex items-center justify-center">
+<!-- Blueprint Grid Lines -->
+<svg class="absolute inset-0 w-full h-full text-on-surface/10" height="100%" width="100%">
+<defs>
+<pattern height="20" id="archGrid" patternunits="userSpaceOnUse" width="20">
+<path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect fill="url(#archGrid)" height="100%" width="100%"></rect>
+</svg>
+<!-- Graphic Blueprint Floor Layout -->
+<div class="relative z-10 w-5/6 h-28 border border-on-surface bg-surface-container-low/80 p-2 flex flex-col justify-between">
+<div class="flex justify-between items-center border-b border-on-surface/30 pb-1">
+<span class="font-complexity-notation text-[9px] uppercase tracking-wider font-bold">VESIT ECS QUADRANT // LEVEL 2</span>
+<span class="font-complexity-notation text-[9px] text-primary-container font-bold">WING B</span>
+</div>
+<div class="grid grid-cols-3 gap-1.5 h-14">
+<div class="border border-on-surface bg-secondary-fixed/40 flex flex-col items-center justify-center">
+<span class="font-complexity-notation text-[10px] font-bold text-on-surface">LAB 201</span>
+<span class="text-[8px] font-complexity-notation text-on-surface-variant">DIGITAL</span>
+</div>
+<div class="border border-on-surface bg-secondary-fixed/40 flex flex-col items-center justify-center">
+<span class="font-complexity-notation text-[10px] font-bold text-on-surface">LAB 203</span>
+<span class="text-[8px] font-complexity-notation text-on-surface-variant">EMBEDDED</span>
+</div>
+<div class="border-2 border-primary-container bg-primary-fixed/30 flex flex-col items-center justify-center">
+<span class="font-complexity-notation text-[10px] font-bold text-primary-container">LAB 215</span>
+<span class="text-[8px] font-complexity-notation text-primary-container">FLUX HQ</span>
+</div>
+</div>
+<div class="text-[8px] font-complexity-notation text-on-surface-variant text-center tracking-widest uppercase">
+                STAIRCASE &amp; ELEVATOR ACCESS VIA CENTRAL ATRIUM
+              </div>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 italic">
+            Physical consultations require identification inspection at the main entrance security booth.
+          </p>
+</div>
+</div>
+<!-- RIGHT: Editorial Transmission Form -->
+<div class="lg:col-span-7 flex flex-col space-y-space-lg">
+<div class="bg-surface-container-lowest border-2 border-on-surface shadow-[6px_6px_0px_#A6301F] p-space-md lg:p-space-lg">
+<!-- Form Header -->
+<div class="border-b-2 border-on-surface pb-space-sm mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-smallcaps text-xs uppercase tracking-widest text-primary-container font-bold">TRANSMISSION TERMINAL</span>
+<span class="font-complexity-notation text-xs font-bold text-on-surface bg-surface-container-high px-2 py-0.5 border border-on-surface">PARITY CHECK: OK</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight mt-1">Submit Editorial Dispatch</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Complete all marked coordinates. Routine student requests receive stewardship response within twenty-four academic hours.
+            </p>
+</div>
+<!-- Transmission Form -->
+<form class="space-y-space-md" id="transmission-form" onsubmit="event.preventDefault(); document.getElementById('form-feedback').classList.remove('hidden'); this.reset();">
+<!-- Row 1: Name & Student Email -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="space-y-1.5">
+<label class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface block font-bold" for="sender-name">
+                  Correspondent Full Name <span class="text-primary-container">*</span>
+</label>
+<input class="w-full bg-surface border-2 border-on-surface px-3 py-2.5 font-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-0 focus:border-primary-container transition-colors" id="sender-name" placeholder="e.g. Advait Sharma" required="" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface block font-bold" for="sender-email">
+                  Email Address (@ves.ac.in preferred) <span class="text-primary-container">*</span>
+</label>
+<input class="w-full bg-surface border-2 border-on-surface px-3 py-2.5 font-complexity-notation text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-0 focus:border-primary-container transition-colors" id="sender-email" placeholder="name.year@ves.ac.in" required="" type="email"/>
+</div>
+</div>
+<!-- Row 2: Academic Year & Inquiry Category -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="space-y-1.5">
+<label class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface block font-bold" for="academic-year">
+                  Academic Year Standing <span class="text-primary-container">*</span>
+</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface border-2 border-on-surface px-3 py-2.5 font-complexity-notation text-sm text-on-surface focus:outline-none focus:border-primary-container transition-colors" id="academic-year" required="">
+<option disabled="" selected="" value="">Select Matriculation Cohort</option>
+<option value="FE">First Year (FE)</option>
+<option value="SE">Second Year (SE - ECS)</option>
+<option value="TE">Third Year (TE - ECS)</option>
+<option value="BE">Final Year (BE - ECS)</option>
+<option value="EXTERNAL">External Institutional Scholar</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-2.5 text-on-surface text-[20px]">arrow_drop_down</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface block font-bold" for="inquiry-category">
+                  Inquiry Category <span class="text-primary-container">*</span>
+</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface border-2 border-on-surface px-3 py-2.5 font-complexity-notation text-sm text-on-surface focus:outline-none focus:border-primary-container transition-colors" id="inquiry-category" required="">
+<option disabled="" selected="" value="">Classify Query Channel</option>
+<option value="auction">Algorithm's Auction Tournament</option>
+<option value="hardware">Hardware Bench Access (Lab 215)</option>
+<option value="technical">General Technical &amp; Workshops</option>
+<option value="secretariat">Council Secretariat &amp; Sponsorship</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-2.5 text-on-surface text-[20px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Row 3: Dispatch Payload / Message -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-smallcaps text-xs uppercase tracking-wider text-on-surface block font-bold" for="dispatch-message">
+                  Dispatch Text / Formal Inquiry <span class="text-primary-container">*</span>
+</label>
+<span class="font-complexity-notation text-[10px] text-on-surface-variant uppercase">Markdown plain-text supported</span>
+</div>
+<textarea class="w-full bg-surface border-2 border-on-surface p-3 font-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary-container transition-colors" id="dispatch-message" placeholder="State your technical problem statement, team registration query, or hardware requirement..." required="" rows="6"></textarea>
+</div>
+<!-- Declaration Stipulation -->
+<div class="p-3 bg-surface-container-high border border-on-surface flex items-start gap-3">
+<input class="mt-1 w-4 h-4 border-2 border-on-surface accent-primary-container cursor-pointer" id="charter-consent" required="" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface leading-tight cursor-pointer" for="charter-consent">
+                I attest that this message pertains to lawful academic, competitive, or departmental operations under the VESIT ECS Constitution.
+              </label>
+</div>
+<!-- Submit Button with Strict Brand 2px border + 6px solid brick red offset shadow -->
+<div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-primary-container text-[#EFE5D6] font-label-smallcaps text-label-smallcaps uppercase tracking-wider border-2 border-[#1B1613] shadow-[6px_6px_0px_#1B1613] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0px_#1B1613] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" type="submit">
+<span>Send Message</span>
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="font-complexity-notation text-[11px] uppercase tracking-wider">End-to-End Secretariat Log</span>
+</div>
+</div>
+<!-- Success Feedback Box (Hidden by default) -->
+<div class="hidden p-4 bg-secondary-fixed border-2 border-on-surface shadow-[3px_3px_0px_#1B1613] transition-all" id="form-feedback">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container text-[24px]">verified</span>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface leading-none">Dispatch Lodged in Ledger</h4>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">
+                    Your transmission has been assigned token <strong class="font-complexity-notation">#ECS-TX-4091</strong>. The presiding steward will address your query via student email shortly.
+                  </p>
+</div>
+</div>
+</div>
+</form>
+</div>
+<!-- Architectural Micro Specs -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="p-3 bg-surface border border-on-surface">
+<span class="font-complexity-notation text-[10px] uppercase text-primary-container block font-bold">ENCRYPTION PROTOCOL</span>
+<span class="font-body-md text-sm text-on-surface mt-1 block">TLS 1.3 / Direct SMTP</span>
+</div>
+<div class="p-3 bg-surface border border-on-surface">
+<span class="font-complexity-notation text-[10px] uppercase text-primary-container block font-bold">RESPONSE BOUND</span>
+<span class="font-body-md text-sm text-on-surface mt-1 block">≤ 24 Academic Hours</span>
+</div>
+<div class="p-3 bg-surface border border-on-surface">
+<span class="font-complexity-notation text-[10px] uppercase text-primary-container block font-bold">ARCHIVAL STATUS</span>
+<span class="font-body-md text-sm text-on-surface mt-1 block">Permanent Session Log</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Ornamental Print Divider with Asterism -->
+<div class="w-full max-w-7xl mx-auto px-4 lg:px-margin py-4 flex items-center justify-center gap-4 text-on-surface">
+<div class="h-0.5 flex-1 bg-on-surface/30"></div>
+<span class="font-complexity-notation text-lg text-primary-container font-bold">✦ ※ ✦</span>
+<div class="h-0.5 flex-1 bg-on-surface/30"></div>
+</div>
+<!-- WhatsApp Community Quick Access Banner -->
+<section class="w-full px-4 lg:px-margin py-space-lg bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="bg-primary-container text-[#EFE5D6] border-2 border-on-surface shadow-[6px_6px_0px_#1B1613] p-space-md lg:p-space-lg relative overflow-hidden">
+<!-- Background Monospace Watermark -->
+<div class="absolute -right-6 -bottom-6 font-complexity-notation text-[100px] text-black/10 select-none pointer-events-none font-bold">
+          WA.CHAT
+        </div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="space-y-2 max-w-3xl">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-[#EFE5D6] text-on-surface font-complexity-notation text-[11px] font-bold uppercase tracking-wider">
+                RAPID RESPONSE NODE
+              </span>
+<span class="font-complexity-notation text-xs tracking-wider uppercase text-[#EFE5D6]/80">REAL-TIME CONTEST WIRE</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-[#EFE5D6] tracking-tight">
+              Algorithm’s Auction Official Dispatch Group
+            </h3>
+<p class="font-body-md text-body-md text-[#EFE5D6]/90 max-w-2xl">
+              Need instant problem statement clarifications, teammate pairings, or round-timing broadcasts? Join the verified tournament broadcast channel managed in real time by the council.
+            </p>
+</div>
+<div class="flex-shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+<a class="inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#EFE5D6] text-on-surface border-2 border-[#1B1613] font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_#1B1613] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#1B1613] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all group" href="https://chat.whatsapp.com/E4qVg7GYjMRAERBegTFyXP" rel="noopener noreferrer" target="_blank">
+<span>Join WhatsApp Group</span>
+<span class="material-symbols-outlined text-[20px] text-primary-container group-hover:rotate-45 transition-transform">arrow_outward</span>
+</a>
+</div>
+</div>
+<!-- Ledger Footer Note -->
+<div class="relative z-10 mt-space-md pt-space-xs border-t border-[#EFE5D6]/30 flex flex-wrap items-center justify-between text-[11px] font-complexity-notation text-[#EFE5D6]/70">
+<span>CANONICAL LINK: chat.whatsapp.com/E4qVg7GYjMRAERBegTFyXP</span>
+<span class="uppercase">MODERATED EXCLUSIVELY BY FLUX-ECS STEWARDS</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Physical Verification Colophon -->
+<section class="w-full bg-surface-container-high border-t border-on-surface/20 py-space-md px-4 lg:px-margin">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="font-complexity-notation text-xs font-bold text-primary-container">§ FLUX-DIR-VESIT</span>
+<span class="text-on-surface-variant/40">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">All communications stored in compliance with the Mumbai University Academic Code of Conduct.</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-complexity-notation text-[11px] text-on-surface font-bold uppercase">Council On-Duty at Lab 215</span>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-[#EFE5D6] border-t-2 border-[#1B1613] text-[#1B1613]"><div class="w-full px-4 lg:px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-gutter pb-space-lg border-b-2 border-[#1B1613]"><div class="md:col-span-4 flex flex-col justify-between pr-0 md:pr-space-md border-b md:border-b-0 md:border-r-2 border-[#1B1613] pb-space-md md:pb-0"><div class="space-y-4"><div class="flex items-center gap-3.5"><img alt="FLUX-ECS Emblem" class="w-10 h-10 object-contain border-2 border-[#1B1613] bg-[#EFE5D6] p-1 shadow-[2px_2px_0px_#A6301F]" src="https://lh3.googleusercontent.com/aida/AEtjO1VZvRa_zZ8YBQJjfFRv1WvfRY-DF6v03yuCzzkeXsFOG6zcefTk8LOic2EPTwxMZK91TYHTKLrjs_f7sCYsKFe0qAB9kiZwP5gbugImDiI7wipT1ZSrQXzM5NFg8yn_UDRouKFK-SiCBt8hxxD9QMHW4QK-VmTugwQtq6PWdtAyL8TZXtS3hxFyX3uKd6nXpz_d0dE7ByTL-eiOXZFy8MxgDykfVz0lC6AGTptE_JLD9zIjrYMBICqJGRE"/><span class="font-headline-sm text-headline-sm uppercase tracking-tight text-[#1B1613]">FLUX-ECS</span></div><p class="font-title-editorial text-title-editorial italic text-primary-container pr-4">“Where Ideas Flow into Innovation”</p><p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">The premier departmental collective of Electronics &amp; Computer Science, fostering algorithmic rigour, hardware craftsmanship, and intellectual inquiry.</p></div><div class="mt-space-md pt-space-sm border-t border-[#1B1613]/30"><span class="font-complexity-notation text-[11px] uppercase tracking-widest text-on-surface-variant block mb-1">Canonical Repository:</span><a class="inline-flex items-center gap-2 font-complexity-notation text-complexity-notation text-primary-container hover:underline" href="https://github.com/Flux-ECS-Club" rel="noopener noreferrer" target="_blank"><span>github.com/Flux-ECS-Club</span><span class="material-symbols-outlined text-[14px]">arrow_outward</span></a></div></div><div class="md:col-span-3 flex flex-col justify-between px-0 md:px-space-md border-b md:border-b-0 md:border-r-2 border-[#1B1613] pb-space-md md:pb-0"><div class="space-y-3"><h3 class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-[#1B1613] border-b border-[#1B1613] pb-1">Gazette Index</h3><nav class="flex flex-col space-y-2"><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="events" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Events</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="blog" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Blog</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="about" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> About</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="contact" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Contact</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="newsletter" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Newsletter</a></nav></div><div class="mt-space-md border-2 border-[#1B1613] bg-[#D2B9A4] p-2.5 shadow-[2px_2px_0px_#1B1613]"><div class="flex items-center justify-between text-[#1B1613]"><span class="font-label-smallcaps text-label-smallcaps uppercase">Terminal Node</span><span class="font-complexity-notation text-[12px] font-bold">ECS-2026</span></div></div></div><div class="md:col-span-5 flex flex-col justify-between pl-0 md:pl-space-md space-y-space-md"><div class="space-y-3"><h3 class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-[#1B1613] border-b border-[#1B1613] pb-1">Department Secretariat &amp; Inquiries</h3><p class="font-body-md text-body-md text-on-surface leading-relaxed">Dept. of Electronics &amp; Computer Science,<br/>VESIT, Chembur, Mumbai 400074,<br/>Maharashtra, India</p><div class="pt-2 space-y-1"><span class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-on-surface-variant block">Official Dispatch:</span><a class="font-complexity-notation text-complexity-notation text-[#1B1613] hover:text-primary-container block underline decoration-primary-container underline-offset-4" href="mailto:flux.ecs@ves.ac.in">flux.ecs@ves.ac.in</a></div></div><div class="space-y-3"><h3 class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-[#1B1613] border-b border-[#1B1613] pb-1">Archival Registry</h3><ul class="space-y-2"><li class="flex items-center justify-between"><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-1.5" href="https://github.com/Flux-ECS-Club" rel="noopener noreferrer" target="_blank"><span class="font-complexity-notation text-xs">•</span> GitHub</a><span class="font-complexity-notation text-[11px] text-on-surface-variant uppercase">[Source Code]</span></li><li class="flex items-center justify-between"><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-1.5" href="https://instagram.com" rel="noopener noreferrer" target="_blank"><span class="font-complexity-notation text-xs">•</span> Instagram</a><span class="font-complexity-notation text-[11px] text-on-surface-variant uppercase">[Exhibitions]</span></li></ul></div></div></div><div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-4"><div class="flex items-center gap-3"><span class="font-complexity-notation text-[12px] uppercase text-[#1B1613]">§ BROADSHEET GAZETTE NO. 26</span><span class="text-primary-container">•</span><span class="font-body-sm text-body-sm text-on-surface-variant">© VESIT 2026. All rights preserved under academic charter.</span></div><div class="flex items-center gap-2 font-complexity-notation text-[11px] text-on-surface-variant uppercase tracking-wider"><span>Complexity Index:</span><span class="px-1.5 py-0.5 border border-[#1B1613] bg-[#EFE5D6] text-[#1B1613] font-bold">O(1)</span></div></div></div></footer></body></html>

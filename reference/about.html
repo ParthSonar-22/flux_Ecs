@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FLUX-ECS | Department of Electronics &amp; Computer Science, VESIT</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"tertiary-container":"#68574d","on-tertiary-container":"#e5cec1","surface-dim":"#e2d9ca","surface-container-high":"#f1e7d8","secondary-fixed-dim":"#dbc2ad","surface-bright":"#fff8f2","outline":"#8c716c","primary":"#85170a","surface-container-highest":"#ebe1d2","on-error":"#ffffff","on-primary-fixed-variant":"#8a1c0d","primary-fixed-dim":"#ffb4a7","error":"#ba1a1a","on-background":"#1f1b12","on-error-container":"#93000a","secondary-fixed":"#f9dec8","error-container":"#ffdad6","on-secondary-fixed":"#26190b","surface-container":"#f7eddd","on-secondary-container":"#735f4d","inverse-on-surface":"#faefe0","tertiary-fixed":"#f6ded0","surface":"#fff8f2","primary-container":"#a6301f","on-primary-fixed":"#400200","on-primary-container":"#ffc5bb","on-surface-variant":"#58413d","tertiary":"#4f4036","on-secondary-fixed-variant":"#554333","on-tertiary-fixed-variant":"#53443a","outline-variant":"#e0bfb9","on-tertiary-fixed":"#251911","secondary":"#6e5b49","on-tertiary":"#ffffff","surface-variant":"#ebe1d2","surface-container-low":"#fdf2e3","primary-fixed":"#ffdad4","background":"#fff8f2","on-primary":"#ffffff","on-surface":"#1f1b12","on-secondary":"#ffffff","inverse-surface":"#353026","tertiary-fixed-dim":"#d9c2b5","secondary-container":"#f6dbc5","surface-container-lowest":"#ffffff","inverse-primary":"#ffb4a7","surface-tint":"#ab3422"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"1.25rem","gutter-mobile":"1rem","space-xs":"0.375rem","space-xl":"3.5rem","space-md":"1.25rem","space-lg":"2rem","gutter":"1.5rem","space-sm":"0.75rem","margin":"3rem"},"fontFamily":{"title-editorial":["Newsreader"],"display-hero-mobile":["EB Garamond"],"headline-md":["EB Garamond"],"body-sm":["Newsreader"],"display-hero":["EB Garamond"],"headline-lg":["EB Garamond"],"body-md":["Newsreader"],"label-smallcaps":["EB Garamond"],"headline-sm":["EB Garamond"],"headline-lg-mobile":["EB Garamond"],"body-lg":["Newsreader"],"complexity-notation":["Space Mono"]},"fontSize":{"title-editorial":["1.375rem",{"lineHeight":"1.4","letterSpacing":"0.01em","fontWeight":"600"}],"display-hero-mobile":["2.75rem",{"lineHeight":"1.1","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-md":["2.25rem",{"lineHeight":"1.25","fontWeight":"500"}],"body-sm":["0.875rem",{"lineHeight":"1.5","fontWeight":"400"}],"display-hero":["4.5rem",{"lineHeight":"1.05","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg":["3rem",{"lineHeight":"1.15","letterSpacing":"-0.015em","fontWeight":"500"}],"body-md":["1rem",{"lineHeight":"1.65","fontWeight":"400"}],"label-smallcaps":["0.875rem",{"lineHeight":"1.2","letterSpacing":"0.14em","fontWeight":"700"}],"headline-sm":["1.75rem",{"lineHeight":"1.3","fontWeight":"600"}],"headline-lg-mobile":["2rem",{"lineHeight":"1.2","letterSpacing":"0em","fontWeight":"500"}],"body-lg":["1.125rem",{"lineHeight":"1.6","fontWeight":"400"}],"complexity-notation":["0.8125rem",{"lineHeight":"1","letterSpacing":"0.04em","fontWeight":"700"}]}}}};</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 left-0 w-full z-50 bg-[#EFE5D6]/95 backdrop-blur-md border-b-2 border-[#1B1613]"><div class="h-20 w-full px-4 lg:px-margin flex items-center justify-between gap-4"><div class="flex items-center gap-6"><a class="flex items-center gap-3.5 group" data-path="home" href="#"><img alt="FLUX-ECS Emblem" class="w-10 h-10 object-contain border-2 border-[#1B1613] bg-[#EFE5D6] p-1 shadow-[2px_2px_0px_#A6301F] transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-none" src="https://lh3.googleusercontent.com/aida/AEtjO1VZvRa_zZ8YBQJjfFRv1WvfRY-DF6v03yuCzzkeXsFOG6zcefTk8LOic2EPTwxMZK91TYHTKLrjs_f7sCYsKFe0qAB9kiZwP5gbugImDiI7wipT1ZSrQXzM5NFg8yn_UDRouKFK-SiCBt8hxxD9QMHW4QK-VmTugwQtq6PWdtAyL8TZXtS3hxFyX3uKd6nXpz_d0dE7ByTL-eiOXZFy8MxgDykfVz0lC6AGTptE_JLD9zIjrYMBICqJGRE"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm uppercase tracking-wider text-[#1B1613] leading-none">FLUX-ECS // DEPT. OF ECS • VESIT</span><span class="font-complexity-notation text-[10px] tracking-widest text-on-surface-variant uppercase mt-1">Where Ideas Flow into Innovation</span></div></a></div><nav class="hidden lg:flex items-center gap-1.5 p-1.5 rounded-full border-2 border-[#1B1613] bg-[#EFE5D6]" data-active-classes="bg-[#1B1613] text-[#EFE5D6] font-bold shadow-[2px_2px_0px_#A6301F]"><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="home" href="#">Home</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="events" href="#">Events</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="blog" href="#">Blog</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="about" href="#">About</a><a class="px-4 py-1.5 rounded-full font-label-smallcaps text-label-smallcaps uppercase text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#">Contact</a></nav><div class="flex items-center gap-3"><a class="hidden sm:inline-flex items-center justify-center px-4 py-2 border-2 border-[#1B1613] bg-[#EFE5D6] text-[#1B1613] font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[3px_3px_0px_#D2B9A4] hover:bg-surface-container-high transition-transform active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" data-path="newsletter" href="#">Newsletter</a><a class="inline-flex items-center justify-center px-5 py-2 border-2 border-[#1B1613] bg-[#A6301F] text-[#EFE5D6] font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_#1B1613] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#1B1613] transition-all" data-path="events" href="#">Explore Events</a><button aria-label="Toggle Theme" class="w-10 h-10 border-2 border-[#1B1613] bg-[#EFE5D6] flex items-center justify-center text-[#1B1613] shadow-[2px_2px_0px_#1B1613] hover:bg-surface-container-high active:translate-x-0.5 active:translate-y-0.5" type="button"><span class="material-symbols-outlined text-[20px]">contrast</span></button></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<!-- Top Archival Strip -->
+<div class="w-full bg-[#1B1613] text-[#EFE5D6] px-4 lg:px-margin py-2 border-b-2 border-[#1B1613] flex flex-wrap items-center justify-between gap-3 font-complexity-notation text-[11px] tracking-widest uppercase">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 bg-[#A6301F]"></span>
+<span>GAZETTE SPECIAL REGISTER // FOLIO EDITION NO. XXIV</span>
+</div>
+<div class="flex items-center gap-4">
+<span>REF: VESIT-ECS-ARCHIVE</span>
+<span class="hidden sm:inline">•</span>
+<span class="hidden sm:inline">CYCLE 2025–2026</span>
+<span class="bg-[#A6301F] text-[#EFE5D6] px-2 py-0.5 font-bold">STATUS: DEPLOYED</span>
+</div>
+</div>
+<!-- Editorial Masthead / Header Section -->
+<section class="w-full px-4 lg:px-margin py-space-lg lg:py-space-xl bg-[#EFE5D6] border-b-2 border-[#1B1613]">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Title & Overline -->
+<div class="lg:col-span-8 flex flex-col space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-[#D2B9A4] border-2 border-[#1B1613] text-[#1B1613] font-complexity-notation text-xs tracking-wider uppercase shadow-[2px_2px_0px_#1B1613] w-fit">
+<span class="text-primary-container font-bold">§</span>
+<span>CHARTER &amp; ARCHIVAL MANDATE // DEPT. OF ELECTRONICS &amp; COMPUTER SCIENCE • VESIT</span>
+</div>
+<h1 class="font-display-hero text-headline-lg lg:text-display-hero text-[#1B1613] leading-none tracking-tight">
+          Where Ideas Flow <br class="hidden sm:block"/>
+<span class="italic font-title-editorial text-primary-container underline decoration-[#1B1613] decoration-2 underline-offset-8">into Innovation.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-[#1B1613] max-w-3xl leading-relaxed pt-2">
+          We are the official departmental technical collective of Electronics &amp; Computer Science at Vivekanand Education Society's Institute of Technology (VESIT), Chembur. Founded to bridge theoretical curricula with hands-on silicon crafting, embedded systems, algorithmic problem solving, and full-stack software development. We organize practical workshops, competitive auctions, hardware exhibitions, and senior-fresher mentorships.
+        </p>
+</div>
+<!-- Right Column: Micro Broadsheet Plate -->
+<div class="lg:col-span-4 flex flex-col space-y-3 bg-[#F6EEE1] p-5 border-2 border-[#1B1613] shadow-[6px_6px_0px_#A6301F]">
+<div class="flex items-center justify-between border-b-2 border-[#1B1613] pb-2">
+<span class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-[#1B1613]">Department Docket</span>
+<span class="font-complexity-notation text-xs bg-[#1B1613] text-[#EFE5D6] px-1.5 py-0.5">ECS-CHARTER</span>
+</div>
+<div class="font-body-sm text-body-sm text-[#1B1613] space-y-2 leading-snug">
+<p class="flex items-start gap-2">
+<span class="font-complexity-notation text-primary-container font-bold">01.</span>
+<span><strong>Jurisdiction:</strong> Department of Electronics &amp; Computer Science, VESIT.</span>
+</p>
+<p class="flex items-start gap-2">
+<span class="font-complexity-notation text-primary-container font-bold">02.</span>
+<span><strong>Core Focus:</strong> Embedded Microarchitectures, Systems Kernel, High-Yield Algorithmic Design.</span>
+</p>
+<p class="flex items-start gap-2">
+<span class="font-complexity-notation text-primary-container font-bold">03.</span>
+<span><strong>Repository:</strong> Open-access educational codices maintained under GNU/MIT charters.</span>
+</p>
+</div>
+<div class="pt-2 border-t border-[#1B1613]/30 flex items-center justify-between font-complexity-notation text-[11px] text-on-surface-variant">
+<span>LAT: 19.0538° N</span>
+<span>LON: 72.8893° E</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Three Foundational Pillars (Broadsheet Columns) -->
+<section class="w-full bg-[#F6EEE1] border-b-2 border-[#1B1613]">
+<div class="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-[#1B1613]">
+<!-- Pillar 1 -->
+<div class="p-6 lg:p-8 flex flex-col justify-between space-y-4 hover:bg-[#EFE5D6] transition-colors">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-complexity-notation text-primary-container font-bold text-sm tracking-widest">[ PILLAR // 01 ]</span>
+<span class="material-symbols-outlined text-[#1B1613]">memory</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-[#1B1613] leading-snug">Hardware Meets Software</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            True engineering exists at the tactile junction of digital logic and physical circuits. We trace execution paths from raw transistor gates and microcontroller registers up through distributed compute abstractions.
+          </p>
+</div>
+<div class="pt-3 border-t border-[#1B1613]/20 flex items-center gap-2 font-complexity-notation text-xs text-[#1B1613]">
+<span class="w-2 h-2 bg-[#A6301F]"></span>
+<span>SILICON + RUNTIMES</span>
+</div>
+</div>
+<!-- Pillar 2 -->
+<div class="p-6 lg:p-8 flex flex-col justify-between space-y-4 hover:bg-[#EFE5D6] transition-colors">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-complexity-notation text-primary-container font-bold text-sm tracking-widest">[ PILLAR // 02 ]</span>
+<span class="material-symbols-outlined text-[#1B1613]">terminal</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-[#1B1613] leading-snug">Real Workflows</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            No toy projects or synthetic coursework. Our workshops simulate production sprints, version-controlled firmware matrices, hardware debugging on logic analyzers, and stress-tested deployments under load.
+          </p>
+</div>
+<div class="pt-3 border-t border-[#1B1613]/20 flex items-center gap-2 font-complexity-notation text-xs text-[#1B1613]">
+<span class="w-2 h-2 bg-[#A6301F]"></span>
+<span>PR-DRIVEN REPOSITORY</span>
+</div>
+</div>
+<!-- Pillar 3 -->
+<div class="p-6 lg:p-8 flex flex-col justify-between space-y-4 hover:bg-[#EFE5D6] transition-colors">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-complexity-notation text-primary-container font-bold text-sm tracking-widest">[ PILLAR // 03 ]</span>
+<span class="material-symbols-outlined text-[#1B1613]">diversity_3</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-[#1B1613] leading-snug">Open to Every Year</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            FLUX eliminates academic hierarchy. First-year novices solder alongside fourth-year researchers. Peer mentorships are engineered so that collective technical memory is preserved across cohorts without friction.
+          </p>
+</div>
+<div class="pt-3 border-t border-[#1B1613]/20 flex items-center gap-2 font-complexity-notation text-xs text-[#1B1613]">
+<span class="w-2 h-2 bg-[#A6301F]"></span>
+<span>ALL COHORTS WELCOME</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Council In-Charge & Core Secretariat Section -->
+<section class="w-full px-4 lg:px-margin py-space-xl bg-[#EFE5D6] border-b-2 border-[#1B1613]">
+<div class="flex flex-col space-y-8">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-[#1B1613] pb-4">
+<div>
+<span class="font-complexity-notation text-xs text-primary-container uppercase tracking-widest font-bold">SECTION 02 // FACULTY &amp; CORE LEADERSHIP</span>
+<h2 class="font-headline-lg text-headline-lg text-[#1B1613] leading-tight">Secretariat &amp; Council In-Charge</h2>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+          Stewards of departmental charter, operational strategy, and technical benchmarks for the 2025–2026 academic term.
+        </div>
+</div>
+<!-- Grid: Faculty Mentor + Core Officers Strip -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<!-- Faculty Mentor Large Plate -->
+<div class="lg:col-span-5 bg-[#F6EEE1] border-2 border-[#1B1613] p-6 lg:p-8 shadow-[6px_6px_0px_#A6301F] flex flex-col justify-between">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b-2 border-[#1B1613] pb-3">
+<span class="font-complexity-notation text-xs uppercase text-primary-container font-bold tracking-widest">FACULTY PATRON</span>
+<span class="font-complexity-notation text-xs bg-[#1B1613] text-[#EFE5D6] px-2 py-0.5">COUNCIL IN-CHARGE</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-[#1B1613] leading-snug">Prof. Yogesh Pandit Sir</h3>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold">
+                Faculty Mentor &amp; Department Coordinator
+              </p>
+<p class="font-complexity-notation text-xs text-on-surface-variant">Dept. of Electronics &amp; Computer Science, VESIT</p>
+</div>
+<div class="p-4 bg-[#EFE5D6] border-2 border-[#1B1613] font-title-editorial italic text-title-editorial text-[#1B1613] leading-relaxed">
+              “Engineering leadership begins when conceptual theory is transformed into reproducible, hardened systems. FLUX represents our department’s commitment to self-directed innovation, academic honesty, and craft.”
+            </div>
+</div>
+<div class="mt-6 pt-4 border-t-2 border-[#1B1613] flex items-center justify-between font-complexity-notation text-xs text-on-surface-variant">
+<span>OFFICE: ECS FACULTY ANNEX</span>
+<span>ENDOWMENT 2025–26</span>
+</div>
+</div>
+<!-- Core Leadership Officers Grid -->
+<div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+<div class="bg-[#D2B9A4] border-2 border-[#1B1613] p-4 font-complexity-notation text-xs text-[#1B1613] flex items-center justify-between">
+<span class="font-bold tracking-wider uppercase">CORE EXECUTIVE BENCH</span>
+<span>5 KEY APPOINTMENTS</span>
+</div>
+<!-- Officers Table / Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- President -->
+<div class="bg-[#F6EEE1] border-2 border-[#1B1613] p-4 shadow-[4px_4px_0px_#1B1613] flex flex-col justify-between space-y-2">
+<div>
+<div class="flex items-center justify-between border-b border-[#1B1613] pb-1.5 mb-2">
+<span class="font-complexity-notation text-[11px] text-primary-container font-bold">OFFICE 01</span>
+<span class="font-complexity-notation text-[11px] bg-[#1B1613] text-[#EFE5D6] px-1.5">CHIEF</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Harsh Patange</h4>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">President</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Executive leadership, university liaison, and departmental governance.</p>
+</div>
+<!-- Vice President -->
+<div class="bg-[#F6EEE1] border-2 border-[#1B1613] p-4 shadow-[4px_4px_0px_#1B1613] flex flex-col justify-between space-y-2">
+<div>
+<div class="flex items-center justify-between border-b border-[#1B1613] pb-1.5 mb-2">
+<span class="font-complexity-notation text-[11px] text-primary-container font-bold">OFFICE 02</span>
+<span class="font-complexity-notation text-[11px] bg-[#1B1613] text-[#EFE5D6] px-1.5">DISPATCH</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Shantanu Gaikwad</h4>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">Vice President</p>
+</div>
+<div class="space-y-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Operational orchestration and inter-departmental synergies.</p>
+<div class="pt-1 flex items-center gap-1 font-complexity-notation text-xs text-[#1B1613] font-bold">
+<span class="material-symbols-outlined text-[14px]">call</span>
+<span>+91 70219 65356</span>
+</div>
+</div>
+</div>
+<!-- Hardware Head -->
+<div class="bg-[#F6EEE1] border-2 border-[#1B1613] p-4 shadow-[4px_4px_0px_#1B1613] flex flex-col justify-between space-y-2">
+<div>
+<div class="flex items-center justify-between border-b border-[#1B1613] pb-1.5 mb-2">
+<span class="font-complexity-notation text-[11px] text-primary-container font-bold">OFFICE 03</span>
+<span class="font-complexity-notation text-[11px] bg-[#1B1613] text-[#EFE5D6] px-1.5">SILICON</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Riya Pailwan</h4>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">Hardware Head</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Silicon workshops, microarchitectural prototyping, and equipment registry.</p>
+</div>
+<!-- Technical Head -->
+<div class="bg-[#F6EEE1] border-2 border-[#1B1613] p-4 shadow-[4px_4px_0px_#1B1613] flex flex-col justify-between space-y-2">
+<div>
+<div class="flex items-center justify-between border-b border-[#1B1613] pb-1.5 mb-2">
+<span class="font-complexity-notation text-[11px] text-primary-container font-bold">OFFICE 04</span>
+<span class="font-complexity-notation text-[11px] bg-[#1B1613] text-[#EFE5D6] px-1.5">SYSTEMS</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Aayan Shaikh</h4>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">Technical Head</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Core infrastructure, codebase governance, and algorithmic syllabus.</p>
+</div>
+<!-- Sr. Technical Officer (Spans 2 columns on sm screens) -->
+<div class="sm:col-span-2 bg-[#F6EEE1] border-2 border-[#1B1613] p-4 shadow-[4px_4px_0px_#1B1613] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-complexity-notation text-[11px] text-primary-container font-bold">OFFICE 05</span>
+<span class="font-complexity-notation text-[11px] bg-[#1B1613] text-[#EFE5D6] px-1.5">SENIOR BENCH</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Paarth Patil</h4>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold">Sr. Technical Officer</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">
+                Algorithmic mentorship, hackathon contest oversight, and technical review board.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Council Members Gallery Section (The Lithographic Cards) -->
+<section class="w-full px-4 lg:px-margin py-space-xl bg-[#F6EEE1] border-b-2 border-[#1B1613]">
+<div class="flex flex-col space-y-8">
+<!-- Title & Notched Subhead -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-[#1B1613] pb-4">
+<div>
+<div class="inline-flex items-center gap-2 font-complexity-notation text-xs text-primary-container font-bold tracking-widest uppercase">
+<span>OFFICIAL REGISTER // FOLIO 03</span>
+<span>•</span>
+<span>RATIFIED PERSONNEL</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-[#1B1613] leading-tight">Council Members &amp; Junior Officers</h2>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+          Archival dossier featuring attested portraits, designated callsigns, unit badges, and personal mandates.
+        </div>
+</div>
+<!-- Cards Grid (Authentic Attached Images) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- CARD 1: Arnav Abhale -->
+<article class="bg-[#F6EEE1] rounded-[14px] border-2 border-[#1B1613] shadow-[6px_6px_0px_#A6301F] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1">
+<!-- Card Header Plate -->
+<div class="p-3 bg-[#EFE5D6] border-b-2 border-[#1B1613] flex items-center justify-between">
+<span class="font-complexity-notation text-xs font-bold text-[#1B1613]">ARCHIVE // 09</span>
+<span class="inline-block px-2 py-0.5 bg-[#A6301F] text-[#EFE5D6] font-complexity-notation text-[11px] font-bold">
+              BADGE '09'
+            </span>
+</div>
+<!-- Card Image Frame -->
+<div class="p-3 bg-[#F6EEE1]">
+<div class="relative w-full aspect-[4/5] border-2 border-[#1B1613] overflow-hidden bg-[#D2B9A4]">
+<img alt="Arnav Abhale" class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRn31_dEFUUFSO6r2xatwtygSvyGpP60HwNQXp4VwSjhfCnhQBA9A7rzZPznMRXiCEva0M3zozFzWy57sQmEfJ89eWwwHykwFP2bCrNbEXUsAKHCCTJlN4Ea9FZFQJaiQdCukjklWj7qpB6A4e2KsHUgqYXnRbVYqDbzbi7MGdiiZXfd6UP1qfBzgN1d3JAD0bowulsmArTUwZgpdOkWMNc3dMoX4Qq8MoODCQjRFBkQWnNGGQfzLoRA"/>
+<div class="absolute bottom-0 inset-x-0 bg-[#1B1613]/85 text-[#EFE5D6] px-2 py-1 flex items-center justify-between font-complexity-notation text-[10px]">
+<span>ID: ECS-FIN-09</span>
+<span>STATUS: ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-4 flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Arnav Abhale</h3>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">
+                Finance Head
+              </p>
+</div>
+<div class="p-2.5 bg-[#EFE5D6] border border-[#1B1613] border-dashed">
+<span class="font-complexity-notation text-[10px] text-on-surface-variant block uppercase tracking-wider mb-0.5">Callsign Mandate:</span>
+<p class="font-title-editorial italic text-body-md text-[#1B1613]">
+                “Here to make a difference”
+              </p>
+</div>
+</div>
+</article>
+<!-- CARD 2: Varnika Mandal Chaurasia -->
+<article class="bg-[#F6EEE1] rounded-[14px] border-2 border-[#1B1613] shadow-[6px_6px_0px_#A6301F] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1">
+<!-- Card Header Plate -->
+<div class="p-3 bg-[#EFE5D6] border-b-2 border-[#1B1613] flex items-center justify-between">
+<span class="font-complexity-notation text-xs font-bold text-[#1B1613]">ARCHIVE // 77</span>
+<span class="inline-block px-2 py-0.5 bg-[#A6301F] text-[#EFE5D6] font-complexity-notation text-[11px] font-bold">
+              BADGE '77'
+            </span>
+</div>
+<!-- Card Image Frame -->
+<div class="p-3 bg-[#F6EEE1]">
+<div class="relative w-full aspect-[4/5] border-2 border-[#1B1613] overflow-hidden bg-[#D2B9A4]">
+<img alt="Varnika Mandal Chaurasia" class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQps5SXfrMKtXWDX-t5-VRjuRt5tm2oCgE0lFUDtI82xU0SleKev-StZOitT2GFKjbP51zeZMyRX51Q_UgDad-hkSQUay6R7mIdQvDq8MImDkh2lZlc8S0XKih520sCfQH-0IOWdmD00vbypRH9EcL-zRNQPZILsmbjG0c_402Y_6eVlnklo0S8TrT9TSfqYeYuHYRDuzSPbQteKSniTttEVd8fZb8UouljItR2JMyUIJW9izmDpnOaA"/>
+<div class="absolute bottom-0 inset-x-0 bg-[#1B1613]/85 text-[#EFE5D6] px-2 py-1 flex items-center justify-between font-complexity-notation text-[10px]">
+<span>ID: ECS-OPS-77</span>
+<span>STATUS: ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-4 flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Varnika Mandal Chaurasia</h3>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">
+                Operations Head
+              </p>
+</div>
+<div class="p-2.5 bg-[#EFE5D6] border border-[#1B1613] border-dashed">
+<span class="font-complexity-notation text-[10px] text-on-surface-variant block uppercase tracking-wider mb-0.5">Callsign Mandate:</span>
+<p class="font-title-editorial italic text-body-md text-[#1B1613]">
+                “Another day, Another slay”
+              </p>
+</div>
+</div>
+</article>
+<!-- CARD 3: Parth Sonar -->
+<article class="bg-[#F6EEE1] rounded-[14px] border-2 border-[#1B1613] shadow-[6px_6px_0px_#A6301F] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1">
+<!-- Card Header Plate -->
+<div class="p-3 bg-[#EFE5D6] border-b-2 border-[#1B1613] flex items-center justify-between">
+<span class="font-complexity-notation text-xs font-bold text-[#1B1613]">ARCHIVE // TECH</span>
+<span class="inline-block px-2 py-0.5 bg-[#1B1613] text-[#EFE5D6] font-complexity-notation text-[11px] font-bold">
+              SYS-CALL
+            </span>
+</div>
+<!-- Card Image Frame -->
+<div class="p-3 bg-[#F6EEE1]">
+<div class="relative w-full aspect-[4/5] border-2 border-[#1B1613] overflow-hidden bg-[#D2B9A4]">
+<img alt="Parth Sonar" class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1lcDImLtNxVZxIQkuzHpBDCPm8rWfIXy_FIbruRBsmPR-dsMMfXsU1XZFMbCRHcBT0cDXCnVH7M9MVMhdef3lbDsQzzurncE_fq5k3ws2ga78RDj6IfDK9xC0OVtIT3ZX3G5kRR-tv6UkUbN5ysekjku_NVqcIR9O1NhoHsjzISuDvk_BgFw_eaL82dYhaz-juKTXXhxt5Q1SlaEbPv5b94eLbHNnZAW8xXwPYSjnmn8tDLmswJ4PMg"/>
+<div class="absolute bottom-0 inset-x-0 bg-[#1B1613]/85 text-[#EFE5D6] px-2 py-1 flex items-center justify-between font-complexity-notation text-[10px]">
+<span>ID: ECS-JTO-01</span>
+<span>STATUS: ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-4 flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Parth Sonar</h3>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">
+                Jr. Technical Officer
+              </p>
+</div>
+<div class="p-2.5 bg-[#EFE5D6] border border-[#1B1613] border-dashed">
+<span class="font-complexity-notation text-[10px] text-on-surface-variant block uppercase tracking-wider mb-0.5">Attested Callout:</span>
+<p class="font-title-editorial italic text-body-md text-[#1B1613]">
+                “Powered by possibility.”
+              </p>
+</div>
+</div>
+</article>
+<!-- CARD 4: Aarya Tanwade -->
+<article class="bg-[#F6EEE1] rounded-[14px] border-2 border-[#1B1613] shadow-[6px_6px_0px_#A6301F] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1">
+<!-- Card Header Plate -->
+<div class="p-3 bg-[#EFE5D6] border-b-2 border-[#1B1613] flex items-center justify-between">
+<span class="font-complexity-notation text-xs font-bold text-[#1B1613]">ARCHIVE // 25</span>
+<span class="inline-block px-2 py-0.5 bg-[#A6301F] text-[#EFE5D6] font-complexity-notation text-[11px] font-bold">
+              BADGE '25'
+            </span>
+</div>
+<!-- Card Image Frame -->
+<div class="p-3 bg-[#F6EEE1]">
+<div class="relative w-full aspect-[4/5] border-2 border-[#1B1613] overflow-hidden bg-[#D2B9A4]">
+<img alt="Aarya Tanwade" class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNuA1YurdMBU8_iioWSQwaQ_pXkJd6J0juY7YHJhZPYwHyKSfetdwN-eXuhsjH8ka_wvuflklgnxRRhQJNX_OSUB8HDs_I1CBoAKO_4bI1ykruFGqz11FzRlF4SKwPX7N0F4JjjudtUn32rEaRweF0KxuNtT0KfeFTnUX3JLgxzkgwCKV61RFmXCrhzB1NKI7iOgLk294EHN5AASidUN5aJmWLq8u9HB87q7FYSEWLeXoW3Q8hGc3ILA"/>
+<div class="absolute bottom-0 inset-x-0 bg-[#1B1613]/85 text-[#EFE5D6] px-2 py-1 flex items-center justify-between font-complexity-notation text-[10px]">
+<span>ID: ECS-JTO-25</span>
+<span>STATUS: ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-4 flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Aarya Tanwade</h3>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">
+                Jr. Technical Officer
+              </p>
+</div>
+<div class="p-2.5 bg-[#EFE5D6] border border-[#1B1613] border-dashed">
+<span class="font-complexity-notation text-[10px] text-on-surface-variant block uppercase tracking-wider mb-0.5">Callsign Mandate:</span>
+<p class="font-title-editorial italic text-body-md text-[#1B1613]">
+                “Trust the process. Question the processor.”
+              </p>
+</div>
+</div>
+</article>
+<!-- CARD 5: Atharva Vaidya -->
+<article class="bg-[#F6EEE1] rounded-[14px] border-2 border-[#1B1613] shadow-[6px_6px_0px_#A6301F] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1">
+<!-- Card Header Plate -->
+<div class="p-3 bg-[#EFE5D6] border-b-2 border-[#1B1613] flex items-center justify-between">
+<span class="font-complexity-notation text-xs font-bold text-[#1B1613]">ARCHIVE // 03</span>
+<span class="inline-block px-2 py-0.5 bg-[#A6301F] text-[#EFE5D6] font-complexity-notation text-[11px] font-bold">
+              BADGE '03'
+            </span>
+</div>
+<!-- Card Image Frame -->
+<div class="p-3 bg-[#F6EEE1]">
+<div class="relative w-full aspect-[4/5] border-2 border-[#1B1613] overflow-hidden bg-[#D2B9A4]">
+<img alt="Atharva Vaidya" class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSejtzuuD6uNxdnVT7TuxyVWsClb1iMW3hjhen8VXZuU4eAnrT8yzHaJpK9YTXG-zY8GLpSX1hADrxr1ZQqYRCl6BxqCctcwy3jB_LN3Ri58jn0lcafBs0bHtf5RiWQ3vulbayKKEUIG0wadneZK2ajTft1_qmEDucmpm3h-tj8zcWm32bNZZa3xwWakrg3ohpZavhr1fqycR-q35M_lPbme8GQMJq-QCO8vd_FSyPAizr5dSpQT3C8w"/>
+<div class="absolute bottom-0 inset-x-0 bg-[#1B1613]/85 text-[#EFE5D6] px-2 py-1 flex items-center justify-between font-complexity-notation text-[10px]">
+<span>ID: ECS-JFO-03</span>
+<span>STATUS: ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-4 flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Atharva Vaidya</h3>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">
+                Jr. Finance Officer
+              </p>
+</div>
+<div class="p-2.5 bg-[#EFE5D6] border border-[#1B1613] border-dashed">
+<span class="font-complexity-notation text-[10px] text-on-surface-variant block uppercase tracking-wider mb-0.5">Callsign Mandate:</span>
+<p class="font-title-editorial italic text-body-md text-[#1B1613]">
+                “Running on curiosity and questionable decisions.”
+              </p>
+</div>
+</div>
+</article>
+<!-- CARD 6: Yogita Gupta -->
+<article class="bg-[#F6EEE1] rounded-[14px] border-2 border-[#1B1613] shadow-[6px_6px_0px_#A6301F] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1">
+<!-- Card Header Plate -->
+<div class="p-3 bg-[#EFE5D6] border-b-2 border-[#1B1613] flex items-center justify-between">
+<span class="font-complexity-notation text-xs font-bold text-[#1B1613]">ARCHIVE // 15</span>
+<span class="inline-block px-2 py-0.5 bg-[#A6301F] text-[#EFE5D6] font-complexity-notation text-[11px] font-bold">
+              BADGE '15'
+            </span>
+</div>
+<!-- Card Image Frame -->
+<div class="p-3 bg-[#F6EEE1]">
+<div class="relative w-full aspect-[4/5] border-2 border-[#1B1613] overflow-hidden bg-[#D2B9A4]">
+<img alt="Yogita Gupta" class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqqZTmGqJWRyCS1d2DC3G0JAwfmfsrE8zkF2x6jn0zqPKGwW2jpI36gXBYDwzW2PwekkkxMv40NfA9nS4KjV5Q1JPbqtDN5b8n4NY1_zCVcndSb8ZWnQcobpGf1XDb_kVfuk9HYUlVLA_Mn2eNGyoj3HHJtWouswnpaysZK_RGOwh2n1g3LO2klaeVmayCgUFwUPSZZf9KVRLD7LbEtx1i0NR2EubCC5-h3fjYulkcB2sBsksHiTkDpQ"/>
+<div class="absolute bottom-0 inset-x-0 bg-[#1B1613]/85 text-[#EFE5D6] px-2 py-1 flex items-center justify-between font-complexity-notation text-[10px]">
+<span>ID: ECS-JGO-15</span>
+<span>STATUS: ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-4 flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Yogita Gupta</h3>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">
+                Jr. Graphics Officer
+              </p>
+</div>
+<div class="p-2.5 bg-[#EFE5D6] border border-[#1B1613] border-dashed">
+<span class="font-complexity-notation text-[10px] text-on-surface-variant block uppercase tracking-wider mb-0.5">Callsign Mandate:</span>
+<p class="font-title-editorial italic text-body-md text-[#1B1613]">
+                “A little stardust in every idea”
+              </p>
+</div>
+</div>
+</article>
+<!-- CARD 7: Tanush Haryan -->
+<article class="bg-[#F6EEE1] rounded-[14px] border-2 border-[#1B1613] shadow-[6px_6px_0px_#A6301F] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1">
+<!-- Card Header Plate -->
+<div class="p-3 bg-[#EFE5D6] border-b-2 border-[#1B1613] flex items-center justify-between">
+<span class="font-complexity-notation text-xs font-bold text-[#1B1613]">ARCHIVE // 10</span>
+<span class="inline-block px-2 py-0.5 bg-[#A6301F] text-[#EFE5D6] font-complexity-notation text-[11px] font-bold">
+              BADGE '10'
+            </span>
+</div>
+<!-- Card Image Frame -->
+<div class="p-3 bg-[#F6EEE1]">
+<div class="relative w-full aspect-[4/5] border-2 border-[#1B1613] overflow-hidden bg-[#D2B9A4]">
+<img alt="Tanush Haryan" class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrYvor3Bd815mcLh9s-5xX03Qr2-4pZz37ljwIwESRfKnJ0MBIa1Cqg6PC1g-RKi7BTKEZXwE5MIPJjoxff_mzmwxczZ6mdCTNR00TAVx0ZkjFbfkiF0SGqybWdvqNLS787cFEONFYZ-0g6K1L9k2Mi9M6Hc94o_n3d9yLbgxUXz0kkA1O5qHQT2BnUKDEADdyPDxCkKP1niEi8FutJG4eEVFecP277rzxorCoDHHJ5MVjPrSNZFhaVw"/>
+<div class="absolute bottom-0 inset-x-0 bg-[#1B1613]/85 text-[#EFE5D6] px-2 py-1 flex items-center justify-between font-complexity-notation text-[10px]">
+<span>ID: ECS-JTO-10</span>
+<span>STATUS: ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-4 flex flex-col flex-1 justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-[#1B1613] leading-none">Tanush Haryan</h3>
+<p class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-primary-container font-bold mt-1">
+                Jr. Technical Officer
+              </p>
+</div>
+<div class="p-2.5 bg-[#EFE5D6] border border-[#1B1613] border-dashed">
+<span class="font-complexity-notation text-[10px] text-on-surface-variant block uppercase tracking-wider mb-0.5">Callsign Mandate:</span>
+<p class="font-title-editorial italic text-body-md text-[#1B1613]">
+                “Jack Of All, Master Of None”
+              </p>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- Editorial Ribbon Divider with Glyph -->
+<div class="w-full bg-[#EFE5D6] py-4 border-b-2 border-[#1B1613] flex items-center justify-center">
+<div class="w-full max-w-4xl px-4 flex items-center gap-4">
+<div class="h-[2px] flex-1 bg-[#1B1613]"></div>
+<div class="flex items-center gap-2 font-complexity-notation text-xs tracking-widest text-[#1B1613] font-bold">
+<span>§</span>
+<span>ARCHIVAL DISPATCH TERMINAL</span>
+<span>§</span>
+</div>
+<div class="h-[2px] flex-1 bg-[#1B1613]"></div>
+</div>
+</div>
+<!-- Department Coordinates & Cartographic Registry Section -->
+<section class="w-full px-4 lg:px-margin py-space-xl bg-[#EFE5D6]">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<!-- Geographic & Institutional Coordinates Card -->
+<div class="lg:col-span-6 bg-[#F6EEE1] border-2 border-[#1B1613] p-6 lg:p-8 shadow-[6px_6px_0px_#A6301F] flex flex-col justify-between">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b-2 border-[#1B1613] pb-2">
+<span class="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-[#1B1613]">Geographic Coordinates</span>
+<span class="font-complexity-notation text-xs bg-[#A6301F] text-[#EFE5D6] px-1.5 py-0.5">SECTOR VESIT</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-[#1B1613] leading-snug">Department Secretariat</h3>
+<div class="space-y-3 font-body-md text-body-md text-[#1B1613]">
+<p class="leading-relaxed">
+<strong>VESIT Campus:</strong> Hashu Advani Memorial Complex, Collector's Colony, Chembur, Mumbai 400074, Maharashtra, India.
+            </p>
+<p class="leading-relaxed text-on-surface-variant">
+              Department laboratories, embedded systems workbenches, and technical review councils operate on the 3rd Floor, Electronics &amp; Computer Science wing.
+            </p>
+</div>
+<div class="pt-4 border-t-2 border-[#1B1613] space-y-3 font-complexity-notation text-xs">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant uppercase">Official Inquiry Dispatch:</span>
+<a class="text-primary-container font-bold hover:underline" href="mailto:flux.ecs@ves.ac.in">flux.ecs@ves.ac.in</a>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant uppercase">Public Git Registry:</span>
+<a class="text-primary-container font-bold hover:underline flex items-center gap-1" href="https://github.com/Flux-ECS-Club" rel="noopener noreferrer" target="_blank">
+<span>github.com/Flux-ECS-Club</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant uppercase">Academic Charter:</span>
+<span class="text-[#1B1613]">VESIT ECS // 2026</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-[#1B1613]/20 flex items-center justify-between font-complexity-notation text-[11px] text-on-surface-variant">
+<span>O(1) CONSTANT COMMUNICATION</span>
+<span>STRICT NO-LINKEDIN PROTOCOL</span>
+</div>
+</div>
+<!-- Map Display Frame -->
+<div class="lg:col-span-6 bg-[#F6EEE1] border-2 border-[#1B1613] p-4 shadow-[6px_6px_0px_#1B1613] flex flex-col justify-between">
+<div class="border-b-2 border-[#1B1613] pb-2 mb-3 flex items-center justify-between font-complexity-notation text-xs">
+<span class="text-[#1B1613] font-bold">CARTOGRAPHIC PLOT // VESIT CAMPUS</span>
+<span class="bg-[#1B1613] text-[#EFE5D6] px-1.5 py-0.5">CHEMBUR 400074</span>
+</div>
+<!-- Static Location Map Embed Area -->
+<div class="w-full h-80 min-h-[300px] border-2 border-[#1B1613] bg-[#D2B9A4] relative flex items-center justify-center overflow-hidden" data-location="VESIT, Collector's Colony, Chembur, Mumbai 400074" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBIjLOv2mcpLHlNwToFGVyrzXyGJPOCEPZ8rlvck9RncGY9LMpzCdlNqrKqJ-cBO3-WygW4iMlyhu6DMox9bM-KaKsNOkCxKLfKNtTdaO4nO99_Xv3ijs0dbJEHNWdqIDG1y19vz3G8lE4JA1JXe72Jv1Xie7M7xzjGJDBrgC2AOcQWnaIGU7SX1qewmPsCwER9Gvg2A1IiMjfojaj3_WgHXKpNpZ1xAopXbWA1TS8w')">
+<!-- Stylized overlay mark for map container -->
+<div class="absolute inset-0 bg-[#A6301F]/10 pointer-events-none mix-blend-multiply"></div>
+<div class="absolute top-4 left-4 bg-[#EFE5D6] border-2 border-[#1B1613] px-3 py-1 font-complexity-notation text-xs text-[#1B1613] shadow-[2px_2px_0px_#1B1613]">
+<span>VESIT ECS DEPT • MUMBAI</span>
+</div>
+<div class="absolute bottom-4 right-4 bg-[#1B1613] text-[#EFE5D6] px-2 py-1 font-complexity-notation text-[10px]">
+<span>19.0538° N, 72.8893° E</span>
+</div>
+</div>
+<div class="pt-3 mt-3 border-t border-[#1B1613] flex flex-wrap items-center justify-between gap-2 font-complexity-notation text-xs text-on-surface-variant">
+<span>ACCESSIBLE VIA CHEMBUR MONORAIL &amp; HARBOUR LINE</span>
+<a class="text-primary-container font-bold hover:underline" href="https://github.com/Flux-ECS-Club" rel="noopener noreferrer" target="_blank">
+            EXPLORE OPEN CODEBASE →
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Archival Seal Bar -->
+<div class="w-full bg-[#D2B9A4] border-t-2 border-[#1B1613] px-4 lg:px-margin py-3 flex flex-wrap items-center justify-between gap-3 text-[#1B1613] font-complexity-notation text-xs">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-[#A6301F]"></span>
+<span class="font-bold">END OF FILE // ABOUT DOSSIER COMPILED</span>
+</div>
+<div class="flex items-center gap-4">
+<span>HASH: 8F2A9C41</span>
+<span>RATIFIED BY COUNCIL SECRETARIAT</span>
+</div>
+</div>
+</div></main><footer class="w-full bg-[#EFE5D6] border-t-2 border-[#1B1613] text-[#1B1613]"><div class="w-full px-4 lg:px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-gutter pb-space-lg border-b-2 border-[#1B1613]"><div class="md:col-span-4 flex flex-col justify-between pr-0 md:pr-space-md border-b md:border-b-0 md:border-r-2 border-[#1B1613] pb-space-md md:pb-0"><div class="space-y-4"><div class="flex items-center gap-3.5"><img alt="FLUX-ECS Emblem" class="w-10 h-10 object-contain border-2 border-[#1B1613] bg-[#EFE5D6] p-1 shadow-[2px_2px_0px_#A6301F]" src="https://lh3.googleusercontent.com/aida/AEtjO1VZvRa_zZ8YBQJjfFRv1WvfRY-DF6v03yuCzzkeXsFOG6zcefTk8LOic2EPTwxMZK91TYHTKLrjs_f7sCYsKFe0qAB9kiZwP5gbugImDiI7wipT1ZSrQXzM5NFg8yn_UDRouKFK-SiCBt8hxxD9QMHW4QK-VmTugwQtq6PWdtAyL8TZXtS3hxFyX3uKd6nXpz_d0dE7ByTL-eiOXZFy8MxgDykfVz0lC6AGTptE_JLD9zIjrYMBICqJGRE"/><span class="font-headline-sm text-headline-sm uppercase tracking-tight text-[#1B1613]">FLUX-ECS</span></div><p class="font-title-editorial text-title-editorial italic text-primary-container pr-4">“Where Ideas Flow into Innovation”</p><p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">The premier departmental collective of Electronics &amp; Computer Science, fostering algorithmic rigour, hardware craftsmanship, and intellectual inquiry.</p></div><div class="mt-space-md pt-space-sm border-t border-[#1B1613]/30"><span class="font-complexity-notation text-[11px] uppercase tracking-widest text-on-surface-variant block mb-1">Canonical Repository:</span><a class="inline-flex items-center gap-2 font-complexity-notation text-complexity-notation text-primary-container hover:underline" href="https://github.com/Flux-ECS-Club" rel="noopener noreferrer" target="_blank"><span>github.com/Flux-ECS-Club</span><span class="material-symbols-outlined text-[14px]">arrow_outward</span></a></div></div><div class="md:col-span-3 flex flex-col justify-between px-0 md:px-space-md border-b md:border-b-0 md:border-r-2 border-[#1B1613] pb-space-md md:pb-0"><div class="space-y-3"><h3 class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-[#1B1613] border-b border-[#1B1613] pb-1">Gazette Index</h3><nav class="flex flex-col space-y-2"><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="events" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Events</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="blog" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Blog</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="about" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> About</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="contact" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Contact</a><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-2" data-path="newsletter" href="#"><span class="font-complexity-notation text-xs text-primary-container">§</span> Newsletter</a></nav></div><div class="mt-space-md border-2 border-[#1B1613] bg-[#D2B9A4] p-2.5 shadow-[2px_2px_0px_#1B1613]"><div class="flex items-center justify-between text-[#1B1613]"><span class="font-label-smallcaps text-label-smallcaps uppercase">Terminal Node</span><span class="font-complexity-notation text-[12px] font-bold">ECS-2026</span></div></div></div><div class="md:col-span-5 flex flex-col justify-between pl-0 md:pl-space-md space-y-space-md"><div class="space-y-3"><h3 class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-[#1B1613] border-b border-[#1B1613] pb-1">Department Secretariat &amp; Inquiries</h3><p class="font-body-md text-body-md text-on-surface leading-relaxed">Dept. of Electronics &amp; Computer Science,<br/>VESIT, Chembur, Mumbai 400074,<br/>Maharashtra, India</p><div class="pt-2 space-y-1"><span class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-on-surface-variant block">Official Dispatch:</span><a class="font-complexity-notation text-complexity-notation text-[#1B1613] hover:text-primary-container block underline decoration-primary-container underline-offset-4" href="mailto:flux.ecs@ves.ac.in">flux.ecs@ves.ac.in</a></div></div><div class="space-y-3"><h3 class="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-[#1B1613] border-b border-[#1B1613] pb-1">Archival Registry</h3><ul class="space-y-2"><li class="flex items-center justify-between"><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-1.5" href="https://github.com/Flux-ECS-Club" rel="noopener noreferrer" target="_blank"><span class="font-complexity-notation text-xs">•</span> GitHub</a><span class="font-complexity-notation text-[11px] text-on-surface-variant uppercase">[Source Code]</span></li><li class="flex items-center justify-between"><a class="font-body-md text-body-md text-on-surface hover:text-primary-container transition-colors flex items-center gap-1.5" href="https://instagram.com" rel="noopener noreferrer" target="_blank"><span class="font-complexity-notation text-xs">•</span> Instagram</a><span class="font-complexity-notation text-[11px] text-on-surface-variant uppercase">[Exhibitions]</span></li></ul></div></div></div><div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-4"><div class="flex items-center gap-3"><span class="font-complexity-notation text-[12px] uppercase text-[#1B1613]">§ BROADSHEET GAZETTE NO. 26</span><span class="text-primary-container">•</span><span class="font-body-sm text-body-sm text-on-surface-variant">© VESIT 2026. All rights preserved under academic charter.</span></div><div class="flex items-center gap-2 font-complexity-notation text-[11px] text-on-surface-variant uppercase tracking-wider"><span>Complexity Index:</span><span class="px-1.5 py-0.5 border border-[#1B1613] bg-[#EFE5D6] text-[#1B1613] font-bold">O(1)</span></div></div></div></footer></body></html>

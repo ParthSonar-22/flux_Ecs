@@ -9,13 +9,13 @@ export default function CTABanner() {
   return (
     <section className="w-full bg-card py-space-xl px-4 lg:px-margin" id="newsletter-signup">
       <div className="max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-ink bg-brick p-1.5 mb-4">
+        <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 border-2 border-ink bg-black p-2.5 mb-5 shadow-[4px_4px_0px_var(--brick)]">
           <Image
-            src="/logo-flux.png"
+            src="/logo-mark.png"
             alt="FLUX-ECS"
-            width={36}
-            height={36}
-            className="w-full h-full object-contain dark:invert"
+            width={64}
+            height={64}
+            className="w-full h-full object-contain"
           />
         </div>
 

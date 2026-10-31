@@ -40,12 +40,12 @@ export const metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/logo-flux.png', type: 'image/png' },
+      { url: '/logo-mark.png', type: 'image/png' },
     ],
     shortcut: ['/favicon.ico'],
     apple: [
       { url: '/apple-icon.png' },
-      { url: '/logo-flux.png' },
+      { url: '/logo-mark.png' },
     ],
   },
   openGraph: {
@@ -66,8 +66,8 @@ export default function RootLayout({ children }) {
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" href="/logo-flux.png" />
-        <link rel="apple-touch-icon" href="/logo-flux.png" />
+        <link rel="icon" type="image/png" href="/logo-mark.png" />
+        <link rel="apple-touch-icon" href="/logo-mark.png" />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"

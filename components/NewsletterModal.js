@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 let openModalFn = () => {}
 
@@ -83,12 +84,25 @@ export default function NewsletterModal() {
         </button>
 
         <div className="mb-4">
-          <span className="inline-block px-2 py-0.5 border border-ink bg-tan text-ink text-[11px] font-bold uppercase tracking-wider font-complexity-notation mb-2">
-            FLUX-ECS Updates
-          </span>
-          <h3 className="font-headline-sm text-headline-sm text-ink font-bold">
-            Get Club Updates
-          </h3>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-11 h-11 border-2 border-ink bg-black p-1 shadow-[2.5px_2.5px_0px_var(--brick)] shrink-0 flex items-center justify-center">
+              <Image
+                src="/logo-mark.png"
+                alt="FLUX-ECS Logo"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <span className="inline-block px-2 py-0.5 border border-ink bg-tan text-ink text-[11px] font-bold uppercase tracking-wider font-complexity-notation">
+                FLUX-ECS Updates
+              </span>
+              <h3 className="font-headline-sm text-headline-sm text-ink font-bold leading-tight">
+                Get Club Updates
+              </h3>
+            </div>
+          </div>
           <p className="font-body-sm text-body-sm text-muted mt-1">
             Receive event announcements, workshop schedules, and project logs directly in your inbox.
           </p>

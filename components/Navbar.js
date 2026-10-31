@@ -5,8 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
 import NewsletterModal, { openNewsletterModal } from './NewsletterModal'
-import Logo from './Logo'
-import LogoWordmark from './LogoWordmark'
+import LogoFull from './LogoFull'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -32,14 +31,14 @@ export default function Navbar() {
           {/* Brand */}
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-ink bg-paper flex items-center justify-center p-2 shadow-[2.5px_2.5px_0px_var(--brick)] transition-all group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-[1px_1px_0px_var(--brick)] shrink-0">
-                <Logo className="w-full h-full text-ink transition-transform group-hover:scale-105" />
+              <div className="w-13 h-13 sm:w-16 sm:h-16 border-2 border-ink bg-paper flex items-center justify-center p-1.5 shadow-[3px_3px_0px_var(--brick)] transition-all group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-[1px_1px_0px_var(--brick)] shrink-0">
+                <LogoFull className="w-full h-full text-ink transition-transform group-hover:scale-105" />
               </div>
               <div className="flex flex-col justify-center">
-                <div className="h-6 sm:h-7.5 w-auto flex items-center">
-                  <LogoWordmark className="h-full w-auto text-ink" />
-                </div>
-                <span className="font-complexity-notation text-[10px] sm:text-[11px] font-bold tracking-widest text-brick uppercase mt-1">
+                <span className="text-xl sm:text-2xl font-black uppercase tracking-wider text-ink leading-tight">
+                  FLUX-ECS
+                </span>
+                <span className="font-complexity-notation text-[10px] sm:text-[11px] font-bold tracking-widest text-brick uppercase mt-0.5">
                   Dept. of ECS • VESIT
                 </span>
               </div>

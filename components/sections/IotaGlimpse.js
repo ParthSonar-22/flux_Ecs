@@ -4,25 +4,25 @@ import Link from 'next/link'
 export default function IotaGlimpse() {
   const labCards = [
     {
-      lab: 'Lab 201',
-      tag: 'Hardware & Electronics',
-      image: '/photos/lab201/lab201-1.jpg',
-      alt: 'Lab 201 hardware session at IoTA Archives, VESIT',
-      note: 'FPGA kits & robotics bench',
+      lab: 'Embedded Systems Lab',
+      tag: 'Hardware & Robotics',
+      image: '/photos/iota-robot-floor-test.jpg',
+      alt: 'Live robotics floor demonstration at IoTA Archives, VESIT',
+      note: 'Autonomous obstacle car',
     },
     {
-      lab: 'Lab 203',
-      tag: 'Software Projects',
-      image: '/photos/lab203/lab203-1.jpg',
-      alt: 'Lab 203 software project demos at IoTA Archives, VESIT',
-      note: 'Computer vision & portals',
+      lab: 'Basic Electrical Lab',
+      tag: 'Circuits & Software',
+      image: '/photos/iota-electrical-lab-discussion.png',
+      alt: 'Senior-fresher technical discussion at IoTA Archives, VESIT',
+      note: 'Bench mentoring & Q&A',
     },
     {
-      lab: 'Lab 215',
-      tag: 'Senior Talks & Interaction',
-      image: '/photos/lab215/lab215-1.jpg',
-      alt: 'Lab 215 senior talks at IoTA Archives, VESIT',
-      note: 'Career roadmap & GitHub talk',
+      lab: "Tinkerers' Lab",
+      tag: 'Hardware Showcase',
+      image: '/photos/iota-robotics-chassis-presentation.jpg',
+      alt: "Ultrasonic chassis demo at IoTA Archives, VESIT",
+      note: 'Assembled chassis demo',
     },
   ]
 
@@ -37,7 +37,7 @@ export default function IotaGlimpse() {
             <h2 className="font-headline-md text-headline-md text-ink font-bold">
               IoTA Archives — 7th September 2026
             </h2>
-            <p className="font-body-sm text-body-sm text-muted mt-1">Labs 201, 203 and 215, VESIT</p>
+            <p className="font-body-sm text-body-sm text-muted mt-1">Labs 201, 203 and Tinkerers&apos; Lab, VESIT</p>
           </div>
           <Link
             href="/blog"
@@ -56,7 +56,7 @@ export default function IotaGlimpse() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
           {labCards.map((card) => (
             <div key={card.lab} className="bg-card border border-ink/30 p-3 shadow-sm hover:-translate-y-0.5 transition-transform">
-              <div className="relative h-52 overflow-hidden border border-ink/20 bg-tan">
+              <div className="relative w-full aspect-[16/10] overflow-hidden border border-ink/20 bg-tan">
                 <Image
                   src={card.image}
                   alt={card.alt}

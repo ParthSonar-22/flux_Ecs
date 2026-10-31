@@ -10,6 +10,7 @@ export default function EventsView() {
   const searchParams = useSearchParams()
   const initialTab = searchParams.get('tab') === 'past' ? 'past' : 'upcoming'
   const [activeTab, setActiveTab] = useState(initialTab)
+  const [lightboxPhoto, setLightboxPhoto] = useState(null)
 
   useEffect(() => {
     const tab = searchParams.get('tab')
@@ -49,22 +50,20 @@ export default function EventsView() {
               <button
                 type="button"
                 onClick={() => setActiveTab('upcoming')}
-                className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${
-                  activeTab === 'upcoming'
+                className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${activeTab === 'upcoming'
                     ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
                     : 'text-ink hover:text-brick'
-                }`}
+                  }`}
               >
                 Upcoming ({upcomingList.length})
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab('past')}
-                className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${
-                  activeTab === 'past'
+                className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${activeTab === 'past'
                     ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
                     : 'text-ink hover:text-brick'
-                }`}
+                  }`}
               >
                 Past Events ({pastList.length})
               </button>
@@ -194,18 +193,29 @@ export default function EventsView() {
               {/* Poster Column */}
               <div className="lg:col-span-5 border-b-2 lg:border-b-0 lg:border-r-2 border-ink p-6 md:p-8 bg-paper flex flex-col items-center justify-center space-y-4">
                 <div
-                  className="relative border-2 border-ink overflow-hidden bg-card w-full shadow-lg"
-                  style={{ transform: 'rotate(-1.5deg)', maxWidth: '420px' }}
+                  className="relative border-2 border-ink overflow-hidden bg-card w-full shadow-lg cursor-pointer group"
+                  style={{ transform: 'rotate(-1.5deg)', maxWidth: '380px' }}
+                  onClick={() =>
+                    setLightboxPhoto({
+                      src: algo.poster,
+                      label: "Algorithm's Auction — Official Event Poster",
+                      sub: 'Department of Electronics and Computer Science × FLUX-ECS · 2nd–3rd November 2026',
+                    })
+                  }
                 >
-                  <div className="relative w-full aspect-[698/428] bg-tan">
+                  <div className="relative w-full aspect-[723/1024] bg-tan">
                     <Image
                       src={algo.poster}
                       alt="Algorithm's Auction official artwork"
                       fill
                       priority
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 420px"
+                      className="object-cover group-hover:scale-[1.01] transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 380px"
                     />
+                    <div className="absolute top-2 right-2 bg-ink/80 text-paper font-complexity-notation text-[11px] px-2 py-0.5 opacity-90 group-hover:opacity-100 flex items-center gap-1 transition-opacity">
+                      <span className="material-symbols-outlined text-[14px]">zoom_in</span>
+                      <span>Enlarge Poster</span>
+                    </div>
                   </div>
                   <div className="p-3 bg-paper border-t-2 border-ink text-center">
                     <p className="font-handwritten text-xl text-brick font-bold">
@@ -214,13 +224,29 @@ export default function EventsView() {
                   </div>
                 </div>
 
-                <span className="font-complexity-notation text-xs text-muted block text-center">
-                  Official Event Poster · Department of ECS × FLUX-ECS
-                </span>
+                <div className="flex flex-col items-center gap-1 text-center">
+                  <span className="font-complexity-notation text-xs text-muted block">
+                    Official Event Poster · Department of ECS × FLUX-ECS
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setLightboxPhoto({
+                        src: algo.poster,
+                        label: "Algorithm's Auction — Official Event Poster",
+                        sub: 'Department of Electronics and Computer Science × FLUX-ECS · 2nd–3rd November 2026',
+                      })
+                    }
+                    className="font-complexity-notation text-xs text-brick hover:underline font-bold flex items-center gap-1 cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[14px]">fullscreen</span>
+                    <span>View Fullscreen &amp; Scan QR Code</span>
+                  </button>
+                </div>
 
                 {/* Official Schedule Timeline Poster */}
                 {algo.timelineImage && (
-                  <div className="w-full max-w-[420px] bg-card border-2 border-ink p-3 shadow-md">
+                  <div className="w-full max-w-[380px] bg-card border-2 border-ink p-3 shadow-md">
                     <div className="flex items-center justify-between pb-2 mb-2 border-b border-ink/20">
                       <span className="handwritten-eyebrow text-lg sm:text-xl font-bold text-brick">
                         Official Visual Timeline
@@ -229,14 +255,28 @@ export default function EventsView() {
                         Day 1 &amp; Day 2
                       </span>
                     </div>
-                    <div className="relative w-full aspect-[16/9] overflow-hidden bg-tan border border-ink/20">
+                    <div
+                      className="relative w-full aspect-[16/9] overflow-hidden bg-tan border border-ink/20 cursor-pointer group"
+                      onClick={() =>
+                        setLightboxPhoto({
+                          src: algo.timelineImage,
+                          label: "Algorithm's Auction — Official Visual Timeline",
+                          sub: 'Day 1: Learn the Logic · Day 2: Bid. Solve. Win.',
+                        })
+                      }
+                    >
                       <Image
                         src={algo.timelineImage}
                         alt="Algorithm's Auction schedule breakdown"
                         fill
-                        className="object-contain"
-                        sizes="(max-width: 768px) 100vw, 420px"
+                        className="object-contain group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 768px) 100vw, 380px"
                       />
+                      <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 flex items-center justify-center transition-colors">
+                        <span className="opacity-0 group-hover:opacity-100 bg-paper/95 text-ink text-xs font-bold px-2 py-1 border border-ink font-complexity-notation">
+                          Click to Expand
+                        </span>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -534,26 +574,33 @@ export default function EventsView() {
                 </span>
               </div>
 
-              {/* 3 Album cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-                {/* Lab 201 */}
+              {/* 4 Album cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
+                {/* Embedded Systems Lab */}
                 <div
-                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between"
+                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
                   style={{ transform: 'rotate(-1deg)' }}
+                  onClick={() =>
+                    setLightboxPhoto({
+                      src: '/photos/iota-robot-floor-test.jpg',
+                      label: 'Embedded Systems Lab — Live Robotics Floor Demonstration',
+                      sub: 'Senior students test the obstacle-avoiding chassis during IoTA Archives exhibition',
+                    })
+                  }
                 >
-                  <div className="relative w-full aspect-[4/3] bg-tan border border-ink/30 overflow-hidden">
+                  <div className="relative w-full aspect-[1024/574] bg-tan border border-ink/30 overflow-hidden">
                     <Image
-                      src="/photos/lab201/lab201-1.jpg"
-                      alt="Lab 201 Hardware demonstrations"
+                      src="/photos/iota-robot-floor-test.jpg"
+                      alt="Embedded Systems Lab live robot testing"
                       fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 360px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 300px"
                     />
                   </div>
                   <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-xl text-ink font-bold">Lab 201 — Hardware</p>
+                    <p className="font-handwritten text-lg text-ink font-bold">Embedded Systems</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Robotics, RF circuits &amp; FPGA demos
+                      Obstacle-avoiding robot floor runs
                     </p>
                     <p className="font-complexity-notation text-[11px] text-brick mt-2 font-semibold">
                       Harsh Patange &amp; Riya Pailwan on bench
@@ -561,52 +608,98 @@ export default function EventsView() {
                   </div>
                 </div>
 
-                {/* Lab 203 */}
+                {/* Tinkerers' Lab Chassis Demo */}
                 <div
-                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between"
-                  style={{ transform: 'rotate(1.5deg)' }}
+                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
+                  style={{ transform: 'rotate(1.2deg)' }}
+                  onClick={() =>
+                    setLightboxPhoto({
+                      src: '/photos/iota-robotics-chassis-presentation.jpg',
+                      label: "Tinkerers' Lab — Ultrasonic Robot Chassis Demonstration",
+                      sub: 'Hands-on presentation of ultrasonic sensors, motor drivers, and hardware chassis',
+                    })
+                  }
                 >
-                  <div className="relative w-full aspect-[4/3] bg-tan border border-ink/30 overflow-hidden">
+                  <div className="relative w-full aspect-[1024/628] bg-tan border border-ink/30 overflow-hidden">
                     <Image
-                      src="/photos/lab203/lab203-1.jpg"
-                      alt="Lab 203 Software project presentations"
+                      src="/photos/iota-robotics-chassis-presentation.jpg"
+                      alt="Tinkerers Lab hardware presentation"
                       fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 360px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 300px"
                     />
                   </div>
                   <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-xl text-ink font-bold">Lab 203 — Software</p>
+                    <p className="font-handwritten text-lg text-ink font-bold">Tinkerers&apos; Lab</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Computer vision classifier &amp; web portals
+                      Ultrasonic sensor chassis showcase
                     </p>
                     <p className="font-complexity-notation text-[11px] text-brick mt-2 font-semibold">
-                      Aayan Shaikh &amp; Paarth Patil presenting
+                      Hardware team &amp; live demos
                     </p>
                   </div>
                 </div>
 
-                {/* Lab 215 */}
+                {/* Basic Electrical Lab */}
                 <div
-                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between"
-                  style={{ transform: 'rotate(-0.5deg)' }}
+                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
+                  style={{ transform: 'rotate(-1deg)' }}
+                  onClick={() =>
+                    setLightboxPhoto({
+                      src: '/photos/iota-electrical-lab-discussion.png',
+                      label: 'Basic Electrical & Electronics Lab — Technical Walkthrough',
+                      sub: 'Interactive discussions on circuits, project architectures, and senior-fresher mentorship',
+                    })
+                  }
                 >
-                  <div className="relative w-full aspect-[4/3] bg-tan border border-ink/30 overflow-hidden">
+                  <div className="relative w-full aspect-[1024/579] bg-tan border border-ink/30 overflow-hidden">
                     <Image
-                      src="/photos/lab215/lab215-1.jpg"
-                      alt="Lab 215 Senior Fresher interaction"
+                      src="/photos/iota-electrical-lab-discussion.png"
+                      alt="Basic Electrical Lab discussions"
                       fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 360px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 300px"
                     />
                   </div>
                   <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-xl text-ink font-bold">Lab 215 — Interaction</p>
+                    <p className="font-handwritten text-lg text-ink font-bold">Electrical Lab</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Senior guidance, GitHub &amp; college roadmap
+                      Bench test debugging &amp; Q&amp;A
                     </p>
                     <p className="font-complexity-notation text-[11px] text-brick mt-2 font-semibold">
-                      Shantanu Gaikwad &amp; Jr. Council officers
+                      Aayan Shaikh &amp; Paarth Patil on floor
+                    </p>
+                  </div>
+                </div>
+
+                {/* Tinkerers' Lab Cohort */}
+                <div
+                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
+                  style={{ transform: 'rotate(0.8deg)' }}
+                  onClick={() =>
+                    setLightboxPhoto({
+                      src: '/photos/iota-tinkerers-lab-cohort.jpg',
+                      label: "Tinkerers' Lab — FLUX-ECS Event Organizing Cohort",
+                      sub: 'Department Council officers and senior members coordinating the induction exhibition',
+                    })
+                  }
+                >
+                  <div className="relative w-full aspect-[1024/581] bg-tan border border-ink/30 overflow-hidden">
+                    <Image
+                      src="/photos/iota-tinkerers-lab-cohort.jpg"
+                      alt="FLUX-ECS Organizing Cohort in Tinkerers Lab"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 300px"
+                    />
+                  </div>
+                  <div className="pt-3 pb-1 text-center">
+                    <p className="font-handwritten text-lg text-ink font-bold">Council Cohort</p>
+                    <p className="font-body-sm text-xs text-muted mt-0.5">
+                      Student leads &amp; event guides
+                    </p>
+                    <p className="font-complexity-notation text-[11px] text-brick mt-2 font-semibold">
+                      Shantanu Gaikwad &amp; Jr. Council
                     </p>
                   </div>
                 </div>
@@ -822,6 +915,68 @@ export default function EventsView() {
               <span>View upcoming events ({upcomingList.length})</span>
               <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Lightbox Modal for Events & Posters */}
+      {lightboxPhoto && (
+        <div
+          className="fixed inset-0 z-50 bg-ink/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+          onClick={() => setLightboxPhoto(null)}
+        >
+          <div
+            className="relative max-w-4xl w-full bg-paper border-2 border-ink shadow-[8px_8px_0px_var(--brick)] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal header bar */}
+            <div className="bg-tan border-b-2 border-ink px-4 py-2.5 flex items-center justify-between">
+              <div className="font-complexity-notation text-xs text-ink font-bold flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-brick inline-block" />
+                <span>FLUX-ECS Event Docket Viewer</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setLightboxPhoto(null)}
+                className="px-2 py-0.5 border border-ink bg-card text-ink hover:bg-brick hover:text-paper font-complexity-notation text-xs font-bold transition-colors cursor-pointer"
+              >
+                Close [ESC]
+              </button>
+            </div>
+
+            {/* Modal image */}
+            <div className="relative w-full aspect-[3/4] sm:aspect-[4/3] max-h-[75vh] bg-ink/5">
+              <Image
+                src={lightboxPhoto.src}
+                alt={lightboxPhoto.label}
+                fill
+                className="object-contain"
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                priority
+              />
+            </div>
+
+            {/* Modal caption footer */}
+            <div className="bg-paper border-t-2 border-ink p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h5 className="font-headline-sm text-sm sm:text-base text-ink font-bold">
+                  {lightboxPhoto.label}
+                </h5>
+                {lightboxPhoto.sub && (
+                  <p className="font-complexity-notation text-xs text-muted mt-0.5">
+                    {lightboxPhoto.sub}
+                  </p>
+                )}
+              </div>
+              <a
+                href={lightboxPhoto.src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="self-start sm:self-auto px-3 py-1.5 bg-card border border-ink text-ink hover:bg-brick hover:text-paper font-complexity-notation text-xs font-bold transition-colors shrink-0"
+              >
+                Open Full Asset ↗
+              </a>
+            </div>
           </div>
         </div>
       )}

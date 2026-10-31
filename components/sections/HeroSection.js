@@ -39,6 +39,18 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
         {/* Left Column: Text */}
         <div className="lg:col-span-6 flex flex-col justify-center space-y-space-md pr-0 lg:pr-space-md pt-4 lg:pt-8 z-20">
+          {/* Upcoming Flagship Beacon */}
+          <Link
+            href="#featured-event"
+            className="self-start inline-flex items-center gap-2 px-3 py-1 bg-tan border-2 border-ink text-ink hover:bg-brick hover:text-paper font-complexity-notation text-xs font-bold transition-all shadow-[2px_2px_0px_var(--ink)] mb-1 group"
+          >
+            <span className="w-2 h-2 rounded-full bg-brick group-hover:bg-paper animate-pulse" />
+            <span className="text-[11px] uppercase tracking-wider">Upcoming Event</span>
+            <span>·</span>
+            <span>Algorithm&apos;s Auction (2nd–3rd Nov)</span>
+            <span className="material-symbols-outlined text-[14px]">arrow_downward</span>
+          </Link>
+
           <h1
             ref={headlineRef}
             className="font-display-hero text-display-hero text-ink leading-none tracking-tight"

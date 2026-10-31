@@ -3,14 +3,14 @@
 import Link from 'next/link'
 import { EMAIL } from '@/data/site'
 import { openNewsletterModal } from '@/components/NewsletterModal'
-import Logo from '@/components/Logo'
+import LogoFull from '@/components/LogoFull'
 
 export default function CTABanner() {
   return (
     <section className="w-full bg-card py-space-xl px-4 lg:px-margin" id="newsletter-signup">
       <div className="max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 border-2 border-ink bg-paper p-3 mb-5 shadow-[4px_4px_0px_var(--brick)]">
-          <Logo className="w-full h-full text-ink" />
+        <div className="inline-flex items-center justify-center w-28 h-28 sm:w-36 sm:h-36 border-2 border-ink bg-paper p-4 mb-5 shadow-[4px_4px_0px_var(--brick)]">
+          <LogoFull className="w-full h-full text-ink" />
         </div>
 
         <h2 className="font-headline-lg text-headline-lg text-ink font-bold mb-2">

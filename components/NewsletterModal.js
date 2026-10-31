@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Logo from './Logo'
+import LogoWordmark from './LogoWordmark'
 
 let openModalFn = () => {}
 
@@ -88,13 +89,13 @@ export default function NewsletterModal() {
             <div className="w-11 h-11 border-2 border-ink bg-paper p-1.5 shadow-[2.5px_2.5px_0px_var(--brick)] shrink-0 flex items-center justify-center">
               <Logo className="w-full h-full text-ink" />
             </div>
-            <div>
-              <span className="inline-block px-2 py-0.5 border border-ink bg-tan text-ink text-[11px] font-bold uppercase tracking-wider font-complexity-notation">
-                FLUX-ECS Updates
+            <div className="flex flex-col justify-center">
+              <div className="h-5 w-auto flex items-center">
+                <LogoWordmark className="h-full w-auto text-ink" />
+              </div>
+              <span className="font-complexity-notation text-[10px] font-bold tracking-widest text-brick uppercase mt-0.5">
+                Official Updates
               </span>
-              <h3 className="font-headline-sm text-headline-sm text-ink font-bold leading-tight">
-                Get Club Updates
-              </h3>
             </div>
           </div>
           <p className="font-body-sm text-body-sm text-muted mt-1">

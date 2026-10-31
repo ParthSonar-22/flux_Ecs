@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { CLUB_NAME, TAGLINE, EMAIL, GITHUB, INSTAGRAM, ADDRESS } from '@/data/site'
 import { openNewsletterModal } from './NewsletterModal'
 import Logo from './Logo'
+import LogoWordmark from './LogoWordmark'
 
 export default function Footer() {
   return (
@@ -17,11 +18,11 @@ export default function Footer() {
                 <div className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-ink bg-paper flex items-center justify-center p-2 shadow-[2.5px_2.5px_0px_var(--brick)] shrink-0">
                   <Logo className="w-full h-full text-ink" />
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-xl sm:text-2xl uppercase tracking-tight text-ink font-black leading-tight">
-                    {CLUB_NAME}
-                  </span>
-                  <span className="font-complexity-notation text-[10px] sm:text-[11px] font-bold tracking-widest text-brick uppercase mt-0.5">
+                <div className="flex flex-col justify-center">
+                  <div className="h-7 sm:h-8.5 w-auto flex items-center">
+                    <LogoWordmark className="h-full w-auto text-ink" />
+                  </div>
+                  <span className="font-complexity-notation text-[10px] sm:text-[11px] font-bold tracking-widest text-brick uppercase mt-1">
                     Dept. of ECS • VESIT
                   </span>
                 </div>

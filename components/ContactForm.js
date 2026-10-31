@@ -63,10 +63,10 @@ export default function ContactForm() {
             VESIT ECS
           </span>
         </div>
-        <h2 className="font-headline-md text-headline-md text-ink uppercase tracking-tight mt-1 font-bold">
+        <h2 className="font-headline-md text-xl sm:text-2xl md:text-headline-md text-ink uppercase tracking-tight mt-1 font-bold">
           Send Us a Message
         </h2>
-        <p className="font-body-md text-body-md text-muted">
+        <p className="font-body-md text-sm sm:text-body-md text-muted">
           Got questions about events, workshops, or club activities? Drop your details below and our council will get back to you.
         </p>
       </div>
@@ -138,7 +138,7 @@ export default function ContactForm() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="2025.studentname@ves.ac.in"
-                className="w-full bg-paper border-2 border-ink px-3 py-2.5 font-complexity-notation text-sm text-ink placeholder:text-muted/50 focus:outline-none focus:border-brick transition-colors"
+                className="w-full bg-paper border-2 border-ink px-3 py-2.5 font-complexity-notation text-base sm:text-sm text-ink placeholder:text-muted/50 focus:outline-none focus:border-brick transition-colors"
               />
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function ContactForm() {
                   required
                   value={formData.year}
                   onChange={handleChange}
-                  className="w-full appearance-none bg-paper border-2 border-ink px-3 py-2.5 font-complexity-notation text-sm text-ink focus:outline-none focus:border-brick transition-colors cursor-pointer"
+                  className="w-full appearance-none bg-paper border-2 border-ink px-3 py-2.5 font-complexity-notation text-base sm:text-sm text-ink focus:outline-none focus:border-brick transition-colors cursor-pointer"
                 >
                   <option value="FE">First Year (FE)</option>
                   <option value="SE">Second Year (SE - ECS)</option>
@@ -186,7 +186,7 @@ export default function ContactForm() {
                   required
                   value={formData.category}
                   onChange={handleChange}
-                  className="w-full appearance-none bg-paper border-2 border-ink px-3 py-2.5 font-complexity-notation text-sm text-ink focus:outline-none focus:border-brick transition-colors cursor-pointer"
+                  className="w-full appearance-none bg-paper border-2 border-ink px-3 py-2.5 font-complexity-notation text-base sm:text-sm text-ink focus:outline-none focus:border-brick transition-colors cursor-pointer"
                 >
                   <option value="Algorithm's Auction">Algorithm&apos;s Auction</option>
                   <option value="Event / Workshop Inquiry">Event / Workshop Inquiry</option>

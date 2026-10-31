@@ -17,13 +17,13 @@ export default function ContactPage() {
         <section className="w-full bg-paper border-b-2 border-ink px-4 lg:px-margin py-space-lg lg:py-space-xl">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-end">
             <div className="lg:col-span-8 flex flex-col space-y-4">
-              <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+              <span className="handwritten-eyebrow text-xl sm:text-3xl font-bold text-brick mb-1">
                 Get in touch with FLUX-ECS
               </span>
-              <h1 className="font-display-hero text-display-hero text-ink leading-[0.95] tracking-tight font-bold">
+              <h1 className="font-display-hero text-3xl sm:text-4xl md:text-display-hero text-ink leading-[0.95] tracking-tight font-bold">
                 Contact Us
               </h1>
-              <p className="font-body-lg text-body-lg text-muted max-w-2xl pt-2">
+              <p className="font-body-lg text-base sm:text-body-lg text-muted max-w-2xl pt-2">
                 Questions about events, workshops or anything else? Fill in the form below or reach us directly.
               </p>
             </div>
@@ -152,16 +152,16 @@ export default function ContactPage() {
             <div className="bg-brick text-paper border-2 border-ink shadow-[6px_6px_0px_var(--ink)] p-space-md lg:p-space-lg relative overflow-hidden">
               <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div className="space-y-2 max-w-3xl">
-                  <h3 className="font-headline-lg text-headline-lg text-paper tracking-tight font-bold">
+                  <h3 className="font-headline-lg text-xl sm:text-2xl md:text-headline-lg text-paper tracking-tight font-bold">
                     Join the Algorithm&apos;s Auction WhatsApp group
                   </h3>
-                  <p className="font-body-md text-body-md text-paper/90 max-w-2xl leading-relaxed">
+                  <p className="font-body-md text-sm sm:text-body-md text-paper/90 max-w-2xl leading-relaxed">
                     Get problem statements, team-up requests and timing updates in real time during the event.
                   </p>
                 </div>
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 w-full sm:w-auto">
                   <a
-                    className="inline-flex items-center justify-center gap-3 px-6 py-4 bg-paper text-ink border-2 border-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all font-bold group"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:py-4 bg-paper text-ink border-2 border-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all font-bold group text-center"
                     href={WHATSAPP_URL}
                     rel="noopener noreferrer"
                     target="_blank"

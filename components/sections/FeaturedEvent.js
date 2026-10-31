@@ -49,7 +49,7 @@ export default function FeaturedEvent() {
                 Upcoming Flagship Event · Department of ECS
               </span>
             </div>
-            <h2 className="font-display-hero text-headline-lg lg:text-display-hero text-ink font-bold tracking-tight leading-none uppercase">
+            <h2 className="font-display-hero text-2xl sm:text-3xl md:text-headline-lg lg:text-display-hero text-ink font-bold tracking-tight leading-none uppercase">
               Algorithm&apos;s Auction
             </h2>
             <p className="font-title-editorial text-title-editorial text-muted italic mt-1.5">
@@ -57,7 +57,7 @@ export default function FeaturedEvent() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <span className="font-complexity-notation text-xs px-3 py-1 bg-brick text-paper font-bold uppercase tracking-wider shadow-[2px_2px_0px_var(--ink)]">
               2nd – 3rd November 2026
             </span>
@@ -183,19 +183,19 @@ export default function FeaturedEvent() {
                 <span className="font-complexity-notation text-[10px] uppercase tracking-wider text-muted font-bold block mb-2 text-center">
                   Auction Problem statements by Big-O Tier:
                 </span>
-                <div className="grid grid-cols-5 gap-1.5 text-center">
+                <div className="grid grid-cols-5 gap-1 text-center">
                   {bigOTiers.map((t) => (
                     <div
                       key={t.notation}
-                      className="bg-card border border-ink/40 p-1.5 shadow-[1px_1px_0px_var(--ink)] flex flex-col justify-between"
+                      className="bg-card border border-ink/40 p-1 sm:p-1.5 shadow-[1px_1px_0px_var(--ink)] flex flex-col justify-between"
                     >
-                      <span className="font-complexity-notation text-xs font-bold text-ink block">
+                      <span className="font-complexity-notation text-[11px] sm:text-xs font-bold text-ink block truncate">
                         {t.notation}
                       </span>
-                      <span className="font-complexity-notation text-[9px] text-muted block mt-0.5">
+                      <span className="font-complexity-notation text-[8px] sm:text-[9px] text-muted block mt-0.5 truncate">
                         {t.pts}
                       </span>
-                      <span className="font-complexity-notation text-[8px] bg-brick text-paper font-bold mt-1 px-0.5 py-0.2 rounded-xs block">
+                      <span className="font-complexity-notation text-[7px] sm:text-[8px] bg-brick text-paper font-bold mt-1 px-0.5 py-0.2 rounded-xs block truncate">
                         {t.bid}
                       </span>
                     </div>
@@ -316,7 +316,7 @@ export default function FeaturedEvent() {
               <div className="pt-3 border-t-2 border-ink space-y-4">
                 <div className="flex flex-wrap items-center gap-3">
                   <a
-                    className="inline-flex items-center gap-2 px-6 py-3 border-2 border-ink bg-brick text-paper font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_var(--ink)] transition-all font-bold"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-ink bg-brick text-paper font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_var(--ink)] transition-all font-bold text-center"
                     href={algoEvent.registerUrl}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -326,7 +326,7 @@ export default function FeaturedEvent() {
                   </a>
 
                   <a
-                    className="inline-flex items-center gap-2 px-5 py-3 border-2 border-ink bg-tan text-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_var(--ink)] transition-all font-bold"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 border-2 border-ink bg-tan text-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_var(--ink)] transition-all font-bold text-center"
                     href={WHATSAPP_URL}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -337,7 +337,7 @@ export default function FeaturedEvent() {
 
                   <Link
                     href="/events"
-                    className="inline-flex items-center gap-1.5 px-4 py-3 font-label-smallcaps text-xs text-ink hover:text-brick uppercase tracking-wider font-bold"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-3 font-label-smallcaps text-xs text-ink hover:text-brick uppercase tracking-wider font-bold text-center"
                   >
                     <span>Full Syllabus &amp; FAQ</span>
                     <span className="material-symbols-outlined text-[16px]">arrow_forward</span>

@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="md:col-span-5 flex flex-col justify-between pr-0 md:pr-space-md border-b md:border-b-0 md:border-r border-ink/30 pb-space-md md:pb-0">
             <div className="space-y-4">
               <div className="flex items-center gap-3.5">
-                <div className="w-13 h-13 sm:w-16 sm:h-16 border-2 border-ink bg-paper flex items-center justify-center p-1.5 shadow-[3px_3px_0px_var(--brick)] shrink-0">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 border-2 border-ink bg-paper flex items-center justify-center p-1.5 shadow-[3px_3px_0px_var(--brick)] shrink-0">
                   <LogoFull className="w-full h-full text-ink" />
                 </div>
                 <div className="flex flex-col justify-center">

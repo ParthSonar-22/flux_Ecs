@@ -18,10 +18,10 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
             {/* Left: Title */}
             <div className="lg:col-span-8 flex flex-col space-y-4">
-              <h1 className="font-display-hero text-headline-lg lg:text-display-hero text-ink leading-none tracking-tight font-bold">
+              <h1 className="font-display-hero text-3xl sm:text-4xl md:text-headline-lg lg:text-display-hero text-ink leading-none tracking-tight font-bold">
                 Who we are
               </h1>
-              <p className="font-body-lg text-body-lg text-ink max-w-3xl leading-relaxed">
+              <p className="font-body-lg text-base sm:text-body-lg text-ink max-w-3xl leading-relaxed">
                 FLUX-ECS is the technical club of the Department of Electronics &amp; Computer Science at VESIT, Chembur. We run competitions, hardware exhibitions, and senior–fresher sessions throughout the academic year.
               </p>
             </div>
@@ -83,10 +83,10 @@ export default function AboutPage() {
         <section className="w-full px-4 lg:px-margin py-space-xl bg-paper border-b-2 border-ink">
           <div className="max-w-7xl mx-auto flex flex-col space-y-8">
             <div className="border-b border-ink/30 pb-4">
-              <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+              <span className="handwritten-eyebrow text-xl sm:text-3xl font-bold text-brick mb-1">
                 Mentorship &amp; Guidance
               </span>
-              <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
+              <h2 className="font-headline-lg text-2xl sm:text-headline-lg text-ink leading-tight font-bold">
                 Faculty in-charge
               </h2>
             </div>
@@ -119,10 +119,10 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto flex flex-col space-y-8">
             <div className="border-b border-ink/30 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
               <div>
-                <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+                <span className="handwritten-eyebrow text-xl sm:text-3xl font-bold text-brick mb-1">
                   Core Leadership
                 </span>
-                <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
+                <h2 className="font-headline-lg text-2xl sm:text-headline-lg text-ink leading-tight font-bold">
                   Senior Council
                 </h2>
                 <p className="font-body-sm text-body-sm text-muted mt-1">
@@ -182,10 +182,10 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto flex flex-col space-y-8">
             <div className="border-b border-ink/30 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
               <div>
-                <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick mb-1">
+                <span className="handwritten-eyebrow text-xl sm:text-3xl font-bold text-brick mb-1">
                   Rising Talent
                 </span>
-                <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
+                <h2 className="font-headline-lg text-2xl sm:text-headline-lg text-ink leading-tight font-bold">
                   Junior Council
                 </h2>
                 <p className="font-body-sm text-body-sm text-muted mt-1">

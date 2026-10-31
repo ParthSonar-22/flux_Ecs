@@ -140,7 +140,7 @@ export const events = [
     status: 'past',
     startDate: new Date('2026-09-07T10:00:00+05:30'),
     endDate: new Date('2026-09-07T17:00:00+05:30'),
-    venue: "Labs 201, 203 and Tinkerers' Lab, VESIT",
+    venue: "Labs 201, 203 and 215, VESIT",
     time: 'Morning – Afternoon',
     poster: '/photos/iota-robot-floor-test.jpg',
     cover: '/photos/iota-robot-floor-test.jpg',

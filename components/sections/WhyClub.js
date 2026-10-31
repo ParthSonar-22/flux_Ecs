@@ -71,8 +71,8 @@ export default function WhyClub() {
     >
       <div className="max-w-7xl mx-auto">
         {/* Simple section header — no fake labels */}
-        <div className="mb-space-lg">
-          <h2 className="font-headline-lg text-headline-lg text-ink font-bold">
+        <div className="mb-space-md sm:mb-space-lg">
+          <h2 className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg text-ink font-bold">
             Why join the club
           </h2>
         </div>
@@ -82,17 +82,17 @@ export default function WhyClub() {
           {rows.map((row) => (
             <div
               key={row.num}
-              className="why-row group py-5 px-1 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-ink/30 hover:bg-paper/40 transition-colors cursor-default"
+              className="why-row group py-4 sm:py-5 px-1 flex flex-col md:flex-row md:items-center justify-between gap-2 sm:gap-4 border-b border-ink/30 hover:bg-paper/40 transition-colors cursor-default"
             >
-              <div className="flex items-baseline gap-6">
-                <span className="font-complexity-notation text-complexity-notation text-brick font-bold">
+              <div className="flex items-baseline gap-3 sm:gap-6">
+                <span className="font-complexity-notation text-xs sm:text-complexity-notation text-brick font-bold shrink-0">
                   {row.num}
                 </span>
                 <div>
-                  <span className="font-headline-sm text-headline-sm text-ink font-semibold mr-3">
+                  <span className="font-headline-sm text-base sm:text-headline-sm text-ink font-semibold mr-2 sm:mr-3">
                     {row.title}
                   </span>
-                  <span className="font-body-lg text-body-lg text-muted">
+                  <span className="font-body-lg text-sm sm:text-body-lg text-muted">
                     {row.desc}
                   </span>
                 </div>

@@ -19,7 +19,7 @@ export default function BlogView() {
           <span className="block font-label-smallcaps text-label-smallcaps text-brick tracking-[0.15em] uppercase mb-2 font-bold">
             FLUX-ECS · Dept. of Electronics &amp; Computer Science, VESIT
           </span>
-          <h1 className="font-display-hero text-headline-lg lg:text-display-hero text-ink uppercase tracking-tight leading-none font-bold">
+          <h1 className="font-display-hero text-3xl sm:text-5xl lg:text-display-hero text-ink uppercase tracking-tight leading-none font-bold">
             Updates &amp; Stories
           </h1>
           <p className="font-title-editorial text-title-editorial italic text-muted mt-2 max-w-2xl">
@@ -34,7 +34,7 @@ export default function BlogView() {
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Main article */}
           <div className="lg:col-span-8 flex flex-col gap-10">
-            <article className="bg-card border-2 border-ink p-6 lg:p-8 shadow-[4px_4px_0px_var(--brick)] relative">
+            <article className="bg-card border-2 border-ink p-4 sm:p-6 lg:p-8 shadow-[4px_4px_0px_var(--brick)] relative">
               {/* Article meta */}
               <div className="flex flex-wrap items-center gap-2 mb-4 font-complexity-notation text-xs text-muted">
                 <span className="px-2.5 py-0.5 bg-brick text-paper font-bold uppercase tracking-wider">
@@ -45,23 +45,25 @@ export default function BlogView() {
                 <span className="text-ink font-bold">{post.location}</span>
               </div>
 
-              <h2 className="font-headline-lg text-headline-lg text-ink leading-tight tracking-tight mb-4 font-bold">
+              <h2 className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg text-ink leading-tight tracking-tight mb-4 font-bold">
                 {post.title}: {post.subtitle}
               </h2>
 
-              <p className="font-body-lg text-body-lg text-ink mb-6 leading-relaxed">
-                {post.intro}
+              <p className="font-body-lg text-body-lg text-ink mb-6 leading-relaxed space-y-3">
+                {post.intro.split('\n\n').map((para, i) => (
+                  <span key={i} className="block mb-3">{para}</span>
+                ))}
               </p>
 
               {/* Cover photo — Fixed aspect ratio so nothing gets cut */}
               <figure className="w-full border-2 border-ink bg-card shadow-[4px_4px_0px_var(--ink)] mb-8 overflow-hidden">
                 <div
-                  className="relative w-full aspect-[1024/574] bg-tan cursor-pointer group"
+                  className="relative w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[1024/628] bg-tan cursor-pointer group"
                   onClick={() =>
                     setSelectedPhoto({
                       src: post.coverPhoto,
-                      label: 'Embedded Systems Lab — Autonomous Obstacle-Avoiding Robot Navigation',
-                      sub: 'IoTA Archives Induction Exhibition · First Year Cohort',
+                      label: 'Lab 201 — Senior demonstrating a hardware project to FE students',
+                      sub: 'IoTA Archives Induction Exhibition · 7th September 2026',
                     })
                   }
                 >
@@ -81,9 +83,9 @@ export default function BlogView() {
                 <figcaption className="bg-paper border-t-2 border-ink px-4 py-2.5 font-complexity-notation text-xs flex flex-wrap justify-between items-center text-ink gap-2">
                   <span className="font-bold flex items-center gap-2">
                     <span className="w-2.5 h-2.5 bg-brick inline-block" />
-                    Embedded Systems Lab — Live Autonomous Robot Navigation
+                    Lab 201 — Senior demonstrating a hardware project to FE students
                   </span>
-                  <span className="text-muted">Labs 201, 203 &amp; Tinkerers&apos; Lab · VESIT</span>
+                  <span className="text-muted">Labs 201, 203 &amp; 215 · VESIT</span>
                 </figcaption>
               </figure>
 
@@ -94,15 +96,17 @@ export default function BlogView() {
                     <h3 className="font-headline-sm text-headline-sm text-ink font-bold mb-3">
                       {sec.heading}
                     </h3>
-                    <p className="font-body-md text-body-md text-ink leading-relaxed mb-4">
-                      {sec.body}
-                    </p>
+                    <div className="font-body-md text-body-md text-ink leading-relaxed mb-4 space-y-3">
+                      {sec.body.split('\n\n').map((para, i) => (
+                        <p key={i}>{para}</p>
+                      ))}
+                    </div>
 
                     {/* Section Photo with exact natural aspect ratio */}
                     {sec.photo && (
                       <div className="my-5 border-2 border-ink bg-card shadow-[3px_3px_0px_var(--ink)] overflow-hidden">
                         <div
-                          className={`relative w-full ${sec.aspect || 'aspect-[16/9]'} bg-tan cursor-pointer group`}
+                          className={`relative w-full aspect-[4/3] md:${sec.aspect || 'aspect-[16/9]'} bg-tan cursor-pointer group`}
                           onClick={() =>
                             setSelectedPhoto({
                               src: sec.photo,
@@ -167,7 +171,7 @@ export default function BlogView() {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {post.gallery.map((img) => (
                     <div
                       key={img.src}
@@ -175,15 +179,15 @@ export default function BlogView() {
                       onClick={() =>
                         setSelectedPhoto({
                           src: img.src,
-                          label: img.label,
+                          label: img.label || 'IoTA Archives — FE Induction Exhibition',
                           sub: 'IoTA Archives — Department of Electronics & Computer Science, VESIT',
                         })
                       }
                     >
-                      <div className={`relative w-full ${img.aspect || 'aspect-[16/9]'} bg-tan overflow-hidden`}>
+                      <div className="relative w-full aspect-[3/2] bg-tan overflow-hidden">
                         <Image
                           src={img.src}
-                          alt={img.label}
+                          alt={img.label || 'IoTA Archives photo'}
                           fill
                           className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
                           sizes="(max-width: 768px) 100vw, 420px"
@@ -194,11 +198,13 @@ export default function BlogView() {
                           </span>
                         </div>
                       </div>
-                      <div className="p-2.5 bg-paper border-t border-ink/20">
-                        <span className="font-complexity-notation text-xs text-ink block font-semibold">
-                          {img.label}
-                        </span>
-                      </div>
+                      {img.label && (
+                        <div className="p-2.5 bg-paper border-t border-ink/20">
+                          <span className="font-complexity-notation text-xs text-ink block font-semibold">
+                            {img.label}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -302,7 +308,7 @@ export default function BlogView() {
             </div>
 
             {/* Modal image */}
-            <div className="relative w-full aspect-[16/9] sm:aspect-[16/10] bg-ink/5">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] bg-ink/5">
               <Image
                 src={selectedPhoto.src}
                 alt={selectedPhoto.label}

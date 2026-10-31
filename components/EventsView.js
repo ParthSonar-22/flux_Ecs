@@ -34,23 +34,23 @@ export default function EventsView() {
           {/* Top Title and Tab Switcher */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-ink/20">
             <div className="space-y-3">
-              <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick">
+              <span className="handwritten-eyebrow text-xl sm:text-3xl font-bold text-brick">
                 Events &amp; Workshops
               </span>
-              <h1 className="font-display-hero text-headline-lg lg:text-display-hero text-ink leading-none tracking-tight font-bold">
+              <h1 className="font-display-hero text-3xl sm:text-4xl md:text-headline-lg lg:text-display-hero text-ink leading-none tracking-tight font-bold">
                 What we do
               </h1>
-              <p className="font-body-lg text-body-lg text-muted max-w-2xl">
+              <p className="font-body-lg text-base sm:text-body-lg text-muted max-w-2xl">
                 Competitive coding tournaments, hands-on hardware exhibitions, peer project jams, and senior mentorship.
               </p>
             </div>
 
             {/* Tab switcher */}
-            <div className="flex items-center border-2 border-ink bg-card p-1 self-start md:self-end">
+            <div className="flex items-center border-2 border-ink bg-card p-1 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={() => setActiveTab('upcoming')}
-                className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${activeTab === 'upcoming'
+                className={`flex-1 sm:flex-initial text-center px-4 sm:px-6 py-2 font-label-smallcaps text-xs sm:text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${activeTab === 'upcoming'
                     ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
                     : 'text-ink hover:text-brick'
                   }`}
@@ -60,7 +60,7 @@ export default function EventsView() {
               <button
                 type="button"
                 onClick={() => setActiveTab('past')}
-                className={`px-6 py-2 font-label-smallcaps text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${activeTab === 'past'
+                className={`flex-1 sm:flex-initial text-center px-4 sm:px-6 py-2 font-label-smallcaps text-xs sm:text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${activeTab === 'past'
                     ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
                     : 'text-ink hover:text-brick'
                   }`}
@@ -288,7 +288,7 @@ export default function EventsView() {
                   <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick">
                     Strategy &amp; Logic Competition
                   </span>
-                  <h2 className="font-headline-lg text-headline-lg tracking-tight text-ink leading-none font-bold">
+                  <h2 className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg tracking-tight text-ink leading-none font-bold">
                     {algo.title}
                   </h2>
                   <p className="font-title-editorial text-title-editorial text-muted italic font-medium">
@@ -576,130 +576,118 @@ export default function EventsView() {
 
               {/* 4 Album cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
-                {/* Embedded Systems Lab */}
+                {/* Lab 201 — Embedded Systems Lab */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
                   style={{ transform: 'rotate(-1deg)' }}
                   onClick={() =>
                     setLightboxPhoto({
                       src: '/photos/iota-robot-floor-test.jpg',
-                      label: 'Embedded Systems Lab — Live Robotics Floor Demonstration',
-                      sub: 'Senior students test the obstacle-avoiding chassis during IoTA Archives exhibition',
+                      label: 'Lab 201 — Seniors showcasing projects to FE students',
+                      sub: 'IoTA Archives · FE Induction Exhibition 2026',
                     })
                   }
                 >
                   <div className="relative w-full aspect-[1024/574] bg-tan border border-ink/30 overflow-hidden">
                     <Image
                       src="/photos/iota-robot-floor-test.jpg"
-                      alt="Embedded Systems Lab live robot testing"
+                      alt="Lab 201 — seniors showcasing to FE students"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 300px"
                     />
                   </div>
                   <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">Embedded Systems</p>
+                    <p className="font-handwritten text-lg text-ink font-bold">Lab 201</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Obstacle-avoiding robot floor runs
-                    </p>
-                    <p className="font-complexity-notation text-[11px] text-brick mt-2 font-semibold">
-                      Harsh Patange &amp; Riya Pailwan on bench
+                      Seniors explaining projects to FE
                     </p>
                   </div>
                 </div>
 
-                {/* Tinkerers' Lab Chassis Demo */}
+                {/* Lab 215 — Tinkerers' Lab Chassis Demo */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
                   style={{ transform: 'rotate(1.2deg)' }}
                   onClick={() =>
                     setLightboxPhoto({
                       src: '/photos/iota-robotics-chassis-presentation.jpg',
-                      label: "Tinkerers' Lab — Ultrasonic Robot Chassis Demonstration",
-                      sub: 'Hands-on presentation of ultrasonic sensors, motor drivers, and hardware chassis',
+                      label: 'Lab 215 — Seniors demonstrating hardware projects to FE students',
+                      sub: 'IoTA Archives · FE Induction Exhibition 2026',
                     })
                   }
                 >
                   <div className="relative w-full aspect-[1024/628] bg-tan border border-ink/30 overflow-hidden">
                     <Image
                       src="/photos/iota-robotics-chassis-presentation.jpg"
-                      alt="Tinkerers Lab hardware presentation"
+                      alt="Lab 215 — seniors demonstrating to FE students"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 300px"
                     />
                   </div>
                   <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">Tinkerers&apos; Lab</p>
+                    <p className="font-handwritten text-lg text-ink font-bold">Lab 215</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Ultrasonic sensor chassis showcase
-                    </p>
-                    <p className="font-complexity-notation text-[11px] text-brick mt-2 font-semibold">
-                      Hardware team &amp; live demos
+                      Seniors explaining projects to FE
                     </p>
                   </div>
                 </div>
 
-                {/* Basic Electrical Lab */}
+                {/* Lab 203 — Basic Electrical Lab */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
                   style={{ transform: 'rotate(-1deg)' }}
                   onClick={() =>
                     setLightboxPhoto({
                       src: '/photos/iota-electrical-lab-discussion.png',
-                      label: 'Basic Electrical & Electronics Lab — Technical Walkthrough',
-                      sub: 'Interactive discussions on circuits, project architectures, and senior-fresher mentorship',
+                      label: 'Lab 203 — Seniors explaining projects to FE students',
+                      sub: 'IoTA Archives · FE Induction Exhibition 2026',
                     })
                   }
                 >
                   <div className="relative w-full aspect-[1024/579] bg-tan border border-ink/30 overflow-hidden">
                     <Image
                       src="/photos/iota-electrical-lab-discussion.png"
-                      alt="Basic Electrical Lab discussions"
+                      alt="Lab 203 — seniors explaining to FE students"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 300px"
                     />
                   </div>
                   <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">Electrical Lab</p>
+                    <p className="font-handwritten text-lg text-ink font-bold">Lab 203</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Bench test debugging &amp; Q&amp;A
-                    </p>
-                    <p className="font-complexity-notation text-[11px] text-brick mt-2 font-semibold">
-                      Aayan Shaikh &amp; Paarth Patil on floor
+                      Seniors explaining projects to FE
                     </p>
                   </div>
                 </div>
 
-                {/* Tinkerers' Lab Cohort */}
+                {/* Exhibition — Seniors with FE students */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
                   style={{ transform: 'rotate(0.8deg)' }}
                   onClick={() =>
                     setLightboxPhoto({
                       src: '/photos/iota-tinkerers-lab-cohort.jpg',
-                      label: "Tinkerers' Lab — FLUX-ECS Event Organizing Cohort",
-                      sub: 'Department Council officers and senior members coordinating the induction exhibition',
+                      label: 'IoTA Archives — Seniors with FE students during the exhibition',
+                      sub: '2nd, 3rd and 4th year ECS students explaining their projects to the incoming FE batch',
                     })
                   }
                 >
                   <div className="relative w-full aspect-[1024/581] bg-tan border border-ink/30 overflow-hidden">
                     <Image
                       src="/photos/iota-tinkerers-lab-cohort.jpg"
-                      alt="FLUX-ECS Organizing Cohort in Tinkerers Lab"
+                      alt="Seniors with FE students at IoTA Archives exhibition"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 300px"
                     />
                   </div>
                   <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">Council Cohort</p>
+                    <p className="font-handwritten text-lg text-ink font-bold">IoTA Archives</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Student leads &amp; event guides
-                    </p>
-                    <p className="font-complexity-notation text-[11px] text-brick mt-2 font-semibold">
-                      Shantanu Gaikwad &amp; Jr. Council
+                      Seniors with FE students
                     </p>
                   </div>
                 </div>

@@ -92,7 +92,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-screen bg-paper text-ink font-body-md antialiased selection:bg-brick selection:text-white flex flex-col justify-between">
         <Navbar />
-        <main className="w-full pt-20 flex-1">{children}</main>
+        <main className="w-full pt-16 sm:pt-20 flex-1">{children}</main>
         <Footer />
       </body>
     </html>

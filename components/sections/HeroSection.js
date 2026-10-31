@@ -42,18 +42,18 @@ export default function HeroSection() {
           {/* Upcoming Flagship Beacon */}
           <Link
             href="#featured-event"
-            className="self-start inline-flex items-center gap-2 px-3 py-1 bg-tan border-2 border-ink text-ink hover:bg-brick hover:text-paper font-complexity-notation text-xs font-bold transition-all shadow-[2px_2px_0px_var(--ink)] mb-1 group"
+            className="self-start inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 bg-tan border-2 border-ink text-ink hover:bg-brick hover:text-paper font-complexity-notation text-[11px] sm:text-xs font-bold transition-all shadow-[2px_2px_0px_var(--ink)] mb-1 group max-w-full"
           >
-            <span className="w-2 h-2 rounded-full bg-brick group-hover:bg-paper animate-pulse" />
-            <span className="text-[11px] uppercase tracking-wider">Upcoming Event</span>
+            <span className="w-2 h-2 rounded-full bg-brick group-hover:bg-paper animate-pulse shrink-0" />
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-wider shrink-0">Upcoming</span>
             <span>·</span>
-            <span>Algorithm&apos;s Auction (2nd–3rd Nov)</span>
-            <span className="material-symbols-outlined text-[14px]">arrow_downward</span>
+            <span className="truncate">Algorithm&apos;s Auction (2nd–3rd Nov)</span>
+            <span className="material-symbols-outlined text-[14px] shrink-0">arrow_downward</span>
           </Link>
 
           <h1
             ref={headlineRef}
-            className="font-display-hero text-display-hero text-ink leading-none tracking-tight"
+            className="font-display-hero text-display-hero-mobile sm:text-display-hero text-ink leading-[1.05] tracking-tight"
           >
             Where ideas flow into{' '}
             <span className="relative inline-block text-brick whitespace-nowrap">
@@ -61,7 +61,7 @@ export default function HeroSection() {
               {/* Hand-drawn marker scribble extending before the word start and beyond the word end */}
               <svg
                 ref={scribbleRef}
-                className="absolute -bottom-3.5 sm:-bottom-4 -left-4 sm:-left-6 w-[calc(100%+32px)] sm:w-[calc(100%+48px)] h-5 sm:h-6 overflow-visible pointer-events-none"
+                className="absolute -bottom-2.5 sm:-bottom-4 -left-3 sm:-left-6 w-[calc(100%+24px)] sm:w-[calc(100%+48px)] h-4 sm:h-6 overflow-visible pointer-events-none"
                 viewBox="0 0 320 18"
                 preserveAspectRatio="none"
                 fill="none"
@@ -91,56 +91,56 @@ export default function HeroSection() {
             .
           </h1>
 
-          <p className="font-title-editorial text-title-editorial text-muted max-w-xl">
+          <p className="font-title-editorial text-base sm:text-title-editorial text-muted max-w-xl">
             We are the technical club of the ECS department at VESIT. We run
             events, show our projects and learn from each other.
           </p>
 
-          <div className="pt-space-sm flex flex-wrap items-center gap-4">
+          <div className="pt-space-sm flex flex-wrap items-center gap-2.5 sm:gap-4">
             <Link
               href="/events"
-              className="inline-flex items-center justify-center px-6 py-3 border-2 border-ink bg-brick text-paper font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[6px_6px_0px_var(--brick)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0px_var(--brick)] transition-all font-bold"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 border-2 border-ink bg-brick text-paper font-label-smallcaps text-xs sm:text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--brick)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_var(--brick)] transition-all font-bold"
             >
               Explore Events
             </Link>
             <button
               type="button"
               onClick={openNewsletterModal}
-              className="inline-flex items-center justify-center px-6 py-3 border-2 border-ink bg-card text-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_var(--ink)] transition-all font-bold cursor-pointer"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 border-2 border-ink bg-card text-ink font-label-smallcaps text-xs sm:text-label-smallcaps uppercase tracking-wider shadow-[3px_3px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_var(--ink)] transition-all font-bold cursor-pointer"
             >
               Get Updates
             </button>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-5 py-3 border-2 border-ink bg-tan text-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_var(--ink)] transition-all font-bold"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center px-4 sm:px-5 py-2.5 sm:py-3 border-2 border-ink bg-tan text-ink font-label-smallcaps text-xs sm:text-label-smallcaps uppercase tracking-wider shadow-[3px_3px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_var(--ink)] transition-all font-bold"
             >
               Contact Us
             </Link>
           </div>
 
           {/* Small info strip with real facts only */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-2 text-muted">
-            <span className="font-complexity-notation text-xs font-bold text-ink">Dept. of ECS, VESIT</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-2 text-muted">
+            <span className="font-complexity-notation text-[11px] sm:text-xs font-bold text-ink">Dept. of ECS, VESIT</span>
             <span className="text-brick font-bold">·</span>
-            <span className="font-complexity-notation text-xs">Chembur, Mumbai</span>
+            <span className="font-complexity-notation text-[11px] sm:text-xs">Chembur, Mumbai</span>
             <span className="text-brick font-bold">·</span>
-            <span className="font-complexity-notation text-xs">Acad. Year 2026–27</span>
+            <span className="font-complexity-notation text-[11px] sm:text-xs">2026–27</span>
           </div>
         </div>
 
-        {/* Right Column: Generous Photo Collage (Covers the right side to eliminate white space) */}
-        <div className="lg:col-span-6 flex justify-center lg:justify-end w-full pt-6 lg:pt-0">
+        {/* Right Column: Generous Photo Collage */}
+        <div className="lg:col-span-6 flex justify-center lg:justify-end w-full pt-4 lg:pt-0">
           <div
-            className="relative w-full max-w-[620px] lg:max-w-none h-[420px] sm:h-[460px] lg:h-[480px]"
-            style={{ marginBottom: '-20px' }}
+            className="relative w-full max-w-[620px] lg:max-w-none h-[350px] sm:h-[460px] lg:h-[480px]"
+            style={{ marginBottom: '-10px' }}
           >
             {/* Photo 1 — Lab 201 Hardware (back left) */}
             <div
               className="absolute bg-paper border-2 border-ink p-2 sm:p-2.5 shadow-lg transition-transform hover:z-40 hover:scale-105"
               style={{
-                width: '60%',
+                width: '58%',
                 top: '15px',
-                left: '-8px',
+                left: '0px',
                 transform: 'rotate(-3.5deg)',
                 zIndex: 10,
               }}
@@ -170,9 +170,9 @@ export default function HeroSection() {
             <div
               className="absolute bg-paper border-2 border-ink p-2 sm:p-2.5 shadow-lg transition-transform hover:z-40 hover:scale-105"
               style={{
-                width: '56%',
+                width: '54%',
                 top: '0px',
-                right: '-8px',
+                right: '0px',
                 transform: 'rotate(2deg)',
                 zIndex: 20,
               }}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
+import Logo from './Logo'
 
 let openModalFn = () => {}
 
@@ -85,14 +85,8 @@ export default function NewsletterModal() {
 
         <div className="mb-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-11 h-11 border-2 border-ink bg-black p-1 shadow-[2.5px_2.5px_0px_var(--brick)] shrink-0 flex items-center justify-center">
-              <Image
-                src="/logo-mark.png"
-                alt="FLUX-ECS Logo"
-                width={36}
-                height={36}
-                className="w-full h-full object-contain"
-              />
+            <div className="w-11 h-11 border-2 border-ink bg-paper p-1.5 shadow-[2.5px_2.5px_0px_var(--brick)] shrink-0 flex items-center justify-center">
+              <Logo className="w-full h-full text-ink" />
             </div>
             <div>
               <span className="inline-block px-2 py-0.5 border border-ink bg-tan text-ink text-[11px] font-bold uppercase tracking-wider font-complexity-notation">

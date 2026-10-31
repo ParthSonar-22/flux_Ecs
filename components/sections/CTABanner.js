@@ -1,22 +1,16 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { EMAIL } from '@/data/site'
 import { openNewsletterModal } from '@/components/NewsletterModal'
+import Logo from '@/components/Logo'
 
 export default function CTABanner() {
   return (
     <section className="w-full bg-card py-space-xl px-4 lg:px-margin" id="newsletter-signup">
       <div className="max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 border-2 border-ink bg-black p-2.5 mb-5 shadow-[4px_4px_0px_var(--brick)]">
-          <Image
-            src="/logo-mark.png"
-            alt="FLUX-ECS"
-            width={64}
-            height={64}
-            className="w-full h-full object-contain"
-          />
+        <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 border-2 border-ink bg-paper p-3 mb-5 shadow-[4px_4px_0px_var(--brick)]">
+          <Logo className="w-full h-full text-ink" />
         </div>
 
         <h2 className="font-headline-lg text-headline-lg text-ink font-bold mb-2">

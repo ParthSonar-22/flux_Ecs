@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
 import NewsletterModal, { openNewsletterModal } from './NewsletterModal'
+import Logo from './Logo'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -31,15 +31,8 @@ export default function Navbar() {
           {/* Brand */}
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-3 sm:gap-3.5 group">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-ink bg-black flex items-center justify-center p-1.5 shadow-[3px_3px_0px_var(--brick)] transition-all group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-[1px_1px_0px_var(--brick)] shrink-0">
-                <Image
-                  src="/logo-mark.png"
-                  alt="FLUX-ECS Logo"
-                  width={48}
-                  height={48}
-                  className="w-full h-full object-contain"
-                  priority
-                />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-ink bg-paper flex items-center justify-center p-2 shadow-[2.5px_2.5px_0px_var(--brick)] transition-all group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-[1px_1px_0px_var(--brick)] shrink-0">
+                <Logo className="w-full h-full text-ink transition-transform group-hover:scale-105" />
               </div>
               <div className="flex flex-col">
                 <span className="text-xl sm:text-2xl font-black uppercase tracking-wider text-ink leading-tight">

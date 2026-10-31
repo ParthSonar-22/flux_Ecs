@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { CLUB_NAME, TAGLINE, EMAIL, GITHUB, INSTAGRAM, ADDRESS } from '@/data/site'
 import { openNewsletterModal } from './NewsletterModal'
+import Logo from './Logo'
 
 export default function Footer() {
   return (
@@ -14,14 +14,8 @@ export default function Footer() {
           <div className="md:col-span-5 flex flex-col justify-between pr-0 md:pr-space-md border-b md:border-b-0 md:border-r border-ink/30 pb-space-md md:pb-0">
             <div className="space-y-4">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-ink bg-black flex items-center justify-center p-1.5 shadow-[3px_3px_0px_var(--brick)] shrink-0">
-                  <Image
-                    src="/logo-mark.png"
-                    alt={`${CLUB_NAME} Logo`}
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-contain"
-                  />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-ink bg-paper flex items-center justify-center p-2 shadow-[2.5px_2.5px_0px_var(--brick)] shrink-0">
+                  <Logo className="w-full h-full text-ink" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xl sm:text-2xl uppercase tracking-tight text-ink font-black leading-tight">

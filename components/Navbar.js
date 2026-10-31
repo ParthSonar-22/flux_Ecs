@@ -62,7 +62,7 @@ export default function Navbar() {
                   href={item.href}
                   className={`px-4 py-1.5 rounded-full uppercase transition-all ${
                     active
-                      ? 'bg-ink text-paper font-bold shadow-[2px_2px_0px_var(--brick)]'
+                      ? 'bg-ink text-paper font-bold'
                       : 'font-label-smallcaps text-label-smallcaps text-muted hover:text-ink'
                   }`}
                 >

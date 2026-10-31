@@ -1,115 +1,177 @@
 // data/team.js
-// Edit to update council members without touching JSX.
-// Place real photos in public/team/<filename>
+// FLUX-ECS Council Members (VESIT ECS Department)
+// Updated with real member photos from official Instagram roster
 
-export const faculty = {
-  name: 'Yogesh Pandit Sir',
-  title: 'Council In-charge',
-  dept: 'Dept. of Electronics & Computer Science, VESIT',
-}
-
-export const coreExec = [
+export const faculty = [
   {
-    office: '01',
-    badge: 'CHIEF',
+    name: 'Yogesh Pandit Sir',
+    title: 'Council In-charge',
+    dept: 'Dept. of Electronics & Computer Science, VESIT',
+  },
+  {
+    name: 'Abhishek Chaudhari Sir',
+    title: 'Faculty Advisor',
+    dept: 'Dept. of Electronics & Computer Science, VESIT',
+  },
+]
+
+// Senior Council (Core Leadership & Senior Officers)
+export const seniorCouncil = [
+  {
+    id: 'harsh-patange',
     name: 'Harsh Patange',
     role: 'President',
+    badge: 'President',
     phone: '+91 84548 41288',
+    photo: '/team/harsh-patange.jpg',
+    card: '/team/harsh-patange-card.jpg',
+    quote: 'Leading with vision and grit.',
   },
   {
-    office: '02',
-    badge: 'DISPATCH',
+    id: 'shantanu-gaikwad',
     name: 'Shantanu Gaikwad',
     role: 'Vice President',
+    badge: 'Vice President',
     phone: '+91 70219 65356',
+    photo: '/team/shantanu-gaikwad.jpg',
+    card: '/team/shantanu-gaikwad-card.jpg',
+    quote: 'Turning ambition into reality.',
   },
   {
-    office: '03',
-    badge: 'SILICON',
-    name: 'Riya Pailwan',
-    role: 'Hardware Head',
-    phone: '+91 81694 56269',
-  },
-  {
-    office: '04',
-    badge: 'SYSTEMS',
+    id: 'aayan-shaikh',
     name: 'Aayan Shaikh',
     role: 'Technical Head',
+    badge: 'Technical Head',
     phone: '+91 98674 66475',
+    photo: '/team/aayan-shaikh.jpg',
+    card: '/team/aayan-shaikh-card.jpg',
+    quote: 'Code. Debug. Innovate.',
   },
   {
-    office: '05',
-    badge: 'SENIOR BENCH',
+    id: 'riya-pailwan',
+    name: 'Riya Pailwan',
+    role: 'Hardware Head',
+    badge: 'Hardware Head',
+    phone: '+91 81694 56269',
+    photo: '/team/riya-pailwan.jpg',
+    card: '/team/riya-pailwan-card.jpg',
+    quote: 'Bringing silicon to life.',
+  },
+  {
+    id: 'hiya-dharwani',
+    name: 'Hiya Dharwani',
+    role: 'Graphics Head',
+    badge: 'Graphics Head',
+    photo: '/team/hiya-dharwani.jpg',
+    card: '/team/hiya-dharwani-card.jpg',
+    quote: 'Designing the visual pulse.',
+  },
+  {
+    id: 'varnika-mandal-chaurasia',
+    name: 'Varnika Mandal Chaurasia',
+    role: 'Operations Head',
+    badge: 'Operations Head',
+    photo: '/team/varnika-mandal-chaurasia.jpg',
+    card: '/team/varnika-mandal-chaurasia-card.jpg',
+    quote: 'Another day, another slay.',
+  },
+  {
+    id: 'arnav-abhale',
+    name: 'Arnav Abhale',
+    role: 'Finance Head',
+    badge: 'Finance Head',
+    photo: '/team/arnav-abhale.jpg',
+    card: '/team/arnav-abhale-card.jpg',
+    quote: 'Here to make a difference.',
+  },
+  {
+    id: 'paarth-patil',
     name: 'Paarth Patil',
     role: 'Sr. Technical Officer',
+    badge: 'Sr. Technical Officer',
     phone: '+91 97024 13348',
+    photo: '/team/paarth-patil.jpg',
+    card: '/team/paarth-patil-card.jpg',
+    quote: "Don't overthink it.",
+  },
+  {
+    id: 'manthan-ilake',
+    name: 'Manthan Ilake',
+    role: 'Sr. Graphics Officer',
+    badge: 'Sr. Graphics Officer',
+    photo: '/team/manthan-ilake.jpg',
+    card: '/team/manthan-ilake-card.jpg',
+    quote: 'Quiet grind. Loud results.',
+  },
+  {
+    id: 'anup-nautiyal',
+    name: 'Anup Nautiyal',
+    role: 'Sr. Operations Officer',
+    badge: 'Sr. Operations Officer',
+    photo: '/team/anup-nautiyal.jpg',
+    card: '/team/anup-nautiyal-card.jpg',
+    quote: 'Where vision meets velocity.',
+  },
+  {
+    id: 'abhishek-patil',
+    name: 'Abhishek Patil',
+    role: 'Sr. Technical Officer',
+    badge: 'Sr. Technical Officer',
+    photo: '/team/abhishek-patil.jpg',
+    card: '/team/abhishek-patil-card.jpg',
+    quote: 'Building solutions that scale.',
   },
 ]
 
-// Junior officers — place real photos in public/team/<photo>
-// The reference HTML used Google-hosted images; replace with your own files.
-export const juniorOfficers = [
+// Junior Council (Second Year Officers)
+export const juniorCouncil = [
   {
-    archive: '09',
-    badge: "BADGE '09'",
-    id: 'ECS-FIN-09',
-    name: 'Arnav Abhale',
-    role: 'Finance Head',
-    quote: 'Here to make a difference',
-    photo: '/team/arnav-abhale.jpg', // TODO: place photo in public/team/
-  },
-  {
-    archive: '77',
-    badge: "BADGE '77'",
-    id: 'ECS-OPS-77',
-    name: 'Varnika Mandal Chaurasia',
-    role: 'Operations Head',
-    quote: 'Another day, Another slay',
-    photo: '/team/varnika-mandal-chaurasia.jpg', // TODO: place photo in public/team/
-  },
-  {
-    archive: 'TECH',
-    badge: 'SYS-CALL',
-    id: 'ECS-JTO-01',
+    id: 'parth-sonar',
     name: 'Parth Sonar',
     role: 'Jr. Technical Officer',
+    badge: 'Jr. Technical Officer',
+    photo: '/team/parth-sonar.jpg',
+    card: '/team/parth-sonar-card.jpg',
     quote: 'Powered by possibility.',
-    photo: '/team/parth-sonar.jpg', // TODO: place photo in public/team/
   },
   {
-    archive: '25',
-    badge: "BADGE '25'",
-    id: 'ECS-JTO-25',
+    id: 'aarya-tanwade',
     name: 'Aarya Tanwade',
     role: 'Jr. Technical Officer',
+    badge: 'Jr. Technical Officer',
+    photo: '/team/aarya-tanwade.jpg',
+    card: '/team/aarya-tanwade-card.jpg',
     quote: 'Trust the process. Question the processor.',
-    photo: '/team/aarya-tanwade.jpg', // TODO: place photo in public/team/
   },
   {
-    archive: '03',
-    badge: "BADGE '03'",
-    id: 'ECS-JFO-03',
-    name: 'Atharva Vaidya',
-    role: 'Jr. Finance Officer',
-    quote: 'Running on curiosity and questionable decisions.',
-    photo: '/team/atharva-vaidya.jpg', // TODO: place photo in public/team/
-  },
-  {
-    archive: '15',
-    badge: "BADGE '15'",
-    id: 'ECS-JGO-15',
-    name: 'Yogita Gupta',
-    role: 'Jr. Graphics Officer',
-    quote: 'A little stardust in every idea',
-    photo: '/team/yogita-gupta.jpg', // TODO: place photo in public/team/
-  },
-  {
-    archive: '10',
-    badge: "BADGE '10'",
-    id: 'ECS-JTO-10',
+    id: 'tanush-haryan',
     name: 'Tanush Haryan',
     role: 'Jr. Technical Officer',
-    quote: 'Jack Of All, Master Of None',
-    photo: '/team/tanush-haryan.jpg', // TODO: place photo in public/team/
+    badge: 'Jr. Technical Officer',
+    photo: '/team/tanush-haryan.jpg',
+    card: '/team/tanush-haryan-card.jpg',
+    quote: 'Jack of all, master of none.',
+  },
+  {
+    id: 'atharva-vaidya',
+    name: 'Atharva Vaidya',
+    role: 'Jr. Finance Officer',
+    badge: 'Jr. Finance Officer',
+    photo: '/team/atharva-vaidya.jpg',
+    card: '/team/atharva-vaidya-card.jpg',
+    quote: 'Running on curiosity and questionable decisions.',
+  },
+  {
+    id: 'yogita-gupta',
+    name: 'Yogita Gupta',
+    role: 'Jr. Graphics Officer',
+    badge: 'Jr. Graphics Officer',
+    photo: '/team/yogita-gupta.jpg',
+    card: '/team/yogita-gupta-card.jpg',
+    quote: 'A little stardust in every idea.',
   },
 ]
+
+// Aliases for compatibility
+export const coreExec = seniorCouncil
+export const juniorOfficers = juniorCouncil

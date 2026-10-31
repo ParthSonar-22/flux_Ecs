@@ -12,7 +12,7 @@ export const posts = [
     subtitle: 'Induction Exhibition 2026',
     date: '7th September 2026',
     location: 'Labs 201, 203 and 215, VESIT',
-    category: 'EXCLUSIVE FIELD RECORD',
+    category: 'Event Write-up',
     coverPhoto: '/photos/lab201/lab201-1.jpg',
     gallery: [
       { src: '/photos/lab201/lab201-1.jpg', label: 'Lab 201' },

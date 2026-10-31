@@ -1,3 +1,8 @@
+const stickers = [
+  'sticker-1', 'sticker-2', 'sticker-3', 'sticker-4',
+  'sticker-5', 'sticker-6', 'sticker-7', 'sticker-8',
+]
+
 export default function ToolsTopics() {
   const algoTags = [
     'Searching and sorting',
@@ -6,6 +11,7 @@ export default function ToolsTopics() {
     'Graph algorithms',
     'Strategic bidding',
     'Problem solving',
+    'Big-O thinking',
   ]
 
   const iotaTags = [
@@ -15,78 +21,50 @@ export default function ToolsTopics() {
     'Software applications',
     'Remote controlled cars',
     'Obstacle avoiding car',
+    'Hardware and electronics',
   ]
 
   return (
     <section className="w-full bg-paper border-b-2 border-ink py-space-xl px-4 lg:px-margin">
       <div className="max-w-7xl mx-auto">
         <div className="mb-space-md">
-          <span className="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-brick block mb-1 font-bold">
-            Taxonomy &amp; Frameworks
-          </span>
           <h2 className="font-headline-md text-headline-md text-ink font-bold">
-            Tools and topics
+            What we work on
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-          {/* Panel A: From Algorithm's Auction */}
-          <div className="border-2 border-ink bg-card p-space-md shadow-[4px_4px_0px_var(--ink)]">
-            <div className="flex items-center justify-between border-b-2 border-ink pb-3 mb-4">
-              <div>
-                <span className="font-label-smallcaps text-label-smallcaps uppercase text-ink block font-bold">
-                  Registry Part A
-                </span>
-                <h3 className="font-headline-sm text-headline-sm text-brick font-bold">
-                  From Algorithm&apos;s Auction
-                </h3>
-              </div>
-              <span className="font-complexity-notation text-xs px-2 py-0.5 border border-ink bg-tan text-ink font-bold">
-                ALGO-01
-              </span>
-            </div>
+          {/* From Algorithm's Auction */}
+          <div className="py-4">
+            <h3 className="font-headline-sm text-headline-sm text-brick font-bold mb-4 pb-2 border-b border-ink/20">
+              Algorithm&apos;s Auction topics
+            </h3>
             <div className="flex flex-wrap gap-2.5">
-              {algoTags.map((t) => (
+              {algoTags.map((t, i) => (
                 <span
                   key={t}
-                  className="border-2 border-ink bg-paper px-3 py-1.5 font-complexity-notation text-complexity-notation text-ink"
+                  className={`sticker-tag ${stickers[i % stickers.length]} inline-block border border-ink bg-card text-ink font-body-sm text-sm px-3 py-1.5 shadow-sm`}
                 >
                   {t}
                 </span>
               ))}
-              <span className="border-2 border-ink bg-brick text-paper px-3 py-1.5 font-complexity-notation text-complexity-notation font-bold">
-                Big-O thinking
-              </span>
             </div>
           </div>
 
-          {/* Panel B: From IoTA Archives */}
-          <div className="border-2 border-ink bg-card p-space-md shadow-[4px_4px_0px_var(--ink)]">
-            <div className="flex items-center justify-between border-b-2 border-ink pb-3 mb-4">
-              <div>
-                <span className="font-label-smallcaps text-label-smallcaps uppercase text-ink block font-bold">
-                  Registry Part B
-                </span>
-                <h3 className="font-headline-sm text-headline-sm text-ink font-bold">
-                  From IoTA Archives
-                </h3>
-              </div>
-              <span className="font-complexity-notation text-xs px-2 py-0.5 border border-ink bg-tan text-ink font-bold">
-                HW-SYS-02
-              </span>
-            </div>
+          {/* From IoTA Archives */}
+          <div className="py-4 md:border-l md:border-ink/20 md:pl-gutter">
+            <h3 className="font-headline-sm text-headline-sm text-ink font-bold mb-4 pb-2 border-b border-ink/20">
+              IoTA Archives projects
+            </h3>
             <div className="flex flex-wrap gap-2.5">
-              {iotaTags.map((t) => (
+              {iotaTags.map((t, i) => (
                 <span
                   key={t}
-                  className="border-2 border-ink bg-paper px-3 py-1.5 font-complexity-notation text-complexity-notation text-ink"
+                  className={`sticker-tag ${stickers[(i + 3) % stickers.length]} inline-block border border-ink bg-tan text-ink font-body-sm text-sm px-3 py-1.5 shadow-sm`}
                 >
                   {t}
                 </span>
               ))}
-              <span className="border-2 border-ink bg-tan px-3 py-1.5 font-complexity-notation text-complexity-notation text-ink font-bold">
-                Hardware and electronics
-              </span>
             </div>
           </div>
         </div>

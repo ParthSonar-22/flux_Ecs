@@ -77,8 +77,50 @@ body {
   background: var(--muted);
 }
 
-/* Focus styles */
+/* Focus styles — only show ring on keyboard navigation */
 :focus-visible {
   outline: 2px solid var(--brick);
   outline-offset: 2px;
 }
+
+/* Remove focus outline on click (mouse users) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Caveat handwritten font utility (used only in photo collage captions) */
+.font-handwritten {
+  font-family: var(--font-caveat), cursive;
+}
+
+/* Photo collage tape strip effect */
+.tape-strip {
+  position: absolute;
+  width: 60px;
+  height: 18px;
+  background: rgba(210, 185, 164, 0.75);
+  border: 1px solid rgba(27, 22, 19, 0.2);
+  z-index: 10;
+}
+
+/* SVG scribble underline animation */
+@keyframes draw-underline {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+.scribble-underline {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: draw-underline 0.8s ease-out 0.4s forwards;
+}
+
+/* Sticker tag rotations for tools/topics */
+.sticker-tag { display: inline-block; }
+.sticker-1 { transform: rotate(-2deg); }
+.sticker-2 { transform: rotate(1.5deg); }
+.sticker-3 { transform: rotate(-1deg); }
+.sticker-4 { transform: rotate(2deg); }
+.sticker-5 { transform: rotate(-1.5deg); }
+.sticker-6 { transform: rotate(0.5deg); }
+.sticker-7 { transform: rotate(-2deg); }
+.sticker-8 { transform: rotate(1deg); }

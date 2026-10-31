@@ -1,320 +1,171 @@
 import Image from 'next/image'
 import Reveal from '@/components/Reveal'
-import { faculty, coreExec, juniorOfficers } from '@/data/team'
-import { ADDRESS, EMAIL, GITHUB } from '@/data/site'
+import { faculty, seniorCouncil, juniorCouncil } from '@/data/team'
+import { ADDRESS, EMAIL, GITHUB, INSTAGRAM } from '@/data/site'
 
 export const metadata = {
-  title: 'About the Council',
+  title: 'Who we are',
   description:
-    'The official departmental technical collective of Electronics & Computer Science at VESIT, Mumbai.',
+    'The technical club of the Department of Electronics & Computer Science at VESIT, Mumbai.',
 }
 
 export default function AboutPage() {
   return (
     <Reveal>
       <div className="flex flex-col w-full">
-        {/* Top Archival Strip */}
-        <div className="w-full bg-ink text-paper px-4 lg:px-margin py-2 border-b-2 border-ink flex flex-wrap items-center justify-between gap-3 font-complexity-notation text-[11px] tracking-widest uppercase">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 bg-brick"></span>
-            <span>GAZETTE SPECIAL REGISTER // FOLIO EDITION NO. XXIV</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <span>REF: VESIT-ECS-ARCHIVE</span>
-            <span className="hidden sm:inline">&bull;</span>
-            <span className="hidden sm:inline">CYCLE 2026</span>
-            <span className="bg-brick text-paper px-2 py-0.5 font-bold">STATUS: DEPLOYED</span>
-          </div>
-        </div>
-
-        {/* Editorial Masthead / Header Section */}
+        {/* Page header */}
         <section className="w-full px-4 lg:px-margin py-space-lg lg:py-space-xl bg-paper border-b-2 border-ink">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
-            {/* Left Column: Title & Overline */}
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+            {/* Left: Title */}
             <div className="lg:col-span-8 flex flex-col space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-tan border-2 border-ink text-ink font-complexity-notation text-xs tracking-wider uppercase shadow-[2px_2px_0px_var(--ink)] w-fit font-bold">
-                <span className="text-brick">&sect;</span>
-                <span>CHARTER &amp; ARCHIVAL MANDATE // DEPT. OF ELECTRONICS &amp; COMPUTER SCIENCE &bull; VESIT</span>
-              </div>
               <h1 className="font-display-hero text-headline-lg lg:text-display-hero text-ink leading-none tracking-tight font-bold">
-                Where Ideas Flow <br className="hidden sm:block" />
-                <span className="italic font-title-editorial text-brick underline decoration-ink decoration-2 underline-offset-8">
-                  into Innovation.
-                </span>
+                Who we are
               </h1>
-              <p className="font-body-lg text-body-lg text-ink max-w-3xl leading-relaxed pt-2">
-                We are the official departmental technical collective of Electronics &amp; Computer Science at Vivekanand Education Society&apos;s Institute of Technology (VESIT), Chembur. Founded to bridge theoretical curricula with hands-on silicon crafting, embedded systems, algorithmic problem solving, and software development. We organize practical workshops, competitive auctions, hardware exhibitions, and senior-fresher mentorships.
+              <p className="font-body-lg text-body-lg text-ink max-w-3xl leading-relaxed">
+                FLUX-ECS is the technical club of the Department of Electronics &amp; Computer Science at VESIT, Chembur. We run competitions, hardware exhibitions, and senior–fresher sessions throughout the academic year.
               </p>
             </div>
 
-            {/* Right Column: Department Docket */}
-            <div className="lg:col-span-4 flex flex-col space-y-3 bg-card p-5 border-2 border-ink shadow-[6px_6px_0px_var(--brick)]">
-              <div className="flex items-center justify-between border-b-2 border-ink pb-2">
-                <span className="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-ink font-bold">
-                  Department Docket
-                </span>
-                <span className="font-complexity-notation text-xs bg-ink text-paper px-1.5 py-0.5 font-bold">
-                  ECS-CHARTER
-                </span>
-              </div>
+            {/* Right: Quick facts — simple border, no heavy fake labels */}
+            <div className="lg:col-span-4 flex flex-col space-y-3 bg-card p-5 border border-ink/30">
               <div className="font-body-sm text-body-sm text-ink space-y-2 leading-snug">
                 <p className="flex items-start gap-2">
                   <span className="font-complexity-notation text-brick font-bold">01.</span>
-                  <span><strong>Jurisdiction:</strong> Department of Electronics &amp; Computer Science, VESIT.</span>
+                  <span><strong>Department:</strong> Electronics &amp; Computer Science, VESIT.</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <span className="font-complexity-notation text-brick font-bold">02.</span>
-                  <span><strong>Core Focus:</strong> Hardware prototyping, embedded systems, algorithms, and practical software projects.</span>
+                  <span><strong>What we do:</strong> Hardware prototyping, algorithms, software projects, and workshops.</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <span className="font-complexity-notation text-brick font-bold">03.</span>
-                  <span><strong>Council:</strong> Student-administered under faculty stewardship.</span>
+                  <span><strong>Eligibility:</strong> Events are open to all ECS students across all years. Council membership is open to 2nd year and above.</span>
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Three Foundational Pillars */}
+        {/* Three pillars — clean hairline dividers */}
         <section className="w-full bg-card border-b-2 border-ink">
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink">
-            {/* Pillar 1 */}
-            <div className="p-6 lg:p-8 flex flex-col justify-between space-y-4 hover:bg-paper transition-colors">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="font-complexity-notation text-brick font-bold text-sm tracking-widest">
-                    [ PILLAR // 01 ]
-                  </span>
-                  <span className="material-symbols-outlined text-ink">memory</span>
-                </div>
+            {[
+              {
+                icon: 'memory',
+                title: 'Hardware and software, side by side.',
+                body: 'Our events bridge physical embedded hardware with algorithmic software — from lab testing benches to full-stack applications.',
+              },
+              {
+                icon: 'terminal',
+                title: 'Built by students.',
+                body: 'FLUX-ECS is run by students of the ECS department at VESIT, organizing competitive events, practical workshops, and exhibitions.',
+              },
+              {
+                icon: 'diversity_3',
+                title: 'Open to every year.',
+                body: 'Events and workshops are open to all ECS batches (FE to BE). Council membership is open from second year onwards.',
+              },
+            ].map((pillar) => (
+              <div key={pillar.title} className="p-6 lg:p-8 flex flex-col space-y-3 hover:bg-paper transition-colors">
+                <span className="material-symbols-outlined text-ink">{pillar.icon}</span>
                 <h2 className="font-headline-sm text-headline-sm text-ink leading-snug font-bold">
-                  Hardware and software, side by side.
+                  {pillar.title}
                 </h2>
                 <p className="font-body-md text-body-md text-muted">
-                  Our events bridge physical embedded hardware with algorithmic software — from lab testing benches to full-stack applications.
+                  {pillar.body}
                 </p>
               </div>
-              <div className="pt-3 border-t border-ink/20 flex items-center gap-2 font-complexity-notation text-xs text-ink font-bold">
-                <span className="w-2 h-2 bg-brick"></span>
-                <span>SILICON + RUNTIMES</span>
-              </div>
-            </div>
-
-            {/* Pillar 2 */}
-            <div className="p-6 lg:p-8 flex flex-col justify-between space-y-4 hover:bg-paper transition-colors">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="font-complexity-notation text-brick font-bold text-sm tracking-widest">
-                    [ PILLAR // 02 ]
-                  </span>
-                  <span className="material-symbols-outlined text-ink">terminal</span>
-                </div>
-                <h2 className="font-headline-sm text-headline-sm text-ink leading-snug font-bold">
-                  Built by students.
-                </h2>
-                <p className="font-body-md text-body-md text-muted">
-                  FLUX-ECS is run by students of the ECS department at VESIT, organizing competitive events, practical workshops, and exhibitions.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-ink/20 flex items-center gap-2 font-complexity-notation text-xs text-ink font-bold">
-                <span className="w-2 h-2 bg-brick"></span>
-                <span>STUDENT RUN</span>
-              </div>
-            </div>
-
-            {/* Pillar 3 */}
-            <div className="p-6 lg:p-8 flex flex-col justify-between space-y-4 hover:bg-paper transition-colors">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="font-complexity-notation text-brick font-bold text-sm tracking-widest">
-                    [ PILLAR // 03 ]
-                  </span>
-                  <span className="material-symbols-outlined text-ink">diversity_3</span>
-                </div>
-                <h2 className="font-headline-sm text-headline-sm text-ink leading-snug font-bold">
-                  Open to every year.
-                </h2>
-                <p className="font-body-md text-body-md text-muted">
-                  Beginners and seniors gather in the same labs. Novices learn alongside senior project builders without hesitation.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-ink/20 flex items-center gap-2 font-complexity-notation text-xs text-ink font-bold">
-                <span className="w-2 h-2 bg-brick"></span>
-                <span>ALL YEARS WELCOME</span>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* Council In-Charge & Core Secretariat Section */}
+        {/* 1. Faculty in-charge (Yogesh Pandit Sir and Abhishek Chaudhari Sir at the top) */}
         <section className="w-full px-4 lg:px-margin py-space-xl bg-paper border-b-2 border-ink">
-          <div className="flex flex-col space-y-8 max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-ink pb-4">
-              <div>
-                <span className="font-complexity-notation text-xs text-brick uppercase tracking-widest font-bold">
-                  SECTION 02 // FACULTY &amp; CORE LEADERSHIP
-                </span>
-                <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
-                  Secretariat &amp; Council In-Charge
-                </h2>
-              </div>
-              <div className="font-body-sm text-body-sm text-muted max-w-sm">
-                Stewards of departmental charter and student coordination at VESIT ECS.
-              </div>
+          <div className="max-w-7xl mx-auto flex flex-col space-y-8">
+            <div className="border-b border-ink/30 pb-4">
+              <span className="font-handwritten text-xl text-brick block mb-1">Mentorship &amp; Guidance</span>
+              <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
+                Faculty in-charge
+              </h2>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
-              {/* Faculty Card (Factual, no fabricated quotes) */}
-              <div className="lg:col-span-5 bg-card border-2 border-ink p-6 lg:p-8 shadow-[6px_6px_0px_var(--brick)] flex flex-col justify-between">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between border-b-2 border-ink pb-3">
-                    <span className="font-complexity-notation text-xs uppercase text-brick font-bold tracking-widest">
-                      FACULTY STEWARDSHIP
-                    </span>
-                    <span className="font-complexity-notation text-xs bg-ink text-paper px-2 py-0.5 font-bold">
-                      COUNCIL IN-CHARGE
-                    </span>
-                  </div>
-                  <div className="space-y-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {faculty.map((f) => (
+                <div
+                  key={f.name}
+                  className="bg-card border-2 border-ink p-6 flex flex-col justify-between space-y-3 shadow-[4px_4px_0px_var(--tan)]"
+                >
+                  <div>
                     <h3 className="font-headline-md text-headline-md text-ink leading-snug font-bold">
-                      {faculty.name}
+                      {f.name}
                     </h3>
-                    <p className="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-brick font-bold">
-                      {faculty.title}
+                    <p className="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-brick font-bold mt-1">
+                      {f.title}
                     </p>
-                    <p className="font-complexity-notation text-xs text-muted">
-                      {faculty.dept}
+                    <p className="font-body-sm text-body-sm text-muted mt-2">
+                      {f.dept}
                     </p>
                   </div>
                 </div>
-                <div className="mt-8 pt-4 border-t-2 border-ink flex items-center justify-between font-complexity-notation text-xs text-muted">
-                  <span>DEPT. OF ELECTRONICS &amp; COMPUTER SCIENCE</span>
-                  <span className="font-bold text-ink">VESIT</span>
-                </div>
-              </div>
-
-              {/* Core Leadership Officers Grid (Role titles only, real phone numbers) */}
-              <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
-                <div className="bg-tan border-2 border-ink p-4 font-complexity-notation text-xs text-ink flex items-center justify-between">
-                  <span className="font-bold tracking-wider uppercase">CORE EXECUTIVE BENCH</span>
-                  <span className="font-bold">5 APPOINTMENTS</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {coreExec.map((exec) => (
-                    <div
-                      key={exec.name}
-                      className={`bg-card border-2 border-ink p-4 shadow-[4px_4px_0px_var(--ink)] flex flex-col justify-between space-y-2 ${
-                        exec.office === '05' ? 'sm:col-span-2' : ''
-                      }`}
-                    >
-                      <div>
-                        <div className="flex items-center justify-between border-b border-ink pb-1.5 mb-2">
-                          <span className="font-complexity-notation text-[11px] text-brick font-bold">
-                            OFFICE {exec.office}
-                          </span>
-                          <span className="font-complexity-notation text-[11px] bg-ink text-paper px-1.5 font-bold">
-                            {exec.badge}
-                          </span>
-                        </div>
-                        <h4 className="font-headline-sm text-headline-sm text-ink leading-none font-bold">
-                          {exec.name}
-                        </h4>
-                        <p className="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-brick font-bold mt-1">
-                          {exec.role}
-                        </p>
-                      </div>
-                      {exec.phone && (
-                        <div className="pt-1 flex items-center gap-1 font-complexity-notation text-xs text-ink font-bold">
-                          <span className="material-symbols-outlined text-[14px]">call</span>
-                          <a href={`tel:${exec.phone.replace(/\s+/g, '')}`} className="hover:underline">
-                            {exec.phone}
-                          </a>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Junior Officers Gallery Section (Lithographic Cards) */}
+        {/* 2. Senior Council (Core Leadership & Senior Officers) */}
         <section className="w-full px-4 lg:px-margin py-space-xl bg-card border-b-2 border-ink">
-          <div className="flex flex-col space-y-8 max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-ink pb-4">
+          <div className="max-w-7xl mx-auto flex flex-col space-y-8">
+            <div className="border-b border-ink/30 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
               <div>
-                <div className="inline-flex items-center gap-2 font-complexity-notation text-xs text-brick font-bold tracking-widest uppercase">
-                  <span>OFFICIAL REGISTER // FOLIO 03</span>
-                  <span>&bull;</span>
-                  <span>RATIFIED PERSONNEL</span>
-                </div>
+                <span className="font-handwritten text-xl text-brick block mb-1">Core Leadership</span>
                 <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
-                  Council Members &amp; Junior Officers
+                  Senior Council
                 </h2>
+                <p className="font-body-sm text-body-sm text-muted mt-1">
+                  Third and Final Year student leads steering FLUX-ECS
+                </p>
               </div>
-              <div className="font-body-sm text-body-sm text-muted max-w-sm">
-                Archival dossier featuring attested portraits, designated callsigns, unit badges, and personal mandates.
-              </div>
+              <span className="font-complexity-notation text-xs text-muted uppercase">2026–2027</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {juniorOfficers.map((officer) => (
+              {seniorCouncil.map((member) => (
                 <article
-                  key={officer.name}
-                  className="bg-card rounded-[14px] border-2 border-ink shadow-[6px_6px_0px_var(--brick)] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1"
+                  key={member.id}
+                  className="bg-paper border-2 border-ink shadow-[4px_4px_0px_var(--tan)] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1"
                 >
-                  <div className="p-3 bg-paper border-b-2 border-ink flex items-center justify-between">
-                    <span className="font-complexity-notation text-xs font-bold text-ink">
-                      ARCHIVE // {officer.archive}
-                    </span>
-                    <span className="inline-block px-2 py-0.5 bg-brick text-paper font-complexity-notation text-[11px] font-bold">
-                      {officer.badge}
-                    </span>
-                  </div>
-
-                  <div className="p-3 bg-card">
-                    <div className="relative w-full aspect-[4/5] border-2 border-ink overflow-hidden bg-tan flex items-center justify-center">
-                      <Image
-                        src={officer.photo}
-                        alt={officer.name}
-                        fill
-                        className="object-cover object-top"
-                      />
-                      {/* Clean Initials Avatar Fallback */}
-                      <div className="flex flex-col items-center justify-center p-4 text-center">
-                        <span className="font-headline-lg text-3xl font-bold text-ink">
-                          {officer.name.split(' ').map((n) => n[0]).join('')}
-                        </span>
-                        <span className="font-complexity-notation text-[10px] text-muted mt-1 uppercase font-bold">
-                          {officer.role}
-                        </span>
-                      </div>
-                      <div className="absolute bottom-0 inset-x-0 bg-ink/85 text-paper px-2 py-1 flex items-center justify-between font-complexity-notation text-[10px]">
-                        <span>ID: {officer.id}</span>
-                        <span>STATUS: ACTIVE</span>
-                      </div>
-                    </div>
+                  <div className="relative w-full aspect-[4/5] bg-tan flex items-center justify-center overflow-hidden border-b-2 border-ink">
+                    <Image
+                      src={member.photo}
+                      alt={member.name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 768px) 100vw, 300px"
+                    />
                   </div>
 
                   <div className="p-4 flex flex-col flex-1 justify-between space-y-3">
                     <div>
                       <h3 className="font-headline-sm text-headline-sm text-ink leading-none font-bold">
-                        {officer.name}
+                        {member.name}
                       </h3>
                       <p className="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-brick font-bold mt-1">
-                        {officer.role}
+                        {member.role}
                       </p>
                     </div>
-                    <div className="p-2.5 bg-paper border border-ink border-dashed">
-                      <span className="font-complexity-notation text-[10px] text-muted block uppercase tracking-wider mb-0.5 font-bold">
-                        Callsign Mandate:
-                      </span>
-                      <p className="font-title-editorial italic text-body-md text-ink">
-                        &ldquo;{officer.quote}&rdquo;
+                    {member.quote && (
+                      <p className="font-title-editorial italic text-sm text-muted">
+                        &ldquo;{member.quote}&rdquo;
                       </p>
-                    </div>
+                    )}
+                    {member.phone && (
+                      <div className="pt-2 border-t border-ink/20 flex items-center gap-1.5 font-complexity-notation text-xs text-ink font-bold">
+                        <span className="material-symbols-outlined text-[15px] text-brick">call</span>
+                        <a href={`tel:${member.phone.replace(/\s+/g, '')}`} className="hover:underline">
+                          {member.phone}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </article>
               ))}
@@ -322,40 +173,81 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Department Coordinates & Cartographic Registry Section (With real Google Maps iframe) */}
-        <section className="w-full px-4 lg:px-margin py-space-xl bg-paper">
+        {/* 3. Junior Council (Second Year Officers) */}
+        <section className="w-full px-4 lg:px-margin py-space-xl bg-paper border-b-2 border-ink">
+          <div className="max-w-7xl mx-auto flex flex-col space-y-8">
+            <div className="border-b border-ink/30 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+              <div>
+                <span className="font-handwritten text-xl text-brick block mb-1">Rising Talent</span>
+                <h2 className="font-headline-lg text-headline-lg text-ink leading-tight font-bold">
+                  Junior Council
+                </h2>
+                <p className="font-body-sm text-body-sm text-muted mt-1">
+                  Second Year student officers powering operations, technical workshops, and media
+                </p>
+              </div>
+              <span className="font-complexity-notation text-xs text-muted uppercase">2026–2027</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+              {juniorCouncil.map((officer) => (
+                <article
+                  key={officer.id}
+                  className="bg-card border-2 border-ink shadow-[4px_4px_0px_var(--tan)] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1"
+                >
+                  <div className="relative w-full aspect-[4/5] bg-tan flex items-center justify-center overflow-hidden border-b-2 border-ink">
+                    <Image
+                      src={officer.photo}
+                      alt={officer.name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 768px) 100vw, 240px"
+                    />
+                  </div>
+
+                  <div className="p-4 flex flex-col flex-1 justify-between space-y-2">
+                    <div>
+                      <h3 className="font-headline-sm text-base text-ink leading-tight font-bold">
+                        {officer.name}
+                      </h3>
+                      <p className="font-label-smallcaps text-xs uppercase tracking-wider text-brick font-bold mt-1">
+                        {officer.role}
+                      </p>
+                    </div>
+                    {officer.quote && (
+                      <p className="font-title-editorial italic text-xs text-muted">
+                        &ldquo;{officer.quote}&rdquo;
+                      </p>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Where we are */}
+        <section className="w-full px-4 lg:px-margin py-space-xl bg-card">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
-            {/* Geographic & Institutional Coordinates Card */}
-            <div className="lg:col-span-6 bg-card border-2 border-ink p-6 lg:p-8 shadow-[6px_6px_0px_var(--brick)] flex flex-col justify-between">
+            {/* Address card */}
+            <div className="lg:col-span-6 bg-paper border border-ink/30 p-6 lg:p-8 flex flex-col justify-between">
               <div className="space-y-4">
-                <div className="flex items-center justify-between border-b-2 border-ink pb-2">
-                  <span className="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-ink font-bold">
-                    Geographic Coordinates
-                  </span>
-                  <span className="font-complexity-notation text-xs bg-brick text-paper px-1.5 py-0.5 font-bold">
-                    SECTOR VESIT
-                  </span>
-                </div>
+                <span className="font-handwritten text-xl text-brick block">Campus Location</span>
                 <h3 className="font-headline-md text-headline-md text-ink leading-snug font-bold">
-                  Department Secretariat
+                  Find us at VESIT
                 </h3>
-                <div className="space-y-3 font-body-md text-body-md text-ink">
-                  <p className="leading-relaxed">
-                    <strong>VESIT Campus:</strong> {ADDRESS}
-                  </p>
-                  <p className="leading-relaxed text-muted">
-                    Department laboratories, embedded systems workbenches, and technical review councils operate in the Department of Electronics &amp; Computer Science.
-                  </p>
-                </div>
-                <div className="pt-4 border-t-2 border-ink space-y-3 font-complexity-notation text-xs">
+                <p className="font-body-md text-body-md text-ink leading-relaxed">
+                  {ADDRESS}
+                </p>
+                <div className="pt-4 border-t border-ink/20 space-y-3 font-complexity-notation text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-muted uppercase font-bold">Official Inquiry Dispatch:</span>
+                    <span className="text-muted uppercase font-bold">Email:</span>
                     <a className="text-brick font-bold hover:underline" href={`mailto:${EMAIL}`}>
                       {EMAIL}
                     </a>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-muted uppercase font-bold">Public Git Registry:</span>
+                    <span className="text-muted uppercase font-bold">GitHub:</span>
                     <a
                       className="text-brick font-bold hover:underline flex items-center gap-1"
                       href={GITHUB}
@@ -367,39 +259,35 @@ export default function AboutPage() {
                     </a>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-muted uppercase font-bold">Academic Charter:</span>
-                    <span className="text-ink font-bold">VESIT ECS // 2026</span>
+                    <span className="text-muted uppercase font-bold">Instagram:</span>
+                    <a
+                      className="text-brick font-bold hover:underline flex items-center gap-1"
+                      href={INSTAGRAM}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <span>@flux.ecs</span>
+                      <span className="material-symbols-outlined text-[14px]">open_in_new</span>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Map Display Frame with real Google Maps iframe */}
-            <div className="lg:col-span-6 bg-card border-2 border-ink p-4 shadow-[6px_6px_0px_var(--brick)] flex flex-col justify-between">
-              <div className="border-b-2 border-ink pb-2 mb-3 flex items-center justify-between font-complexity-notation text-xs">
-                <span className="text-ink font-bold">CARTOGRAPHIC PLOT // VESIT CAMPUS</span>
-                <span className="bg-ink text-paper px-1.5 py-0.5 font-bold">CHEMBUR 400074</span>
-              </div>
-              <div className="w-full h-80 min-h-[300px] border-2 border-ink overflow-hidden relative">
+            {/* Map */}
+            <div className="lg:col-span-6 bg-paper border border-ink/30 p-4 flex flex-col justify-between">
+              <div className="w-full h-80 min-h-[300px] border border-ink/30 overflow-hidden relative">
                 <iframe
-                  title="VESIT Chembur Location Map"
+                  title="VESIT Chembur Location"
                   src="https://www.google.com/maps?q=VESIT+Chembur+Mumbai&output=embed"
                   className="w-full h-full border-0"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
-              <div className="pt-3 mt-3 border-t border-ink flex flex-wrap items-center justify-between gap-2 font-complexity-notation text-xs text-muted">
-                <span>ACCESSIBLE VIA CHEMBUR MONORAIL &amp; HARBOUR LINE</span>
-                <a
-                  className="text-brick font-bold hover:underline"
-                  href={GITHUB}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  EXPLORE OPEN CODEBASE &rarr;
-                </a>
-              </div>
+              <p className="pt-2 font-complexity-notation text-xs text-muted">
+                Accessible via Chembur Monorail &amp; Harbour Line
+              </p>
             </div>
           </div>
         </section>

@@ -1,4 +1,4 @@
-import { EB_Garamond, Newsreader, Space_Mono } from 'next/font/google'
+import { EB_Garamond, Newsreader, Space_Mono, Caveat } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -20,6 +20,12 @@ const spaceMono = Space_Mono({
   weight: ['400', '700'],
   display: 'swap',
   variable: '--font-space-mono',
+})
+
+const caveat = Caveat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-caveat',
 })
 
 export const metadata = {
@@ -48,7 +54,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${ebGaramond.variable} ${newsreader.variable} ${spaceMono.variable}`}
+      className={`${ebGaramond.variable} ${newsreader.variable} ${spaceMono.variable} ${caveat.variable}`}
     >
       <head>
         <link

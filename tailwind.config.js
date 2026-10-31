@@ -142,6 +142,11 @@ module.exports = {
       "var(--font-space-mono)",
       "Space Mono",
       "monospace"
+    ],
+    "handwritten": [
+      "var(--font-caveat)",
+      "Caveat",
+      "cursive"
     ]
   },
   "fontSize": {

@@ -21,7 +21,7 @@ export default function WhyClub() {
     {
       num: '03',
       title: 'Open to every year.',
-      desc: "Algorithm's Auction is for ECS students across all years, and beginners are welcome.",
+      desc: "Events are open to all ECS students. To join the council itself, you need to be in second year or above.",
     },
     {
       num: '04',
@@ -47,7 +47,7 @@ export default function WhyClub() {
       rowElements?.forEach((row) => {
         gsap.fromTo(
           row,
-          { opacity: 0.5 },
+          { opacity: 0.7 },
           {
             opacity: 1,
             ease: 'none',
@@ -70,32 +70,19 @@ export default function WhyClub() {
       className="w-full bg-card border-b-2 border-ink py-space-xl px-4 lg:px-margin"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header with Triple Rule Terminal */}
+        {/* Simple section header — no fake labels */}
         <div className="mb-space-lg">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="font-complexity-notation text-complexity-notation text-brick">
-              &para;
-            </span>
-            <span className="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-muted font-bold">
-              Charter &bull; Departmental Mandate
-            </span>
-          </div>
           <h2 className="font-headline-lg text-headline-lg text-ink font-bold">
-            Why the club
+            Why join the club
           </h2>
-          <div className="flex items-center gap-2 mt-3">
-            <div className="h-0.5 bg-ink flex-grow"></div>
-            <span className="font-complexity-notation text-xs text-ink">&sect;</span>
-            <div className="h-[1px] bg-ink flex-grow"></div>
-          </div>
         </div>
 
-        {/* Factual Rows 01 to 05 */}
-        <div className="divide-y-2 divide-ink border-t-2 border-b-2 border-ink">
+        {/* Rows with thin dividers only */}
+        <div className="border-t border-ink/30">
           {rows.map((row) => (
             <div
               key={row.num}
-              className="why-row group py-5 px-3 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-paper transition-colors cursor-default"
+              className="why-row group py-5 px-1 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-ink/30 hover:bg-paper/40 transition-colors cursor-default"
             >
               <div className="flex items-baseline gap-6">
                 <span className="font-complexity-notation text-complexity-notation text-brick font-bold">

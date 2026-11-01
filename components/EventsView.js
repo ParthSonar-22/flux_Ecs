@@ -658,22 +658,22 @@ export default function EventsView() {
                   </div>
                 </div>
 
-                {/* Exhibition — Organizing Cohort in Lab 201 */}
+                {/* Exhibition — Senior presenter with FE students */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
                   style={{ transform: 'rotate(0.8deg)' }}
                   onClick={() =>
                     setLightboxPhoto({
                       src: '/photos/iota-lab201-group.jpg',
-                      label: 'IoTA Archives — FLUX-ECS organizing cohort in Lab 201',
-                      sub: 'Department exhibition organized for the incoming FE batch',
+                      label: 'IoTA Archives — Senior presenter with first-year (FE) students',
+                      sub: 'Senior explaining projects with FE students in Lab 201',
                     })
                   }
                 >
                   <div className="relative w-full aspect-[1024/646] bg-tan border border-ink/30 overflow-hidden">
                     <Image
                       src="/photos/iota-lab201-group.jpg"
-                      alt="FLUX-ECS cohort at IoTA Archives exhibition in Lab 201"
+                      alt="Senior presenter with first-year (FE) students in Lab 201"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 300px"
@@ -682,7 +682,7 @@ export default function EventsView() {
                   <div className="pt-3 pb-1 text-center">
                     <p className="font-handwritten text-lg text-ink font-bold">IoTA Archives</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Organizing cohort in Lab 201
+                      Senior with FE students
                     </p>
                   </div>
                 </div>

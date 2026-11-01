@@ -222,7 +222,7 @@ export const events = [
       },
       {
         src: '/photos/iota-lab201-group.jpg',
-        label: 'Lab 201 — FLUX-ECS Student Organizing Cohort',
+        label: 'Lab 201 — Senior presenter with first-year (FE) students',
         aspect: 'aspect-[1024/646]',
       },
     ],

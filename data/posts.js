@@ -18,7 +18,7 @@ export const posts = [
     gallery: [
       {
         src: '/photos/iota-lab201-group.jpg',
-        label: 'Lab 201 — Seniors in the Tinkerers\u2019 Lab during the exhibition',
+        label: 'Lab 201 — Senior presenter with first-year (FE) students',
         aspect: 'aspect-[4/3]',
       },
       {

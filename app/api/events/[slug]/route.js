@@ -28,11 +28,19 @@ export async function PATCH(req, { params }) {
     const { slug } = await params
     const cookieStore = await cookies()
     const token = cookieStore.get('flux_admin_token')?.value
-    if (!verifyAdminToken(token)) {
+    if (!verifyAdminToken(token, 'editor')) {
       return NextResponse.json({ ok: false, error: 'Unauthorized admin access' }, { status: 401 })
     }
 
     const updates = await req.json()
+    // Role enforcement: Publishing requires Admin role
+    if (updates.is_published && !verifyAdminToken(token, 'admin')) {
+      return NextResponse.json(
+        { ok: false, error: 'Unauthorized: Admin or Super Admin role required to publish events' },
+        { status: 403 }
+      )
+    }
+
     const updated = await updateEvent(slug, updates)
     if (!updated) {
       return NextResponse.json({ ok: false, error: 'Event not found' }, { status: 404 })
@@ -50,8 +58,8 @@ export async function DELETE(req, { params }) {
     const { slug } = await params
     const cookieStore = await cookies()
     const token = cookieStore.get('flux_admin_token')?.value
-    if (!verifyAdminToken(token)) {
-      return NextResponse.json({ ok: false, error: 'Unauthorized admin access' }, { status: 401 })
+    if (!verifyAdminToken(token, 'admin')) {
+      return NextResponse.json({ ok: false, error: 'Unauthorized: Admin role required to delete events' }, { status: 403 })
     }
 
     await deleteEvent(slug)

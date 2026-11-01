@@ -25,12 +25,12 @@ export async function GET(req) {
   }
 }
 
-// POST: Create a new event with poster (Admin only)
+// POST: Create a new event with poster (Editor can draft; Admin to publish)
 export async function POST(req) {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get('flux_admin_token')?.value
-    if (!verifyAdminToken(token)) {
+    if (!verifyAdminToken(token, 'editor')) {
       return NextResponse.json({ ok: false, error: 'Unauthorized admin access' }, { status: 401 })
     }
 
@@ -41,6 +41,14 @@ export async function POST(req) {
       return NextResponse.json(
         { ok: false, error: 'Title, date, and description are required.' },
         { status: 400 }
+      )
+    }
+
+    // Role enforcement: Publishing directly requires Admin role; Editor can only save drafts
+    if (body.is_published && !verifyAdminToken(token, 'admin')) {
+      return NextResponse.json(
+        { ok: false, error: 'Unauthorized: Admin or Super Admin role required to publish events. Please save as draft.' },
+        { status: 403 }
       )
     }
 
@@ -57,8 +65,8 @@ export async function DELETE(req) {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get('flux_admin_token')?.value
-    if (!verifyAdminToken(token)) {
-      return NextResponse.json({ ok: false, error: 'Unauthorized admin access' }, { status: 401 })
+    if (!verifyAdminToken(token, 'admin')) {
+      return NextResponse.json({ ok: false, error: 'Unauthorized: Admin role required to delete events' }, { status: 403 })
     }
 
     const { searchParams } = new URL(req.url)

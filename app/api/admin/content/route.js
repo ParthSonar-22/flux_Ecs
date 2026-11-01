@@ -12,8 +12,8 @@ export async function POST(req) {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get('flux_admin_token')?.value
-    if (!verifyAdminToken(token)) {
-      return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 })
+    if (!verifyAdminToken(token, 'admin')) {
+      return NextResponse.json({ ok: false, error: 'Unauthorized: Admin or Super Admin role required to update site content' }, { status: 403 })
     }
 
     const body = await req.json()

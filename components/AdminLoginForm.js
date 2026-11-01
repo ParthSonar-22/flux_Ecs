@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 
 export default function AdminLoginForm() {
   const router = useRouter()
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState('')
@@ -18,7 +19,7 @@ export default function AdminLoginForm() {
       const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ email: email.trim() || undefined, password }),
       })
 
       const data = await res.json()
@@ -36,6 +37,26 @@ export default function AdminLoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label
+          htmlFor="admin-email"
+          className="block font-complexity-notation text-[12px] uppercase tracking-wider text-ink font-bold mb-1"
+        >
+          Administrator Email (Optional)
+        </label>
+        <input
+          id="admin-email"
+          type="email"
+          placeholder="buildwithaarya@gmail.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-3 py-2 border-2 border-ink bg-card text-ink placeholder-muted focus:outline-none focus:border-brick font-mono text-xs"
+        />
+        <span className="block text-[10px] text-gray-500 font-mono mt-1">
+          Leave blank to authorize as Super Admin using master key.
+        </span>
+      </div>
+
       <div>
         <label
           htmlFor="admin-password"

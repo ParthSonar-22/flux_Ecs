@@ -2,9 +2,10 @@ import { cookies } from 'next/headers'
 import connectMongo from '@/lib/mongodb'
 import Message from '@/models/Message'
 import Subscriber from '@/models/Subscriber'
-import { verifyAdminToken } from '@/lib/auth'
+import { verifyAdminToken, getAdminSession } from '@/lib/auth'
 import AdminLoginForm from '@/components/AdminLoginForm'
 import AdminDashboardClient from '@/components/admin/AdminDashboardClient'
+import AdminLogoutButton from '@/components/admin/AdminLogoutButton'
 import { getAllEvents } from '@/lib/events-store'
 
 export const dynamic = 'force-dynamic'
@@ -21,6 +22,7 @@ export default async function AdminPage() {
   const cookieStore = await cookies()
   const token = cookieStore.get('flux_admin_token')?.value
   const isAuthorized = verifyAdminToken(token)
+  const session = isAuthorized ? getAdminSession(token) : null
 
   let messages = []
   let subscribers = []
@@ -46,13 +48,15 @@ export default async function AdminPage() {
         {/* Header */}
         <div className="border-b border-white/10 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex flex-wrap items-center gap-2 mb-2">
               <span className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-gray-400 text-xs font-mono uppercase tracking-wider">
                 Council Operations · Level-04
               </span>
-              <span className="inline-block px-3 py-1 rounded-full border border-[#D94A5B]/30 bg-[#D94A5B]/10 text-[#D94A5B] text-xs font-mono uppercase font-bold tracking-wider">
-                Super Admin: buildwithaarya@gmail.com
-              </span>
+              {session && (
+                <span className="inline-block px-3 py-1 rounded-full border border-[#D94A5B]/30 bg-[#D94A5B]/10 text-[#D94A5B] text-xs font-mono uppercase font-bold tracking-wider">
+                  {session.role?.replace('_', ' ').toUpperCase()}: {session.email}
+                </span>
+              )}
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white font-display uppercase tracking-tight">
               Secretariat Admin &amp; Control
@@ -70,6 +74,7 @@ export default async function AdminPage() {
               >
                 <span>Export Subscribers CSV ↓</span>
               </a>
+              <AdminLogoutButton />
             </div>
           )}
         </div>

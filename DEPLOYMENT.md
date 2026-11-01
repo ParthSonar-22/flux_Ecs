@@ -1,97 +1,88 @@
-# FLUXECS V2 — PRODUCTION DEPLOYMENT GUIDE (VERCEL)
+# FluxECS V2 — Vercel Deployment & Production Setup Guide
 
-**Target Production Domain:** `https://aarya-fluxecs.vercel.app`  
-**Repository:** `https://github.com/ParthSonar-22/flux_Ecs`  
-**Branch:** `feat/fluxecs-homepage-v2`  
-**Framework:** Next.js 16.4.3 (App Router)  
-**Node.js Runtime:** Node 20.x or Node 22.x  
-
----
-
-## 1. Pre-Deployment Readiness Check
-
-Before deploying the feature branch to Vercel, ensure you have:
-1. Access to the GitHub repository: `https://github.com/ParthSonar-22/flux_Ecs`.
-2. A free MongoDB Atlas cluster (M0 or higher).
-3. A free Supabase project for persistent media storage (optional, recommended for posters & PDFs).
-4. Administrative credentials to be used by the council secretariat.
+**Target Address:** `https://aarya-fluxecs.vercel.app`  
+**Git Repository:** `https://github.com/ParthSonar-22/flux_Ecs`  
+**Production Branch:** `feat/fluxecs-homepage-v2` (or merged into `main` after review)  
+**Node.js Engine:** Node.js 22.x or >=24.x (Vercel default)
 
 ---
 
-## 2. Environment Variables Specification
+## 1. Readiness Status: READY FOR CONFIGURATION
 
-Configure the following environment variables in the **Vercel Project Dashboard** under **Settings → Environment Variables**:
-
-| Variable Name | Required | Example / Description |
-| :--- | :--- | :--- |
-| `MONGODB_URI` | **YES (Production)** | `mongodb+srv://flux_admin:<password>@cluster0.mongodb.net/flux_ecs?retryWrites=true&w=majority`<br>Enables persistent database storage for events, blogs, resources, site copy, council rosters, and inquiries. |
-| `ADMIN_PASSWORD` | **YES** | A strong secret key used for the root Super Admin login (e.g. `Secretariat#Flux2026!`). |
-| `ADMIN_SECRET` | **YES** | Random 32+ character hex string used to sign HMAC tokens (e.g. run `openssl rand -hex 32`). |
-| `NEXT_PUBLIC_SITE_URL` | **YES** | `https://aarya-fluxecs.vercel.app` |
-| `NEXT_PUBLIC_SUPABASE_URL` | Optional (Recommended) | `https://xyzcompany.supabase.co` (from Supabase Project Settings → API). |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Optional | Supabase public anon key. |
-| `SUPABASE_SERVICE_ROLE_KEY` | Optional (Recommended) | Supabase service role key (enables serverless image and PDF uploads). |
-| `SUPABASE_STORAGE_BUCKET` | Optional | Bucket name for uploads. Defaults to `media`. |
-| `NEXT_PUBLIC_RADIO_URL` | Optional | Custom stream URL or audio file. Defaults to `/media/ambient-pit.wav`. |
+The codebase is fully integrated and tested. To deploy successfully on Vercel's serverless platform, the production database and media storage environment variables must be configured in the Vercel Project Settings prior to triggering the production deployment.
 
 ---
 
-## 3. Step-by-Step Vercel Setup
+## 2. Required Environment Variables
 
-### Step A: Import Repository
-1. Log in to [Vercel](https://vercel.com).
-2. Click **Add New... → Project**.
-3. Select `ParthSonar-22/flux_Ecs`.
-4. Choose branch: `feat/fluxecs-homepage-v2`.
+Configure these variables in **Vercel Project Dashboard** -> **Settings** -> **Environment Variables**:
 
-### Step B: Configure Build Settings
-- **Framework Preset:** `Next.js`
-- **Root Directory:** `./` (or leave blank if repository root is the website directory)
-- **Build Command:** `npm run build`
-- **Output Directory:** Automatically set by Next.js (`.next`)
-- **Install Command:** `npm install`
+| Variable Name | Required | Purpose | Example / Format |
+| :--- | :---: | :--- | :--- |
+| `MONGODB_URI` | **YES** | Persistent MongoDB Atlas cluster connection for events, blogs, resources, copy, and council rosters. | `mongodb+srv://<user>:<password>@cluster0.xxxx.mongodb.net/flux_ecs?retryWrites=true&w=majority` |
+| `ADMIN_PASSWORD` | **YES** | Master authentication key for the council secretariat. | Strong 16+ character password (e.g., `flux_ecs_sec_2026_xK9...`) |
+| `ADMIN_SECRET` | **YES** | 32-byte hex secret used to sign HMAC session tokens (`flux_admin_token`). | 64 hex characters (e.g. generated via `openssl rand -hex 32`) |
+| `SUPER_ADMIN_EMAIL` | **YES** | Root administrator account with full user management privileges. | `buildwithaarya@gmail.com` |
+| `NEXT_PUBLIC_SITE_URL` | **YES** | Canonical public URL used for metadata and social graph cards. | `https://aarya-fluxecs.vercel.app` |
+| `NEXT_PUBLIC_SUPABASE_URL` | **YES** | Supabase project URL for serverless media storage. | `https://xyzcompany.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | **YES** | Supabase public anonymous API key. | `eyJhbGciOi...` |
+| `SUPABASE_SERVICE_ROLE_KEY` | **YES** | Supabase service role key for authorized poster & PDF uploads. | `eyJhbGciOi...` |
+| `SUPABASE_STORAGE_BUCKET` | Optional | Bucket name for media assets (default: `media`). | `media` |
+| `NEXT_PUBLIC_RADIO_URL` | Optional | Audio transmission stream or asset for PitRadio. Defaults to ambient track. | `/media/ambient-pit.wav` |
 
-### Step C: Add Environment Variables
-Paste the variables from Section 2 into the Vercel dashboard for both **Production** and **Preview** environments.
-
-### Step D: Supabase Storage Configuration (If using Cloud Storage)
-1. In your [Supabase Dashboard](https://supabase.com), navigate to **Storage**.
-2. Click **New Bucket**.
-3. Name the bucket `media`.
-4. Set it to **Public Bucket** so posters and photos can be viewed by public visitors.
-5. In **Policies**, add a policy allowing `INSERT` for authenticated service roles, and `SELECT` for public visitors.
-
-### Step E: Initial Database Seeding
-You do not need to write a migration script.
-When the application first boots on Vercel with `MONGODB_URI` connected:
-1. `lib/events-store.js` checks if the `events` collection is empty. If empty, it automatically seeds all initial events from `data/events-store.json`.
-2. `lib/blogs-store.js` checks and seeds initial technical guides from `data/blogs-store.json`.
-3. `lib/resources-store.js` checks and seeds all engineering resources from `data/resources-store.json`.
-4. `lib/site-content.js` checks and seeds homepage hero slides, copy, faculty, and council members from `data/site-content.json`.
-5. `lib/admins-store.js` seeds the initial Super Admin account (`buildwithaarya@gmail.com`).
+> [!WARNING]
+> On Vercel, the filesystem (`/public/posters/uploads/`) is ephemeral and read-only at runtime. `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` (or an equivalent S3-compatible provider) must be configured so poster uploads persist across serverless function invocations.
 
 ---
 
-## 4. Verification Post-Deployment
+## 3. Step-by-Step Vercel Deployment Instructions
 
-Once deployed to `https://aarya-fluxecs.vercel.app`:
-1. **Public Site Check:**
-   - Verify `/` renders with the official FluxECS wordmark, slideshow, and footer.
-   - Verify `/events` displays upcoming and past events.
-   - Verify `/about` displays faculty and council cards with vibrant photos.
-   - Verify `/blog` and `/resources` load articles and download links.
-2. **Admin Console Check:**
-   - Navigate to `/admin`.
-   - Enter your `ADMIN_PASSWORD`.
-   - Verify dashboard loads with Events, Editor, Analytics, Admins, and Inquiries.
-   - Test changing a hero subtitle or adding a test event to confirm database write.
-3. **PitRadio Check:**
-   - Click the radio icon in the bottom navigation.
-   - Verify smooth toggle without unexpected autoplay.
+### Step 1: Connect Repository to Vercel
+1. Log in to [Vercel Dashboard](https://vercel.com).
+2. Click **Add New...** -> **Project**.
+3. Import the repository `ParthSonar-22/flux_Ecs`.
+4. Set **Root Directory** to `website` (or `./` if deploying from the root workspace).
+5. Framework Preset: **Next.js**.
+6. Build Command: `npm run build` (default).
+7. Output Directory: `.next` (default).
+8. Install Command: `npm install` (default).
+
+### Step 2: Configure Environment Variables
+In the **Environment Variables** section of the setup screen, add all variables from the table above.
+
+### Step 3: Configure MongoDB Atlas (Whitelist Vercel)
+1. In [MongoDB Atlas](https://cloud.mongodb.com), go to **Network Access**.
+2. Click **Add IP Address**.
+3. Select **Allow Access From Anywhere** (`0.0.0.0/0`) since Vercel utilizes dynamic serverless IP ranges.
+4. Verify that the database user has `readWrite` permissions on the `flux_ecs` database.
+
+### Step 4: Configure Supabase Storage Bucket
+1. In your [Supabase Dashboard](https://supabase.com), go to **Storage** -> **New Bucket**.
+2. Name the bucket `media`.
+3. Set bucket access to **Public** so uploaded posters and document attachments are publicly readable.
+4. Set allowed MIME types: `image/jpeg`, `image/png`, `image/webp`, `image/gif`, `image/svg+xml`, `application/pdf`.
+
+### Step 5: Deploy
+1. Click **Deploy**.
+2. Review the build logs. Build should complete in ~10 seconds with 0 warnings or errors.
+3. Once deployed, verify:
+   - Homepage loads at `https://aarya-fluxecs.vercel.app`
+   - PitRadio initializes without console errors
+   - Events docket loads at `/events`
+   - Admin login works at `/admin` with your configured `ADMIN_PASSWORD`
+   - Poster uploads succeed and return public Supabase URLs
 
 ---
 
-## 5. Rollback & Maintenance
+## 4. Verification Checkpoint Before Production Cutover
 
-- If any configuration issue occurs, Vercel allows instant 1-click rollbacks under **Deployments → Promote to Production**.
-- The fallback JSON stores remain safely committed in the repository as a baseline backup.
+Execute these commands locally before merging to `main`:
+```bash
+npm run typecheck
+npm run lint
+npm run test
+node scripts/verify-v2.mjs
+node scripts/test-cms-e2e.mjs
+npm run build
+```
+All commands must output zero errors.

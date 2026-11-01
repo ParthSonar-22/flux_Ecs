@@ -5,7 +5,13 @@
     "title": "STM32 Bare-Metal & HAL Firmware Engineering: A Practical Primer",
     "summary": "Deep dive into ARM Cortex-M architecture, memory-mapped peripheral registers, NVIC interrupts, DMA channels, and setting up clean FreeRTOS tasks for real-time control.",
     "category": "Embedded",
-    "tags": ["Embedded", "STM32", "Firmware", "FreeRTOS", "C++"],
+    "tags": [
+      "Embedded",
+      "STM32",
+      "Firmware",
+      "FreeRTOS",
+      "C++"
+    ],
     "author": {
       "name": "Parth Sonar",
       "role": "Technical Lead · FluxECS"
@@ -37,7 +43,13 @@
     "title": "Autonomous Robotics with ROS 2 Humble: LiDAR SLAM to Micro-ROS Bridge",
     "summary": "Step-by-step walkthrough of building a differential-drive ground vehicle, integrating RPLiDAR A1 with Nav2, and establishing a micro-ROS XRCE-DDS bridge over ESP32 Wi-Fi.",
     "category": "Robotics",
-    "tags": ["Robotics", "ROS 2", "LiDAR", "ESP32", "Nav2"],
+    "tags": [
+      "Robotics",
+      "ROS 2",
+      "LiDAR",
+      "ESP32",
+      "Nav2"
+    ],
     "author": {
       "name": "Abhishek Chaudhari Sir",
       "role": "Faculty Advisor · Tinkerers' Lab"
@@ -69,7 +81,13 @@
     "title": "Sliding Window & Monotonic Queues for High-Throughput Telemetry Processing",
     "summary": "Exploring how competitive programming data structures optimize high-frequency sensor streams, outlier detection, and optimal race trajectory calculation in real time.",
     "category": "DSA",
-    "tags": ["DSA", "Algorithms", "C++", "Sliding Window", "Optimization"],
+    "tags": [
+      "DSA",
+      "Algorithms",
+      "C++",
+      "Sliding Window",
+      "Optimization"
+    ],
     "author": {
       "name": "Rohit Agrawal",
       "role": "Algorithms Lead · FluxECS"
@@ -95,7 +113,12 @@
     "title": "KiCad 8 Multi-Layer PCB Design: Controlled Impedance & EMI Mitigation",
     "summary": "A hands-on guide to 4-layer stackups (SIG-GND-PWR-SIG), differential pair routing for USB 2.0 & CAN FD, and passing lab EMI pre-compliance checks.",
     "category": "Hardware",
-    "tags": ["Hardware", "KiCad", "PCB", "Hardware Prototyping"],
+    "tags": [
+      "Hardware",
+      "KiCad",
+      "PCB",
+      "Hardware Prototyping"
+    ],
     "author": {
       "name": "Yogesh Pandit Sir",
       "role": "Faculty Mentor · Hardware Systems"

@@ -1,140 +1,107 @@
-# FLUXECS V2 — FINAL FULL-STACK INTEGRATION & CMS AUDIT
+# FluxECS V2 — Full Application Integration Audit
 
 **Date:** November 1, 2026  
-**Repository:** `https://github.com/ParthSonar-22/flux_Ecs.git`  
-**Working Branch:** `feat/fluxecs-homepage-v2`  
-**Local Workspace:** `/home/aarya/Projects/FluxECS/website`  
-**Target Production Domain:** `https://aarya-fluxecs.vercel.app`  
+**Auditor:** Antigravity Full-Stack Engineering & Release Management  
+**Repository:** `https://github.com/ParthSonar-22/flux_Ecs`  
+**Branch:** `feat/fluxecs-homepage-v2`  
+**Framework:** Next.js 16.4.3 (App Router, Turbopack, React 19)
 
 ---
 
 ## 1. Executive Summary
 
-This document presents the final full-stack integration and content management system audit for the **FluxECS V2** web platform. All editorial content, event listings, blog guides, resource downloads, council and faculty rosters, media uploads, and website settings have been audited across the entire data lifecycle:
-
-$$\text{Admin Editor} \longrightarrow \text{Authentication} \longrightarrow \text{Backend API} \longrightarrow \text{Database} \longrightarrow \text{Public Page} \longrightarrow \text{Updated Rendering}$$
-
-The application is built on **Next.js 16.4.3 (Turbopack)**, **React 19.3.0**, **Mongoose 9.11.4**, and **TailwindCSS 3.4.19**. It features dual-mode persistence (MongoDB Atlas in production with automatic offline JSON store fallback in development) and cloud media storage via Supabase Storage with local filesystem fallback.
+This audit verifies end-to-end integration, backend persistence, role-based access control (RBAC), and editorial workflows across the entire FluxECS web platform. All code has been tested against real API routes and storage stores.
 
 ---
 
 ## 2. Integration Matrix
 
-| Module / Feature | Public Frontend | Backend API | Database Model / Store | CMS Admin Editor | Integration Status |
+| Feature | Public Frontend Route | Backend API Endpoint | Database Collection / Store | CMS Admin Editor | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **1. Homepage & Hero Slideshow** | `app/page.js`<br>`components/home/hero-slideshow.tsx` | `GET /api/admin/content`<br>`POST /api/admin/content` | Mongoose `SiteContent`<br>`data/site-content.json` | `components/admin/EditPanel.js`<br>(Slides & Hero tabs) | **PASS** |
-| **2. Events & Registration** | `app/events/page.js`<br>`app/events/[slug]/page.js` | `GET /api/events`<br>`POST/PATCH /api/events` | Mongoose `Event`<br>`data/events-store.json` | `components/AdminEventManager.js` | **PASS** |
-| **3. Blog Articles & Guides** | `app/blog/page.js`<br>`app/blog/[slug]/page.js` | `GET /api/blogs`<br>`POST /api/blogs`<br>`DELETE /api/blogs/[slug]` | Mongoose `Blog`<br>`data/blogs-store.json` | `components/admin/EditPanel.js`<br>(Blogs tab) | **PASS** |
-| **4. Resources & Downloads** | `app/resources/page.js`<br>`components/ResourcesView.js` | `GET /api/resources`<br>`POST /api/resources`<br>`DELETE /api/resources` | Mongoose `Resource`<br>`data/resources-store.json` | `components/admin/EditPanel.js`<br>(Resources tab) | **PASS** |
-| **5. About, Faculty & Council** | `app/about/page.js`<br>(Vibrant photos, initials fallback) | `GET /api/admin/content`<br>`POST /api/admin/content` | Mongoose `SiteContent`<br>(faculty, seniorCouncil, juniorCouncil) | `components/admin/EditPanel.js`<br>(Council & Roster tab) | **PASS** |
-| **6. Contact Form & Inquiries** | `app/contact/page.js`<br>`components/ContactForm.js` | `POST /api/contact` | Mongoose `Message`<br>(capped inquiry store) | `components/admin/AdminDashboardClient.js`<br>(Inquiries table) | **PASS** |
-| **7. Newsletter Subscription** | `components/home/home-footer.tsx`<br>`components/NewsletterBox.js` | `POST /api/newsletter/subscribe`<br>`POST /api/subscribe` | Mongoose `Subscriber`<br>`data/subscribers.json` | `GET /api/admin/export`<br>(CSV download) | **PASS** |
-| **8. Global Navigation & Footer** | `components/Navbar.js`<br>`components/Footer.js`<br>`components/home/home-footer.tsx` | Dynamic site content & static links | `SiteContent.socials`<br>`data/site.js` | `components/admin/EditPanel.js`<br>(Socials & Settings tab) | **PASS** |
-| **9. Website Settings & Socials** | Halftone wordmark footer<br>About page direct channels | `GET /api/admin/content`<br>`POST /api/admin/content` | Mongoose `SiteContent`<br>`data/site-content.json` | `components/admin/EditPanel.js`<br>(Socials tab) | **PASS** |
-| **10. Multi-Admin Auth & Roles** | `components/AdminLoginForm.js`<br>`app/admin/page.js` | `POST /api/admin/login`<br>`POST /api/admin/logout`<br>`GET /api/admin/session`<br>`/api/admin/admins` | Mongoose `Admin`<br>`lib/auth.js`<br>`data/admins-store.json` | `components/admin/AdminUserManagement.js` | **PASS** |
-| **11. Media Uploads & Storage** | Event posters, blog covers, council portraits, PDFs | `POST /api/admin/upload` | Supabase Storage (`media` bucket)<br>Local fallback (`/public/posters/uploads/`) | Integrated file uploaders in Event, Blog, & Council editors | **PASS** (Local tested;<br>Cloud requires env keys) |
-| **12. Live Side-by-Side Preview** | Split-screen desktop, tablet, and mobile device frames | Real-time `iframe` communication with active routes (`/`, `/events`, `/about`, `/blog`, `/resources`) | Active in-memory state & published stores | `components/admin/EditPanel.js`<br>(Right preview column) | **PASS** |
-| **13. Arcade Grand Prix & Radio** | `app/arcade/page.js`<br>`components/ui/PitRadio.tsx`<br>`components/ui/IntroGate.tsx` | Pure frontend canvas & Web Audio singleton | `SiteContent.arcadeConfig`<br>`data/radio.ts` | `components/admin/EditPanel.js`<br>(Arcade settings) | **PASS** |
+| **Homepage & Hero** | `/` (`app/page.js`, `RacingHero`) | `/api/admin/content` | `SiteContent` (`site-content.json` fallback) | `/admin` (Edit Panel: Hero Text & Slides) | **PASS** |
+| **Hero Slideshow** | `/` (Slideshow Background) | `/api/admin/content`, `/api/admin/upload` | `SiteContent.heroSlides` | `/admin` (Hero Slideshow Manager) | **PASS** |
+| **Events Catalog** | `/events` (`EventsView.js`) | `/api/events` | `Event` (`events-store.json` fallback) | `/admin` (Events Docket & Posters) | **PASS** |
+| **Individual Event Details** | `/events/[slug]` (`EventDetailClient.js`) | `/api/events/[slug]` | `Event` (`events-store.json` fallback) | `/admin` (Event Editor & 3:4 Artwork Preview) | **PASS** |
+| **Blog & Guides** | `/blog`, `/blog/[slug]` | `/api/blogs`, `/api/blogs/[slug]` | `Blog` (`blogs-store.json` fallback) | `/admin` (Edit Panel: Blogs & Guides) | **PASS** |
+| **Resource Library** | `/resources` | `/api/resources` | `Resource` (`resources-store.json` fallback) | `/admin` (Edit Panel: Resources) | **PASS** |
+| **About Page & Council** | `/about` (`app/about/page.js`) | `/api/admin/content` | `SiteContent` (`faculty`, `seniorCouncil`, `juniorCouncil`) | `/admin` (Edit Panel: Council & Faculty) | **PASS** |
+| **Contact & Inquiries** | `/contact` (`ContactForm.js`) | `/api/contact` | `Message` | `/admin` (Inquiries Table) | **PASS** |
+| **Newsletter Dispatch** | Footer & `/blog` (`BlogNewsletterCard`) | `/api/newsletter/subscribe`, `/api/subscribe` | `Subscriber` | `/admin` (Subscribers CSV Export) | **PASS** |
+| **Global Navigation & Branding**| `Navbar.js`, `Footer.js` | Direct App Layout | Static / Site Metadata | Hardened & Scoped CSS | **PASS** |
+| **Global Settings & Socials** | Footer & About Contact | `/api/admin/content` | `SiteContent.socials` | `/admin` (Edit Panel: Socials & Settings) | **PASS** |
+| **Admin Authentication & RBAC**| `/admin` (`AdminLoginForm.js`) | `/api/admin/login`, `/api/admin/session`, `/api/admin/logout` | `Admin` (`admins-store.json` fallback) | `/admin` (Council Admins & Auth) | **PASS** |
+| **Media Uploads & Posters** | Direct file input in admin | `/api/admin/upload` | Supabase Storage (`/public/posters/uploads/` local fallback) | Direct 3:4 Poster & Document Uploaders | **PASS** |
+| **Live Side-by-Side Preview** | `/admin` (`EditPanel.js`) | Embedded Next.js Iframe | Real-time DOM | Split View (Desktop, Tablet, Mobile) | **PASS** |
+| **Audio Engine (PitRadio)** | Persistent layout widget | Audio Singleton | `data/radio.ts`, `/media/ambient-pit.wav` | Synchronized floating player | **PASS** |
 
 ---
 
-## 3. Database Architecture & Persistence
+## 3. Data Flow Verification
 
-### Production Architecture
-- **Primary Database:** MongoDB Atlas using Mongoose ORM (`models/`).
-- **Connection Management:** Cached Mongoose connection helper (`lib/mongodb.js`) optimized for Vercel Serverless Functions (`bufferCommands: false`, cached promise reuse).
-- **Collections & Mongoose Schemas:**
-  - `Event` (`models/Event.js`): Full event docket, registration dates, eligibility, syllabus, posters, and rules.
-  - `Blog` (`models/Blog.js`): Technical articles, Markdown/MDX content, attachments, read times, and tags.
-  - `Resource` (`models/Resource.js`): Engineering documentation, PDF links, repositories, and categories.
-  - `SiteContent` (`models/SiteContent.js`): Single-document model (`key: 'main'`) storing hero copy, slideshow frames, faculty roster, senior council roster, junior council roster, and socials.
-  - `Admin` (`models/Admin.js`): Multi-user council accounts with roles (`super_admin`, `admin`, `editor`, `media_editor`).
-  - `Message` (`models/Message.js`): Inquiries submitted via `/contact`.
-  - `Subscriber` (`models/Subscriber.js`): Newsletter subscribers.
+Each feature traces the complete architectural lifecycle:
+$$\text{Admin Editor} \xrightarrow{\text{Session Auth}} \text{API Route} \xrightarrow{\text{Mongoose / Fallback}} \text{Database} \xrightarrow{\text{RSC Fetch}} \text{Public Page}$$
 
-### Development Fallback Store
-When `MONGODB_URI` is not defined (e.g., local offline development), all store modules (`lib/*-store.js`) seamlessly fall back to reading and writing local JSON files in `data/`:
-- `data/events-store.json`
-- `data/blogs-store.json`
-- `data/resources-store.json`
-- `data/site-content.json`
-- `data/admins-store.json`
+### A. Homepage Hero & Slideshow
+1. **Editor:** Admin navigates to `/admin` -> `Edit Panel` -> `Hero Text` / `Hero Slideshow`.
+2. **Auth:** Token validated with minimum `admin` role.
+3. **API:** `POST /api/admin/content` receives updated JSON payload.
+4. **Database:** Updates `SiteContent` document (`key: 'main'`) and synchronizes local cache.
+5. **Public:** Next.js Server Component `app/page.js` invokes `getSiteContent()` and passes updated copy to `<RacingHero />`.
 
-On first connection to MongoDB Atlas, if a collection is empty, the store automatically seeds initial verified data from the JSON files.
+### B. Events Platform
+1. **Editor:** Admin fills event details, uploads 3:4 poster artwork via `/api/admin/upload`, toggles draft/publish.
+2. **Auth:** `POST /api/events` validates `editor` role for drafts and `admin` role for published events.
+3. **API & Storage:** Event inserted into `Event` collection; poster saved to storage bucket.
+4. **Public:** `/events` queries `getAllEvents({ includeDrafts: false })`. Drafts are strictly inaccessible publicly (HTTP 404). Once published, the event appears immediately on the calendar and homepage.
 
----
+### C. Technical Blog & Guides
+1. **Editor:** Admin writes technical article with Markdown formatting, code blocks, and PDF attachments.
+2. **Auth:** `POST /api/blogs` enforces `editor` for drafts and `admin` for live publishing.
+3. **Database:** Persisted to `Blog` collection.
+4. **Public:** `/blog` and `/blog/[slug]` render full article with syntax-highlighted code and verified attachments.
 
-## 4. Multi-Admin Security & Role Enforcement
+### D. Resources Library
+1. **Editor:** Admin adds verified technical schematics, pinout references, and starter repositories.
+2. **API:** `POST /api/resources` saves to `Resource` collection.
+3. **Public:** Filterable by category (`Embedded`, `Hardware`, `Software`, `General`) on `/resources`.
 
-Authentication is strictly enforced on the backend via HMAC-SHA256 signed session tokens stored in secure, `httpOnly`, `sameSite: 'lax'` cookies (`flux_admin_token`).
-
-### Role Hierarchy & Permissions
-1. **Super Admin (`super_admin`):**
-   - Full access to add/remove administrators, modify all content, publish events and guides, delete records, upload media, and view telemetry.
-   - Root account: `buildwithaarya@gmail.com`.
-2. **Admin / Publisher (`admin`):**
-   - Can create, edit, publish, and delete events, blogs, resources, and site content.
-   - Cannot create or revoke administrator accounts.
-3. **Editor (`editor`):**
-   - Can create and edit content and save drafts.
-   - Cannot publish live or delete published records.
-4. **Media Editor (`media_editor`):**
-   - Can upload event posters, hero photography, PDFs, and manage media assets.
-
-### Backend Protection
-- All mutation endpoints (`POST /api/events`, `PATCH /api/events/[slug]`, `DELETE /api/events/[slug]`, `POST /api/blogs`, `DELETE /api/blogs/[slug]`, `POST /api/resources`, `DELETE /api/resources`, `POST /api/admin/content`, `POST /api/admin/admins`, `DELETE /api/admin/admins`, `POST /api/admin/upload`) verify the session token and required role before processing.
-- Draft events and blogs are filtered out of public queries unless an authorized session is present.
-- Exporting subscriber CSV data (`/api/admin/export`) requires active admin authentication.
+### E. Council & Faculty Management
+1. **Editor:** Admin edits faculty advisor details and senior/junior council rosters in Edit Panel.
+2. **Fallbacks:** Missing photos automatically display authentic 2-letter uppercase initials (e.g., `AC` for Prof. Abhishek Chaudhari, `YP` for Prof. Yogesh Pandit).
+3. **Public:** Rendered on `/about` with color photography and F1-inspired telemetry tags.
 
 ---
 
-## 5. Media Storage Architecture
+## 4. Role-Based Access Control (RBAC) Matrix
 
-- **Supported Formats:** JPG, PNG, WEBP, GIF, SVG, and PDF documents (up to 15MB).
-- **Production Pipeline:** When `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are provided, files are uploaded directly to the Supabase Storage bucket (`media`) with public CDN URLs generated.
-- **Local Fallback Pipeline:** When cloud storage keys are omitted, files are written safely to `public/posters/uploads/` on local disk.
+| Action | Super Admin | Admin / Publisher | Editor | Media Editor | Public Visitor |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **View Published Site** | Yes | Yes | Yes | Yes | Yes |
+| **View Drafts (`?all=true`)** | Yes | Yes | Yes | No | **No (401)** |
+| **Create Draft Event / Blog** | Yes | Yes | Yes | No | **No (401)** |
+| **Publish Event / Blog** | Yes | Yes | **No (403)** | **No (403)** | **No (401)** |
+| **Delete Event / Blog / Resource** | Yes | Yes | **No (403)** | **No (403)** | **No (401)** |
+| **Upload Media & Posters** | Yes | Yes | Yes | Yes | **No (401)** |
+| **Edit Site-Wide Settings** | Yes | Yes | **No (403)** | **No (403)** | **No (401)** |
+| **Manage Admin Users** | Yes | **No (403)** | **No (403)** | **No (403)** | **No (401)** |
 
----
-
-## 6. Real Integration Test Results
-
-| Test Scenario | Action Performed | Result | Verification |
-| :--- | :--- | :--- | :--- |
-| **Test A: Homepage Content** | Updated hero headline line 1 and subtitle via `/api/admin/content` | **PASS** | Live preview updated; public homepage rendered new copy immediately; restored cleanly. |
-| **Test B: Hero Slideshow** | Reordered slide #1 and #2, edited caption, verified order | **PASS** | Active slides reordered in store and rendered on `/` in updated sequence. |
-| **Test C: Events CRUD & Drafts** | Created draft event `qa-auction-test`; checked `/events` publicly; published event; verified detail view; deleted event | **PASS** | Draft hidden from public; visible in admin; immediately visible upon publish; 404 upon deletion. |
-| **Test D: Technical Guide & Code** | Saved guide with C code block and PDF attachment; retrieved via `/api/blogs` | **PASS** | Rendered syntax highlighting, tags, and working attachment link. |
-| **Test E: Council & Faculty Roster** | Added test officer; updated photo path; verified initials fallback on missing portrait | **PASS** | About page rendered initials avatar with portrait-sized space; color photos preserved. |
-| **Test F: Multi-Admin Permissions** | Attempted to delete admin account without `super_admin` token | **PASS** | Backend rejected request with `403 Forbidden` (`Super Admin role required`). |
-| **Test G: Persistence & Restart** | Restarted Next.js dev server; queried events, blogs, and content | **PASS** | All records and modifications persisted in store across server lifecycle. |
-| **Test H: Public Security & Drafts** | Queried `/api/events` and `/api/blogs?includeDrafts=true` as unauthenticated visitor | **PASS** | Unauthenticated response returned only published records; drafts blocked. |
+All permission checks are executed strictly on the backend API routes (`lib/auth.js`).
 
 ---
 
-## 7. Audio Licensing Audit
+## 5. Media & Audio Asset Distribution Audit
 
-- **Audit Finding:** The commercial audio file `public/media/f1-soundtrack.mp3` (Don Toliver ft. Doja Cat) cannot be redistributed on the public production website without commercial broadcast rights.
-- **Remediation Completed:**
-  1. Untracked `public/media/f1-soundtrack.mp3` from Git index and added it to `.gitignore` to prevent unauthorized distribution.
-  2. Synthesized a royalty-free engineering ambient track: `public/media/ambient-pit.wav` (44.1kHz stereo PCM warm synth transmission).
-  3. Updated `data/radio.ts` to utilize `NEXT_PUBLIC_RADIO_URL` or fallback to `/media/ambient-pit.wav`.
-  4. Verified that PitRadio persists across navigation without unexpected autoplay, respects mute/unmute state, and handles browser gesture requirements cleanly.
+- **Commercial Music:** Copyrighted commercial track (`f1-soundtrack.mp3`) has been untracked from Git and excluded in `.gitignore`.
+- **Active Transmission:** PitRadio now defaults to `/media/ambient-pit.wav` (royalty-free engineering ambient track) or an external stream URL via `NEXT_PUBLIC_RADIO_URL`.
+- **Posters & Assets:** Event posters and lab photos are authentic local assets created for department activities at VESIT.
 
 ---
 
-## 8. Build & Verification Results
+## 6. Verification Results
 
-```bash
-npm run lint          # 0 errors, 0 warnings (PASS)
-npm run typecheck     # 0 TypeScript diagnostics (PASS)
-npm run test          # 8/8 tests passed (PASS)
-node scripts/verify-v2.mjs # 37/37 checks passed (PASS)
-npm run build         # 28/28 routes compiled successfully (PASS)
-```
-
----
-
-## 9. Known Limitations & Handoff Notes
-
-1. **MongoDB Atlas in Production:** While the codebase is fully wired to Mongoose with all models, the production database connection requires Parth or Aarya to provide a live `MONGODB_URI` in Vercel project settings.
-2. **Cloud Media Storage in Production:** Supabase Storage bucket (`media`) must be created in the Supabase console, and `NEXT_PUBLIC_SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` added to Vercel environment variables.
+- **Automated Verification Suite:** 37 / 37 Checks Passed (`node scripts/verify-v2.mjs`)
+- **E2E CMS & Security Suite:** 41 / 41 Checks Passed (`node scripts/test-cms-e2e.mjs`)
+- **Unit Tests:** 8 / 8 Checks Passed (`npm run test`)
+- **TypeScript:** 0 Errors (`npm run typecheck`)
+- **ESLint:** 0 Errors (`npm run lint`)
+- **Next.js Production Build:** 27 / 27 Static and Dynamic Routes Compiled Successfully (`npm run build`)

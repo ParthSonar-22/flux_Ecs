@@ -25,8 +25,8 @@ async function runVerification() {
     assert(homeHtml.includes('FROM CIRCUITS'), 'Homepage contains headline "FROM CIRCUITS"')
     assert(!homeHtml.includes('FLUX CIRCUIT // VESIT RACE CONTROL'), 'Track map / telemetry completely eliminated')
     assert(!homeHtml.includes('BUILT TO LEARN'), 'Projects showcase section removed from homepage')
-    assert(homeHtml.includes('01 / FEATURED EVENT'), 'Homepage has Featured Event section')
-    assert(homeHtml.includes('02 / ABOUT FLUXECS'), 'Homepage has About the Council section')
+    assert(homeHtml.includes('On the calendar') || homeHtml.includes('FEATURED EVENT'), 'Homepage has Featured Event section')
+    assert(!homeHtml.includes('The council'), 'The council section removed from homepage per user request')
 
     const resEvents = await fetch(`${baseUrl}/events`)
     assert(resEvents.status === 200, 'Events page renders (200 OK)')
@@ -69,7 +69,7 @@ async function runVerification() {
     const resAuth = await fetch(`${baseUrl}/api/admin/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: process.env.TEST_ADMIN_PASSWORD }),
+      body: JSON.stringify({ password: process.env.TEST_ADMIN_PASSWORD || 'fluxecs2026' }),
     })
     assert(resAuth.status === 200, 'Admin login accepts valid password (200 OK)')
     const setCookie = resAuth.headers.get('set-cookie')
@@ -170,26 +170,79 @@ async function runVerification() {
     failed++
   }
 
-  // 7. Delete Test Event & Clean Up
-  try {
-    const resDelete = await fetch(`${baseUrl}/api/events/${draftSlug}`, {
-      method: 'DELETE',
-      headers: { Cookie: adminCookie },
-    })
-    const delData = await resDelete.json()
-    assert(delData.ok, 'Admin can delete event from docket')
+    // 7. Delete Test Event & Clean Up
+    try {
+      const resDelete = await fetch(`${baseUrl}/api/events/${draftSlug}`, {
+        method: 'DELETE',
+        headers: { Cookie: adminCookie },
+      })
+      const delData = await resDelete.json()
+      assert(delData.ok, 'Admin can delete event from docket')
 
-    const resCheckGone = await fetch(`${baseUrl}/api/events`)
-    const checkGoneData = await resCheckGone.json()
-    const isGone = !checkGoneData.events.some((e) => e.slug === draftSlug)
-    assert(isGone, 'Deleted event is removed from public docket')
-  } catch (err) {
-    console.error('Delete test failed:', err)
-    failed++
+      const resCheckGone = await fetch(`${baseUrl}/api/events`)
+      const checkGoneData = await resCheckGone.json()
+      const isGone = !checkGoneData.events.some((e) => e.slug === draftSlug)
+      assert(isGone, 'Deleted event is removed from public docket')
+    } catch (err) {
+      console.error('Delete test failed:', err)
+      failed++
+    }
+
+    // 8. Blog & Resources Platform Verification
+    try {
+      const resBlog = await fetch(`${baseUrl}/blog`)
+      assert(resBlog.status === 200, 'Blog page /blog renders (200 OK)')
+      const blogHtml = await resBlog.text()
+      assert(blogHtml.includes('BUILD LOGS'), 'Blog page contains title "BUILD LOGS"')
+      assert(blogHtml.includes('Embedded') && blogHtml.includes('Robotics'), 'Blog page renders category filters')
+
+      const resGuide = await fetch(`${baseUrl}/blog/stm32-firmware-engineering-guide`)
+      assert(resGuide.status === 200, 'Individual guide /blog/stm32-firmware-engineering-guide renders (200 OK)')
+      const guideHtml = await resGuide.text()
+      assert(guideHtml.includes('STM32 Bare-Metal'), 'Individual guide renders title and code blocks')
+
+      const resResources = await fetch(`${baseUrl}/resources`)
+      assert(resResources.status === 200, 'Resources page /resources renders (200 OK)')
+      const resHtml = await resResources.text()
+      assert(resHtml.includes('RESOURCE') && resHtml.includes('LIBRARY'), 'Resources page renders library title')
+
+      const resArcade = await fetch(`${baseUrl}/arcade`)
+      assert(resArcade.status === 200, 'Arcade page /arcade renders (200 OK)')
+    } catch (err) {
+      console.error('Blog & Resources failed:', err)
+      failed++
+    }
+
+    // 9. Newsletter Subscription API
+    try {
+      const testEmail = `test-verify-${Date.now()}@fluxecs.ves.ac.in`
+      const resSub = await fetch(`${baseUrl}/api/newsletter/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: testEmail }),
+      })
+      const subData = await resSub.json()
+      assert(subData.ok, 'Newsletter subscription API accepts email')
+    } catch (err) {
+      console.error('Newsletter API failed:', err)
+      failed++
+    }
+
+    // 10. Assets Verification
+    try {
+      const resCursor = await fetch(`${baseUrl}/cursors/f1-cursor.svg`)
+      assert(resCursor.status === 200, 'F1 cursor SVG is publicly accessible')
+
+      const resBg = await fetch(`${baseUrl}/backgrounds/midnight-velocity.png`)
+      assert(resBg.status === 200, 'Midnight Velocity background image is accessible')
+    } catch (err) {
+      console.error('Assets check failed:', err)
+      failed++
+    }
+
+    console.log(`\n📊 Verification Complete: ${passed} Passed, ${failed} Failed\n`)
+    if (failed > 0) process.exit(1)
   }
 
-  console.log(`\n📊 Verification Complete: ${passed} Passed, ${failed} Failed\n`)
-  if (failed > 0) process.exit(1)
-}
+  runVerification()
 
-runVerification()

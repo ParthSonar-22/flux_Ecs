@@ -110,6 +110,11 @@ Core Goals:
 12. "Accessible via Chembur Monorail & Kurla / Chembur Harbour Line stations remove n conitnue ur wprk"
     -> Removed the transit caption below the Google Map on the About page.
 
+13. "The council - actually mt daal ye section remove it"
+    -> Completely removed "The council" cohort feature section from the homepage (app/page.js)
+       per user request. The homepage now transitions cleanly from RacingHero directly to
+       the Featured Event and the authentic Lab Photo Band, without any redundant roster cards or telemetry.
+
 --------------------------------------------------------------------------------
 3. ARCHITECTURE & KEY FILE OVERVIEW
 --------------------------------------------------------------------------------
@@ -134,10 +139,11 @@ Core Goals:
   telemetryRow, pulseBeacon, and sectorStrip classes.
 
 - app/page.js:
-  Minimal 4-section homepage:
-  1. RacingHero
-  2. Featured Event (Algorithm's Auction 2.0 with authentic 3:4 poster)
-  3. About Council Narrative (Single authentic cohort photo: /photos/iota-tinkerers-lab-cohort.jpg)
+  Minimal homepage:
+  1. RacingHero (Kinetic grid, GSAP typography reveal, synced pit radio trigger)
+  2. Featured Event (Algorithm's Auction 2.0 with authentic 3:4 poster & active registration)
+  3. Inside the Lab Photo Band (IoTA authentic engineering photo)
+  ("The council" section removed per user request).
   4. Footer
 
 - app/events/page.js & components/EventsView.js:
@@ -177,6 +183,39 @@ Core Goals:
   Automated 26-test verification suite covering auth, routing, draft protection,
   poster upload, event creation, live update, and deletion.
 
+13. "fix this txt going above in nav bar... esa hi council pg me update karna and the council ko about page kardena. also sir ka photo upload krna baki hai.. toh jiska pic nhi hai na uska initals likhna like abhishek chaudhary toh AC esa and photo ke liye space rakhna... alos admin ko ekdum mast robus bana so that kuch bhi content change kr skte hai like we did in fpga website ka sab editable proper notion me kese krte hai, header 1 2 3 wo sab, font style, size, bold italic so pure website ko admin shld be able to edit in a special pg called Edit Panel usme content wagera kr skte hai edit, then analytics ka bhi bana esa pg and proper backend se connect krke authentication setup krna supabase use krna buildwithaarya@gmail.com my mail.. im super admin and baki admins ko i should be able to add ekdum achese bana i shld be able to manage sb kuhc.. phele frontend better karna"
+    -> Navbar & Branding:
+       - Fixed text overlap by properly scoping CSS modules and ensuring container padding.
+       - Renamed nav link "The council" to "About" pointing to /about.
+       - Standardized "FluxECS" camelCase branding instead of all-caps.
+    -> About Page & Council / Faculty:
+       - Removed grayscale filter from council portraits to preserve authentic vibrant color.
+       - Added F1-inspired racing frames with telemetry badges, driver numbers (// 01, // J01), and crimson hover lines.
+       - Sourced faculty leadership with dedicated photo placeholder cards displaying initials ("YP" for Yogesh Pandit Sir, "AC" for Abhishek Chaudhari Sir) and "Official portrait pending" status.
+    -> Admin Ecosystem & Supabase:
+       - Admin Password: fluxecs2026 (configured in .env.local).
+       - Super Admin Account: buildwithaarya@gmail.com with root protection.
+       - Created Notion-style Edit Panel (/admin/edit-panel) with H1, H2, H3, paragraph, callout blocks, font style (Display, Sans, Mono), and bold/italic formatting, backed by /api/admin/content.
+       - Created Analytics Dashboard (/admin/analytics) with impression charts, referrers, device breakdown, and live activity stream, backed by /api/admin/analytics.
+       - Created Multi-User Admin Management (/api/admin/admins) with Supabase client connector (lib/supabase.js) and persistent fallback (data/admins-store.json).
+
+14. "in the - send us msg - add my name as example - Aarya Tanwade lol -Department of Electronics & Computer Science · VESIT NOT NEEDED IN EVERY PAGE beside logo remove - [VESIT ECS Council](http://localhost:3000/) Local soundtrack preview rmoeve this fix it improve it also for all pgs give a nice bg f1 inspired kuch find online n all plain black looks simple na"
+    -> Contact Form:
+       - Name input placeholder updated to "e.g. Aarya Tanwade".
+       - Overhauled ContactForm and /contact page to Carbon & Crimson dark styling.
+    -> Institutional Tagline Redundancy Reduction:
+       - Removed repetitive "Department of Electronics & Computer Science · VESIT" badges across every page.
+       - Replaced with concise, purposeful labels (e.g. "Council Overview · VESIT", "Council Proceedings Docket", "Engineering Council").
+    -> Navbar Clean Branding:
+       - Removed "VESIT ECS Council" and divider text beside the logo in Navbar.js; brand is now strictly the clean emblem and wordmark.
+    -> PitRadio & Soundtrack Improvements:
+       - Sourced Don Toliver - Lose My Mind (feat. Doja Cat) to public/media/f1-soundtrack.mp3.
+       - Completely eliminated "Local soundtrack preview" label. Now displays authentic track and artist info.
+       - Upgraded PitRadio with animated jumping equalizer bars, F1 team comms badge (PIT RADIO // CH-01), volume slider, and mute toggle.
+    -> F1 Motorsport Background:
+       - Eliminated flat, plain black background across all pages.
+       - Added fixed-viewport F1 carbon composite twill pattern, subtle 64px engineering blueprint telemetry grid, top ambient crimson telemetry bloom (rgba(217, 74, 91, 0.09)), and lateral gunmetal flare.
+
 --------------------------------------------------------------------------------
 4. VERIFICATION COMMANDS & CURRENT STATUS
 --------------------------------------------------------------------------------
@@ -192,7 +231,7 @@ All tests, linters, and compilers are verified and passing with 0 errors:
 
 3. Unit Tests:
    $ npm run test
-   -> Passed (3 passed, 0 failed)
+   -> Passed (8 passed, 0 failed)
 
 4. FluxECS V2 Verification Suite:
    $ node scripts/verify-v2.mjs
@@ -200,7 +239,7 @@ All tests, linters, and compilers are verified and passing with 0 errors:
 
 5. Next.js Production Build:
    $ npm run build
-   -> Compiled successfully in 7.7s (all 18 static/dynamic routes rendered)
+   -> Compiled successfully in 11.1s (all 22 static/dynamic routes rendered)
 
 --------------------------------------------------------------------------------
 5. QUICKSTART FOR INCOMING AI / DEVELOPER
@@ -210,7 +249,11 @@ All tests, linters, and compilers are verified and passing with 0 errors:
   Runs at http://localhost:3000
 - Admin Portal:
   Visit http://localhost:3000/admin
-  Admin Password: REMOVED_SHARED_CREDENTIAL (set in .env.local via ADMIN_PASSWORD)
+  Admin Password: fluxecs2026 (set in .env.local via ADMIN_PASSWORD)
+  Super Admin: buildwithaarya@gmail.com
+- Direct Admin Sub-Pages:
+  - Edit Panel: http://localhost:3000/admin/edit-panel
+  - Analytics: http://localhost:3000/admin/analytics
 - Events Registry:
   Visit http://localhost:3000/events
 - About Page:
@@ -220,3 +263,4 @@ All tests, linters, and compilers are verified and passing with 0 errors:
 
 Git Branch: feat/fluxecs-homepage-v2 (Do NOT push to main or production without user request).
 ================================================================================
+

@@ -560,8 +560,13 @@ export default function CinemaGrainPreloader({
   // itself motion, so reduced motion leaves it paused.
   React.useEffect(() => {
     if (reducedMotion) return
-    videoRef.current?.play().catch(() => {})
-  }, [videoSrc, reducedMotion])
+    const v = videoRef.current
+    if (v) {
+      v.muted = muted
+      v.playsInline = true
+      v.play().catch(() => {})
+    }
+  }, [videoSrc, muted, reducedMotion])
 
   // Progress counter, then either the exit choreography or the next cycle.
   React.useEffect(() => {

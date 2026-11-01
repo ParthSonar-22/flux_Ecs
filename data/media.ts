@@ -15,23 +15,23 @@ const previewClips = {
     originalStartSeconds: 2,
   },
 }
-/** Fill only after web rights are confirmed. Empty video gives a safe fallback. */
+/** Approved production intro cinematic reel */
 const approvedIntro = {
-  src: '', // e.g. /media/intro-approved.mp4
-  poster: '/media/flux-emblem.svg',
+  src: '/media/intro-hd.mp4',
+  poster: '/media/intro-poster.jpg',
   audioSrc: process.env.NEXT_PUBLIC_RADIO_URL || '/media/f1-soundtrack.mp3',
-  source: '',
-  originalStartSeconds: 0,
+  source: 'F1 Cinematic Reveal',
+  originalStartSeconds: 12,
 }
+
 export const introMedia = {
   ...approvedIntro,
+  src: '/media/intro-hd.mp4',
+  poster: '/media/intro-poster.jpg',
   audioSrc: process.env.NEXT_PUBLIC_RADIO_URL || '/media/f1-soundtrack.mp3',
-  ...(preview
-    ? {
-        ...previewClips[previewClip],
-      }
-    : {}),
 }
+
 // Original preloader choreography runs more slowly, with every letter retained.
 export const introSettings = { speed: 0.48, safetyTimeoutMs: 11000 }
 export const splineScene = { url: '', credit: '', license: '' }
+

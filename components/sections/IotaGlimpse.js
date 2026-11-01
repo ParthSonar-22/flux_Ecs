@@ -4,25 +4,25 @@ import Link from 'next/link'
 export default function IotaGlimpse() {
   const labCards = [
     {
-      lab: 'Embedded Systems Lab',
+      lab: 'Lab 201 (Embedded Systems)',
       tag: 'Hardware & Robotics',
-      image: '/photos/iota-robot-floor-test.jpg',
-      alt: 'Live robotics floor demonstration at IoTA Archives, VESIT',
-      note: 'Autonomous obstacle car',
+      image: '/photos/iota-robotics-chassis-presentation.jpg',
+      alt: 'Live robotics demonstration at IoTA Archives, VESIT',
+      note: 'Chassis demonstration',
     },
     {
-      lab: 'Basic Electrical Lab',
+      lab: 'Lab 203 (Electrical Lab)',
       tag: 'Circuits & Software',
-      image: '/photos/iota-electrical-lab-discussion.png',
+      image: '/photos/iota-robot-floor-test.jpg',
       alt: 'Senior-fresher technical discussion at IoTA Archives, VESIT',
       note: 'Bench mentoring & Q&A',
     },
     {
-      lab: "Tinkerers' Lab",
+      lab: "Lab 215 (Tinkerers' Lab)",
       tag: 'Hardware Showcase',
-      image: '/photos/iota-robotics-chassis-presentation.jpg',
+      image: '/photos/iota-electrical-lab-discussion.png',
       alt: "Ultrasonic chassis demo at IoTA Archives, VESIT",
-      note: 'Assembled chassis demo',
+      note: 'Hardware & mentoring track',
     },
   ]
 

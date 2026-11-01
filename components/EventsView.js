@@ -600,14 +600,14 @@ export default function EventsView() {
                   </div>
                 </div>
 
-                {/* Lab 215 — Tinkerers' Lab Chassis Demo */}
+                {/* Lab 201 — Hardware & Chassis Demo */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
                   style={{ transform: 'rotate(1.2deg)' }}
                   onClick={() =>
                     setLightboxPhoto({
                       src: '/photos/iota-robotics-chassis-presentation.jpg',
-                      label: 'Lab 215 — Seniors demonstrating hardware projects to FE students',
+                      label: 'Lab 201 — Seniors demonstrating hardware projects to FE students',
                       sub: 'IoTA Archives · FE Induction Exhibition 2026',
                     })
                   }
@@ -615,28 +615,28 @@ export default function EventsView() {
                   <div className="relative w-full aspect-[1024/628] bg-tan border border-ink/30 overflow-hidden">
                     <Image
                       src="/photos/iota-robotics-chassis-presentation.jpg"
-                      alt="Lab 215 — seniors demonstrating to FE students"
+                      alt="Lab 201 — seniors demonstrating to FE students"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 300px"
                     />
                   </div>
                   <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">Lab 215</p>
+                    <p className="font-handwritten text-lg text-ink font-bold">Lab 201</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
                       Seniors explaining projects to FE
                     </p>
                   </div>
                 </div>
 
-                {/* Lab 203 — Basic Electrical Lab */}
+                {/* Lab 215 — Electrical & Mentoring Bench */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
                   style={{ transform: 'rotate(-1deg)' }}
                   onClick={() =>
                     setLightboxPhoto({
                       src: '/photos/iota-electrical-lab-discussion.png',
-                      label: 'Lab 203 — Seniors explaining projects to FE students',
+                      label: 'Lab 215 — Seniors explaining projects to FE students',
                       sub: 'IoTA Archives · FE Induction Exhibition 2026',
                     })
                   }
@@ -644,14 +644,14 @@ export default function EventsView() {
                   <div className="relative w-full aspect-[1024/579] bg-tan border border-ink/30 overflow-hidden">
                     <Image
                       src="/photos/iota-electrical-lab-discussion.png"
-                      alt="Lab 203 — seniors explaining to FE students"
+                      alt="Lab 215 — seniors explaining to FE students"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 300px"
                     />
                   </div>
                   <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">Lab 203</p>
+                    <p className="font-handwritten text-lg text-ink font-bold">Lab 215</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
                       Seniors explaining projects to FE
                     </p>

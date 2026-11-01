@@ -1,0 +1,222 @@
+================================================================================
+FLUXECS V2 WEBSITE & EVENTS PLATFORM - AI HANDOVER & CONVERSATION SUMMARY
+================================================================================
+Timestamp: November 1, 2026
+Repository: /home/aarya/Projects/FluxECS/website
+Active Git Branch: feat/fluxecs-homepage-v2
+Node / Next.js Version: Next.js 16.4.3 (Turbopack, App Router, React 19)
+
+--------------------------------------------------------------------------------
+1. PROJECT MISSION & CLIENT REQUIREMENTS
+--------------------------------------------------------------------------------
+The user requested a complete overhaul of the FluxECS website (Department of
+Electronics & Computer Science council at VESIT, Mumbai). Previous redesigns
+were rejected for introducing fake race cars, circuit track maps, fake telemetry
+status bars, robot graphics, and excessive clutter.
+
+Core Goals:
+- True Minimal, Premium Engineering Council Aesthetic:
+  Carbon & Crimson color palette (#0D1014, #1B2026, #30363E, #D94A5B, #9EA6AF, #EFF0F2).
+  Inspiration drawn from e-Yantra (IIT Bombay) and previous TLC web projects.
+- Authentic Poster-First Events Platform:
+  Poster artwork displayed in genuine 3:4 aspect ratio cards with upcoming/past
+  tabs, zoomable high-resolution lightbox, and dynamic event routes (/events/[slug]).
+- Full-Fledged Admin Management Portal (/admin):
+  Password-authenticated dashboard where council admins can create, view, edit all
+  fields, upload poster files directly, toggle draft/publish, and delete events.
+- Audio & Motorsport Precision:
+  Real full-length soundtrack sourced directly from user's Music folder:
+  "Don Toliver - Lose My Mind (feat. Doja Cat) [From F1® The Movie]" (3:30 min).
+  Persistent floating global player widget (PitRadio) visible on all pages with
+  prominent radio icon, ON/OFF status badge, and jumping equalizer bars.
+- High-Performance Motion:
+  GSAP and Anime.js used for kinetic typography line mask reveals, staggered
+  entrances, and interactive mouse parallax tilt without tacky gimmicks.
+- ABSOLUTE PROHIBITION ON "AI SLOP":
+  Strict removal of fake sector tags (S1 HARDWARE BENCH, S2 COMPETITIVE ALGORITHMS,
+  S3 PEER COMMUNITY), fake track status badges (TRACK STATUS: GREEN // PIT OPEN),
+  and coordinates (19.0458° N, 72.8889° E). No em dashes (— or –) in copy.
+
+--------------------------------------------------------------------------------
+2. KEY CHRONOLOGICAL USER REQUESTS & IMPLEMENTATIONS
+--------------------------------------------------------------------------------
+1. "also i dont like events pg ka theme take inspiration from eyantra's website backend n frontend both.. keep it minimall pls"
+   -> Refactored /events and /events/[slug] into a minimal poster-first platform
+      with 3:4 aspect ratio cards, upcoming/past tabs, and Google Form registration.
+
+2. "https://github.com/Flux-ECS-Club/tlc-web.git ye kaha run kiya hai send me link to see this npm run dev krke"
+   -> Cloned TLC web repo into scratchpad directory, installed dependencies,
+      and ran it at http://localhost:5173 for visual reference.
+
+3. "FLUXECS V2: MINIMAL WEBSITE + EVENTS PLATFORM"
+   -> Implemented 4-section homepage (Hero, Featured Event, Council Story, Footer).
+   -> Removed separate garage/projects section from the homepage.
+   -> Created Mongoose Event schema + persistent JSON fallback store (data/events-store.json)
+      so local dev works without MongoDB Atlas credentials.
+   -> Implemented /api/events, /api/events/[slug], /api/admin/upload.
+
+4. "abee bg kaha gya pagal"
+   -> Restored <KineticGrid /> canvas background in the hero with subtle opacity.
+
+5. "thoda opacity kamm krna and music ka baju me chota sa play jesa button dena and pls try to match f1/racing theme plsssand i want qality work"
+   -> Set KineticGrid container opacity to 0.20 with !bg-transparent so it's moody
+      and interactive without washing out typography.
+   -> Added synchronized radio play toggle button with equalizer in the hero toolbar.
+
+6. "oh no hai barabr sorry.. but full song chiye"
+   -> Sourced full 4:17 Brian Tyler official F1 theme to public/media/f1-theme-full.mp3.
+
+7. "annd shld be aklways visible kidhar to like radio"
+   -> Created components/ui/PitRadio.tsx and mounted it globally in app/layout.js
+      so the radio widget floats at the bottom-right corner across all pages.
+
+8. "S1 HARDWARE BENCH S2 COMPETITIVE ALGORITHMS S3 PEER COMMUNITY Remvoe this ai slop idiot
+    Department of Electronics & Computer Science · VESIT TRACK STATUS: GREEN // PIT OPEN thistoo
+    bruhh pls search online for guide n see kuch acha tools and libaries and use it full persmissionb u have anime . js use kar gsap use karr plsssssssssssssss"
+   -> Completely purged S1, S2, S3, HARDWARE BENCH, COMPETITIVE ALGORITHMS, PEER COMMUNITY,
+      TRACK STATUS: GREEN // PIT OPEN, and coordinates from components/home/racing-hero.tsx
+      and components/home/identity-hero.module.css.
+   -> Implemented GSAP timeline with line mask kinetic typography reveal on "FROM CIRCUITS TO CODE."
+   -> Added interactive mouse parallax physics with GSAP quickTo / gsap.to.
+
+9. "mere music folder me hai sond downloaded toh waha se lele and global hai wo so radio should be visible icon on/off ka uska frontend usshisab se bana"
+   -> Sourced user's downloaded song from /home/aarya/Music/:
+      "Don Toliver - Lose My Mind (feat. Doja Cat) [From F1® The Movie] - Don Toliver.mp3"
+      Copied to public/media/f1-soundtrack.mp3 (3:30, 8.1MB).
+   -> Updated PitRadio.tsx with prominent radio antenna SVG icon, master ON/OFF toggle,
+      live glowing pulse, status badge (RADIO ON / RADIO OFF), track metadata marquee,
+      animated equalizer bars, time counter, mute toggle, and minimize control.
+
+10. "Department of Electronics & Computer Science · VESIT TRACK STATUS: GREEN // PIT OPEN 19.0458° N, 72.8889° E remove this completely"
+    -> Confirmed 100% removal across the entire codebase and rendered DOM. Verified via curl.
+
+11. "01. Department... 02. What we do... 03. Eligibility... trmove this and improeve content of sabout pg.. implement admin page as ewll usme sab proper editable chiye"
+    -> Removed the 01/02/03 quick facts card from app/about/page.js.
+    -> Completely revamped app/about/page.js into Carbon & Crimson theme:
+       - Editorial header: "FROM CIRCUITS TO CODE."
+       - 3 Core Domains: Hardware & Embedded Systems, Competitive Algorithms & Software, Peer Mentorship.
+       - Faculty in-charge: Prof. Yogesh Pandit & Prof. Abhishek Chaudhari.
+       - Senior Council & Junior Council photo roster with authentic roles.
+       - Headquarters & contact info for IoTA Tinkerer's Lab 201 at VESIT.
+    -> Upgraded components/AdminEventManager.js:
+       - Added full edit mode pre-populating ALL fields: title, category, date, time, venue,
+         summary, description, poster upload/URL, registration URL, eligibility, syllabus,
+         rules (multiline), status, and publication toggle.
+       - Live 3:4 poster artwork preview.
+       - Direct 1-click Publish/Unpublish toggle, Edit button, Delete button, and View Live Page link.
+    -> Updated components/EventDetailClient.js to dynamically render rules, syllabus (handling both
+       string and array of { topic, desc } objects), and eligibility.
+
+12. "Accessible via Chembur Monorail & Kurla / Chembur Harbour Line stations remove n conitnue ur wprk"
+    -> Removed the transit caption below the Google Map on the About page.
+
+--------------------------------------------------------------------------------
+3. ARCHITECTURE & KEY FILE OVERVIEW
+--------------------------------------------------------------------------------
+- app/layout.js:
+  Root Server Component. Injects fonts (Barlow, Saira), metadata, Skip link,
+  Navbar, main content, Footer, and globally mounts <PitRadio />.
+
+- components/ui/PitRadio.tsx:
+  Global floating team radio player (fixed bottom-5 right-5 z-50).
+  Plays /media/f1-soundtrack.mp3 (Don Toliver - Lose My Mind [F1 Movie]).
+  Features antenna SVG icon, ON/OFF toggle, live EQ spectrum bars, track info,
+  and syncs with hero via window events ('flux:toggle-radio', 'flux:radio-change', 'flux:query-radio').
+
+- components/home/racing-hero.tsx:
+  Hero section with <KineticGrid /> at opacity 0.20 (!bg-transparent).
+  GSAP kinetic typography animation reveals lines of "FROM CIRCUITS TO CODE." via
+  overflow-hidden line masks. Interactive GSAP mouse tilt parallax on header.
+  Zero AI slop badges. Synced audio button in toolbar.
+
+- components/home/identity-hero.module.css:
+  CSS module for hero section. Strict Carbon & Crimson styling. Cleaned of all
+  telemetryRow, pulseBeacon, and sectorStrip classes.
+
+- app/page.js:
+  Minimal 4-section homepage:
+  1. RacingHero
+  2. Featured Event (Algorithm's Auction 2.0 with authentic 3:4 poster)
+  3. About Council Narrative (Single authentic cohort photo: /photos/iota-tinkerers-lab-cohort.jpg)
+  4. Footer
+
+- app/events/page.js & components/EventsView.js:
+  Minimal poster-first events catalog inspired by e-Yantra and TLC web.
+  Tabs for Upcoming and Past events. 3:4 aspect ratio cards. Lightbox zoom.
+
+- app/events/[slug]/page.js & components/EventDetailClient.js:
+  Dynamic event page displaying high-res poster, date, time, venue, description,
+  rules list, syllabus/curriculum, eligibility, schedule breakdown, and Google Form registration.
+
+- app/admin/page.js:
+  Admin portal protected by password authentication (token cookie flux_admin_token).
+  Password configured in .env.local as ADMIN_PASSWORD (default: REMOVED_SHARED_CREDENTIAL).
+  Renders AdminEventManager and recent inquiries.
+
+- components/AdminEventManager.js:
+  Comprehensive event editor. Supports direct poster file upload (/api/admin/upload),
+  live 3:4 artwork preview, editing all fields in-place, publish/draft toggle, and delete.
+
+- app/about/page.js:
+  Redesigned About page matching Carbon & Crimson palette. Features core domains,
+  faculty coordinators, senior/junior council rosters, and IoTA lab location.
+
+- lib/events-store.js:
+  Dual-storage manager: MongoDB Atlas if MONGODB_URI is provided, with seamless
+  fallback to data/events-store.json for local development without external credentials.
+  Normalizes rules, eligibility, syllabus, and dates.
+
+- app/api/events/route.js & app/api/events/[slug]/route.js:
+  REST API endpoints: GET (public sees only published events; admin sees drafts with ?all=true),
+  POST (create event), PATCH (update/publish toggle), DELETE (remove event).
+
+- app/api/admin/upload/route.js:
+  Multipart file upload endpoint saving to public/posters/uploads/ with size/type validation.
+
+- scripts/verify-v2.mjs:
+  Automated 26-test verification suite covering auth, routing, draft protection,
+  poster upload, event creation, live update, and deletion.
+
+--------------------------------------------------------------------------------
+4. VERIFICATION COMMANDS & CURRENT STATUS
+--------------------------------------------------------------------------------
+All tests, linters, and compilers are verified and passing with 0 errors:
+
+1. Typecheck:
+   $ npm run typecheck
+   -> Passed (0 errors)
+
+2. Linter:
+   $ npm run lint
+   -> Passed (0 warnings, 0 errors)
+
+3. Unit Tests:
+   $ npm run test
+   -> Passed (3 passed, 0 failed)
+
+4. FluxECS V2 Verification Suite:
+   $ node scripts/verify-v2.mjs
+   -> Passed (26 passed, 0 failed)
+
+5. Next.js Production Build:
+   $ npm run build
+   -> Compiled successfully in 7.7s (all 18 static/dynamic routes rendered)
+
+--------------------------------------------------------------------------------
+5. QUICKSTART FOR INCOMING AI / DEVELOPER
+--------------------------------------------------------------------------------
+- Dev Server:
+  $ npm run dev
+  Runs at http://localhost:3000
+- Admin Portal:
+  Visit http://localhost:3000/admin
+  Admin Password: REMOVED_SHARED_CREDENTIAL (set in .env.local via ADMIN_PASSWORD)
+- Events Registry:
+  Visit http://localhost:3000/events
+- About Page:
+  Visit http://localhost:3000/about
+- Run All Checks:
+  $ npm run typecheck && npm run lint && npm run test && node scripts/verify-v2.mjs
+
+Git Branch: feat/fluxecs-homepage-v2 (Do NOT push to main or production without user request).
+================================================================================

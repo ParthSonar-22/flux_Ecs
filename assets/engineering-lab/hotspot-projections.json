@@ -1,0 +1,47 @@
+{
+  "sensors": {
+    "left": 61.91,
+    "top": 63.75,
+    "world_blender": [
+      2.1,
+      -0.52,
+      0.46
+    ]
+  },
+  "telemetry": {
+    "left": 48.81,
+    "top": 36.37,
+    "world_blender": [
+      -0.15,
+      0,
+      1.3
+    ]
+  },
+  "aerodynamics": {
+    "left": 71.83,
+    "top": 68.16,
+    "world_blender": [
+      2.75,
+      0,
+      0.25
+    ]
+  },
+  "control": {
+    "left": 55.56,
+    "top": 49.9,
+    "world_blender": [
+      0.7,
+      0,
+      0.73
+    ]
+  },
+  "power": {
+    "left": 34.98,
+    "top": 46.02,
+    "world_blender": [
+      -1.2,
+      -0.6,
+      0.53
+    ]
+  }
+}

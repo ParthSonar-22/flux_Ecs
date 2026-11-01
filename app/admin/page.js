@@ -4,11 +4,13 @@ import Message from '@/models/Message'
 import Subscriber from '@/models/Subscriber'
 import { verifyAdminToken } from '@/lib/auth'
 import AdminLoginForm from '@/components/AdminLoginForm'
+import AdminEventManager from '@/components/AdminEventManager'
+import { getAllEvents } from '@/lib/events-store'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
-  title: 'Admin Registry',
+  title: 'Admin Console | FluxECS Council',
   robots: {
     index: false,
     follow: false,
@@ -22,173 +24,154 @@ export default async function AdminPage() {
 
   let messages = []
   let subscribers = []
+  let events = []
 
-  if (isAuthorized && process.env.MONGODB_URI) {
-    try {
-      await connectMongo()
-      messages = await Message.find({}).sort({ createdAt: -1 }).limit(50).lean()
-      subscribers = await Subscriber.find({}).sort({ createdAt: -1 }).limit(100).lean()
-    } catch (e) {
-      console.error('Failed to query admin collections:', e)
+  if (isAuthorized) {
+    events = await getAllEvents({ includeDrafts: true })
+
+    if (process.env.MONGODB_URI) {
+      try {
+        await connectMongo()
+        messages = await Message.find({}).sort({ createdAt: -1 }).limit(50).lean()
+        subscribers = await Subscriber.find({}).sort({ createdAt: -1 }).limit(100).lean()
+      } catch (e) {
+        console.error('Failed to query admin collections:', e)
+      }
     }
   }
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] px-4 lg:px-margin py-space-lg">
-      <div className="max-w-5xl mx-auto">
+    <div className="w-full min-h-screen bg-[#0D1014] text-[#EFF0F2] pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto space-y-10">
         {/* Header */}
-        <div className="border-b-2 border-ink pb-4 mb-space-md flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div className="border-b border-white/10 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <span className="inline-block px-2 py-0.5 border border-ink bg-tan text-ink text-[11px] font-bold uppercase tracking-wider font-complexity-notation mb-2">
-              RESTRICTED CONSOLE // LEVEL-04
+            <span className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-gray-400 text-xs font-mono uppercase tracking-wider mb-2">
+              Council Operations · Level-04
             </span>
-            <h1 className="font-headline-lg text-headline-lg font-bold text-ink">
-              Secretariat Registry
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white font-display uppercase tracking-tight">
+              Secretariat Admin
             </h1>
+            <p className="text-sm text-gray-400 mt-1">
+              Manage graphics posters, event publications, inquiries, and subscriber dispatches.
+            </p>
           </div>
+
           {isAuthorized && (
-            <a
-              href="/api/admin/export"
-              className="inline-flex items-center gap-2 px-4 py-2 border-2 border-ink bg-card text-ink font-label-smallcaps uppercase tracking-wider shadow-[3px_3px_0px_var(--ink)] hover:bg-tan active:translate-x-0.5 active:translate-y-0.5 text-xs font-bold"
-            >
-              <span className="material-symbols-outlined text-[16px]">download</span>
-              <span>Download Subscribers CSV</span>
-            </a>
+            <div className="flex items-center gap-3">
+              <a
+                href="/api/admin/export"
+                className="inline-flex items-center gap-2 px-4 py-2 border border-white/15 bg-white/5 hover:bg-white/10 text-white rounded-lg text-xs font-mono font-semibold transition-all"
+              >
+                <span>Export Subscribers CSV ↓</span>
+              </a>
+            </div>
           )}
         </div>
 
         {!isAuthorized ? (
-          <div className="max-w-md mx-auto my-12 border-2 border-ink bg-paper p-6 shadow-[6px_6px_0px_var(--brick)]">
-            <div className="mb-4 text-center">
-              <span className="material-symbols-outlined text-brick text-[36px] mb-2">
-                lock
+          <div className="max-w-md mx-auto my-12 border border-white/15 bg-[#12161C] p-8 rounded-xl shadow-2xl">
+            <div className="mb-6 text-center space-y-2">
+              <span className="inline-block p-3 rounded-full bg-[#D94A5B]/10 text-[#D94A5B] border border-[#D94A5B]/20 text-2xl">
+                🔒
               </span>
-              <h2 className="font-headline-sm text-headline-sm font-bold text-ink">
+              <h2 className="text-xl font-bold text-white font-display uppercase tracking-tight">
                 Council Authentication
               </h2>
-              <p className="font-body-sm text-muted mt-1">
-                Enter your administrative key to view inquiries and dispatch subscribers.
+              <p className="text-xs text-gray-400 leading-relaxed">
+                Enter your administrative key to access the event publisher, inquiries, and dispatches.
               </p>
             </div>
             <AdminLoginForm />
           </div>
         ) : (
-          <div className="space-y-space-lg">
-            {/* Stats Overview */}
+          <div className="space-y-12">
+            {/* Quick Metrics Bar */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="border-2 border-ink bg-card p-4 shadow-[3px_3px_0px_var(--ink)]">
-                <span className="font-complexity-notation text-[11px] uppercase tracking-wider text-muted block">
-                  Total Messages
+              <div className="border border-white/10 bg-[#12161C] p-5 rounded-xl">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-gray-400 block">
+                  Total Events
                 </span>
-                <span className="font-headline-md text-headline-md font-bold text-ink">
+                <span className="text-2xl font-bold text-white mt-1 block">
+                  {events.length}
+                </span>
+              </div>
+
+              <div className="border border-white/10 bg-[#12161C] p-5 rounded-xl">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-gray-400 block">
+                  Total Inquiries
+                </span>
+                <span className="text-2xl font-bold text-white mt-1 block">
                   {messages.length}
                 </span>
               </div>
-              <div className="border-2 border-ink bg-card p-4 shadow-[3px_3px_0px_var(--ink)]">
-                <span className="font-complexity-notation text-[11px] uppercase tracking-wider text-muted block">
-                  Total Subscribers
+
+              <div className="border border-white/10 bg-[#12161C] p-5 rounded-xl">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-gray-400 block">
+                  Subscribers
                 </span>
-                <span className="font-headline-md text-headline-md font-bold text-ink">
+                <span className="text-2xl font-bold text-white mt-1 block">
                   {subscribers.length}
                 </span>
               </div>
-              <div className="border-2 border-ink bg-card p-4 shadow-[3px_3px_0px_var(--ink)]">
-                <span className="font-complexity-notation text-[11px] uppercase tracking-wider text-muted block">
+
+              <div className="border border-white/10 bg-[#12161C] p-5 rounded-xl">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-gray-400 block">
                   Database State
                 </span>
-                <span className="font-headline-sm text-[1.2rem] font-bold text-brick mt-2 block">
-                  {process.env.MONGODB_URI ? 'Connected (Atlas)' : 'Local Standby'}
-                </span>
-              </div>
-              <div className="border-2 border-ink bg-card p-4 shadow-[3px_3px_0px_var(--ink)]">
-                <span className="font-complexity-notation text-[11px] uppercase tracking-wider text-muted block">
-                  Council Session
-                </span>
-                <span className="font-complexity-notation text-sm font-bold text-ink mt-2 block">
-                  Active (7d Token)
+                <span className="text-xs font-mono font-bold text-[#D94A5B] mt-2 block">
+                  {process.env.MONGODB_URI ? 'Connected (Atlas)' : 'Persistent Local Store'}
                 </span>
               </div>
             </div>
 
-            {/* Inquiries Section */}
-            <div className="border-2 border-ink bg-paper shadow-[4px_4px_0px_var(--ink)]">
-              <div className="p-4 border-b-2 border-ink bg-tan flex items-center justify-between">
-                <h2 className="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-ink font-bold">
-                  Recent Inquiries &amp; Dispatches
+            {/* SECTION 1: EVENTS & GRAPHICS POSTER PUBLISHER */}
+            <section className="space-y-4">
+              <AdminEventManager initialEvents={events} />
+            </section>
+
+            {/* SECTION 2: RECENT INQUIRIES */}
+            <section className="border border-white/10 bg-[#12161C] rounded-xl overflow-hidden shadow-xl">
+              <div className="p-5 border-b border-white/10 flex items-center justify-between">
+                <h2 className="text-base font-bold text-white font-display uppercase tracking-tight">
+                  Recent Inquiries &amp; Dispatches ({messages.length})
                 </h2>
-                <span className="font-complexity-notation text-xs text-ink">
-                  Count: {messages.length}
+                <span className="text-xs font-mono text-gray-400">
+                  Contact form entries
                 </span>
               </div>
-              <div className="divide-y-2 divide-ink max-h-[500px] overflow-y-auto">
+
+              <div className="divide-y divide-white/10 max-h-[400px] overflow-y-auto">
                 {messages.length === 0 ? (
-                  <p className="p-6 text-center text-muted font-body-md">
-                    No dispatches logged in the registry yet.
+                  <p className="p-8 text-center text-gray-400 text-sm">
+                    No inquiries recorded in the registry yet.
                   </p>
                 ) : (
                   messages.map((m) => (
-                    <div key={m._id.toString()} className="p-4 hover:bg-card transition-colors">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                    <div key={m._id.toString()} className="p-4 hover:bg-white/[0.02] transition-colors space-y-1">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-ink font-headline-sm text-base">
-                            {m.name}
-                          </span>
-                          <span className="px-1.5 py-0.5 border border-ink bg-card text-[11px] font-complexity-notation">
+                          <span className="font-bold text-white text-sm">{m.name}</span>
+                          <span className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-mono text-gray-300">
                             {m.year}
                           </span>
-                          <span className="px-1.5 py-0.5 border border-ink bg-brick text-paper text-[11px] font-complexity-notation font-bold">
+                          <span className="px-1.5 py-0.5 rounded bg-[#D94A5B]/20 text-[#D94A5B] border border-[#D94A5B]/30 text-[10px] font-mono font-bold">
                             {m.category}
                           </span>
                         </div>
-                        <span className="font-complexity-notation text-[11px] text-muted">
+                        <span className="text-[10px] font-mono text-gray-500">
                           {new Date(m.createdAt).toLocaleString()}
                         </span>
                       </div>
-                      <p className="text-muted text-sm font-mono mb-2">{m.email}</p>
-                      <p className="font-body-md text-ink whitespace-pre-wrap text-sm border-l-2 border-tan pl-3">
+                      <p className="text-xs text-gray-400 font-mono">{m.email}</p>
+                      <p className="text-xs text-gray-300 pt-1 leading-relaxed border-l-2 border-white/20 pl-3">
                         {m.message}
                       </p>
                     </div>
                   ))
                 )}
               </div>
-            </div>
-
-            {/* Subscribers Section */}
-            <div className="border-2 border-ink bg-paper shadow-[4px_4px_0px_var(--ink)]">
-              <div className="p-4 border-b-2 border-ink bg-tan flex items-center justify-between">
-                <h2 className="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-ink font-bold">
-                  Newsletter Registry ({subscribers.length})
-                </h2>
-                <a
-                  href="/api/admin/export"
-                  className="font-complexity-notation text-xs text-brick hover:underline font-bold"
-                >
-                  Export CSV
-                </a>
-              </div>
-              <div className="p-4">
-                {subscribers.length === 0 ? (
-                  <p className="text-center text-muted font-body-md py-4">
-                    No subscribers logged yet.
-                  </p>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {subscribers.map((s) => (
-                      <div
-                        key={s._id.toString()}
-                        className="p-3 border border-ink bg-card flex flex-col justify-between"
-                      >
-                        <span className="font-mono text-sm text-ink truncate">{s.email}</span>
-                        <span className="font-complexity-notation text-[10px] text-muted mt-1">
-                          {new Date(s.createdAt).toLocaleDateString()}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+            </section>
           </div>
         )}
       </div>

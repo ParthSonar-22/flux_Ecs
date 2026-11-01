@@ -42,7 +42,7 @@ export async function POST(req) {
         { upsert: true, new: true, setDefaultsOnInsert: true }
       )
     } else {
-      console.log('[Dev Notice] MONGODB_URI not configured. Simulated subscription:', cleanEmail)
+      return NextResponse.json({ ok: false, error: 'Newsletter signup is unavailable. Please try again later.' }, { status: 503 })
     }
 
     return NextResponse.json({ ok: true })

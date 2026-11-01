@@ -1,0 +1,346 @@
+/* ==========================================================================
+   F1 Precision Engineering Hero - Carbon & Crimson
+   Minimal editorial typography, F1 pit-wall telemetry accents,
+   micro-equalizer team radio controller, and restrained motion.
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 130px 6% 36px;
+  background: var(--carbon-black, #0d1014);
+  color: var(--ice-white, #eff0f2);
+  overflow: hidden;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 48px;
+}
+
+/* ==========================================================================
+   Editorial Header: Institution & Headline
+   ========================================================================== */
+
+.heroHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 860px;
+  padding-top: 24px;
+}
+
+.headline {
+  font-family: var(--font-display, sans-serif);
+  font-weight: 800;
+  font-size: clamp(48px, 7vw, 92px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: var(--ice-white, #eff0f2);
+  margin: 0 0 24px 0;
+  text-transform: uppercase;
+}
+
+.lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.lineInner {
+  display: block;
+  transform-origin: left bottom;
+  will-change: transform, opacity;
+}
+
+.accentWord {
+  color: var(--titanium, #9ea6af);
+  font-weight: 400;
+}
+
+.leadText {
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.65;
+  color: var(--titanium, #9ea6af);
+  max-width: 620px;
+  margin: 0 0 32px 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  background: var(--crimson, #d94a5b);
+  color: var(--ice-white, #eff0f2);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 18px rgba(217, 74, 91, 0.35);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+}
+
+.primaryButton:hover {
+  background: #e45a6b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(217, 74, 91, 0.45);
+}
+
+.secondaryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ice-white, #eff0f2);
+  background: rgba(27, 32, 38, 0.7);
+  border: 1px solid rgba(48, 54, 62, 0.8);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+}
+
+.secondaryLink:hover {
+  background: rgba(48, 54, 62, 0.9);
+  border-color: var(--titanium, #9ea6af);
+}
+
+
+
+/* ==========================================================================
+   Bottom Toolbar & F1 Pit Radio Controller
+   ========================================================================== */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--titanium, #9ea6af);
+  padding-top: 24px;
+  border-top: 1px solid rgba(48, 54, 62, 0.6);
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.councilLabel {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.scrollLink {
+  color: var(--titanium, #9ea6af);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.scrollLink:hover {
+  color: var(--ice-white, #eff0f2);
+}
+
+.toolbar :global(.replay-intro) {
+  font-size: 11px;
+  color: var(--titanium, #9ea6af);
+}
+
+/* F1 Pit Radio / Audio Widget */
+.audioWidget {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(27, 32, 38, 0.85);
+  border: 1px solid rgba(48, 54, 62, 0.8);
+  border-radius: 9999px;
+  color: var(--titanium, #9ea6af);
+  font-size: 10.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.audioWidget:hover {
+  background: rgba(48, 54, 62, 0.9);
+  color: var(--ice-white, #eff0f2);
+  border-color: var(--titanium, #9ea6af);
+}
+
+.audioActive {
+  background: rgba(217, 74, 91, 0.15) !important;
+  border-color: var(--crimson, #d94a5b) !important;
+  color: var(--ice-white, #eff0f2) !important;
+}
+
+.audioGlyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playArrow {
+  font-size: 9px;
+  color: var(--crimson, #d94a5b);
+}
+
+.pauseBars {
+  display: inline-flex;
+  gap: 2px;
+  width: 8px;
+  height: 9px;
+}
+
+.pauseBars span {
+  width: 2.5px;
+  height: 100%;
+  background: var(--crimson, #d94a5b);
+  border-radius: 1px;
+}
+
+.audioText {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.equalizerBars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 11px;
+  margin-left: 2px;
+}
+
+.equalizerBars span {
+  width: 2px;
+  background: var(--crimson, #d94a5b);
+  border-radius: 1px;
+  animation: eqJump 0.65s ease-in-out infinite alternate;
+}
+
+.equalizerBars span:nth-child(1) { height: 5px; animation-delay: 0.1s; }
+.equalizerBars span:nth-child(2) { height: 11px; animation-delay: 0.3s; }
+.equalizerBars span:nth-child(3) { height: 7px; animation-delay: 0.2s; }
+
+@keyframes eqJump {
+  0% { height: 2px; }
+  100% { height: 11px; }
+}
+
+/* Logo Construction Classes (Required by logo-construction.tsx) */
+.construction {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: var(--carbon-black, #0d1014);
+  color: var(--ice-white, #eff0f2);
+  z-index: 120;
+}
+
+.guides {
+  position: absolute;
+  width: min(80vw, 700px);
+  max-height: 80vh;
+  color: var(--crimson, #d94a5b);
+  opacity: 0.65;
+}
+
+.constructEmblem {
+  position: relative;
+  width: min(46vw, 340px);
+  aspect-ratio: 845 / 595;
+}
+
+.constructEmblem path {
+  fill-opacity: 0;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.constructWordmark {
+  position: relative;
+  width: min(56vw, 390px);
+  aspect-ratio: 835 / 138;
+  margin-top: 22px;
+}
+
+.constructWordmark path {
+  opacity: 0;
+}
+
+/* Responsive Adaptations */
+@media (max-width: 900px) {
+  .hero {
+    padding: 105px 20px 30px;
+  }
+  .actions {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 12px;
+  }
+  .primaryButton, .secondaryLink {
+    width: 100%;
+    justify-content: center;
+  }
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .toolbarLeft {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .equalizerBars span {
+    animation: none;
+  }
+  .constructEmblem path {
+    fill-opacity: 1;
+    stroke: none;
+  }
+  .constructWordmark path {
+    opacity: 1;
+  }
+  .guides {
+    display: none;
+  }
+}

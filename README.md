@@ -39,7 +39,7 @@ Edit `.env.local`:
 - `ADMIN_PASSWORD`: Password for `/admin` access
 - `ADMIN_SECRET`: HMAC signature secret for administrative session cookies
 
-*(Note: In local development, if `MONGODB_URI` is omitted, the app will gracefully log submissions to console without crashing).*
+If `MONGODB_URI` is omitted, forms return an honest unavailable response. No data is saved. Admin login requires both `ADMIN_PASSWORD` and `ADMIN_SECRET`.
 
 ### 3. Run Development Server
 

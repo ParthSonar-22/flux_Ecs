@@ -1,0 +1,17 @@
+{
+  "bytes": 59436,
+  "meshes": 2,
+  "materials": [
+    "FLUX_Carbon",
+    "FLUX_Tires",
+    "FLUX_VelocityOrange",
+    "FLUX_Titanium"
+  ],
+  "triangles": 982,
+  "textures": 0,
+  "animations": 0,
+  "nodes": [
+    "FLUX_CAR",
+    "FLUX_BrandMark"
+  ]
+}

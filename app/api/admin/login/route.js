@@ -4,7 +4,10 @@ import { generateAdminToken } from '@/lib/auth'
 export async function POST(req) {
   try {
     const { password } = await req.json()
-    const correctPassword = process.env.ADMIN_PASSWORD || 'flux2026'
+    const correctPassword = process.env.ADMIN_PASSWORD
+    if (!correctPassword || !process.env.ADMIN_SECRET) {
+      return NextResponse.json({ ok: false, error: 'Admin access is not configured.' }, { status: 503 })
+    }
 
     if (password !== correctPassword) {
       return NextResponse.json({ ok: false, error: 'Invalid authentication key' }, { status: 401 })

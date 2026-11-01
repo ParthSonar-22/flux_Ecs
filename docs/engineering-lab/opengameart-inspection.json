@@ -1,0 +1,266 @@
+{
+  "source": "assets/engineering-lab/source/f1_car.blend",
+  "sha256": "266582508684e126bac2ae4bd0272e76461deb088906197aeb85c295d2c11767",
+  "bytes": 1074568,
+  "blender_version": "3.6.23",
+  "objects": [
+    {
+      "name": "Armature",
+      "type": "ARMATURE",
+      "location": [
+        -0.5596410036087036,
+        -0.006191568914800882,
+        4.084400177001953
+      ],
+      "dimensions": [
+        9.903899192810059,
+        7.4378790855407715,
+        4.852908611297607
+      ],
+      "parent": null,
+      "modifiers": [],
+      "materials": []
+    },
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "location": [
+        16.764318466186523,
+        -18.68832015991211,
+        11.76235580444336
+      ],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parent": null,
+      "modifiers": [],
+      "materials": []
+    },
+    {
+      "name": "f1",
+      "type": "MESH",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "dimensions": [
+        15.762930870056152,
+        6.201581954956055,
+        3.296175003051758
+      ],
+      "parent": "Armature",
+      "modifiers": [
+        {
+          "name": "Armature",
+          "type": "ARMATURE"
+        }
+      ],
+      "materials": [
+        "Red",
+        "Tires",
+        "White",
+        "Black"
+      ],
+      "vertices": 385,
+      "polygons": 271,
+      "triangles": 574,
+      "world_bounds": [
+        [
+          -8.355064392089844,
+          -3.1066577434539795,
+          -0.0347590446472168
+        ],
+        [
+          -8.355064392089844,
+          -3.1066577434539795,
+          3.261415958404541
+        ],
+        [
+          -8.355064392089844,
+          3.094924211502075,
+          3.261415958404541
+        ],
+        [
+          -8.355064392089844,
+          3.094924211502075,
+          -0.0347590446472168
+        ],
+        [
+          7.407866477966309,
+          -3.1066577434539795,
+          -0.0347590446472168
+        ],
+        [
+          7.407866477966309,
+          -3.1066577434539795,
+          3.261415958404541
+        ],
+        [
+          7.407866477966309,
+          3.094924211502075,
+          3.261415958404541
+        ],
+        [
+          7.407866477966309,
+          3.094924211502075,
+          -0.0347590446472168
+        ]
+      ]
+    },
+    {
+      "name": "Sun",
+      "type": "LIGHT",
+      "location": [
+        4.211846828460693,
+        -0.006193210836499929,
+        16.30341911315918
+      ],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parent": null,
+      "modifiers": [],
+      "materials": []
+    }
+  ],
+  "materials": [
+    {
+      "name": "Black",
+      "diffuse": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+      ],
+      "use_nodes": true,
+      "nodes": [
+        {
+          "type": "BSDF_PRINCIPLED",
+          "name": "Principled BSDF",
+          "image": null
+        },
+        {
+          "type": "OUTPUT_MATERIAL",
+          "name": "Material Output",
+          "image": null
+        }
+      ]
+    },
+    {
+      "name": "Dots Stroke",
+      "diffuse": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+      ],
+      "use_nodes": false,
+      "nodes": []
+    },
+    {
+      "name": "Red",
+      "diffuse": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+      ],
+      "use_nodes": true,
+      "nodes": [
+        {
+          "type": "OUTPUT_MATERIAL",
+          "name": "Material Output",
+          "image": null
+        },
+        {
+          "type": "BSDF_PRINCIPLED",
+          "name": "Principled BSDF",
+          "image": null
+        }
+      ]
+    },
+    {
+      "name": "Tires",
+      "diffuse": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+      ],
+      "use_nodes": true,
+      "nodes": [
+        {
+          "type": "BSDF_PRINCIPLED",
+          "name": "Principled BSDF",
+          "image": null
+        },
+        {
+          "type": "OUTPUT_MATERIAL",
+          "name": "Material Output",
+          "image": null
+        }
+      ]
+    },
+    {
+      "name": "White",
+      "diffuse": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+      ],
+      "use_nodes": true,
+      "nodes": [
+        {
+          "type": "BSDF_PRINCIPLED",
+          "name": "Principled BSDF",
+          "image": null
+        },
+        {
+          "type": "OUTPUT_MATERIAL",
+          "name": "Material Output",
+          "image": null
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Render Result",
+      "path": "",
+      "packed": false
+    }
+  ],
+  "actions": [
+    {
+      "name": "backward.002",
+      "channels": 30
+    },
+    {
+      "name": "forward.002",
+      "channels": 30
+    },
+    {
+      "name": "idle",
+      "channels": 32
+    },
+    {
+      "name": "steeringLeft.002",
+      "channels": 14
+    },
+    {
+      "name": "steeringRight",
+      "channels": 14
+    }
+  ],
+  "totals": {
+    "meshes": 1,
+    "vertices": 385,
+    "triangles": 574
+  }
+}

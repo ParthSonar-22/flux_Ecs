@@ -61,12 +61,7 @@ export async function POST(req) {
         isRead: false,
       })
     } else {
-      console.log('[Dev Notice] MONGODB_URI not configured. Simulated message save:', {
-        name,
-        email,
-        year: cleanYear,
-        category: cleanCategory,
-      })
+      return NextResponse.json({ ok: false, error: 'Message delivery is unavailable. Please email flux.ecs@ves.ac.in.' }, { status: 503 })
     }
 
     return NextResponse.json({ ok: true })

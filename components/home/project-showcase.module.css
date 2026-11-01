@@ -1,0 +1,129 @@
+.showcase {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 7%;
+  align-items: center;
+}
+.image {
+  position: relative;
+  aspect-ratio: 1.35;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+.imageLayer {
+  position: absolute;
+  inset: 0;
+}
+.image img {
+  object-fit: cover;
+  object-position: center;
+}
+.caption {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  padding: 9px 12px;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-size: 12px;
+}
+.index {
+  align-self: center;
+}
+.item {
+  display: grid;
+  grid-template-columns: 25px 1fr 20px;
+  gap: 16px;
+  width: 100%;
+  padding: 27px 0;
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  background: none;
+  text-align: left;
+  color: var(--color-text-secondary);
+}
+.item:first-child {
+  border-top: 1px solid var(--color-border);
+}
+.item[aria-pressed='true'] {
+  color: var(--color-text-primary);
+}
+.number {
+  font:
+    12px/1.6 ui-monospace,
+    monospace;
+  padding-top: 3px;
+}
+.item[aria-pressed='true'] .number {
+  color: var(--color-accent);
+}
+.lab {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 9px;
+  color: var(--color-text-secondary);
+}
+.item strong {
+  display: block;
+  font: 700 clamp(25px, 2.6vw, 38px)/1.1 var(--font-display);
+}
+.description {
+  display: block;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-top: 16px;
+  max-width: 330px;
+}
+.plus {
+  font-size: 22px;
+}
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 38px;
+  margin-top: 32px;
+  font-size: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+.link:hover {
+  color: var(--color-accent-hover);
+}
+@media (max-width: 900px) {
+  .showcase {
+    gap: 5%;
+  }
+  .item {
+    padding: 21px 0;
+    gap: 9px;
+  }
+  .description {
+    font-size: 14px;
+  }
+}
+@media (max-width: 700px) {
+  .showcase {
+    grid-template-columns: 1fr;
+    gap: 27px;
+  }
+  .image {
+    aspect-ratio: 1.25;
+  }
+  .caption {
+    font-size: 11px;
+    bottom: 12px;
+    left: 12px;
+  }
+  .item {
+    padding: 23px 0;
+    gap: 13px;
+  }
+  .item strong {
+    font-size: 30px;
+  }
+  .link {
+    font-size: 14px;
+    margin-top: 27px;
+  }
+}

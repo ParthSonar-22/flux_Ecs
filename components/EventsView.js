@@ -1,973 +1,326 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
-import { events, clubPillars, tournamentPipeline, isPast } from '@/data/events'
-import { WHATSAPP_URL } from '@/data/site'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 
-export default function EventsView() {
-  const searchParams = useSearchParams()
-  const initialTab = searchParams.get('tab') === 'past' ? 'past' : 'upcoming'
-  const [activeTab, setActiveTab] = useState(initialTab)
-  const [lightboxPhoto, setLightboxPhoto] = useState(null)
+// SVG icons inline for zero dependencies
+const CalendarIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+  </svg>
+)
 
-  useEffect(() => {
-    const tab = searchParams.get('tab')
-    if (tab === 'past' || tab === 'upcoming') {
-      setActiveTab(tab)
-    }
-  }, [searchParams])
+const ClockIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+)
 
-  const upcomingList = events.filter((e) => !isPast(e))
-  const pastList = events.filter((e) => isPast(e))
+const LocationIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+)
 
-  const algo = events.find((e) => e.slug === 'algorithms-auction') || events[0]
-  const iota = events.find((e) => e.slug === 'iota-archives') || events[1]
-  const hardwareExhibit = events.find((e) => e.slug === 'senior-hardware-exhibit')
+const ArrowRightIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+)
+
+const ZoomIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    <line x1="11" y1="8" x2="11" y2="14" />
+    <line x1="8" y1="11" x2="14" y2="11" />
+  </svg>
+)
+
+const CloseIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+)
+
+export default function EventsView({ initialEvents = [] }) {
+  const [activeTab, setActiveTab] = useState('upcoming')
+  const [lightboxPoster, setLightboxPoster] = useState(null)
+
+  const displayedEvents = useMemo(() => {
+    return initialEvents.filter((e) => (e.status || 'upcoming') === activeTab)
+  }, [initialEvents, activeTab])
 
   return (
-    <div className="flex flex-col w-full">
-      {/* Page Header & What We Do Showcase */}
-      <section className="w-full px-4 lg:px-margin py-space-lg lg:py-space-xl bg-paper border-b-2 border-ink">
-        <div className="max-w-7xl mx-auto space-y-8">
-          {/* Top Title and Tab Switcher */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-ink/20">
-            <div className="space-y-3">
-              <span className="handwritten-eyebrow text-xl sm:text-3xl font-bold text-brick">
-                Events &amp; Workshops
-              </span>
-              <h1 className="font-display-hero text-3xl sm:text-4xl md:text-headline-lg lg:text-display-hero text-ink leading-none tracking-tight font-bold">
-                What we do
-              </h1>
-              <p className="font-body-lg text-base sm:text-body-lg text-muted max-w-2xl">
-                Competitive coding tournaments, hands-on hardware exhibitions, peer project jams, and senior mentorship.
-              </p>
-            </div>
-
-            {/* Tab switcher */}
-            <div className="flex items-center border-2 border-ink bg-card p-1 w-full sm:w-auto">
-              <button
-                type="button"
-                onClick={() => setActiveTab('upcoming')}
-                className={`flex-1 sm:flex-initial text-center px-4 sm:px-6 py-2 font-label-smallcaps text-xs sm:text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${activeTab === 'upcoming'
-                    ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
-                    : 'text-ink hover:text-brick'
-                  }`}
-              >
-                Upcoming ({upcomingList.length})
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('past')}
-                className={`flex-1 sm:flex-initial text-center px-4 sm:px-6 py-2 font-label-smallcaps text-xs sm:text-label-smallcaps uppercase tracking-wider font-bold transition-all cursor-pointer ${activeTab === 'past'
-                    ? 'bg-brick text-paper shadow-[2px_2px_0px_var(--ink)]'
-                    : 'text-ink hover:text-brick'
-                  }`}
-              >
-                Past Events ({pastList.length})
-              </button>
-            </div>
+    <div className="min-h-screen bg-[#0D1014] text-[#EFF0F2] pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* ==============================================================
+            PAGE HEADER: Clean academic & engineering identity (Carbon & Crimson)
+           ============================================================== */}
+        <header className="mb-10 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-gray-400">
+            <span>Department of Electronics &amp; Computer Science</span>
+            <span>·</span>
+            <span>VESIT</span>
           </div>
 
-          {/* 4 Core Club Activity Pillars */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="font-complexity-notation text-xs uppercase tracking-wider text-brick font-bold">
-                Four Pillars of FLUX-ECS
-              </span>
-              <span className="font-complexity-notation text-xs text-muted">
-                Department of Electronics &amp; Computer Science · VESIT
-              </span>
-            </div>
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white uppercase font-display">
+            Events
+          </h1>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {clubPillars.map((pillar) => (
-                <div
-                  key={pillar.number}
-                  className="bg-card border-2 border-ink p-5 flex flex-col justify-between shadow-[3px_3px_0px_var(--ink)] transition-transform hover:-translate-y-0.5"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between border-b border-ink/20 pb-2">
-                      <span className="font-complexity-notation text-xs font-bold text-brick">
-                        {pillar.number}
-                      </span>
-                      <span className="font-complexity-notation text-[11px] px-2 py-0.5 bg-tan border border-ink/30 font-bold text-ink uppercase">
-                        {pillar.lab}
-                      </span>
-                    </div>
-                    <h3 className="font-headline-sm text-lg text-ink font-bold leading-snug">
-                      {pillar.title}
-                    </h3>
-                    <p className="font-body-sm text-xs text-muted leading-relaxed">
-                      {pillar.summary}
-                    </p>
-                  </div>
+          <p className="text-sm sm:text-base text-gray-400 max-w-2xl leading-relaxed">
+            Technical tournaments, hands-on workshops, and exhibitions organized by the
+            Department of Electronics &amp; Computer Science, VESIT.
+          </p>
+        </header>
 
-                  <div className="pt-4 mt-3 border-t border-ink/10 flex flex-wrap gap-1.5">
-                    {pillar.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-complexity-notation text-[10px] px-1.5 py-0.5 bg-paper border border-ink/20 text-ink"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tournament Execution Pipeline for Algorithm's Auction (Replaces unconfirmed future events) */}
-          <div className="bg-tan border-2 border-ink p-5 md:p-6 shadow-[4px_4px_0px_var(--ink)] space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-ink/20 pb-2">
-              <div>
-                <span className="handwritten-eyebrow text-xl sm:text-2xl font-bold text-brick">
-                  Tournament Pipeline
+        {/* ==============================================================
+            TAB SWITCHER: Upcoming vs Past
+           ============================================================== */}
+        <div className="flex items-center gap-1.5 p-1 bg-white/[0.04] border border-white/10 rounded-lg inline-flex mb-8">
+          {['upcoming', 'past'].map((tab) => {
+            const isActive = activeTab === tab
+            return (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveTab(tab)}
+                className={`relative px-5 py-2 text-xs font-semibold rounded-md transition-colors cursor-pointer capitalize ${
+                  isActive ? 'text-black' : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="events-active-pill"
+                    className="absolute inset-0 bg-white rounded-md z-0 shadow-sm"
+                    transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                  />
+                )}
+                <span className="relative z-10">
+                  {tab === 'upcoming' ? 'Upcoming' : 'Past'}
                 </span>
-                <h4 className="font-headline-sm text-lg text-ink font-bold">
-                  Algorithm&apos;s Auction 2.0 · Official Four-Stage Execution Flow
-                </h4>
-              </div>
-              <span className="font-complexity-notation text-xs text-muted font-bold">
-                2nd – 3rd November 2026 · 2nd Floor, VESIT
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {tournamentPipeline.map((item) => (
-                <div
-                  key={item.phase}
-                  className="bg-card border-2 border-ink p-4 flex flex-col justify-between shadow-[2px_2px_0px_var(--ink)]"
-                >
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between border-b border-ink/20 pb-1.5">
-                      <span className="font-complexity-notation text-xs font-bold text-brick">
-                        Phase {item.phase}
-                      </span>
-                      <span className="font-complexity-notation text-[10px] uppercase font-bold text-ink bg-paper px-1.5 py-0.5 border border-ink/20">
-                        {item.schedule}
-                      </span>
-                    </div>
-                    <h5 className="font-headline-sm text-base text-ink font-bold leading-tight">
-                      {item.stage}
-                    </h5>
-                    <div className="font-complexity-notation text-[10px] text-brick font-semibold">
-                      {item.venue}
-                    </div>
-                    <p className="font-body-sm text-xs text-muted leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+              </button>
+            )
+          })}
         </div>
-      </section>
 
-      {/* UPCOMING TAB: Deep, rich coverage of Algorithm's Auction */}
-      {activeTab === 'upcoming' && (
-        <div className="w-full px-4 lg:px-margin py-space-xl flex flex-col space-y-space-lg">
-          {/* Main Hero Card: Algorithm's Auction */}
-          <article className="relative bg-card border-2 border-ink shadow-[6px_6px_0px_var(--brick)] overflow-hidden">
-            {/* Header info bar */}
-            <div className="border-b-2 border-ink bg-tan px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="font-complexity-notation text-[11px] px-2.5 py-1 bg-brick text-paper tracking-wider uppercase font-bold">
-                  Active Flagship Tournament
-                </span>
-                <span className="font-complexity-notation text-[12px] tracking-wider uppercase text-ink font-semibold">
-                  Department of Electronics &amp; Computer Science × FluxECS
-                </span>
-              </div>
-              <div className="flex items-center gap-2 font-complexity-notation text-complexity-notation text-ink font-bold">
-                <span className="material-symbols-outlined text-[18px]">calendar_month</span>
-                <span>2nd – 3rd November 2026</span>
-              </div>
-            </div>
+        {/* ==============================================================
+            EVENTS GRID: Minimal 3:4 Poster-First Layout
+           ============================================================== */}
+        <AnimatePresence mode="wait">
+          {displayedEvents.length > 0 ? (
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {displayedEvents.map((event) => {
+                const poster = event.poster_url || event.poster
+                const hasPoster = Boolean(poster)
+                const isUpcoming = event.status === 'upcoming'
+                const slug = event.slug || event.id
 
-            {/* Poster + details layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-ink">
-              {/* Poster Column */}
-              <div className="lg:col-span-5 border-b-2 lg:border-b-0 lg:border-r-2 border-ink p-6 md:p-8 bg-paper flex flex-col items-center justify-center space-y-4">
-                <div
-                  className="relative border-2 border-ink overflow-hidden bg-card w-full shadow-lg cursor-pointer group"
-                  style={{ transform: 'rotate(-1.5deg)', maxWidth: '380px' }}
-                  onClick={() =>
-                    setLightboxPhoto({
-                      src: algo.poster,
-                      label: "Algorithm's Auction — Official Event Poster",
-                      sub: 'Department of Electronics and Computer Science × FLUX-ECS · 2nd–3rd November 2026',
-                    })
-                  }
-                >
-                  <div className="relative w-full aspect-[723/1024] bg-tan">
-                    <Image
-                      src={algo.poster}
-                      alt="Algorithm's Auction official artwork"
-                      fill
-                      priority
-                      className="object-cover group-hover:scale-[1.01] transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, 380px"
-                    />
-                    <div className="absolute top-2 right-2 bg-ink/80 text-paper font-complexity-notation text-[11px] px-2 py-0.5 opacity-90 group-hover:opacity-100 flex items-center gap-1 transition-opacity">
-                      <span className="material-symbols-outlined text-[14px]">zoom_in</span>
-                      <span>Enlarge Poster</span>
-                    </div>
-                  </div>
-                  <div className="p-3 bg-paper border-t-2 border-ink text-center">
-                    <p className="font-handwritten text-xl text-brick font-bold">
-                      &ldquo;{algo.posterLine}&rdquo;
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-center gap-1 text-center">
-                  <span className="font-complexity-notation text-xs text-muted block">
-                    Official Event Poster · Department of ECS × FLUX-ECS
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setLightboxPhoto({
-                        src: algo.poster,
-                        label: "Algorithm's Auction — Official Event Poster",
-                        sub: 'Department of Electronics and Computer Science × FLUX-ECS · 2nd–3rd November 2026',
-                      })
-                    }
-                    className="font-complexity-notation text-xs text-brick hover:underline font-bold flex items-center gap-1 cursor-pointer"
+                return (
+                  <article
+                    key={slug}
+                    className="group bg-[#12161C] border border-white/10 rounded-xl overflow-hidden flex flex-col transition-all duration-200 hover:border-white/25 hover:-translate-y-1 shadow-lg"
                   >
-                    <span className="material-symbols-outlined text-[14px]">fullscreen</span>
-                    <span>View Fullscreen &amp; Scan QR Code</span>
-                  </button>
-                </div>
+                    {/* Poster Area: 3:4 aspect ratio tailored for graphics team artwork */}
+                    <div className="relative w-full aspect-[3/4] bg-[#1B2026] overflow-hidden">
+                      {hasPoster ? (
+                        <>
+                          <Image
+                            src={poster}
+                            alt={`${event.title} official poster`}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-cover group-hover:scale-[1.03] transition-transform duration-300"
+                          />
 
-                {/* Official Schedule Timeline Poster */}
-                {algo.timelineImage && (
-                  <div className="w-full max-w-[380px] bg-card border-2 border-ink p-3 shadow-md">
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-ink/20">
-                      <span className="handwritten-eyebrow text-lg sm:text-xl font-bold text-brick">
-                        Official Visual Timeline
-                      </span>
-                      <span className="font-complexity-notation text-[11px] uppercase tracking-wider text-muted font-bold">
-                        Day 1 &amp; Day 2
-                      </span>
-                    </div>
-                    <div
-                      className="relative w-full aspect-[16/9] overflow-hidden bg-tan border border-ink/20 cursor-pointer group"
-                      onClick={() =>
-                        setLightboxPhoto({
-                          src: algo.timelineImage,
-                          label: "Algorithm's Auction — Official Visual Timeline",
-                          sub: 'Day 1: Learn the Logic · Day 2: Bid. Solve. Win.',
-                        })
-                      }
-                    >
-                      <Image
-                        src={algo.timelineImage}
-                        alt="Algorithm's Auction schedule breakdown"
-                        fill
-                        className="object-contain group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 100vw, 380px"
-                      />
-                      <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 flex items-center justify-center transition-colors">
-                        <span className="opacity-0 group-hover:opacity-100 bg-paper/95 text-ink text-xs font-bold px-2 py-1 border border-ink font-complexity-notation">
-                          Click to Expand
+                          {/* Zoom poster button on hover */}
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setLightboxPoster({
+                                src: poster,
+                                title: event.title,
+                                date: event.date,
+                              })
+                            }
+                            aria-label="Enlarge poster"
+                            className="absolute bottom-3 right-3 p-2 rounded-full bg-black/75 backdrop-blur-md text-white border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:bg-black"
+                          >
+                            <ZoomIcon />
+                          </button>
+                        </>
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center p-6 text-center text-gray-500 font-mono text-xs">
+                          <span>Poster coming soon</span>
+                        </div>
+                      )}
+
+                      {/* Top Badges */}
+                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                        <span className="px-2.5 py-1 rounded text-[10px] font-mono font-semibold uppercase tracking-wider bg-black/80 backdrop-blur-md text-gray-200 border border-white/15">
+                          {event.category || 'Event'}
+                        </span>
+
+                        <span
+                          className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider ${
+                            isUpcoming
+                              ? 'bg-[#D94A5B] text-white shadow-sm'
+                              : 'bg-white/20 text-gray-300 backdrop-blur-md'
+                          }`}
+                        >
+                          {isUpcoming ? 'Registration Open' : 'Concluded'}
                         </span>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
 
-              {/* Details Column */}
-              <div className="lg:col-span-7 p-6 md:p-10 space-y-6">
-                <div className="space-y-2">
-                  <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick">
-                    Strategy &amp; Logic Competition
-                  </span>
-                  <h2 className="font-headline-lg text-2xl sm:text-3xl md:text-headline-lg tracking-tight text-ink leading-none font-bold">
-                    {algo.title}
-                  </h2>
-                  <p className="font-title-editorial text-title-editorial text-muted italic font-medium">
-                    {algo.shortLine}
-                  </p>
-                </div>
+                    {/* Card Body */}
+                    <div className="p-5 flex flex-col flex-grow justify-between gap-4">
+                      <div className="space-y-3">
+                        <Link href={`/events/${slug}`}>
+                          <h2 className="text-lg font-bold text-white group-hover:text-[#D94A5B] transition-colors leading-snug">
+                            {event.title}
+                          </h2>
+                        </Link>
 
-                <p className="font-body-lg text-body-lg text-ink leading-relaxed">
-                  {algo.intro}
-                </p>
-
-                {/* Date / venue / time */}
-                <div className="w-full bg-tan border-2 border-ink p-4 flex flex-col md:flex-row md:items-center justify-between divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink text-ink shadow-[2px_2px_0px_var(--ink)]">
-                  <div className="pb-3 md:pb-0 md:pr-6 flex items-center gap-3">
-                    <span className="material-symbols-outlined text-[24px]">calendar_month</span>
-                    <div>
-                      <span className="font-label-smallcaps text-[11px] uppercase tracking-wider block text-muted font-bold">When</span>
-                      <span className="font-complexity-notation text-complexity-notation font-bold">2nd – 3rd Nov 2026</span>
-                    </div>
-                  </div>
-                  <div className="py-3 md:py-0 md:px-6 flex items-center gap-3">
-                    <span className="material-symbols-outlined text-[24px]">location_on</span>
-                    <div>
-                      <span className="font-label-smallcaps text-[11px] uppercase tracking-wider block text-muted font-bold">Where</span>
-                      <span className="font-complexity-notation text-complexity-notation font-bold">2nd Floor, VESIT</span>
-                    </div>
-                  </div>
-                  <div className="pt-3 md:pt-0 md:pl-6 flex items-center gap-3">
-                    <span className="material-symbols-outlined text-[24px]">schedule</span>
-                    <div>
-                      <span className="font-label-smallcaps text-[11px] uppercase tracking-wider block text-muted font-bold">Time</span>
-                      <span className="font-complexity-notation text-complexity-notation font-bold">1:00 pm – 3:30 pm</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Day 1 & Day 2 breakdown */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-                  <div className="relative bg-paper border-2 border-ink p-5 pt-8">
-                    <div
-                      className="absolute -top-3 left-4 px-3 py-0.5 bg-brick text-paper font-label-smallcaps text-xs uppercase tracking-wider font-bold"
-                      style={{ clipPath: 'polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%)', paddingRight: '1.2rem' }}
-                    >
-                      Day 1: Learn the Logic
-                    </div>
-                    <ul className="space-y-2 font-body-sm text-body-sm text-ink pt-1">
-                      {algo.day1.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2">
-                          <span className="text-brick font-bold">·</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="relative bg-paper border-2 border-ink p-5 pt-8">
-                    <div
-                      className="absolute -top-3 left-4 px-3 py-0.5 bg-brick text-paper font-label-smallcaps text-xs uppercase tracking-wider font-bold"
-                      style={{ clipPath: 'polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%)', paddingRight: '1.2rem' }}
-                    >
-                      Day 2: Bid. Solve. Win.
-                    </div>
-                    <ul className="space-y-2 font-body-sm text-body-sm text-ink pt-1">
-                      {algo.day2.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2">
-                          <span className="text-brick font-bold">·</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* What's in it for you */}
-                <div className="border border-ink/20 bg-paper p-4 space-y-2">
-                  <span className="font-label-smallcaps text-xs uppercase tracking-wider text-brick font-bold block">
-                    What&apos;s in it for you:
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-body-sm text-sm text-ink">
-                    <p>• Explore algorithms &amp; sharpen problem-solving</p>
-                    <p>• Strategic coin bidding with peers</p>
-                    <p>• Build skills useful for placements</p>
-                    <p>• Certificate of Participation for all</p>
-                  </div>
-                </div>
-
-                {/* CTAs */}
-                <div className="pt-2 flex flex-wrap items-center gap-4">
-                  <a
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-brick text-paper font-label-smallcaps text-label-smallcaps uppercase tracking-wider border-2 border-ink shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all font-bold"
-                    href={algo.registerUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <span>Register on Google Form</span>
-                    <span className="material-symbols-outlined text-[18px]">how_to_reg</span>
-                  </a>
-                  <a
-                    className="inline-flex items-center gap-2 px-5 py-3 bg-paper text-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider border-2 border-ink shadow-[4px_4px_0px_var(--tan)] hover:bg-tan hover:translate-x-0.5 hover:translate-y-0.5 transition-all font-bold"
-                    href={WHATSAPP_URL}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <span>Join WhatsApp Group</span>
-                    <span className="material-symbols-outlined text-[18px]">forum</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Contacts */}
-            <div className="bg-paper p-6 md:p-8">
-              <div className="mb-4 border-b border-ink/20 pb-2">
-                <span className="handwritten-eyebrow text-xl sm:text-2xl font-bold text-brick">
-                  Student Contacts
-                </span>
-                <h4 className="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-ink font-bold pt-1">
-                  Got questions? Reach out to the student coordinators:
-                </h4>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {algo.contacts.map((c) => (
-                  <div key={c.name} className="bg-card border border-ink/20 p-3.5">
-                    <span className="font-complexity-notation text-[10px] text-brick tracking-wider uppercase block font-bold">
-                      {c.role}
-                    </span>
-                    <div className="font-headline-sm text-base text-ink font-bold">{c.name}</div>
-                    <a
-                      className="font-complexity-notation text-xs text-ink hover:text-brick mt-1 block font-bold"
-                      href={`tel:${c.phone.replace(/\s+/g, '')}`}
-                    >
-                      {c.phone}
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </article>
-
-          {/* Deep Info Section 1: Tournament Bidding Rules & Protocol */}
-          <div className="bg-card border-2 border-ink p-6 md:p-8 shadow-[4px_4px_0px_var(--ink)] space-y-6">
-            <div className="border-b-2 border-ink pb-3 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
-              <div>
-                <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick">
-                  Auction Protocol
-                </span>
-                <h3 className="font-headline-md text-2xl text-ink font-bold">
-                  Bidding Rules &amp; Tournament Mechanics
-                </h3>
-              </div>
-              <span className="font-complexity-notation text-xs text-muted font-bold">
-                Day 2 Live Competitive Format
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {algo.biddingRules.map((rule) => (
-                <div
-                  key={rule.badge}
-                  className="bg-paper border border-ink/30 p-5 space-y-2.5 shadow-sm"
-                >
-                  <div className="flex items-center justify-between border-b border-ink/15 pb-1.5">
-                    <span className="font-complexity-notation text-[11px] px-2 py-0.5 bg-brick text-paper font-bold uppercase">
-                      {rule.badge}
-                    </span>
-                  </div>
-                  <h4 className="font-headline-sm text-lg text-ink font-bold leading-tight">
-                    {rule.title}
-                  </h4>
-                  <p className="font-body-sm text-xs text-ink leading-relaxed">
-                    {rule.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Deep Info Section 2: Syllabus & Preparation Topics */}
-          <div className="bg-tan border-2 border-ink p-6 md:p-8 shadow-[4px_4px_0px_var(--ink)] space-y-6">
-            <div className="border-b-2 border-ink pb-3 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
-              <div>
-                <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick">
-                  Syllabus &amp; Preparation
-                </span>
-                <h3 className="font-headline-md text-2xl text-ink font-bold">
-                  Core Algorithmic Topics Covered
-                </h3>
-              </div>
-              <span className="font-complexity-notation text-xs text-muted font-bold">
-                Learn on Day 1 · Solve on Day 2
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {algo.syllabus.map((item) => (
-                <div
-                  key={item.topic}
-                  className="bg-paper border-2 border-ink p-5 space-y-2 shadow-[2px_2px_0px_var(--ink)]"
-                >
-                  <h4 className="font-headline-sm text-lg text-ink font-bold flex items-center gap-2">
-                    <span className="text-brick font-bold">▸</span>
-                    <span>{item.topic}</span>
-                  </h4>
-                  <p className="font-body-sm text-xs text-muted leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Deep Info Section 3: Frequently Asked Questions (FAQ) */}
-          <div className="bg-card border-2 border-ink p-6 md:p-8 shadow-[4px_4px_0px_var(--ink)] space-y-6">
-            <div className="border-b-2 border-ink pb-3 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
-              <div>
-                <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick">
-                  Student Questions
-                </span>
-                <h3 className="font-headline-md text-2xl text-ink font-bold">
-                  Frequently Asked Questions (FAQ)
-                </h3>
-              </div>
-              <span className="font-complexity-notation text-xs text-muted font-bold">
-                All Years · FE to BE Eligible
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {algo.faqs.map((faq, i) => (
-                <div
-                  key={faq.question}
-                  className="bg-paper border border-ink/20 p-5 space-y-2 shadow-sm"
-                >
-                  <div className="font-headline-sm text-base text-ink font-bold flex items-start gap-2">
-                    <span className="font-complexity-notation text-xs text-brick font-bold pt-0.5">
-                      Q{i + 1}.
-                    </span>
-                    <span>{faq.question}</span>
-                  </div>
-                  <p className="font-body-sm text-xs text-muted leading-relaxed pl-6">
-                    {faq.answer}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* PAST ACTIVITIES TAB: Clean historic exhibitions */}
-      {activeTab === 'past' && (
-        <div className="w-full px-4 lg:px-margin py-space-xl flex flex-col space-y-space-lg">
-          {/* IoTA Archives Scrapbook */}
-          <article className="relative bg-card border-2 border-ink shadow-[6px_6px_0px_var(--tan)] overflow-hidden">
-            {/* Header */}
-            <div className="border-b-2 border-ink bg-tan px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className="font-complexity-notation text-[11px] px-2.5 py-1 bg-ink text-paper tracking-wider uppercase font-bold">
-                  Concluded Induction Exhibition
-                </span>
-                <span className="font-complexity-notation text-[12px] tracking-wider uppercase text-ink font-semibold">
-                  First Year (FE) Induction Program · VESIT ECS
-                </span>
-              </div>
-              <span className="font-complexity-notation text-complexity-notation text-ink uppercase font-bold">
-                7th September 2026
-              </span>
-            </div>
-
-            {/* Scrapbook Photo Album Strip */}
-            <div className="p-6 md:p-10 border-b-2 border-ink bg-paper space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-ink/20 pb-3">
-                <div>
-                  <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick">
-                    Exhibition Scrapbook
-                  </span>
-                  <h3 className="font-headline-md text-headline-md text-ink font-bold">
-                    Snapshots from the Labs
-                  </h3>
-                </div>
-                <span className="font-complexity-notation text-xs text-muted">
-                  3 Labs · 10+ Projects · FE 2026 Batch
-                </span>
-              </div>
-
-              {/* 4 Album cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
-                {/* Lab 201 — Embedded Systems Lab */}
-                <div
-                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
-                  style={{ transform: 'rotate(-1deg)' }}
-                  onClick={() =>
-                    setLightboxPhoto({
-                      src: '/photos/iota-robot-floor-test.jpg',
-                      label: 'Lab 201 — Seniors showcasing projects to FE students',
-                      sub: 'IoTA Archives · FE Induction Exhibition 2026',
-                    })
-                  }
-                >
-                  <div className="relative w-full aspect-[1024/574] bg-tan border border-ink/30 overflow-hidden">
-                    <Image
-                      src="/photos/iota-robot-floor-test.jpg"
-                      alt="Lab 201 — seniors showcasing to FE students"
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, 300px"
-                    />
-                  </div>
-                  <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">Lab 201</p>
-                    <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Seniors explaining projects to FE
-                    </p>
-                  </div>
-                </div>
-
-                {/* Lab 215 — Tinkerers' Lab Chassis Demo */}
-                <div
-                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
-                  style={{ transform: 'rotate(1.2deg)' }}
-                  onClick={() =>
-                    setLightboxPhoto({
-                      src: '/photos/iota-robotics-chassis-presentation.jpg',
-                      label: 'Lab 215 — Seniors demonstrating hardware projects to FE students',
-                      sub: 'IoTA Archives · FE Induction Exhibition 2026',
-                    })
-                  }
-                >
-                  <div className="relative w-full aspect-[1024/628] bg-tan border border-ink/30 overflow-hidden">
-                    <Image
-                      src="/photos/iota-robotics-chassis-presentation.jpg"
-                      alt="Lab 215 — seniors demonstrating to FE students"
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, 300px"
-                    />
-                  </div>
-                  <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">Lab 215</p>
-                    <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Seniors explaining projects to FE
-                    </p>
-                  </div>
-                </div>
-
-                {/* Lab 203 — Basic Electrical Lab */}
-                <div
-                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
-                  style={{ transform: 'rotate(-1deg)' }}
-                  onClick={() =>
-                    setLightboxPhoto({
-                      src: '/photos/iota-electrical-lab-discussion.png',
-                      label: 'Lab 203 — Seniors explaining projects to FE students',
-                      sub: 'IoTA Archives · FE Induction Exhibition 2026',
-                    })
-                  }
-                >
-                  <div className="relative w-full aspect-[1024/579] bg-tan border border-ink/30 overflow-hidden">
-                    <Image
-                      src="/photos/iota-electrical-lab-discussion.png"
-                      alt="Lab 203 — seniors explaining to FE students"
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, 300px"
-                    />
-                  </div>
-                  <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">Lab 203</p>
-                    <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Seniors explaining projects to FE
-                    </p>
-                  </div>
-                </div>
-
-                {/* Exhibition — Seniors with FE students */}
-                <div
-                  className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
-                  style={{ transform: 'rotate(0.8deg)' }}
-                  onClick={() =>
-                    setLightboxPhoto({
-                      src: '/photos/iota-tinkerers-lab-cohort.jpg',
-                      label: 'IoTA Archives — Seniors with FE students during the exhibition',
-                      sub: '2nd, 3rd and 4th year ECS students explaining their projects to the incoming FE batch',
-                    })
-                  }
-                >
-                  <div className="relative w-full aspect-[1024/581] bg-tan border border-ink/30 overflow-hidden">
-                    <Image
-                      src="/photos/iota-tinkerers-lab-cohort.jpg"
-                      alt="Seniors with FE students at IoTA Archives exhibition"
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, 300px"
-                    />
-                  </div>
-                  <div className="pt-3 pb-1 text-center">
-                    <p className="font-handwritten text-lg text-ink font-bold">IoTA Archives</p>
-                    <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Seniors with FE students
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Event Description & Labs Content */}
-            <div className="p-6 md:p-10 space-y-6">
-              <div className="space-y-2">
-                <span className="handwritten-eyebrow text-2xl sm:text-3xl font-bold text-brick">
-                  Induction Exhibition
-                </span>
-                <h2 className="font-headline-lg text-headline-lg tracking-tight text-ink font-bold">
-                  {iota.title}
-                </h2>
-                <p className="font-title-editorial text-title-editorial text-muted italic">
-                  {iota.shortLine}
-                </p>
-              </div>
-
-              {/* Date / venue info strip */}
-              <div className="w-full bg-tan border-2 border-ink p-4 flex flex-col md:flex-row md:items-center justify-between divide-y-2 md:divide-y-0 md:divide-x-2 divide-ink text-ink">
-                <div className="pb-3 md:pb-0 md:pr-6 flex items-center gap-3">
-                  <span className="material-symbols-outlined text-[24px]">event_available</span>
-                  <div>
-                    <span className="font-label-smallcaps text-[11px] uppercase tracking-wider block text-muted font-bold">Date</span>
-                    <span className="font-complexity-notation text-complexity-notation font-bold">7th September 2026</span>
-                  </div>
-                </div>
-                <div className="py-3 md:py-0 md:px-6 flex items-center gap-3">
-                  <span className="material-symbols-outlined text-[24px]">domain</span>
-                  <div>
-                    <span className="font-label-smallcaps text-[11px] uppercase tracking-wider block text-muted font-bold">Venue</span>
-                    <span className="font-complexity-notation text-complexity-notation font-bold">{iota.venue}</span>
-                  </div>
-                </div>
-                <div className="pt-3 md:pt-0 md:pl-6 flex items-center gap-3">
-                  <span className="material-symbols-outlined text-[24px]">groups</span>
-                  <div>
-                    <span className="font-label-smallcaps text-[11px] uppercase tracking-wider block text-muted font-bold">Audience</span>
-                    <span className="font-complexity-notation text-complexity-notation font-bold">FE Induction Cohort &amp; Seniors</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Summary note */}
-              <div className="border-l-4 border-brick pl-4 py-2 bg-paper/50">
-                <p className="font-body-lg text-body-lg text-ink leading-relaxed">{iota.intro}</p>
-              </div>
-
-              {/* Lab breakdown cards */}
-              <div className="space-y-4 pt-2">
-                <h3 className="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-ink border-b border-ink/20 pb-2 font-bold">
-                  What happened in each lab
-                </h3>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-                  {iota.labs.map((lab) => (
-                    <div
-                      key={lab.id}
-                      className="bg-paper border border-ink/30 p-5 flex flex-col justify-between shadow-sm"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between border-b border-ink/20 pb-2 mb-3">
-                          <span className="px-2.5 py-0.5 bg-brick text-paper font-complexity-notation text-[11px] font-bold">
-                            {lab.label}
-                          </span>
-                          <span className="font-complexity-notation text-[11px] text-muted uppercase">
-                            {lab.focus}
-                          </span>
+                        <div className="flex flex-col gap-1.5 text-xs text-gray-400 font-mono">
+                          <div className="flex items-center gap-2">
+                            <CalendarIcon />
+                            <span>{event.date}</span>
+                          </div>
+                          {event.time && (
+                            <div className="flex items-center gap-2">
+                              <ClockIcon />
+                              <span>{event.time}</span>
+                            </div>
+                          )}
+                          {event.venue && (
+                            <div className="flex items-center gap-2">
+                              <LocationIcon />
+                              <span>{event.venue}</span>
+                            </div>
+                          )}
                         </div>
-                        <h4 className="font-headline-sm text-xl text-ink font-bold mb-2">
-                          {lab.label} — {lab.focus}
-                        </h4>
-                        <p className="font-body-sm text-body-sm text-muted mb-4 leading-relaxed">
-                          {lab.description}
-                        </p>
-                        <div className="border-t border-ink/10 pt-3">
-                          <span className="font-complexity-notation text-[10px] uppercase text-brick font-bold block mb-1">
-                            Demonstrated Projects:
-                          </span>
-                          <ul className="space-y-1.5 font-body-sm text-xs text-ink">
-                            {lab.projects.map((proj) => (
-                              <li key={proj} className="flex items-start gap-1.5">
-                                <span className="text-brick font-bold">·</span>
-                                <span>{proj}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+
+                        {event.summary && (
+                          <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed">
+                            {event.summary}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Action CTA */}
+                      <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                        <Link
+                          href={`/events/${slug}`}
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-white hover:text-[#D94A5B] transition-colors"
+                        >
+                          <span>Event details</span>
+                          <ArrowRightIcon />
+                        </Link>
+
+                        {isUpcoming && event.registration_url && (
+                          <a
+                            href={event.registration_url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-3 py-1 rounded bg-[#D94A5B] hover:bg-[#e45a6b] text-white text-[11px] font-mono font-semibold transition-colors"
+                          >
+                            Register ↗
+                          </a>
+                        )}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Council presence & Credits */}
-              <div className="border-2 border-ink bg-paper p-6 space-y-5">
-                <div className="border-b border-ink/20 pb-2">
-                  <span className="handwritten-eyebrow text-xl sm:text-2xl font-bold text-brick">
-                    Council on Duty
-                  </span>
-                  <h4 className="font-label-smallcaps text-label-smallcaps uppercase tracking-widest text-ink font-bold pt-1">
-                    Who ran this event &amp; where members were stationed:
-                  </h4>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  {/* Faculty */}
-                  <div className="bg-card border border-ink/20 p-4 space-y-2">
-                    <span className="font-complexity-notation text-[10px] uppercase text-brick font-bold block">
-                      Faculty Leadership
-                    </span>
-                    <div className="font-headline-sm text-lg text-ink font-bold">Yogesh Pandit Sir</div>
-                    <p className="font-body-sm text-xs text-muted">Council In-charge, Dept. of ECS</p>
-                    <div className="font-headline-sm text-lg text-ink font-bold pt-2">Abhishek Chaudhari Sir</div>
-                    <p className="font-body-sm text-xs text-muted">Faculty Advisor, Dept. of ECS</p>
-                  </div>
-
-                  {/* Senior Council */}
-                  <div className="bg-card border border-ink/20 p-4 space-y-2">
-                    <span className="font-complexity-notation text-[10px] uppercase text-brick font-bold block">
-                      Senior Council (Labs 201 &amp; 203)
-                    </span>
-                    <p className="font-body-sm text-xs text-ink leading-relaxed">
-                      <strong>Harsh Patange</strong> (President) &amp; <strong>Riya Pailwan</strong> (Hardware Head) ran hardware benches in Lab 201.
-                    </p>
-                    <p className="font-body-sm text-xs text-ink leading-relaxed pt-1">
-                      <strong>Aayan Shaikh</strong> (Technical Head), <strong>Paarth Patil</strong>, and <strong>Abhishek Patil</strong> ran AI/software demos in Lab 203.
-                    </p>
-                  </div>
-
-                  {/* Junior Council */}
-                  <div className="bg-card border border-ink/20 p-4 space-y-2">
-                    <span className="font-complexity-notation text-[10px] uppercase text-brick font-bold block">
-                      Operations &amp; Junior Council (Lab 215)
-                    </span>
-                    <p className="font-body-sm text-xs text-ink leading-relaxed">
-                      <strong>Shantanu Gaikwad</strong> (VP), <strong>Varnika Mandal Chaurasia</strong> (Ops Head), and <strong>Arnav Abhale</strong> (Finance Head) managed student flow and scheduling.
-                    </p>
-                    <p className="font-body-sm text-xs text-ink leading-relaxed pt-1">
-                      <strong>Parth Sonar</strong>, <strong>Aarya Tanwade</strong>, <strong>Tanush Haryan</strong>, <strong>Atharva Vaidya</strong>, and <strong>Yogita Gupta</strong> coordinated batches and freshman guidance.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          {/* Past Exhibit 2: Senior Hardware Showcase */}
-          {hardwareExhibit && (
-            <article className="relative bg-card border-2 border-ink shadow-[4px_4px_0px_var(--ink)] p-6 md:p-8 space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-ink pb-3">
-                <div>
-                  <span className="handwritten-eyebrow text-xl sm:text-2xl font-bold text-brick">
-                    Archival Bench Showcase
-                  </span>
-                  <h3 className="font-headline-md text-2xl text-ink font-bold">
-                    {hardwareExhibit.title}
-                  </h3>
-                  <p className="font-title-editorial text-sm text-muted italic">
-                    {hardwareExhibit.shortLine}
-                  </p>
-                </div>
-                <span className="font-complexity-notation text-xs font-bold text-ink">
-                  22nd August 2026 · Lab 201
-                </span>
-              </div>
-
-              <p className="font-body-md text-ink leading-relaxed">
-                {hardwareExhibit.intro}
-              </p>
-
-              {hardwareExhibit.projects && (
-                <div className="bg-paper border border-ink/20 p-4 space-y-2">
-                  <span className="font-complexity-notation text-xs uppercase text-brick font-bold block">
-                    Bench Projects &amp; Demonstrations:
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-body-sm text-xs text-ink">
-                    {hardwareExhibit.projects.map((proj) => (
-                      <div key={proj} className="flex items-start gap-1.5">
-                        <span className="text-brick font-bold">·</span>
-                        <span>{proj}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {hardwareExhibit.credits && (
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-complexity-notation text-xs text-muted pt-2 border-t border-ink/10">
-                  <span className="font-bold text-ink">Led by:</span>
-                  {hardwareExhibit.credits.map((cr) => (
-                    <span key={cr}>{cr}</span>
-                  ))}
-                </div>
-              )}
-            </article>
-          )}
-
-          {/* Switch back banner */}
-          <div className="border-2 border-ink bg-tan p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-ink">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[18px]">verified</span>
-              <span className="font-complexity-notation text-[11px] uppercase tracking-wider font-bold">
-                Concluded Term Proceedings · Department of ECS
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => setActiveTab('upcoming')}
-              className="font-label-smallcaps text-xs uppercase tracking-wider text-brick hover:underline flex items-center gap-1 font-bold cursor-pointer"
+                  </article>
+                )
+              })}
+            </motion.div>
+          ) : (
+            <motion.div
+              key={`${activeTab}-empty`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-16 px-6 text-center border border-dashed border-white/15 rounded-xl text-gray-400"
             >
-              <span>View upcoming events ({upcomingList.length})</span>
-              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-            </button>
-          </div>
-        </div>
-      )}
+              <p className="text-sm font-semibold text-gray-300">
+                {activeTab === 'upcoming'
+                  ? 'No upcoming events scheduled yet.'
+                  : 'No past events in archive.'}
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                Posters and announcements will appear as soon as the council publishes them.
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
-      {/* Lightbox Modal for Events & Posters */}
-      {lightboxPhoto && (
-        <div
-          className="fixed inset-0 z-50 bg-ink/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
-          onClick={() => setLightboxPhoto(null)}
-        >
-          <div
-            className="relative max-w-4xl w-full bg-paper border-2 border-ink shadow-[8px_8px_0px_var(--brick)] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
+      {/* ==============================================================
+          LIGHTBOX MODAL: Inspect Graphics Team Posters in Full Resolution
+         ============================================================== */}
+      <AnimatePresence>
+        {lightboxPoster && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+            onClick={() => setLightboxPoster(null)}
           >
-            {/* Modal header bar */}
-            <div className="bg-tan border-b-2 border-ink px-4 py-2.5 flex items-center justify-between">
-              <div className="font-complexity-notation text-xs text-ink font-bold flex items-center gap-2">
-                <span className="w-2.5 h-2.5 bg-brick inline-block" />
-                <span>FLUX-ECS Event Docket Viewer</span>
+            <div
+              className="relative max-w-lg w-full bg-[#12161C] border border-white/20 rounded-xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-4 border-b border-white/10 flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-bold text-white">{lightboxPoster.title}</h3>
+                  <span className="text-[11px] font-mono text-gray-400">{lightboxPoster.date}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setLightboxPoster(null)}
+                  className="p-1 rounded text-gray-400 hover:text-white cursor-pointer"
+                  aria-label="Close modal"
+                >
+                  <CloseIcon />
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={() => setLightboxPhoto(null)}
-                className="px-2 py-0.5 border border-ink bg-card text-ink hover:bg-brick hover:text-paper font-complexity-notation text-xs font-bold transition-colors cursor-pointer"
-              >
-                Close [ESC]
-              </button>
-            </div>
 
-            {/* Modal image */}
-            <div className="relative w-full aspect-[3/4] sm:aspect-[4/3] max-h-[75vh] bg-ink/5">
-              <Image
-                src={lightboxPhoto.src}
-                alt={lightboxPhoto.label}
-                fill
-                className="object-contain"
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                priority
-              />
-            </div>
-
-            {/* Modal caption footer */}
-            <div className="bg-paper border-t-2 border-ink p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <h5 className="font-headline-sm text-sm sm:text-base text-ink font-bold">
-                  {lightboxPhoto.label}
-                </h5>
-                {lightboxPhoto.sub && (
-                  <p className="font-complexity-notation text-xs text-muted mt-0.5">
-                    {lightboxPhoto.sub}
-                  </p>
-                )}
+              <div className="relative w-full aspect-[3/4] bg-black">
+                <Image
+                  src={lightboxPoster.src}
+                  alt={lightboxPoster.title}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 600px) 100vw, 500px"
+                />
               </div>
-              <a
-                href={lightboxPhoto.src}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="self-start sm:self-auto px-3 py-1.5 bg-card border border-ink text-ink hover:bg-brick hover:text-paper font-complexity-notation text-xs font-bold transition-colors shrink-0"
-              >
-                Open Full Asset ↗
-              </a>
+
+              <div className="p-3 bg-black/40 text-center border-t border-white/10">
+                <span className="text-[11px] font-mono text-gray-400">
+                  Official artwork by FluxECS Graphics Team
+                </span>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

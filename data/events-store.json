@@ -1,0 +1,239 @@
+[
+  {
+    "id": "algorithms-auction",
+    "slug": "algorithms-auction",
+    "title": "Algorithm's Auction",
+    "summary": "Every move is a strategy. Every bid is a gamble.",
+    "description": "Ready for a challenge that's more than just coding? Whether you're a beginner or a problem-solving enthusiast, Algorithm's Auction is specially curated for ECS students across all years. Get ready for 2 days of logic, strategy, competitive bidding and exciting challenges.",
+    "poster_url": "/posters/algorithms-auction.jpg",
+    "starts_at": "2026-11-02T07:30:00.000Z",
+    "ends_at": "2026-11-03T10:00:00.000Z",
+    "date": "02 - 03 November 2026",
+    "time": "1:00 pm - 3:30 pm",
+    "venue": "2nd Floor, VESIT",
+    "registration_url": "https://docs.google.com/forms/d/e/1FAIpQLSfp5CY1X37Z6CC40Q5R4YRrEb1Rcd4Z9ux6VyNmWGDVnvh5RA/viewform?usp=dialog",
+    "registration_open_at": "2026-10-15T00:00:00Z",
+    "registration_close_at": "2026-11-01T23:59:59Z",
+    "status": "upcoming",
+    "is_published": true,
+    "is_featured": true,
+    "category": "Competitive Coding",
+    "timeline_image": "/posters/algorithm-timeline.jpg",
+    "syllabus": [
+      {
+        "topic": "Searching & Sorting",
+        "desc": "Binary search variations, rotated arrays, custom comparator sort logic, and two-pointer search patterns."
+      },
+      {
+        "topic": "Greedy Algorithms",
+        "desc": "Activity selection, interval merging, coin change optimal selection, and greedy decision trees."
+      },
+      {
+        "topic": "Divide & Conquer",
+        "desc": "Recursive breakdown, merge sort paradigms, binary exponentiation, and peak element discovery."
+      },
+      {
+        "topic": "Graphs & Breadth/Depth Search",
+        "desc": "Adjacency representations, BFS queue traversal, DFS recursion, and connected component counting."
+      }
+    ],
+    "bidding_rules": [
+      {
+        "title": "Virtual Coin Purse",
+        "badge": "Rule 01",
+        "description": "Every registered team receives a fixed purse of virtual auction coins at the beginning of Day 2. Coins are used to bid on problem statements of varying point weights."
+      },
+      {
+        "title": "Open & Blind Bidding Tiers",
+        "badge": "Rule 02",
+        "description": "Problems are categorized into Bronze (100 pts), Silver (250 pts), and Gold (500 pts). Teams place bids to lock down problems. The highest bidder secures the problem."
+      },
+      {
+        "title": "The Steal Deal Window",
+        "badge": "Rule 03",
+        "description": "If a team fails to pass test cases on their acquired problem within the designated timer, the problem is unlocked for live steal bids at a discounted coin price."
+      },
+      {
+        "title": "Net Scoring Formula",
+        "badge": "Rule 04",
+        "description": "Final ranking = (Points from passed test cases) - (Total coins spent on auctions). Conservative bidding paired with accurate coding yields the championship score."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Do I need prior competitive coding experience?",
+        "answer": "Not at all! Day 1 is specifically designed as \"Learn the Logic\", where senior mentors walk through algorithm patterns with interactive mini-challenges so everyone is prepared for the Day 2 auction."
+      },
+      {
+        "question": "Can First-Year (FE) ECS students take part?",
+        "answer": "Yes, absolutely! Algorithm's Auction is open to FE, SE, TE, and BE students of the Department of Electronics & Computer Science. Beginner-friendly problems and mentor support are provided."
+      },
+      {
+        "question": "What is the team size and composition?",
+        "answer": "You can register individually (solo) or as a team of up to 3 students. Solo participants can also be paired with peers during the Day 1 team formation mixer."
+      },
+      {
+        "question": "What do I need to bring?",
+        "answer": "Bring your laptop with an IDE or compiler installed for your preferred language (C++, Python, Java, or C), a charger, and your college ID card."
+      },
+      {
+        "question": "Will all participants receive certificates?",
+        "answer": "Yes. All registered attendees who complete both days will receive an official Certificate of Participation from the Department of Electronics & Computer Science × FLUX-ECS."
+      }
+    ],
+    "labs": [],
+    "gallery": [],
+    "contacts": [
+      {
+        "name": "Harsh Patange",
+        "role": "President",
+        "phone": "+91 84548 41288"
+      },
+      {
+        "name": "Riya Pailwan",
+        "role": "Hardware Head",
+        "phone": "+91 81694 56269"
+      },
+      {
+        "name": "Aayan Shaikh",
+        "role": "Technical Head",
+        "phone": "+91 98674 66475"
+      },
+      {
+        "name": "Paarth Patil",
+        "role": "Sr. Technical Officer",
+        "phone": "+91 97024 13348"
+      }
+    ],
+    "created_at": "2026-09-01T00:00:00.000Z",
+    "updated_at": "2026-10-25T00:00:00.000Z",
+    "order": 0
+  },
+  {
+    "id": "iota-archives",
+    "slug": "iota-archives",
+    "title": "IoTA Archives",
+    "summary": "Induction Exhibition 2026",
+    "description": "IoTA Archives was an exhibition organised by the ECS department at VESIT as part of the induction programme for newly admitted FE students. It gave the new batch a chance to see live robotic demonstrations, embedded projects, and interact directly with their seniors.",
+    "poster_url": "/photos/iota-robot-floor-test.jpg",
+    "starts_at": "2026-09-07T04:30:00.000Z",
+    "ends_at": "2026-09-07T11:30:00.000Z",
+    "date": "07 September 2026",
+    "time": "Morning - Afternoon",
+    "venue": "Labs 201, 203 and 215, VESIT",
+    "registration_url": "",
+    "registration_open_at": null,
+    "registration_close_at": null,
+    "status": "past",
+    "is_published": true,
+    "is_featured": false,
+    "category": "Hardware Exhibition",
+    "timeline_image": "",
+    "syllabus": [],
+    "bidding_rules": [],
+    "faqs": [],
+    "labs": [
+      {
+        "id": "lab201",
+        "label": "Embedded Systems Lab",
+        "focus": "Hardware and Robotics",
+        "description": "The Embedded Systems & Edge Computing Lab was the active robotics wing. Senior students set up live demonstrations of remote-controlled cars, obstacle-avoiding robotic chassis with ultrasonic sensors, and custom sensor rigs. First-year students gathered around the workbenches and floor runs, asking questions and experiencing their first hands-on look at embedded systems.",
+        "projects": [
+          "Obstacle-avoiding robot with HC-SR04 ultrasonic sensor and L298N motor driver",
+          "Remote-controlled car with custom RF transmitter-receiver pair",
+          "FPGA demo board running an LED pattern synthesised in VHDL",
+          "Custom sensor rig reading temperature, humidity, and light levels over I²C"
+        ],
+        "photo": "/photos/iota-robot-floor-test.jpg",
+        "thumb": "/photos/iota-robot-floor-test.jpg",
+        "aspect": "aspect-[1024/574]"
+      },
+      {
+        "id": "lab203",
+        "label": "Basic Electrical Lab",
+        "focus": "Circuits & Software Demonstrations",
+        "description": "Lab 203 hosted hands-on demonstrations and technical discussions around the electrical test benches and computer monitors. Seniors walked freshmen through circuitry, project architectures, computer vision classifiers, and logic design.",
+        "projects": [
+          "Bench test equipment walkthrough & circuit debugging",
+          "Real-time object detection using a pre-trained YOLO model",
+          "A full-stack student attendance portal built with React and Node.js",
+          "A sorting algorithm visualiser showing bubble, merge, and quicksort in real time"
+        ],
+        "photo": "/photos/iota-electrical-lab-discussion.png",
+        "thumb": "/photos/iota-electrical-lab-discussion.png",
+        "aspect": "aspect-[1024/579]"
+      },
+      {
+        "id": "lab215",
+        "label": "Tinkerers' Lab",
+        "focus": "Hardware Showcase & Mentorship",
+        "description": "In the Tinkerers' Lab, seniors showcased assembled obstacle-avoiding chassis and sat down with freshers to discuss competitive programming, open-source contributions, hardware prototyping, and what to expect from the ECS curriculum.",
+        "projects": [
+          "Live demonstration of obstacle-avoiding robot chassis",
+          "Interactive Q&A on competitive programming and hackathons",
+          "Open-source contribution demo — Git workflows and submitting pull requests",
+          "FLUX-ECS student cohort guidance and roadmap"
+        ],
+        "photo": "/photos/iota-robotics-chassis-presentation.jpg",
+        "thumb": "/photos/iota-robotics-chassis-presentation.jpg",
+        "aspect": "aspect-[1024/628]"
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/photos/iota-robot-floor-test.jpg",
+        "label": "Embedded Systems Lab — Autonomous Robot Floor Run",
+        "aspect": "aspect-[1024/574]"
+      },
+      {
+        "src": "/photos/iota-robotics-chassis-presentation.jpg",
+        "label": "Tinkerers' Lab — Ultrasonic Sensor Chassis Demo",
+        "aspect": "aspect-[1024/628]"
+      },
+      {
+        "src": "/photos/iota-electrical-lab-discussion.png",
+        "label": "Basic Electrical & Electronics Lab — Senior-Fresher Q&A",
+        "aspect": "aspect-[1024/579]"
+      },
+      {
+        "src": "/photos/iota-tinkerers-lab-cohort.jpg",
+        "label": "Tinkerers' Lab — FLUX-ECS Student Organizing Team",
+        "aspect": "aspect-[1024/581]"
+      }
+    ],
+    "contacts": [],
+    "created_at": "2026-09-01T00:00:00.000Z",
+    "updated_at": "2026-10-25T00:00:00.000Z",
+    "order": 1
+  },
+  {
+    "id": "senior-hardware-exhibit",
+    "slug": "senior-hardware-exhibit",
+    "title": "Senior Hardware & Robotics Showcase",
+    "summary": "RF Telemetry & VHDL Logic Synthesis",
+    "description": "Senior ECS students opened Lab 201 to demonstrate custom 433MHz RF transceivers, VHDL state-machine synthesis on FPGA boards, and autonomous obstacle-navigating robotic chassis for second and third-year students.",
+    "poster_url": "/photos/lab201/lab201-1.jpg",
+    "starts_at": "2026-08-22T05:30:00.000Z",
+    "ends_at": "2026-08-22T10:30:00.000Z",
+    "date": "22 August 2026",
+    "time": "11:00 am - 4:00 pm",
+    "venue": "Lab 201, VESIT",
+    "registration_url": "",
+    "registration_open_at": null,
+    "registration_close_at": null,
+    "status": "past",
+    "is_published": true,
+    "is_featured": false,
+    "category": "Hardware Exhibition",
+    "timeline_image": "",
+    "syllabus": [],
+    "bidding_rules": [],
+    "faqs": [],
+    "labs": [],
+    "gallery": [],
+    "contacts": [],
+    "created_at": "2026-09-01T00:00:00.000Z",
+    "updated_at": "2026-10-25T00:00:00.000Z",
+    "order": 2
+  }
+]

@@ -1,98 +1,68 @@
-import { EB_Garamond, Newsreader, Space_Mono, Caveat } from 'next/font/google'
+/* eslint-disable @next/next/no-page-custom-font -- Shared App Router root layout, not a per-page font. */
+import localFont from 'next/font/local'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import PitRadio from '@/components/ui/PitRadio'
 
-const ebGaramond = EB_Garamond({
-  subsets: ['latin'],
+const display = localFont({
+  src: '../public/fonts/BarlowCondensed-Bold.ttf',
+  variable: '--font-display',
   display: 'swap',
-  variable: '--font-eb-garamond',
+  weight: '700',
+})
+const body = localFont({
+  src: '../public/fonts/Barlow-Regular.ttf',
+  variable: '--font-body',
+  display: 'swap',
+  weight: '400',
 })
 
-const newsreader = Newsreader({
-  subsets: ['latin'],
+const introFont = localFont({
+  src: '../public/fonts/SairaExtraCondensed-Black.ttf',
+  variable: '--font-intro',
   display: 'swap',
-  variable: '--font-newsreader',
-})
-
-const spaceMono = Space_Mono({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  display: 'swap',
-  variable: '--font-space-mono',
-})
-
-const caveat = Caveat({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  display: 'swap',
-  variable: '--font-caveat',
+  weight: '900',
 })
 
 export const metadata = {
-  metadataBase: new URL('https://flux-ecs.ves.ac.in'),
+  metadataBase: new URL('https://flux-ecs.vercel.app'),
   title: {
-    default: 'FLUX-ECS | Dept. of Electronics & Computer Science, VESIT',
-    template: '%s | FLUX-ECS',
+    default: 'FluxECS | Electronics & Computer Science, VESIT',
+    template: '%s | FluxECS',
   },
   description:
-    'FLUX-ECS is the technical club of the Department of Electronics and Computer Science at VESIT, Mumbai. Where Ideas Flow into Innovation.',
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/logo-mark.png', type: 'image/png' },
-    ],
-    shortcut: ['/favicon.ico'],
-    apple: [
-      { url: '/apple-icon.png' },
-      { url: '/logo-mark.png' },
-    ],
-  },
+    'The Electronics and Computer Science council at VESIT. Student projects, hardware, software, events and a community built around making.',
+  icons: { icon: '/favicon.ico', apple: '/apple-icon.png' },
   openGraph: {
-    title: 'FLUX-ECS | Dept. of Electronics & Computer Science, VESIT',
+    title: 'FluxECS | From circuits to code',
     description:
-      'The technical club of the Department of Electronics and Computer Science at VESIT, Mumbai.',
+      'The Electronics and Computer Science council at VESIT, Mumbai.',
     images: ['/logo-flux.png'],
     type: 'website',
   },
 }
-
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      className={`${ebGaramond.variable} ${newsreader.variable} ${spaceMono.variable} ${caveat.variable}`}
+      className={`${display.variable} ${body.variable} ${introFont.variable} dark`}
     >
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" href="/logo-mark.png" />
-        <link rel="apple-touch-icon" href="/logo-mark.png" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme');
-                  var supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-                  if (theme === 'dark' || (!theme && supportDarkMode)) {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap"
         />
       </head>
-      <body className="min-h-screen bg-paper text-ink font-body-md antialiased selection:bg-brick selection:text-white flex flex-col justify-between">
+      <body>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <Navbar />
-        <main className="w-full pt-16 sm:pt-20 flex-1">{children}</main>
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
+        <PitRadio />
         <Footer />
       </body>
     </html>

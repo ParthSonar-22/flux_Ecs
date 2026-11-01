@@ -65,6 +65,52 @@ body {
   background-position: -1px -1px;
   color: var(--ice-white, #eff0f2);
 }
+
+/* ── F1 Custom Cursor & Smoke Layer ─────────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  html, body {
+    cursor: url('/cursors/f1-cursor.svg') 11 11, auto;
+  }
+
+  a, button, [role="button"], input[type="submit"], input[type="button"] {
+    cursor: url('/cursors/f1-cursor.svg') 11 11, pointer;
+  }
+
+  input[type="text"], input[type="email"], input[type="search"], textarea, [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
+.smoke-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.smoke-puff {
+  position: absolute;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(220, 225, 235, 0.45) 0%, rgba(140, 150, 165, 0.22) 50%, rgba(90, 100, 115, 0) 80%);
+  transform: translate(-50%, -50%);
+  animation: smokeFade 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  filter: blur(1.5px);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+@keyframes smokeFade {
+  0% {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.4) translateY(-8px);
+  }
+}
+
 body:has(dialog[open]) {
   overflow: hidden;
 }
@@ -2648,13 +2694,180 @@ body:has(.homepage-refined) .brand-school {
   color: var(--color-accent-text);
 }
 
-/* Persistent radio: compact by default, no automatic media request. */
-.pit-radio { position:fixed; right:20px; bottom:20px; z-index:50; color:var(--white); font-size:13px; }
-.pit-radio-bar { display:flex; align-items:center; gap:8px; background:var(--graphite); border:1px solid var(--color-border); border-radius:30px; padding:5px 12px 5px 5px; }
-.pit-radio button { background:none; color:inherit; border:0; min-height:36px; }
-.pit-radio .radio-play { width:36px; border-radius:50%; background:var(--color-accent); color:var(--color-on-accent); }
-.pit-radio-bar button:last-child { display:flex; gap:20px; align-items:center; }
-.pit-radio-panel { max-width:260px; background:var(--graphite); border:1px solid var(--color-border); padding:20px; margin-bottom:10px; }
-.pit-radio-panel p { color:var(--muted); margin:8px 0; }
-.pit-radio-panel label { display:grid; gap:8px; }
-@media(max-width:600px) { .pit-radio { bottom:12px; right:12px; } }
+/* ── F1 PitRadio Player & Team Comms ───────────────────────────────────── */
+.pit-radio { position:fixed; right:20px; bottom:20px; z-index:100; color:var(--ice-white, #eff0f2); font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+.pit-radio-bar {
+  display:flex; align-items:center; gap:10px;
+  background:rgba(23, 28, 35, 0.94);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:40px;
+  padding:5px 14px 5px 6px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(217,74,91,0.1);
+  backdrop-filter:blur(12px);
+  transition:all 0.3s ease;
+}
+.pit-radio-bar.is-playing {
+  border-color:rgba(217,74,91,0.5);
+  box-shadow:0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(217,74,91,0.25);
+}
+.pit-radio button { background:none; color:inherit; border:0; min-height:36px; cursor:pointer; }
+.pit-radio .radio-play {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--color-accent, #d94a5b);
+  color:#fff; display:flex; align-items:center; justify-content:center;
+  transition:transform 0.2s, background 0.2s;
+  flex-shrink:0;
+}
+.pit-radio .radio-play:hover { background:#e45a6b; transform:scale(1.05); }
+.radio-bars-active { display:inline-flex; align-items:flex-end; gap:2.5px; height:12px; }
+.radio-bars-active span {
+  width:2.5px; background:#fff; border-radius:1px;
+  animation:pitRadioEq 0.65s ease-in-out infinite alternate;
+}
+.radio-bars-active span:nth-child(1) { height:6px; animation-delay:0.1s; }
+.radio-bars-active span:nth-child(2) { height:12px; animation-delay:0.3s; }
+.radio-bars-active span:nth-child(3) { height:8px; animation-delay:0.2s; }
+@keyframes pitRadioEq { 0% { height:3px; } 100% { height:13px; } }
+.radio-play-icon { font-size:12px; margin-left:2px; }
+.radio-toggle-btn { display:flex; align-items:center; gap:12px; font-size:11px; font-weight:700; letter-spacing:0.1em; }
+.radio-expand-icon { font-size:14px; color:var(--color-accent, #d94a5b); }
+
+.pit-radio-panel {
+  width:290px;
+  background:rgba(18, 22, 28, 0.95);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:10px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.6);
+  backdrop-filter:blur(16px);
+  animation:pitPanelIn 0.25s ease-out;
+}
+@keyframes pitPanelIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.pit-radio-panel-header { display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px; margin-bottom:10px; }
+.pit-radio-track-info { margin-bottom:12px; }
+.pit-radio-title { font-weight:700; font-size:13px; color:#fff; margin:0 0 2px 0; font-family:var(--font-display), sans-serif; text-transform:uppercase; letter-spacing:0.02em; }
+.pit-radio-artist { font-size:11px; color:#9ea6af; margin:0; line-height:1.4; }
+.pit-radio-controls-row { display:flex; align-items:center; justify-content:space-between; gap:12px; border-top:1px solid rgba(255,255,255,0.08); padding-top:10px; }
+.pit-radio-mute-btn { font-size:10px; padding:3px 8px; border-radius:4px; border:1px solid rgba(255,255,255,0.12); color:#9ea6af; }
+.pit-radio-mute-btn:hover { color:#fff; border-color:var(--color-accent, #d94a5b); }
+.pit-radio-slider { width:100px; accent-color:var(--color-accent, #d94a5b); cursor:pointer; }
+@media(max-width:600px) { .pit-radio { bottom:12px; right:12px; } .pit-radio-panel { width:calc(100vw - 24px); max-width:320px; } }
+
+/* ── Homepage v2 section overrides ───────────────────────────────────────── */
+.fx-section--event {
+  background: var(--color-background);
+}
+.fx-section--council {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.fx-section--council .fx-heading {
+  color: var(--color-text-primary);
+}
+.fx-section--lab-band {
+  /* full-bleed band, no padding */
+}
+/* Make sure fx-feature-poster image shows correctly on dark bg */
+.fx-section--event .fx-feature-poster {
+  border: 1px solid var(--color-border);
+}
+/* Accent color for on-calendar eyebrow pulse dot */
+.fx-section--event .fx-status::before {
+  background: var(--color-accent);
+  color: var(--color-accent);
+}
+/* Ensure on-dark headings in event section are white */
+.fx-section--event .fx-heading {
+  color: var(--color-text-primary);
+}
+.fx-section--event .fx-text {
+  color: var(--color-text-secondary);
+}
+.fx-section--event .fx-event-facts dt { color: var(--color-accent); }
+.fx-section--event .fx-event-facts dd { color: var(--color-text-primary); }
+
+/* ── Council Cohort Feature (Homepage) ─────────────────────────────────── */
+.fx-cohort-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 16px;
+}
+.fx-cohort-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--gunmetal, #30363e);
+  background: #0d1014;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+.fx-cohort-frame img {
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fx-cohort-frame:hover img {
+  transform: scale(1.02);
+}
+.fx-cohort-telemetry {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 18px;
+  background: linear-gradient(180deg, transparent 0%, rgba(13, 16, 20, 0.95) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #9ea6af;
+}
+.fx-cohort-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .fx-cohort-copy {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+.fx-cohort-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ── Arcade Mini-Game Pill ─────────────────────────────────────────────── */
+.fx-arcade-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #eff0f2;
+  background: rgba(217, 74, 91, 0.12);
+  border: 1px solid rgba(217, 74, 91, 0.35);
+  transition: all 0.2s ease;
+}
+.fx-arcade-pill:hover {
+  background: rgba(217, 74, 91, 0.25);
+  border-color: #d94a5b;
+  box-shadow: 0 0 16px rgba(217, 74, 91, 0.3);
+  transform: translateY(-1px);
+}
+.fx-arcade-flag {
+  font-size: 14px;
+}
+
+

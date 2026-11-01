@@ -18,17 +18,17 @@ const previewClips = {
 /** Fill only after web rights are confirmed. Empty video gives a safe fallback. */
 const approvedIntro = {
   src: '', // e.g. /media/intro-approved.mp4
-  poster: '/media/flux-racer.webp',
-  audioSrc: '', // Only loaded after an explicit sound click.
+  poster: '/media/flux-emblem.svg',
+  audioSrc: '/media/f1-soundtrack.mp3', // Sourced from user's music folder
   source: '',
   originalStartSeconds: 0,
 }
 export const introMedia = {
   ...approvedIntro,
+  audioSrc: '/media/f1-soundtrack.mp3',
   ...(preview
     ? {
         ...previewClips[previewClip],
-        audioSrc: '/api/preview-media/intro-reference.m4a',
       }
     : {}),
 }

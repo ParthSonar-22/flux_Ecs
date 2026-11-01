@@ -11,10 +11,12 @@ import { Arrow } from '@/components/ui/arrow'
 const items = [
   ['Home', '/'],
   ['Events', '/events'],
-  ['Council', '/about#council'],
+  ['Blog', '/blog'],
+  ['Resources', '/resources'],
   ['About', '/about'],
   ['Contact', '/contact'],
 ]
+
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -47,12 +49,6 @@ export default function Navbar() {
         <Link href="/" aria-label="FluxECS home" className="brand">
           <Logo className="official-emblem" />
           <LogoWordmark className="official-wordmark" />
-          <span className="brand-divider" />
-          <span className="brand-school">
-            VESIT
-            <br />
-            ECS COUNCIL
-          </span>
         </Link>
         <nav className="desktop-nav" aria-label="Main navigation">
           {items.map(([label, href]) => (
@@ -66,7 +62,7 @@ export default function Navbar() {
           ))}
         </nav>
         <Link href="/contact" className="nav-cta">
-          Let’s build <Arrow />
+          Get in touch <Arrow />
         </Link>
         <button
           type="button"
@@ -100,7 +96,7 @@ export default function Navbar() {
           transition={{ duration: reduced ? 0 : 0.2 }}
         >
           <div className="mobile-menu-head">
-            <span className="mono">FLUXECS / NAVIGATION</span>
+            <span className="mono">FluxECS / Navigation</span>
             <button
               type="button"
               onClick={closeMenu}
@@ -123,9 +119,10 @@ export default function Navbar() {
               </Link>
             ))}
           </nav>
-          <p className="mono">ELECTRONICS & COMPUTER SCIENCE · VESIT</p>
+          <p className="mono">Electronics &amp; Computer Science Council</p>
         </motion.div>
       </dialog>
     </>
+
   )
 }

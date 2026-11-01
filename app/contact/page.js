@@ -1,181 +1,158 @@
 import Reveal from '@/components/Reveal'
 import ContactForm from '@/components/ContactForm'
-import { EMAIL, GITHUB, INSTAGRAM, ADDRESS, WHATSAPP_URL } from '@/data/site'
+import { EMAIL, GITHUB, INSTAGRAM, LINKEDIN, ADDRESS } from '@/data/site'
 import { coreExec } from '@/data/team'
 
 export const metadata = {
-  title: 'Contact us',
+  title: 'Contact Secretariat | FluxECS VESIT',
   description:
-    'Get in touch with FLUX-ECS, the technical club of the Department of Electronics & Computer Science, VESIT.',
+    'Get in touch with FluxECS, the technical student council for Electronics & Computer Science at VESIT, Mumbai.',
 }
 
 export default function ContactPage() {
   return (
     <Reveal>
-      <div className="flex flex-col w-full">
-        {/* Page header */}
-        <section className="w-full bg-paper border-b-2 border-ink px-4 lg:px-margin py-space-lg lg:py-space-xl">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-end">
-            <div className="lg:col-span-8 flex flex-col space-y-4">
-              <span className="handwritten-eyebrow text-xl sm:text-3xl font-bold text-brick mb-1">
-                Get in touch with FLUX-ECS
+      <div className="flex flex-col w-full bg-transparent text-[#EFF0F2] min-h-screen">
+        {/* Header */}
+        <header className="w-full px-6 lg:px-12 pt-36 pb-12 border-b border-white/10">
+          <div className="max-w-7xl mx-auto flex flex-col space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1B2026] border border-white/15 w-fit">
+              <span className="w-2 h-2 rounded-full bg-[#D94A5B]" />
+              <span className="font-mono text-xs text-[#9EA6AF] uppercase tracking-wider">
+                Direct Secretariat Communications
               </span>
-              <h1 className="font-display-hero text-3xl sm:text-4xl md:text-display-hero text-ink leading-[0.95] tracking-tight font-bold">
-                Contact Us
-              </h1>
-              <p className="font-body-lg text-base sm:text-body-lg text-muted max-w-2xl pt-2">
-                Questions about events, workshops or anything else? Fill in the form below or reach us directly.
-              </p>
             </div>
 
-            {/* Quick info card */}
-            <div className="lg:col-span-4 bg-card border border-ink/30 p-space-md">
-              <div className="space-y-3">
-                <div className="flex justify-between items-center border-b border-ink/20 pb-2">
-                  <span className="font-label-smallcaps text-xs uppercase tracking-wider text-ink font-bold">Department</span>
-                  <span className="font-complexity-notation text-xs font-bold text-brick">ECS · VESIT</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-ink/20 pb-2">
-                  <span className="font-label-smallcaps text-xs uppercase tracking-wider text-ink font-bold">Location</span>
-                  <span className="font-complexity-notation text-xs font-bold text-ink">2nd Floor, VESIT</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="font-label-smallcaps text-xs uppercase tracking-wider text-ink font-bold">Labs</span>
-                  <span className="font-complexity-notation text-xs font-bold text-muted">201, 203, 215</span>
-                </div>
-              </div>
-            </div>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white uppercase leading-[1.05]">
+              Contact Us.
+            </h1>
+
+            <p className="text-base sm:text-lg text-[#9EA6AF] max-w-2xl leading-relaxed font-body">
+              Have questions about upcoming tournaments, open bench hours in Lab 201, or technical workshops? Send a direct dispatch below.
+            </p>
           </div>
-        </section>
+        </header>
 
-        {/* Main body */}
-        <section className="w-full px-4 lg:px-margin py-space-xl bg-paper">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
-            {/* LEFT: Contact info */}
-            <div className="lg:col-span-5 flex flex-col space-y-space-lg">
-              <div className="border-2 border-ink bg-card shadow-[4px_4px_0px_var(--brick)] p-space-md lg:p-space-lg flex flex-col space-y-space-md">
-                <div className="border-b border-ink/30 pb-space-sm">
-                  <h2 className="font-headline-sm text-headline-sm text-ink font-bold">
-                    Contact info
+        {/* Content */}
+        <main className="w-full px-6 lg:px-12 py-16">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Left Channels */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="bg-[#12161C] border border-white/10 rounded-xl p-6 sm:p-7 space-y-6 shadow-xl">
+                <div className="border-b border-white/10 pb-4">
+                  <span className="font-mono text-xs uppercase tracking-widest text-[#D94A5B] font-bold block mb-1">
+                    Direct Channels
+                  </span>
+                  <h2 className="text-xl font-bold text-white font-display uppercase tracking-tight">
+                    Council Headquarters
                   </h2>
                 </div>
 
-                {/* Email and GitHub */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <a
-                    className="flex items-center justify-between p-3 bg-paper border border-ink/30 hover:bg-tan transition-colors group"
-                    href={`mailto:${EMAIL}`}
-                  >
-                    <div className="flex flex-col">
-                      <span className="font-label-smallcaps text-[11px] uppercase tracking-wider text-muted font-bold">Email</span>
-                      <span className="font-complexity-notation text-xs font-bold text-brick truncate">{EMAIL}</span>
-                    </div>
-                    <span className="material-symbols-outlined text-[18px] text-brick">mail</span>
-                  </a>
-                  <a
-                    className="flex items-center justify-between p-3 bg-paper border border-ink/30 hover:bg-tan transition-colors group"
-                    href={GITHUB}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <div className="flex flex-col">
-                      <span className="font-label-smallcaps text-[11px] uppercase tracking-wider text-muted font-bold">GitHub</span>
-                      <span className="font-complexity-notation text-xs font-bold text-ink truncate">Flux-ECS-Club</span>
-                    </div>
-                    <span className="material-symbols-outlined text-[18px] text-ink">terminal</span>
-                  </a>
-                </div>
-
-                {/* Instagram */}
-                <div className="bg-tan border border-ink/30 p-3 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="font-label-smallcaps text-xs uppercase tracking-wider text-ink font-bold">Instagram:</span>
+                <div className="space-y-3 font-mono text-xs">
+                  <div className="p-3 bg-[#171C23] border border-white/10 rounded-lg flex items-center justify-between">
+                    <span className="text-gray-400">EMAIL:</span>
+                    <a className="text-[#D94A5B] font-bold hover:underline inline-flex items-center gap-1.5" href={`mailto:${EMAIL}`}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 text-[#D94A5B] shrink-0">
+                        <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                      </svg>
+                      <span>{EMAIL}</span>
+                    </a>
                   </div>
-                  <a
-                    className="font-complexity-notation text-xs font-bold text-brick hover:underline"
-                    href={INSTAGRAM}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    @flux.ecs
-                  </a>
+
+                  <div className="p-3 bg-[#171C23] border border-white/10 rounded-lg flex items-center justify-between">
+                    <span className="text-gray-400">INSTAGRAM:</span>
+                    <a
+                      className="text-white hover:text-[#D94A5B] transition-colors inline-flex items-center gap-1.5"
+                      href={INSTAGRAM}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 text-[#D94A5B] shrink-0">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                      <span>@flux.ecs</span>
+                      <span className="text-[11px] leading-none">↗</span>
+                    </a>
+                  </div>
+
+                  <div className="p-3 bg-[#171C23] border border-white/10 rounded-lg flex items-center justify-between">
+                    <span className="text-gray-400">LINKEDIN:</span>
+                    <a
+                      className="text-white hover:text-[#D94A5B] transition-colors inline-flex items-center gap-1.5"
+                      href={LINKEDIN}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 text-[#D94A5B] shrink-0">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                      </svg>
+                      <span>Tinkerers&apos; Lab ECS</span>
+                      <span className="text-[11px] leading-none">↗</span>
+                    </a>
+                  </div>
+
+                  <div className="p-3 bg-[#171C23] border border-white/10 rounded-lg flex items-center justify-between">
+                    <span className="text-gray-400">GITHUB:</span>
+                    <a
+                      className="text-white hover:text-[#D94A5B] transition-colors inline-flex items-center gap-1.5"
+                      href={GITHUB}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 text-[#D94A5B] shrink-0">
+                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                        <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                      </svg>
+                      <span>Flux-ECS-Club</span>
+                      <span className="text-[11px] leading-none">↗</span>
+                    </a>
+                  </div>
                 </div>
 
-                {/* Address */}
-                <div className="space-y-2 border-t border-ink/20 pt-space-sm">
-                  <span className="font-label-smallcaps text-xs uppercase tracking-widest text-muted flex items-center gap-1.5 font-bold">
-                    <span className="material-symbols-outlined text-[16px] text-brick">location_on</span>
-                    Address
+                <div className="pt-4 border-t border-white/10 space-y-2">
+                  <span className="font-mono text-xs uppercase tracking-wider text-gray-400 block font-semibold">
+                    Lab Location
                   </span>
-                  <p className="font-body-md text-body-md text-ink leading-snug">
+                  <p className="text-sm text-gray-300 leading-relaxed">
                     {ADDRESS}
                   </p>
                 </div>
 
-                {/* Phone numbers */}
-                <div className="space-y-2 border-t border-ink/20 pt-space-sm">
-                  <h3 className="font-label-smallcaps text-xs uppercase tracking-widest text-ink font-bold pb-1">
-                    Call us
-                  </h3>
-                  <div className="divide-y divide-ink/10 bg-paper border border-ink/20">
+                <div className="pt-4 border-t border-white/10 space-y-3">
+                  <span className="font-mono text-xs uppercase tracking-wider text-gray-400 block font-semibold">
+                    Council Officers Hotline
+                  </span>
+                  <div className="space-y-2 font-mono text-xs">
                     {coreExec
-                      .filter((c) => c.phone)
-                      .map((c) => (
-                      <div key={c.name} className="p-2.5 flex items-center justify-between">
-                        <div>
-                          <p className="font-title-editorial text-sm font-bold text-ink">{c.name}</p>
-                          <span className="font-complexity-notation text-[10px] uppercase text-brick font-bold">{c.role}</span>
+                      .filter(c => c.phone)
+                      .slice(0, 4)
+                      .map(c => (
+                        <div key={c.name} className="flex items-center justify-between p-2.5 bg-[#171C23] rounded border border-white/5">
+                          <div>
+                            <span className="text-white font-semibold block">{c.name}</span>
+                            <span className="text-[10px] text-[#D94A5B] uppercase">{c.role}</span>
+                          </div>
+                          <a href={`tel:${c.phone.replace(/\s+/g, '')}`} className="text-gray-300 hover:text-white">
+                            {c.phone}
+                          </a>
                         </div>
-                        <a
-                          className="font-complexity-notation text-xs text-ink hover:text-brick hover:underline font-bold"
-                          href={`tel:${c.phone.replace(/\s+/g, '')}`}
-                        >
-                          {c.phone}
-                        </a>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* RIGHT: Form */}
-            <div className="lg:col-span-7 flex flex-col space-y-space-lg">
+            {/* Right Form */}
+            <div className="lg:col-span-7">
               <ContactForm />
             </div>
           </div>
-        </section>
-
-        {/* WhatsApp banner */}
-        <section className="w-full px-4 lg:px-margin py-space-lg bg-paper">
-          <div className="max-w-7xl mx-auto">
-            <div className="bg-brick text-paper border-2 border-ink shadow-[6px_6px_0px_var(--ink)] p-space-md lg:p-space-lg relative overflow-hidden">
-              <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                <div className="space-y-2 max-w-3xl">
-                  <h3 className="font-headline-lg text-xl sm:text-2xl md:text-headline-lg text-paper tracking-tight font-bold">
-                    Join the Algorithm&apos;s Auction WhatsApp group
-                  </h3>
-                  <p className="font-body-md text-sm sm:text-body-md text-paper/90 max-w-2xl leading-relaxed">
-                    Get problem statements, team-up requests and timing updates in real time during the event.
-                  </p>
-                </div>
-                <div className="flex-shrink-0 w-full sm:w-auto">
-                  <a
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:py-4 bg-paper text-ink border-2 border-ink font-label-smallcaps text-label-smallcaps uppercase tracking-wider shadow-[4px_4px_0px_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all font-bold group text-center"
-                    href={WHATSAPP_URL}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <span>Join WhatsApp Group</span>
-                    <span className="material-symbols-outlined text-[20px] text-brick group-hover:rotate-45 transition-transform">
-                      arrow_outward
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        </main>
       </div>
     </Reveal>
   )

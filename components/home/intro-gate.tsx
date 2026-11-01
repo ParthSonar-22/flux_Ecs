@@ -6,6 +6,12 @@ import IntroBoundary from '@/components/ui/intro-boundary'
 import LogoFull from '@/components/LogoFull'
 import LogoConstruction from './logo-construction'
 import { introMedia, introSettings } from '@/data/media'
+import {
+  playRadio,
+  pauseRadio,
+  subscribeRadio,
+  isRadioPlaying,
+} from '@/lib/radio-player'
 
 const CinemaGrainPreloader = dynamic(
   () => import('@/components/ui/cinema-grain-preloader'),
@@ -17,10 +23,20 @@ export default function IntroGate() {
   const dialog = useRef<HTMLDialogElement>(null)
   const replay = useRef<HTMLButtonElement>(null)
   const [active, setActive] = useState(false)
-  const [stage, setStage] = useState<'cinema' | 'logo'>('cinema')
+  const [stage, setStage] = useState<'cinema' | 'handoff' | 'logo'>('cinema')
   const [sound, setSound] = useState(false)
-  const audio = useRef<HTMLAudioElement | null>(null)
+  const closing = useRef(false)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return subscribeRadio(isPlaying => {
+      setSound(isPlaying)
+    })
+  }, [])
+
   const finish = useCallback(() => {
+    if (closing.current) return
+    closing.current = true
     const el = dialog.current
     if (!el) {
       setActive(false)
@@ -30,13 +46,13 @@ export default function IntroGate() {
     el.style.opacity = '0'
     el.style.transform = 'scale(0.98)'
 
-    setTimeout(() => {
+    closeTimer.current = setTimeout(() => {
       el.close()
       el.style.opacity = '1'
       el.style.transform = 'none'
       setActive(false)
-      setSound(false)
-      audio.current?.pause()
+      // Note: If intro sound was ON, keep it playing seamlessly via PitRadio!
+      // If it was OFF, it remains OFF.
       try {
         sessionStorage.setItem(SESSION_KEY, '1')
       } catch {
@@ -45,12 +61,13 @@ export default function IntroGate() {
       window.dispatchEvent(new Event('flux:intro-complete'))
     }, 450)
   }, [])
+
   const start = useCallback(() => {
-    audio.current?.pause()
-    if (audio.current) audio.current.currentTime = 0
+    closing.current = false
+    if (closeTimer.current) clearTimeout(closeTimer.current)
     setStage('cinema')
     setActive(true)
-    setSound(false)
+    setSound(isRadioPlaying())
     if (dialog.current) {
       dialog.current.style.opacity = '1'
       dialog.current.style.transform = 'none'
@@ -58,6 +75,7 @@ export default function IntroGate() {
     }
     window.dispatchEvent(new Event('flux:intro-start'))
   }, [])
+
   useEffect(() => {
     let seen = false
     try {
@@ -79,10 +97,11 @@ export default function IntroGate() {
     reduce.addEventListener('change', change)
     return () => {
       clearTimeout(timer)
+      if (closeTimer.current) clearTimeout(closeTimer.current)
       reduce.removeEventListener('change', change)
-      audio.current?.pause()
     }
   }, [start, finish])
+
   useEffect(() => {
     if (!active) return
     const previous = document.body.style.overflow
@@ -94,29 +113,21 @@ export default function IntroGate() {
       document.body.style.overflow = previous
     }
   }, [active, finish])
+
   const showLogo = useCallback(() => {
-    audio.current?.pause()
-    setSound(false)
-    setStage('logo')
+    // Keep sound playing through the logo construction
+    setStage('handoff')
   }, [])
-  async function toggleSound() {
-    if (!introMedia.audioSrc) return
-    if (!audio.current) {
-      audio.current = new Audio(introMedia.audioSrc)
-      audio.current.volume = 0.35
-    }
+
+  const toggleSound = useCallback(async () => {
     if (sound) {
-      audio.current.pause()
+      pauseRadio()
       setSound(false)
-      return
+    } else {
+      const ok = await playRadio()
+      setSound(ok)
     }
-    try {
-      await audio.current.play()
-      setSound(true)
-    } catch {
-      setSound(false)
-    }
-  }
+  }, [sound])
   return (
     <>
       <button
@@ -131,12 +142,13 @@ export default function IntroGate() {
         ref={dialog}
         className="intro-dialog"
         aria-label="Optional FluxECS cinematic intro"
-        onCancel={finish}
+        onCancel={e => { e.preventDefault(); finish() }}
         onClose={() => {
           if (active) finish()
         }}
       >
-        {active && stage === 'cinema' && (
+        {active && stage !== 'logo' && (
+          <div className="intro-cinema-layer">
           <IntroBoundary>
             <CinemaGrainPreloader
               word="FLUX"
@@ -145,12 +157,14 @@ export default function IntroGate() {
               poster={introMedia.poster}
               shaderPreset="cinema"
               speed={introSettings.speed}
-              onComplete={showLogo}
+              onExitStart={showLogo}
+              onComplete={() => setStage('logo')}
             />
           </IntroBoundary>
+          </div>
         )}
-        {active && stage === 'logo' && <LogoConstruction onComplete={finish} />}
-        <div className="intro-top" hidden={stage === 'logo'}>
+        {active && stage !== 'cinema' && <LogoConstruction onComplete={finish} />}
+        <div className="intro-top" hidden={stage !== 'cinema'}>
           <span className="intro-official-logo">
             <LogoFull className="w-full h-full" />
           </span>
@@ -163,7 +177,7 @@ export default function IntroGate() {
               type="button"
               aria-pressed={sound}
               onClick={toggleSound}
-              disabled={!introMedia.audioSrc || stage === 'logo'}
+              disabled={!introMedia.audioSrc}
             >
               {introMedia.audioSrc
                 ? `Sound ${sound ? 'on' : 'off'}`

@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-page-custom-font -- Shared App Router root layout, not a per-page font. */
 import localFont from 'next/font/local'
 import './globals.css'
+import './design-system.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import PitRadio from '@/components/ui/PitRadio'
+import CursorSmoke from '@/components/ui/CursorSmoke'
 
 const display = localFont({
   src: '../public/fonts/BarlowCondensed-Bold.ttf',
@@ -55,6 +57,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        <CursorSmoke />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>

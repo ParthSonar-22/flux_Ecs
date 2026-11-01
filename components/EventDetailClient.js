@@ -61,7 +61,7 @@ export default function EventDetailClient({ event }) {
   const posterSrc = event.poster_url || event.poster || ''
 
   return (
-    <article className="min-h-screen bg-[#0D1014] text-[#EFF0F2] pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+    <article className="min-h-screen bg-transparent text-[#EFF0F2] pt-28 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto space-y-10">
         {/* Navigation Breadcrumb */}
         <div>

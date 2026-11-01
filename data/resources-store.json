@@ -1,0 +1,68 @@
+[
+  {
+    "id": "res-1",
+    "title": "STM32F401RE Pinout & Clock Tree Reference Guide",
+    "description": "Comprehensive reference document covering GPIO multiplexing, AF pin assignments, timer channels, and hardware power rail decoupling.",
+    "category": "Embedded",
+    "type": "PDF",
+    "url": "/resources/stm32f4-pinout-guide.pdf",
+    "size": "2.4 MB",
+    "author": "FluxECS Embedded Division",
+    "updatedAt": "2026-10-24"
+  },
+  {
+    "id": "res-2",
+    "title": "FluxECS FreeRTOS STM32 Dual-Core Starter Repo",
+    "description": "Production-ready CMake + Ninja project boilerplate with NVIC priority groupings, UART circular DMA logging, and preemptive task scheduling.",
+    "category": "Embedded",
+    "type": "Repository",
+    "url": "https://github.com/Flux-ECS-Club",
+    "size": "GitHub Repo",
+    "author": "Parth Sonar",
+    "updatedAt": "2026-10-20"
+  },
+  {
+    "id": "res-3",
+    "title": "ROS 2 Humble & Nav2 Navigation Tuning Manual",
+    "description": "Official lab documentation for cartographer SLAM, costmap layer inflation radius calculation, and TEB local planner kinematic constraints.",
+    "category": "Robotics",
+    "type": "PDF",
+    "url": "/resources/ros2-nav2-tuning.pdf",
+    "size": "1.8 MB",
+    "author": "Abhishek Chaudhari Sir",
+    "updatedAt": "2026-10-18"
+  },
+  {
+    "id": "res-4",
+    "title": "Differential Drive Autonomous Chassis Schematics",
+    "description": "Full hardware schematic diagrams including dual H-bridge motor drivers, optical encoder pull-ups, and buck converter power distribution.",
+    "category": "Robotics",
+    "type": "PDF",
+    "url": "/resources/robotics-chassis-schematic.pdf",
+    "size": "4.1 MB",
+    "author": "Robotics Lab Cohort",
+    "updatedAt": "2026-10-15"
+  },
+  {
+    "id": "res-5",
+    "title": "High-Throughput Telemetry & Stream Algorithms Cheat Sheet",
+    "description": "Summary reference sheet for monotonic queues, segment trees, binary indexed trees (BIT), and online sliding window filters for telemetry sensors.",
+    "category": "DSA",
+    "type": "Cheat Sheet",
+    "url": "/resources/telemetry-algorithms.pdf",
+    "size": "1.2 MB",
+    "author": "Rohit Agrawal",
+    "updatedAt": "2026-10-10"
+  },
+  {
+    "id": "res-6",
+    "title": "KiCad 8 FluxECS Component Footprint & Symbol Library",
+    "description": "Standardized symbols, 3D STEP models, and verified footprints for STM32, ESP32, CAN transceivers, and surface-mount passives.",
+    "category": "Hardware",
+    "type": "ZIP Archive",
+    "url": "/resources/kicad-fluxecs-library.zip",
+    "size": "8.5 MB",
+    "author": "Yogesh Pandit Sir",
+    "updatedAt": "2026-09-28"
+  }
+]

@@ -61,27 +61,49 @@ export default function EventsView({ initialEvents = [] }) {
   }, [initialEvents, activeTab])
 
   return (
-    <div className="min-h-screen bg-[#0D1014] text-[#EFF0F2] pt-28 pb-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-transparent text-[#EFF0F2] pt-28 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Subtle F1 Circuit background */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.06] z-0 overflow-hidden">
+        <Image
+          src="/backgrounds/circuit.jpg"
+          alt="Circuit telemetry backdrop"
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* ==============================================================
             PAGE HEADER: Clean academic & engineering identity (Carbon & Crimson)
            ============================================================== */}
-        <header className="mb-10 space-y-3">
+        <header className="mb-6 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-gray-400">
-            <span>Department of Electronics &amp; Computer Science</span>
-            <span>·</span>
-            <span>VESIT</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D94A5B]" />
+            <span>Council Proceedings Docket · 2026-27</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white uppercase font-display">
-            Events
+            Events &amp; Competitions
           </h1>
 
           <p className="text-sm sm:text-base text-gray-400 max-w-2xl leading-relaxed">
-            Technical tournaments, hands-on workshops, and exhibitions organized by the
-            Department of Electronics &amp; Computer Science, VESIT.
+            Technical tournaments, hands-on workshops, and algorithmic exhibitions hosted by FluxECS.
           </p>
+
+          {/* Animated F1 Racing Line Trace */}
+          <div className="w-full h-6 overflow-hidden pt-2 pointer-events-none" aria-hidden="true">
+            <svg className="w-full h-full" viewBox="0 0 1000 24" fill="none">
+              <path
+                d="M0 12 C 220 22, 420 2, 680 18 C 840 28, 940 6, 1000 12"
+                stroke="#D94A5B"
+                strokeWidth="2.2"
+                strokeDasharray="8 6"
+                opacity="0.75"
+              />
+            </svg>
+          </div>
         </header>
+
 
         {/* ==============================================================
             TAB SWITCHER: Upcoming vs Past

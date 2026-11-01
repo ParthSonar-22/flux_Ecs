@@ -1,0 +1,118 @@
+{
+  "hero": {
+    "overlineDept": "Electronics & Computer Science",
+    "overlineSchool": "VESIT · Mumbai",
+    "headlineLine1": "From circuits",
+    "headlineLine2": "to code.",
+    "lead": "A council for the things we build. And the people who build them.",
+    "primaryCtaText": "Explore events",
+    "primaryCtaLink": "/events",
+    "secondaryCtaText": "Meet FluxECS",
+    "secondaryCtaLink": "/about"
+  },
+  "heroSlides": [
+    {
+      "id": "slide-1",
+      "src": "/photos/iota-lab201-crowd.jpg",
+      "alt": "Students at an IoTA lab event",
+      "title": "IoTA Lab Gatherings",
+      "caption": "Hands-on tech workshops and lab exhibitions in Lab 201",
+      "enabled": true
+    },
+    {
+      "id": "slide-2",
+      "src": "/photos/iota-robotics-chassis-presentation.jpg",
+      "alt": "Robotics chassis presentation",
+      "title": "Robotics Engineering",
+      "caption": "Autonomous navigation, motor control and chassis demonstrations",
+      "enabled": true
+    },
+    {
+      "id": "slide-3",
+      "src": "/photos/iota-lab201-group.jpg",
+      "alt": "FluxECS group session in Lab 201",
+      "title": "Lab Sessions",
+      "caption": "Peer mentorship across embedded firmware and systems",
+      "enabled": true
+    },
+    {
+      "id": "slide-4",
+      "src": "/photos/iota-tinkerers-lab-cohort.jpg",
+      "alt": "FluxECS cohort at Tinkerers' Lab",
+      "title": "Tinkerers' Lab Cohort",
+      "caption": "Collaborative hardware prototyping and circuit testing",
+      "enabled": true
+    },
+    {
+      "id": "slide-5",
+      "src": "/photos/iota-lab201-robot-demo.jpg",
+      "alt": "Robot demonstration in Lab 201",
+      "title": "Microcontroller Demos",
+      "caption": "Real-time sensor arrays and control testing",
+      "enabled": true
+    }
+  ],
+  "featuredEventSection": {
+    "eyebrow": "On the calendar",
+    "viewAllText": "All events"
+  },
+  "councilSection": {
+    "eyebrow": "The council",
+    "heading": "The people behind the grid.",
+    "lead": "Hardware prototyping, competitive algorithms, workshops and active time in the lab bring our student cohorts together.",
+    "image": "/photos/iota-tinkerers-lab-cohort.jpg",
+    "caption": "FluxECS student council cohort and faculty mentors at Tinkerers' Lab",
+    "ctaText": "Meet the full council",
+    "ctaLink": "/about#council"
+  },
+  "labBandSection": {
+    "eyebrow": "Inside the lab",
+    "heading": "Student-led. Built together.",
+    "buttonText": "Meet FluxECS"
+  },
+  "aboutPage": {
+    "badge": "Council Overview · Department of ECS",
+    "headline": "THE PEOPLE BEHIND FLUXECS.",
+    "introParagraph": "FluxECS is the technical student council representing the Department of Electronics & Computer Science at Vivekanand Education Society's Institute of Technology (VESIT), Chembur. We bridge the intersection between physical silicon and algorithmic software through competitive problem-solving, hands-on lab prototyping, and peer engineering mentorship."
+  },
+  "socials": {
+    "instagram": "https://www.instagram.com/flux.ecs/",
+    "linkedin": "https://in.linkedin.com/company/tinkerers-lab-ecs",
+    "email": "flux.ecs@ves.ac.in",
+    "github": "https://github.com/Flux-ECS-Club"
+  },
+  "arcadeConfig": {
+    "enabled": true,
+    "homepageBadge": true,
+    "durationSeconds": 30,
+    "difficulty": "medium",
+    "title": "Flux Grand Prix",
+    "description": "Race a 30-second sprint collecting Software, Hardware and Robotics checkpoints"
+  },
+  "notionBlocks": [
+    {
+      "id": "block-1",
+      "type": "h1",
+      "content": "FluxECS Engineering Directive 2026",
+      "style": { "bold": true, "fontFamily": "display", "fontSize": "text-3xl", "color": "#eff0f2" }
+    },
+    {
+      "id": "block-2",
+      "type": "callout",
+      "content": "Official Announcement: Lab 201 open bench sessions commence every Tuesday and Thursday afternoon for hardware prototyping.",
+      "style": { "italic": false, "fontFamily": "sans", "fontSize": "text-sm", "color": "#d94a5b" }
+    },
+    {
+      "id": "block-3",
+      "type": "h2",
+      "content": "Key Academic & Competition Milestones",
+      "style": { "bold": true, "fontFamily": "display", "fontSize": "text-xl", "color": "#eff0f2" }
+    },
+    {
+      "id": "block-4",
+      "type": "p",
+      "content": "Students working across robotics chassis, embedded STM32 firmware, and full-stack web platforms are invited to showcase ongoing work during council office hours.",
+      "style": { "italic": false, "fontFamily": "sans", "fontSize": "text-base", "color": "#9ea6af" }
+    }
+  ]
+}

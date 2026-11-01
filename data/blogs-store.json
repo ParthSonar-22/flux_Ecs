@@ -1,0 +1,118 @@
+[
+  {
+    "id": "blog-1",
+    "slug": "stm32-firmware-engineering-guide",
+    "title": "STM32 Bare-Metal & HAL Firmware Engineering: A Practical Primer",
+    "summary": "Deep dive into ARM Cortex-M architecture, memory-mapped peripheral registers, NVIC interrupts, DMA channels, and setting up clean FreeRTOS tasks for real-time control.",
+    "category": "Embedded",
+    "tags": ["Embedded", "STM32", "Firmware", "FreeRTOS", "C++"],
+    "author": {
+      "name": "Parth Sonar",
+      "role": "Technical Lead · FluxECS"
+    },
+    "publishedAt": "2026-10-24T10:00:00.000Z",
+    "readTime": "8 min read",
+    "coverImage": "/photos/iota-electrical-lab-discussion.png",
+    "isFeatured": true,
+    "status": "published",
+    "content": "### Introduction to ARM Cortex-M Embedded Architecture\n\nWhen developing low-latency embedded systems for robotics chassis and telemetry sensors, understanding register-level memory mapping is vital. While HAL (Hardware Abstraction Layer) simplifies rapid prototyping, production-grade automotive and motorsport electronics demand direct register manipulation (LL) to minimize clock cycle overhead.\n\n```c\n// Direct Register Configuration for TIM2 PWM Output (PA0)\nvoid TIM2_PWM_Init(void) {\n    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;    // Enable GPIOA clock\n    RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;     // Enable TIM2 clock\n\n    GPIOA->MODER |= (2U << (0 * 2));        // Alternate function mode\n    GPIOA->AFR[0] |= (1U << (0 * 4));       // AF1 = TIM2_CH1\n\n    TIM2->PSC = 16 - 1;                     // 16 MHz / 16 = 1 MHz timer clock\n    TIM2->ARR = 1000 - 1;                   // 1 kHz PWM frequency\n    TIM2->CCR1 = 500;                       // 50% initial duty cycle\n    TIM2->CCMR1 |= (6U << TIM_CCMR1_OC1M_Pos); // PWM Mode 1\n    TIM2->CCER |= TIM_CCER_CC1E;            // Enable Channel 1 output\n    TIM2->CR1 |= TIM_CR1_CEN;               // Start counter\n}\n```\n\n### Direct Memory Access (DMA) for Continuous Telemetry\n\nPolling UART in control loops introduces jitter. By configuring circular DMA streams on UART RX/TX, sensor payloads stream directly into SRAM buffers without interrupting the CPU core during motor PID computation.\n\n> [!TIP]\n> Always double-buffer DMA transfer memory to prevent race conditions between incoming CAN/UART packets and telemetry state estimators.\n\n### Lab Bench Checklist\n1. Measure clock skew using digital storage oscilloscope (Lab 201).\n2. Verify reset vector and vector table relocation in flash memory.\n3. Validate interrupt priority grouping in SCB->AIRCR.",
+    "attachments": [
+      {
+        "title": "STM32F401RE Pinout & Clock Tree Reference",
+        "type": "PDF",
+        "url": "/resources/stm32f4-pinout-guide.pdf",
+        "size": "2.4 MB"
+      },
+      {
+        "title": "FluxECS FreeRTOS Starter Template Repository",
+        "type": "REPO",
+        "url": "https://github.com/Flux-ECS-Club",
+        "size": "GitHub"
+      }
+    ]
+  },
+  {
+    "id": "blog-2",
+    "slug": "autonomous-robotics-ros2-navigation",
+    "title": "Autonomous Robotics with ROS 2 Humble: LiDAR SLAM to Micro-ROS Bridge",
+    "summary": "Step-by-step walkthrough of building a differential-drive ground vehicle, integrating RPLiDAR A1 with Nav2, and establishing a micro-ROS XRCE-DDS bridge over ESP32 Wi-Fi.",
+    "category": "Robotics",
+    "tags": ["Robotics", "ROS 2", "LiDAR", "ESP32", "Nav2"],
+    "author": {
+      "name": "Abhishek Chaudhari Sir",
+      "role": "Faculty Advisor · Tinkerers' Lab"
+    },
+    "publishedAt": "2026-10-18T14:30:00.000Z",
+    "readTime": "11 min read",
+    "coverImage": "/photos/iota-robotics-chassis-presentation.jpg",
+    "isFeatured": true,
+    "status": "published",
+    "content": "### Architecture Overview: High-Level Navigation Meets Real-Time Control\n\nAutonomous navigation requires decoupling high-compute path planning from microsecond-precise motor odometry. In our Lab 203 setup, a Raspberry Pi 5 runs Ubuntu 24.04 and ROS 2 Humble, while an ESP32 micro-ROS client drives dual optical encoder motors.\n\n```python\n# ROS 2 Velocity Telemetry Subscriber & Safety Guard\nimport rclpy\nfrom rclpy.node import Node\nfrom geometry_msgs.msg import Twist\n\nclass MotorSafetyGuard(Node):\n    def __init__(self):\n        super().__init__('motor_safety_guard')\n        self.subscription = self.create_subscription(\n            Twist,\n            '/cmd_vel',\n            self.cmd_vel_callback,\n            10\n        )\n        self.get_logger().info('FluxECS Navigation Safety Node Initialized')\n\n    def cmd_vel_callback(self, msg: Twist):\n        # Clamp linear velocity to laboratory safety threshold (0.8 m/s)\n        safe_linear = max(-0.8, min(0.8, msg.linear.x))\n        safe_angular = max(-1.5, min(1.5, msg.angular.z))\n        # Dispatch to motor PWM controller...\n```\n\n### Cartographer SLAM Optimization\n\nTo achieve sub-centimeter localization inside campus corridors:\n- Set `submaps.num_range_data = 70` for indoor grid stability.\n- Calibrate wheel separation baseline using the open floor test track in Lab 201.\n- Synchronize IMU 6-DOF covariance matrices using `robot_localization` EKF.",
+    "attachments": [
+      {
+        "title": "FluxECS Differential Drive Chassis Schematics",
+        "type": "PDF",
+        "url": "/resources/robotics-chassis-schematic.pdf",
+        "size": "4.1 MB"
+      },
+      {
+        "title": "ROS 2 Nav2 Parameter Configuration Deck",
+        "type": "PDF",
+        "url": "/resources/ros2-nav2-tuning.pdf",
+        "size": "1.8 MB"
+      }
+    ]
+  },
+  {
+    "id": "blog-3",
+    "slug": "dsa-graph-algorithms-f1-telemetry",
+    "title": "Sliding Window & Monotonic Queues for High-Throughput Telemetry Processing",
+    "summary": "Exploring how competitive programming data structures optimize high-frequency sensor streams, outlier detection, and optimal race trajectory calculation in real time.",
+    "category": "DSA",
+    "tags": ["DSA", "Algorithms", "C++", "Sliding Window", "Optimization"],
+    "author": {
+      "name": "Rohit Agrawal",
+      "role": "Algorithms Lead · FluxECS"
+    },
+    "publishedAt": "2026-10-10T09:15:00.000Z",
+    "readTime": "6 min read",
+    "coverImage": "/photos/iota-lab201-group.jpg",
+    "isFeatured": false,
+    "status": "published",
+    "content": "### Real-Time Peak Detection in 1000 Hz Sensor Streams\n\nWhen a Formula car navigates curbs or sudden braking zones, vertical accelerometers report spikes over 20G. A naive window maximum takes O(k) per sample, causing buffer bloat. Using a monotonic double-ended queue (`std::deque`), we track the sliding window maximum in amortized O(1) time.\n\n```cpp\n#include <vector>\n#include <deque>\n\nstd::vector<float> slidingWindowPeak(const std::vector<float>& telemetry, int k) {\n    std::deque<int> dq;\n    std::vector<float> peaks;\n\n    for (int i = 0; i < (int)telemetry.size(); ++i) {\n        // Pop elements outside the current window of size k\n        if (!dq.empty() && dq.front() <= i - k) {\n            dq.pop_front();\n        }\n        // Maintain monotonic decreasing order in the deque\n        while (!dq.empty() && telemetry[dq.back()] <= telemetry[i]) {\n            dq.pop_back();\n        }\n        dq.push_back(i);\n        if (i >= k - 1) {\n            peaks.push_back(telemetry[dq.front()]);\n        }\n    }\n    return peaks;\n}\n```\n\n### Complexity Benchmark\n- Space Complexity: O(k) auxiliary memory\n- Time Complexity: O(N) linear scan over 50,000 telemetry points per stint.",
+    "attachments": [
+      {
+        "title": "Telemetry Algorithms Cheat Sheet",
+        "type": "PDF",
+        "url": "/resources/telemetry-algorithms.pdf",
+        "size": "1.2 MB"
+      }
+    ]
+  },
+  {
+    "id": "blog-4",
+    "slug": "kicad-pcb-design-high-speed-routing",
+    "title": "KiCad 8 Multi-Layer PCB Design: Controlled Impedance & EMI Mitigation",
+    "summary": "A hands-on guide to 4-layer stackups (SIG-GND-PWR-SIG), differential pair routing for USB 2.0 & CAN FD, and passing lab EMI pre-compliance checks.",
+    "category": "Hardware",
+    "tags": ["Hardware", "KiCad", "PCB", "Hardware Prototyping"],
+    "author": {
+      "name": "Yogesh Pandit Sir",
+      "role": "Faculty Mentor · Hardware Systems"
+    },
+    "publishedAt": "2026-09-28T16:00:00.000Z",
+    "readTime": "9 min read",
+    "coverImage": "/photos/iota-lab201-robot-demo.jpg",
+    "isFeatured": false,
+    "status": "published",
+    "content": "### Stackup Architecture: Why 4 Layers Outperforms 2 Layers\n\nIn high-frequency embedded designs, ground plane continuity dictates loop inductance. By routing high-speed differential pairs directly adjacent to a solid internal ground plane (Layer 2), return currents travel directly beneath signal traces, preventing radiated emissions.\n\n### Design Rules for Lab Prototyping\n- 90 ohm differential impedance for USB D+/D- pairs.\n- 120 ohm termination resistor across CAN bus endpoints.\n- Decoupling capacitors (100nF + 10uF) placed directly at microcontroller VDD pins before routing vias.",
+    "attachments": [
+      {
+        "title": "KiCad 8 FluxECS Design Rules & Component Footprint Library",
+        "type": "ZIP",
+        "url": "/resources/kicad-fluxecs-library.zip",
+        "size": "8.5 MB"
+      }
+    ]
+  }
+]

@@ -21,6 +21,7 @@ export default function LogoConstruction({
       import('animejs')
         .then(({ createTimeline, svg }) => {
           if (!live || !root.current) return
+          root.current.dataset.animating = 'true'
           const lines =
             root.current.querySelectorAll<SVGGeometryElement>('[data-guide]')
           const emblem =
@@ -67,7 +68,7 @@ export default function LogoConstruction({
             )
           dispose = () => timeline.revert()
         })
-        .catch(() => {})
+        .catch(() => { if (root.current) delete root.current.dataset.animating })
     }
     return () => {
       live = false

@@ -115,6 +115,34 @@ Core Goals:
        per user request. The homepage now transitions cleanly from RacingHero directly to
        the Featured Event and the authentic Lab Photo Band, without any redundant roster cards or telemetry.
 
+14. "also wo instan linkedin ka jo hai icons those are not aligned fix em. and when i turn the intro sound ON keep it on only affter intro finishes OFF hai toh OFF hi baki that option is there only"
+    -> Social Icons Alignment & Harmonization:
+       - In halftone-wordmark-footer.module.css: Replaced blunt .contact a selector with scoped
+         .socialRow, .socialBtn, and .emailText classes, eliminating broken baseline alignment and
+         unwanted margin-top inheritance on icon buttons.
+       - Replaced the mismatched solid-block LinkedIn SVG with the matching Lucide stroke icon
+         (24x24 viewBox, stroke-width 2, rounded caps/joins), ensuring Instagram, LinkedIn,
+         Mail, and GitHub icons share identical geometry, line weight, and 36x36px flex centering.
+       - Added matching aligned icons with inline-flex alignment to Instagram and LinkedIn links
+         in app/about/page.js and app/contact/page.js.
+    -> Intro Sound Continuation & Global Persistence:
+       - Unified audio control so IntroGate controls the master PitRadio engine via
+         'flux:radio-play', 'flux:radio-pause', and 'flux:radio-change' events.
+       - Configured data/media.ts to reference /media/f1-soundtrack.mp3.
+       - Removed audio.pause() and setSound(false) on finish() and showLogo() in intro-gate.tsx.
+         When the user turns sound ON in the intro, playback continues seamlessly through the logo
+         and into the live site; if OFF, it remains OFF.
+       - Floating PitRadio widget remains permanently accessible on all pages for user control.
+
+15. "cant hear intro sound on intro fix it as well"
+    -> Created lib/radio-player.ts: Built a centralized client-side singleton audio manager
+       (globalAudio with preload='auto', volume=0.65, state listeners, and isRadioPlaying()).
+    -> Rewired IntroGate: Calling toggleSound() invokes playRadio() directly within the synchronous
+       user click callstack, eliminating browser gesture blocks and CustomEvent race conditions.
+    -> Unified PitRadio and IntroGate: Both components now bind directly to the singleton radio
+       engine, ensuring the sound plays immediately upon user click, transitions smoothly across
+       intro completion/skip without pausing, and remains togglable via the floating PitRadio bar.
+
 --------------------------------------------------------------------------------
 3. ARCHITECTURE & KEY FILE OVERVIEW
 --------------------------------------------------------------------------------

@@ -1,264 +1,97 @@
-/* ==========================================================================
-   F1 Precision Engineering Hero - Carbon & Crimson
-   Minimal editorial typography, F1 pit-wall telemetry accents,
-   micro-equalizer team radio controller, and restrained motion.
-   ========================================================================== */
 
+/* ── Hero wrapper ─────────────────────────────────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 130px 6% 36px;
-  background: var(--carbon-black, #0d1014);
-  color: var(--ice-white, #eff0f2);
+  isolation: isolate;
+  min-height: 100svh;
+  max-height: 1250px;
   overflow: hidden;
+  background: var(--carbon-black, #0d1014);
+  display: flex;
+  flex-direction: column;
 }
 
-.heroInner {
+/* content wrapper: :global so it applies to the global .fx-container class */
+.hero :global(.fx-container) {
+  padding-top: 130px;
+  padding-bottom: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  z-index: 10;
-  width: 100%;
-  max-width: 1240px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
-  gap: 48px;
+  z-index: 3;
 }
 
-/* ==========================================================================
-   Editorial Header: Institution & Headline
-   ========================================================================== */
-
-.heroHeader {
+/* ── Overline row ──────────────────────────────────────────────────────────── */
+.overline {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 860px;
-  padding-top: 24px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--titanium, #9ea6af);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding-bottom: 36px;
+}
+
+/* ── Headline ─────────────────────────────────────────────────────────────── */
+.composition {
+  padding: 4px 0 70px;
 }
 
 .headline {
-  font-family: var(--font-display, sans-serif);
-  font-weight: 800;
-  font-size: clamp(48px, 7vw, 92px);
-  line-height: 0.94;
-  letter-spacing: -0.025em;
-  color: var(--ice-white, #eff0f2);
-  margin: 0 0 24px 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(72px, 8.8vw, 136px);
+  line-height: .95;
+  letter-spacing: -.035em;
   text-transform: uppercase;
+  margin: 0 0 28px;
 }
 
 .lineMask {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.08em;
+  padding-bottom: .05em;
 }
 
-.lineInner {
+.lineMask > span {
   display: block;
-  transform-origin: left bottom;
-  will-change: transform, opacity;
 }
 
-.accentWord {
+.outline {
   color: var(--titanium, #9ea6af);
-  font-weight: 400;
 }
 
-.leadText {
-  font-size: clamp(15px, 1.35vw, 18px);
-  line-height: 1.65;
+.lead {
   color: var(--titanium, #9ea6af);
-  max-width: 620px;
-  margin: 0 0 32px 0;
+  font-size: 20px;
+  line-height: 1.55;
+  margin: 0 0 32px;
 }
 
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px;
-}
-
-.primaryButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 26px;
-  background: var(--crimson, #d94a5b);
-  color: var(--ice-white, #eff0f2);
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 18px rgba(217, 74, 91, 0.35);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
-}
-
-.primaryButton:hover {
-  background: #e45a6b;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(217, 74, 91, 0.45);
-}
-
-.secondaryLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ice-white, #eff0f2);
-  background: rgba(27, 32, 38, 0.7);
-  border: 1px solid rgba(48, 54, 62, 0.8);
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
-}
-
-.secondaryLink:hover {
-  background: rgba(48, 54, 62, 0.9);
-  border-color: var(--titanium, #9ea6af);
-}
-
-
-
-/* ==========================================================================
-   Bottom Toolbar & F1 Pit Radio Controller
-   ========================================================================== */
-
-.toolbar {
+/* ── Bottom toolbar ──────────────────────────────────────────────────────── */
+.heroBottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
+  padding: 23px 0;
+  border-top: 1px solid rgba(255,255,255,.12);
   color: var(--titanium, #9ea6af);
-  padding-top: 24px;
-  border-top: 1px solid rgba(48, 54, 62, 0.6);
+  font-size: 13px;
+  margin-top: auto;
 }
 
-.toolbarLeft {
+.heroBottom p { margin: 0; }
+
+.heroBottom a {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 34px;
+  min-height: 44px;
 }
 
-.councilLabel {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-}
-
-.scrollLink {
-  color: var(--titanium, #9ea6af);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.scrollLink:hover {
-  color: var(--ice-white, #eff0f2);
-}
-
-.toolbar :global(.replay-intro) {
-  font-size: 11px;
-  color: var(--titanium, #9ea6af);
-}
-
-/* F1 Pit Radio / Audio Widget */
-.audioWidget {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 12px;
-  background: rgba(27, 32, 38, 0.85);
-  border: 1px solid rgba(48, 54, 62, 0.8);
-  border-radius: 9999px;
-  color: var(--titanium, #9ea6af);
-  font-size: 10.5px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
-}
-
-.audioWidget:hover {
-  background: rgba(48, 54, 62, 0.9);
-  color: var(--ice-white, #eff0f2);
-  border-color: var(--titanium, #9ea6af);
-}
-
-.audioActive {
-  background: rgba(217, 74, 91, 0.15) !important;
-  border-color: var(--crimson, #d94a5b) !important;
-  color: var(--ice-white, #eff0f2) !important;
-}
-
-.audioGlyph {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.playArrow {
-  font-size: 9px;
-  color: var(--crimson, #d94a5b);
-}
-
-.pauseBars {
-  display: inline-flex;
-  gap: 2px;
-  width: 8px;
-  height: 9px;
-}
-
-.pauseBars span {
-  width: 2.5px;
-  height: 100%;
-  background: var(--crimson, #d94a5b);
-  border-radius: 1px;
-}
-
-.audioText {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-}
-
-.equalizerBars {
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 11px;
-  margin-left: 2px;
-}
-
-.equalizerBars span {
-  width: 2px;
-  background: var(--crimson, #d94a5b);
-  border-radius: 1px;
-  animation: eqJump 0.65s ease-in-out infinite alternate;
-}
-
-.equalizerBars span:nth-child(1) { height: 5px; animation-delay: 0.1s; }
-.equalizerBars span:nth-child(2) { height: 11px; animation-delay: 0.3s; }
-.equalizerBars span:nth-child(3) { height: 7px; animation-delay: 0.2s; }
-
-@keyframes eqJump {
-  0% { height: 2px; }
-  100% { height: 11px; }
-}
-
-/* Logo Construction Classes (Required by logo-construction.tsx) */
+/* ── Logo Construction (intro animation) ─────────────────────────────────── */
 .construction {
   position: absolute;
   inset: 0;
@@ -275,7 +108,7 @@
   position: absolute;
   width: min(80vw, 700px);
   max-height: 80vh;
-  color: var(--crimson, #d94a5b);
+  color: var(--color-accent);
   opacity: 0.65;
 }
 
@@ -286,7 +119,7 @@
 }
 
 .constructEmblem path {
-  fill-opacity: 0;
+  fill-opacity: 1;
   stroke: currentColor;
   stroke-width: 1.5;
 }
@@ -298,49 +131,29 @@
   margin-top: 22px;
 }
 
-.constructWordmark path {
-  opacity: 0;
+.constructWordmark path { opacity: 1; }
+
+@media(prefers-reduced-motion:reduce) {
+  .constructEmblem path { fill-opacity:1; stroke:none; }
+  .constructWordmark path { opacity:1; }
+  .guides { display:none; }
 }
 
-/* Responsive Adaptations */
-@media (max-width: 900px) {
-  .hero {
-    padding: 105px 20px 30px;
-  }
-  .actions {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: 12px;
-  }
-  .primaryButton, .secondaryLink {
-    width: 100%;
-    justify-content: center;
-  }
-  .toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .toolbarLeft {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
+.construction[data-animating="true"] .constructEmblem path { fill-opacity: 0; }
+.construction[data-animating="true"] .constructWordmark path { opacity: 0; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media(max-width:1000px) {
+  .headline { font-size: 8.6vw; }
+  .lead { font-size: 18px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .equalizerBars span {
-    animation: none;
-  }
-  .constructEmblem path {
-    fill-opacity: 1;
-    stroke: none;
-  }
-  .constructWordmark path {
-    opacity: 1;
-  }
-  .guides {
-    display: none;
-  }
+@media(max-width:700px) {
+  .hero :global(.fx-container) { padding-top: 100px; }
+  .overline { padding-bottom: 24px; font-size: 10px; }
+  .composition { padding-bottom: 24px; }
+  .headline { font-size: clamp(60px, 15vw, 106px); margin-bottom: 18px; }
+  .lead { font-size: 17px; margin-bottom: 20px; }
+  .heroBottom { gap: 12px; padding: 14px 0; }
+  .heroBottom a { gap: 14px; }
 }

@@ -1,229 +1,207 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useRef, useEffect } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
+import { useEffect, useRef, useState } from 'react'
 import { Arrow } from '@/components/ui/arrow'
 import IntroGate from './intro-gate'
-import KineticGrid from '@/components/ui/kinetic-grid'
 import styles from './identity-hero.module.css'
 
-export default function RacingHero() {
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false)
-  const heroRef = useRef<HTMLElement | null>(null)
-  const headerRef = useRef<HTMLDivElement | null>(null)
+const SLIDES = [
+  { src: '/photos/iota-lab201-crowd.jpg',        alt: 'Students at an IoTA lab event' },
+  { src: '/photos/iota-robotics-chassis-presentation.jpg', alt: 'Robotics chassis presentation' },
+  { src: '/photos/iota-lab201-group.jpg',        alt: 'FluxECS group session in Lab 201' },
+  { src: '/photos/iota-tinkerers-lab-cohort.jpg', alt: "FluxECS cohort at Tinkerers' Lab" },
+  { src: '/photos/iota-lab201-robot-demo.jpg',   alt: 'Robot demonstration in Lab 201' },
+]
 
-  // Listen to global Pit Radio events to keep hero audio widget synchronized
-  useEffect(() => {
-    const handleRadioChange = (e: Event) => {
-      const customEvent = e as CustomEvent<{ isPlaying: boolean }>
-      if (customEvent?.detail?.isPlaying !== undefined) {
-        setIsPlayingAudio(customEvent.detail.isPlaying)
-      }
-    }
+export interface HeroSlide {
+  id?: string
+  src: string
+  alt: string
+  title?: string
+  caption?: string
+  enabled?: boolean
+}
 
-    window.addEventListener('flux:radio-change', handleRadioChange)
-    // Query initial state on mount
-    window.dispatchEvent(new CustomEvent('flux:query-radio'))
+export interface HeroContent {
+  overlineDept?: string
+  overlineSchool?: string
+  headlineLine1?: string
+  headlineLine2?: string
+  lead?: string
+  primaryCtaText?: string
+  primaryCtaLink?: string
+  secondaryCtaText?: string
+  secondaryCtaLink?: string
+}
 
-    return () => {
-      window.removeEventListener('flux:radio-change', handleRadioChange)
-    }
-  }, [])
+export default function RacingHero({
+  slides: initialSlides,
+  content: initialContent,
+  onLaunchArcade,
+}: {
+  slides?: HeroSlide[]
+  content?: HeroContent
+  onLaunchArcade?: () => void
+}) {
+  const root = useRef<HTMLElement>(null)
+  const [current, setCurrent] = useState(0)
 
-  const toggleGlobalAudio = () => {
-    window.dispatchEvent(new CustomEvent('flux:toggle-radio'))
+  const activeSlides = (initialSlides && initialSlides.length > 0)
+    ? initialSlides.filter(s => s.enabled !== false)
+    : SLIDES
+  const slides = activeSlides.length > 0 ? activeSlides : SLIDES
+
+  const heroContent = {
+    overlineDept: initialContent?.overlineDept || 'Engineering Council',
+    overlineSchool: initialContent?.overlineSchool || 'VESIT · Mumbai',
+    headlineLine1: initialContent?.headlineLine1 || 'From circuits',
+    headlineLine2: initialContent?.headlineLine2 || 'to code.',
+    lead: initialContent?.lead || 'A council for the things we build. And the people who build them.',
+    primaryCtaText: initialContent?.primaryCtaText || 'Explore events',
+    primaryCtaLink: initialContent?.primaryCtaLink || '/events',
+    secondaryCtaText: initialContent?.secondaryCtaText || 'Meet FluxECS',
+    secondaryCtaLink: initialContent?.secondaryCtaLink || '/about',
   }
 
-  // GSAP Kinetic Typography & Layout Entrance Timeline
-  useGSAP(
-    () => {
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (prefersReduced) {
-        gsap.set(`.${styles.lineInner}`, { y: '0%', opacity: 1, rotateZ: 0 })
-        gsap.set(`.${styles.leadText}`, { opacity: 1, y: 0 })
-        gsap.set(`.${styles.actions}`, { opacity: 1, y: 0 })
-        gsap.set(`.${styles.toolbar}`, { opacity: 1, y: 0 })
-        return
-      }
-
-      const tl = gsap.timeline({
-        defaults: { ease: 'power4.out' },
-      })
-
-      // 1. Kinetic headline staggered line mask reveal
-      tl.fromTo(
-        `.${styles.lineInner}`,
-        { y: '120%', opacity: 0, rotateZ: 2.5 },
-        {
-          y: '0%',
-          opacity: 1,
-          rotateZ: 0,
-          duration: 1.3,
-          stagger: 0.16,
-          ease: 'power4.out',
-        }
-      )
-
-      // 2. Editorial lead paragraph reveal
-      tl.fromTo(
-        `.${styles.leadText}`,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-        '-=0.85'
-      )
-
-      // 3. CTA Action buttons
-      tl.fromTo(
-        `.${styles.actions} > *`,
-        { y: 22, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' },
-        '-=0.7'
-      )
-
-      // 4. Toolbar footer
-      tl.fromTo(
-        `.${styles.toolbar}`,
-        { y: 16, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' },
-        '-=0.5'
-      )
-    },
-    { scope: heroRef }
-  )
-
-  // Subtle Interactive Mouse Parallax using GSAP
+  // ── Slideshow ──────────────────────────────────────────────────────────────
   useEffect(() => {
-    const hero = heroRef.current
-    const header = headerRef.current
-    if (!hero || !header) return
+    if (slides.length <= 1) return
+    const id = setInterval(() => {
+      setCurrent(c => (c + 1) % slides.length)
+    }, 5500)
+    return () => clearInterval(id)
+  }, [slides.length])
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) return
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = hero.getBoundingClientRect()
-      const xNorm = (e.clientX - rect.left) / rect.width - 0.5
-      const yNorm = (e.clientY - rect.top) / rect.height - 0.5
-
-      gsap.to(header, {
-        x: xNorm * 18,
-        y: yNorm * 12,
-        duration: 0.6,
-        ease: 'power2.out',
-        overwrite: 'auto',
-      })
-    }
-
-    const handleMouseLeave = () => {
-      gsap.to(header, {
-        x: 0,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        overwrite: 'auto',
-      })
-    }
-
-    hero.addEventListener('mousemove', handleMouseMove)
-    hero.addEventListener('mouseleave', handleMouseLeave)
-
-    return () => {
-      hero.removeEventListener('mousemove', handleMouseMove)
-      hero.removeEventListener('mouseleave', handleMouseLeave)
-    }
+  // ── GSAP reveal ───────────────────────────────────────────────────────────
+  useEffect(() => {
+    let active = true
+    let cleanup = () => {}
+    import('@/lib/gsap').then(({ gsap }) => {
+      if (!active || !root.current) return
+      const media = gsap.matchMedia()
+      media.add('(prefers-reduced-motion: no-preference)', () => {
+        const reveal = () => {
+          gsap.fromTo(
+            root.current!.querySelectorAll('[data-headline]'),
+            { yPercent: 105 },
+            { yPercent: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out', overwrite: true },
+          )
+        }
+        const timer = setTimeout(() => {
+          if (!document.querySelector('.intro-dialog[open]')) reveal()
+        }, 100)
+        window.addEventListener('flux:intro-complete', reveal)
+        return () => {
+          clearTimeout(timer)
+          window.removeEventListener('flux:intro-complete', reveal)
+        }
+      }, root)
+      cleanup = () => media.revert()
+    }).catch(() => {})
+    return () => { active = false; cleanup() }
   }, [])
 
   return (
-    <section ref={heroRef} className={styles.hero} id="hero" aria-labelledby="hero-heading">
-      {/* Interactive Kinetic Grid Background with subtle moody opacity */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20 transition-opacity duration-500">
-        <KineticGrid
-          globalColor="monochrome"
-          className="w-full h-full !h-full !min-h-full !bg-transparent"
-        />
+    <section
+      className={styles.hero}
+      ref={root}
+      aria-labelledby="hero-heading"
+      style={{ position: 'relative', overflow: 'hidden' }}
+    >
+      {/* ── Slideshow background ─────────────────────────────────────────── */}
+      <div className="fx-hero-slideshow">
+        {slides.map((slide, i) => (
+          <div key={slide.src + i} className={`fx-hero-slide${i === current ? ' is-active' : ''}`}>
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              sizes="100vw"
+              priority={i === 0}
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        ))}
+        <div className="fx-hero-shade" />
       </div>
 
-      <div className={styles.heroInner}>
-        {/* ==============================================================
-            HERO: GSAP KINETIC EDITORIAL TYPOGRAPHY
-           ============================================================== */}
-        <div ref={headerRef} className={styles.heroHeader}>
-          <h1 id="hero-heading" className={styles.headline}>
-            <div className={styles.lineMask}>
-              <span className={styles.lineInner}>FROM CIRCUITS</span>
-            </div>
-            <div className={styles.lineMask}>
-              <span className={`${styles.lineInner} ${styles.accentWord}`}>TO CODE.</span>
-            </div>
-          </h1>
+      {/* ── KineticGrid canvas overlay (lazy-loaded) ─────────────────────── */}
+      <KineticCanvas />
 
-          <p className={styles.leadText}>
-            The official student branch council for Electronics &amp; Computer Science at VESIT.
-            Engineered with motorsport precision: we build hardware, write competitive software,
-            and run the engineering community in between.
-          </p>
-
-          <div className={styles.actions}>
-            <a href="#featured-event" className={styles.primaryButton}>
-              <span>Explore Events</span>
-              <Arrow />
-            </a>
-            <Link href="/about" className={styles.secondaryLink}>
-              <span>About FluxECS</span>
-              <Arrow />
-            </Link>
+      {/* ── Content ──────────────────────────────────────────────────────── */}
+      <div className="fx-container fx-hero-content">
+        <div className={styles.overline}>
+          <span className="fx-eyebrow">{heroContent.overlineDept}</span>
+          <span>{heroContent.overlineSchool}</span>
+        </div>
+        <div className={styles.composition}>
+          <div className={styles.copy}>
+            <h1 id="hero-heading" className={styles.headline}>
+              <span className={styles.lineMask}><span data-headline>{heroContent.headlineLine1}</span></span>
+              <span className={styles.lineMask}>
+                <span data-headline>
+                  {heroContent.headlineLine2.startsWith('to ') ? (
+                    <>to <span className={styles.outline}>{heroContent.headlineLine2.replace(/^to\s*/i, '')}</span></>
+                  ) : (
+                    heroContent.headlineLine2
+                  )}
+                </span>
+              </span>
+            </h1>
+            <p className={styles.lead}>{heroContent.lead}</p>
+            <div className="fx-actions">
+              <Link className="fx-button" href={heroContent.primaryCtaLink}>{heroContent.primaryCtaText} <Arrow /></Link>
+              <Link className="fx-link" href={heroContent.secondaryCtaLink}>{heroContent.secondaryCtaText} <Arrow /></Link>
+              {onLaunchArcade && (
+                <button
+                  type="button"
+                  onClick={onLaunchArcade}
+                  className="fx-arcade-pill"
+                  aria-label="Play Flux Grand Prix mini-game"
+                >
+                  <span className="fx-arcade-flag">🏁</span> Play Flux Grand Prix
+                </button>
+              )}
+            </div>
           </div>
         </div>
-
-        {/* ==============================================================
-            BOTTOM TOOLBAR WITH INTRO GATE & SYNCED RADIO TOGGLE
-           ============================================================== */}
-        <footer className={styles.toolbar}>
-          <div className={styles.toolbarLeft}>
-            <IntroGate />
-
-            {/* F1 Team Radio Audio Toggle Button (Synced with Global Radio) */}
-            <button
-              type="button"
-              onClick={toggleGlobalAudio}
-              className={`${styles.audioWidget} ${isPlayingAudio ? styles.audioActive : ''}`}
-              aria-label={isPlayingAudio ? 'Turn radio off' : 'Turn radio on'}
-              title="Toggle F1 Soundtrack"
-            >
-              <span className={styles.audioGlyph}>
-                {isPlayingAudio ? (
-                  <span className={styles.pauseBars}>
-                    <span />
-                    <span />
-                  </span>
-                ) : (
-                  <span className={styles.playArrow}>▶</span>
-                )}
-              </span>
-
-              <span className={styles.audioText}>
-                {isPlayingAudio ? 'RADIO ON // LIVE' : 'TEAM RADIO'}
-              </span>
-
-              {isPlayingAudio && (
-                <span className={styles.equalizerBars}>
-                  <span />
-                  <span />
-                  <span />
-                </span>
-              )}
-            </button>
+        <div className={styles.heroBottom}>
+          <IntroGate />
+          {/* Slideshow dots */}
+          <div className="fx-hero-dots" aria-label="Slideshow progress">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                className={`fx-hero-dot${i === current ? ' is-active' : ''}`}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => setCurrent(i)}
+              />
+            ))}
           </div>
-
-          <span className={styles.councilLabel}>VESIT ECS COUNCIL · 2026</span>
-
-          <a href="#featured-event" className={styles.scrollLink}>
-            Scroll to explore ↓
+          <a href="#featured-event" aria-label="Discover our featured event">
+            Discover <span aria-hidden="true">↓</span>
           </a>
-        </footer>
+        </div>
       </div>
     </section>
+  )
+}
+
+// Lazy-loaded kinetic grid canvas — imported dynamically so it never blocks SSR
+function KineticCanvas() {
+  const [Comp, setComp] = useState<React.ComponentType<{ className?: string }> | null>(null)
+  useEffect(() => {
+    import('@/components/ui/kinetic-grid')
+      .then(m => setComp(() => m.default as unknown as React.ComponentType<{ className?: string }>))
+      .catch(() => {})
+  }, [])
+  if (!Comp) return null
+  return (
+    <div className="fx-kinetic-canvas" aria-hidden="true">
+      {/* @ts-expect-error – dynamic import, globalColor prop typed inside component */}
+      <Comp globalColor="monochrome" className="!bg-transparent" />
+    </div>
   )
 }

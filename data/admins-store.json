@@ -1,0 +1,20 @@
+[
+  {
+    "id": "super-admin-01",
+    "email": "buildwithaarya@gmail.com",
+    "name": "Aarya (Super Admin)",
+    "role": "super_admin",
+    "status": "active",
+    "addedAt": "2026-11-01T00:00:00.000Z",
+    "lastLogin": "2026-11-01T19:40:00.000Z"
+  },
+  {
+    "id": "admin-council-02",
+    "email": "fluxecs@vesit.edu",
+    "name": "FluxECS Secretariat",
+    "role": "admin",
+    "status": "active",
+    "addedAt": "2026-11-01T00:00:00.000Z",
+    "lastLogin": null
+  }
+]

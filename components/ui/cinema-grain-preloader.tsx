@@ -90,6 +90,7 @@ export interface CinemaGrainPreloaderProps {
   /** Root height. A definite length - never a percentage. */
   height?: string
   /** Fired once, when the gate has finished lifting. Never fires while looping. */
+  onExitStart?: () => void
   onComplete?: () => void
   /** Extra root class names */
   className?: string
@@ -354,6 +355,7 @@ export default function CinemaGrainPreloader({
   cubeSize = '88px',
   height = '100svh',
   onComplete,
+  onExitStart,
   className = '',
 }: CinemaGrainPreloaderProps) {
   const [progress, setProgress] = React.useState(0)
@@ -375,9 +377,11 @@ export default function CinemaGrainPreloader({
   // loop re-renders ~60x/s, and a dependency on onComplete identity would
   // tear down and restart the whole thing on every single frame.
   const onCompleteRef = React.useRef(onComplete)
+  const onExitRef = React.useRef(onExitStart)
   React.useEffect(() => {
     onCompleteRef.current = onComplete
-  }, [onComplete])
+    onExitRef.current = onExitStart
+  }, [onComplete, onExitStart])
 
   const resolvedGrade = React.useMemo<CinemaGrainGrade>(
     () => ({
@@ -585,7 +589,7 @@ export default function CinemaGrainPreloader({
         return
       }
       setProgress(100)
-      timers.push(setTimeout(() => setPhase('exiting'), 250 / speed))
+      timers.push(setTimeout(() => { setPhase('exiting'); if (!loop) onExitRef.current?.() }, 250 / speed))
 
       if (loop) {
         // Let the counter drop away, hold a beat, then run it again. The
@@ -593,14 +597,14 @@ export default function CinemaGrainPreloader({
         timers.push(setTimeout(() => setCycle((c) => c + 1), 250 / speed + 900))
         return
       }
-      // 550ms to start the gate fade, plus its own 750ms transition
+      // Complete exactly when the gate fade ends; the next scene is already underneath.
       timers.push(
         setTimeout(
           () => {
             setPhase('unlocked')
             onCompleteRef.current?.()
           },
-          550 / speed + 750,
+          250 / speed + 750,
         ),
       )
     }

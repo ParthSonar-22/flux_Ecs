@@ -22,8 +22,8 @@ export async function POST(req) {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get('flux_admin_token')?.value
-    if (!verifyAdminToken(token)) {
-      return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 })
+    if (!verifyAdminToken(token, 'super_admin')) {
+      return NextResponse.json({ ok: false, error: 'Unauthorized: Super Admin role required' }, { status: 403 })
     }
 
     const { email, name, role } = await req.json()
@@ -38,8 +38,8 @@ export async function DELETE(req) {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get('flux_admin_token')?.value
-    if (!verifyAdminToken(token)) {
-      return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 })
+    if (!verifyAdminToken(token, 'super_admin')) {
+      return NextResponse.json({ ok: false, error: 'Unauthorized: Super Admin role required' }, { status: 403 })
     }
 
     const { searchParams } = new URL(req.url)

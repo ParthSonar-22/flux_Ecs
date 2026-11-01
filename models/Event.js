@@ -64,13 +64,51 @@ const EventSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    order: {
-      type: Number,
-      default: 0,
+    timeline_image: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    is_published: {
+      type: Boolean,
+      default: true,
+    },
+    is_featured: {
+      type: Boolean,
+      default: false,
+    },
+    poster_url: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    registration_url: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    summary: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    rules: {
+      type: [String],
+      default: [],
+    },
+    eligibility: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    syllabus: {
+      type: mongoose.Schema.Types.Mixed,
+      default: [],
     },
   },
   {
     timestamps: true,
+    strict: false,
   }
 )
 

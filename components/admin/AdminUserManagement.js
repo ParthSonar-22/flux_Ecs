@@ -157,8 +157,9 @@ export default function AdminUserManagement() {
               onChange={e => setNewRole(e.target.value)}
               className="w-full bg-[#171C23] border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm font-mono outline-none"
             >
-              <option value="admin">Admin</option>
-              <option value="editor">Editor</option>
+              <option value="admin">Admin / Publisher</option>
+              <option value="editor">Editor (Drafts)</option>
+              <option value="media_editor">Media Editor</option>
               <option value="super_admin">Super Admin</option>
             </select>
           </div>

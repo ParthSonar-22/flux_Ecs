@@ -149,6 +149,31 @@ export default function EditPanel() {
     setContent({ ...content, heroSlides: updated })
   }
 
+  // Council & Faculty Roster Helpers
+  function updateCouncilMember(type, index, field, value) {
+    if (!content || !content[type]) return
+    const list = [...content[type]]
+    list[index] = { ...list[index], [field]: value }
+    setContent({ ...content, [type]: list })
+  }
+
+  function addCouncilMember(type) {
+    if (!content) return
+    const list = [...(content[type] || [])]
+    const isFaculty = type === 'faculty'
+    const newMember = isFaculty
+      ? { name: 'New Faculty Advisor', title: 'Faculty Mentor', dept: 'Dept. of Electronics & Computer Science, VESIT', photo: '' }
+      : { id: `member-${Date.now()}`, name: 'New Officer', role: 'Technical Officer', quote: '', photo: '' }
+    list.push(newMember)
+    setContent({ ...content, [type]: list })
+  }
+
+  function deleteCouncilMember(type, index) {
+    if (!content || !content[type]) return
+    const list = content[type].filter((_, i) => i !== index)
+    setContent({ ...content, [type]: list })
+  }
+
   // Blog Save Handler
   async function handleSaveBlog(e) {
     e.preventDefault()
@@ -651,6 +676,228 @@ export default function EditPanel() {
                       </option>
                     ))}
                   </select>
+                </div>
+              </div>
+
+              {/* Faculty Leadership Roster */}
+              <div className="pt-6 border-t border-white/10 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-sm font-bold text-white font-display uppercase tracking-wider">
+                      Faculty In-Charge Roster
+                    </h4>
+                    <p className="text-xs text-[#9EA6AF]">
+                      Manage department advisors and faculty mentors displayed on the About page
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => addCouncilMember('faculty')}
+                    className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/15 rounded text-xs font-mono text-white"
+                  >
+                    + Add Faculty
+                  </button>
+                </div>
+
+                <div className="space-y-3">
+                  {(content.faculty || []).map((f, i) => (
+                    <div key={i} className="p-3 bg-[#12161C] border border-white/10 rounded-lg grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                      <div className="sm:col-span-3">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Name</label>
+                        <input
+                          type="text"
+                          value={f.name || ''}
+                          onChange={e => updateCouncilMember('faculty', i, 'name', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-3">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Title / Role</label>
+                        <input
+                          type="text"
+                          value={f.title || ''}
+                          onChange={e => updateCouncilMember('faculty', i, 'title', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-3">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Department</label>
+                        <input
+                          type="text"
+                          value={f.dept || ''}
+                          onChange={e => updateCouncilMember('faculty', i, 'dept', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Photo URL</label>
+                        <input
+                          type="text"
+                          placeholder="/team/...jpg"
+                          value={f.photo || ''}
+                          onChange={e => updateCouncilMember('faculty', i, 'photo', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-1 text-right">
+                        <button
+                          type="button"
+                          onClick={() => deleteCouncilMember('faculty', i)}
+                          className="text-red-400 hover:text-red-300 text-xs p-1"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Senior Council Roster */}
+              <div className="pt-6 border-t border-white/10 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-sm font-bold text-white font-display uppercase tracking-wider">
+                      Senior Council Roster
+                    </h4>
+                    <p className="text-xs text-[#9EA6AF]">
+                      Third and final year executive council members
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => addCouncilMember('seniorCouncil')}
+                    className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/15 rounded text-xs font-mono text-white"
+                  >
+                    + Add Senior Officer
+                  </button>
+                </div>
+
+                <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
+                  {(content.seniorCouncil || []).map((m, i) => (
+                    <div key={m.id || i} className="p-3 bg-[#12161C] border border-white/10 rounded-lg grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                      <div className="sm:col-span-3">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Name</label>
+                        <input
+                          type="text"
+                          value={m.name || ''}
+                          onChange={e => updateCouncilMember('seniorCouncil', i, 'name', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-3">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Role</label>
+                        <input
+                          type="text"
+                          value={m.role || ''}
+                          onChange={e => updateCouncilMember('seniorCouncil', i, 'role', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-3">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Quote</label>
+                        <input
+                          type="text"
+                          value={m.quote || ''}
+                          onChange={e => updateCouncilMember('seniorCouncil', i, 'quote', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Photo URL</label>
+                        <input
+                          type="text"
+                          placeholder="/team/...jpg"
+                          value={m.photo || ''}
+                          onChange={e => updateCouncilMember('seniorCouncil', i, 'photo', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-1 text-right">
+                        <button
+                          type="button"
+                          onClick={() => deleteCouncilMember('seniorCouncil', i)}
+                          className="text-red-400 hover:text-red-300 text-xs p-1"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Junior Council Roster */}
+              <div className="pt-6 border-t border-white/10 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-sm font-bold text-white font-display uppercase tracking-wider">
+                      Junior Council Roster
+                    </h4>
+                    <p className="text-xs text-[#9EA6AF]">
+                      Second year student officers powering workshops and operations
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => addCouncilMember('juniorCouncil')}
+                    className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/15 rounded text-xs font-mono text-white"
+                  >
+                    + Add Junior Officer
+                  </button>
+                </div>
+
+                <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
+                  {(content.juniorCouncil || []).map((m, i) => (
+                    <div key={m.id || i} className="p-3 bg-[#12161C] border border-white/10 rounded-lg grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                      <div className="sm:col-span-3">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Name</label>
+                        <input
+                          type="text"
+                          value={m.name || ''}
+                          onChange={e => updateCouncilMember('juniorCouncil', i, 'name', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-3">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Role</label>
+                        <input
+                          type="text"
+                          value={m.role || ''}
+                          onChange={e => updateCouncilMember('juniorCouncil', i, 'role', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-3">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Quote</label>
+                        <input
+                          type="text"
+                          value={m.quote || ''}
+                          onChange={e => updateCouncilMember('juniorCouncil', i, 'quote', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <label className="block text-[10px] font-mono uppercase text-[#656D7A] mb-0.5">Photo URL</label>
+                        <input
+                          type="text"
+                          placeholder="/team/...jpg"
+                          value={m.photo || ''}
+                          onChange={e => updateCouncilMember('juniorCouncil', i, 'photo', e.target.value)}
+                          className="w-full bg-[#171C23] border border-white/10 rounded px-2.5 py-1 text-xs text-white"
+                        />
+                      </div>
+                      <div className="sm:col-span-1 text-right">
+                        <button
+                          type="button"
+                          onClick={() => deleteCouncilMember('juniorCouncil', i)}
+                          className="text-red-400 hover:text-red-300 text-xs p-1"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

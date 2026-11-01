@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Reveal from '@/components/Reveal'
-import { faculty, seniorCouncil, juniorCouncil } from '@/data/team'
+import { getSiteContent } from '@/lib/site-content'
 import { ADDRESS, EMAIL, GITHUB, INSTAGRAM, LINKEDIN } from '@/data/site'
 
 export const metadata = {
@@ -11,7 +11,7 @@ export const metadata = {
 }
 
 function getInitials(name) {
-  const clean = name.replace(/\b(Sir|Prof\.?|Dr\.?)\b/gi, '').trim()
+  const clean = (name || '').replace(/\b(Sir|Prof\.?|Dr\.?)\b/gi, '').trim()
   const parts = clean.split(/\s+/).filter(Boolean)
   if (parts.length >= 2) {
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
@@ -19,7 +19,19 @@ function getInitials(name) {
   return parts[0] ? parts[0].slice(0, 2).toUpperCase() : 'FX'
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const content = await getSiteContent()
+  const faculty = content.faculty || []
+  const seniorCouncil = content.seniorCouncil || []
+  const juniorCouncil = content.juniorCouncil || []
+  const aboutPage = content.aboutPage || {}
+  const socials = content.socials || {}
+
+  const currentEmail = socials.email || EMAIL
+  const currentGithub = socials.github || GITHUB
+  const currentInstagram = socials.instagram || INSTAGRAM
+  const currentLinkedin = socials.linkedin || LINKEDIN
+
   return (
     <Reveal>
       <div className="flex flex-col w-full bg-transparent text-[#EFF0F2] min-h-screen">
@@ -39,18 +51,16 @@ export default function AboutPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1B2026] border border-white/15 w-fit">
               <span className="w-2 h-2 rounded-full bg-[#D94A5B]" />
               <span className="font-mono text-xs text-[#9EA6AF] uppercase tracking-wider">
-                Council Overview · Department of ECS
+                {aboutPage.badge || 'Council Overview · Department of ECS'}
               </span>
             </div>
 
             <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white uppercase leading-[1.05]">
-              THE PEOPLE <br />
-              <span className="text-[#9EA6AF] font-normal">BEHIND FLUXECS.</span>
+              {aboutPage.headline || 'THE PEOPLE BEHIND FLUXECS.'}
             </h1>
 
-
             <p className="text-base sm:text-lg text-[#9EA6AF] max-w-3xl leading-relaxed font-body">
-              FluxECS is the technical student council representing the Department of Electronics &amp; Computer Science at Vivekanand Education Society&apos;s Institute of Technology (VESIT), Chembur. We bridge the intersection between physical silicon and algorithmic software through competitive problem-solving, hands-on lab prototyping, and peer engineering mentorship.
+              {aboutPage.introParagraph || "FluxECS is the technical student council representing the Department of Electronics & Computer Science at Vivekanand Education Society's Institute of Technology (VESIT), Chembur. We bridge the intersection between physical silicon and algorithmic software through competitive problem-solving, hands-on lab prototyping, and peer engineering mentorship."}
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -173,14 +183,26 @@ export default function AboutPage() {
                     </div>
 
                     {/* Photo slot / Initials Avatar space */}
-                    <div className="relative w-full aspect-[4/3] bg-gradient-to-b from-[#1B222C] to-[#11151A] border-b border-white/10 flex flex-col items-center justify-center p-6 text-center">
-                      <div className="w-24 h-24 rounded-full border-2 border-dashed border-[#D94A5B]/60 bg-[#D94A5B]/10 flex items-center justify-center text-white font-display text-3xl font-bold tracking-wider mb-3 shadow-[0_0_20px_rgba(217,74,91,0.2)] group-hover:scale-105 transition-transform duration-300">
-                        {initials}
+                    {f.photo ? (
+                      <div className="relative w-full aspect-[4/3] bg-[#0D1014] overflow-hidden border-b border-white/10">
+                        <Image
+                          src={f.photo}
+                          alt={f.name}
+                          fill
+                          className="object-cover object-top filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-500"
+                          sizes="(max-width: 768px) 100vw, 400px"
+                        />
                       </div>
-                      <span className="font-mono text-[11px] text-[#9EA6AF] uppercase tracking-wider">
-                        Official portrait pending
-                      </span>
-                    </div>
+                    ) : (
+                      <div className="relative w-full aspect-[4/3] bg-gradient-to-b from-[#1B222C] to-[#11151A] border-b border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                        <div className="w-24 h-24 rounded-full border-2 border-dashed border-[#D94A5B]/60 bg-[#D94A5B]/10 flex items-center justify-center text-white font-display text-3xl font-bold tracking-wider mb-3 shadow-[0_0_20px_rgba(217,74,91,0.2)] group-hover:scale-105 transition-transform duration-300">
+                          {initials}
+                        </div>
+                        <span className="font-mono text-[11px] text-[#9EA6AF] uppercase tracking-wider">
+                          Official portrait pending
+                        </span>
+                      </div>
+                    )}
 
                     {/* Metadata */}
                     <div className="p-6 flex flex-col flex-1 justify-between space-y-3">
@@ -243,15 +265,26 @@ export default function AboutPage() {
                   </div>
 
                   {/* Photo: Natural full vibrant color (NOT grayscale) */}
-                  <div className="relative w-full aspect-[4/5] bg-[#0D1014] overflow-hidden border-b border-white/10">
-                    <Image
-                      src={member.photo}
-                      alt={member.name}
-                      fill
-                      className="object-cover object-top filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-500"
-                      sizes="(max-width: 768px) 100vw, 300px"
-                    />
-                  </div>
+                  {member.photo ? (
+                    <div className="relative w-full aspect-[4/5] bg-[#0D1014] overflow-hidden border-b border-white/10">
+                      <Image
+                        src={member.photo}
+                        alt={member.name}
+                        fill
+                        className="object-cover object-top filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-500"
+                        sizes="(max-width: 768px) 100vw, 300px"
+                      />
+                    </div>
+                  ) : (
+                    <div className="relative w-full aspect-[4/5] bg-gradient-to-b from-[#1B222C] to-[#11151A] border-b border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                      <div className="w-20 h-20 rounded-full border-2 border-dashed border-[#D94A5B]/60 bg-[#D94A5B]/10 flex items-center justify-center text-white font-display text-2xl font-bold tracking-wider mb-2 shadow-[0_0_20px_rgba(217,74,91,0.2)] group-hover:scale-105 transition-transform duration-300">
+                        {getInitials(member.name)}
+                      </div>
+                      <span className="font-mono text-[11px] text-[#9EA6AF] uppercase tracking-wider">
+                        Portrait pending
+                      </span>
+                    </div>
+                  )}
 
                   <div className="p-5 flex flex-col flex-1 justify-between space-y-3">
                     <div>
@@ -309,15 +342,26 @@ export default function AboutPage() {
                   </div>
 
                   {/* Photo: Natural vibrant full color (NOT grayscale) */}
-                  <div className="relative w-full aspect-[4/5] bg-[#0D1014] overflow-hidden border-b border-white/10">
-                    <Image
-                      src={officer.photo}
-                      alt={officer.name}
-                      fill
-                      className="object-cover object-top filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-500"
-                      sizes="(max-width: 768px) 100vw, 240px"
-                    />
-                  </div>
+                  {officer.photo ? (
+                    <div className="relative w-full aspect-[4/5] bg-[#0D1014] overflow-hidden border-b border-white/10">
+                      <Image
+                        src={officer.photo}
+                        alt={officer.name}
+                        fill
+                        className="object-cover object-top filter brightness-95 group-hover:brightness-105 group-hover:scale-105 transition-all duration-500"
+                        sizes="(max-width: 768px) 100vw, 240px"
+                      />
+                    </div>
+                  ) : (
+                    <div className="relative w-full aspect-[4/5] bg-gradient-to-b from-[#1B222C] to-[#11151A] border-b border-white/10 flex flex-col items-center justify-center p-6 text-center">
+                      <div className="w-16 h-16 rounded-full border-2 border-dashed border-[#D94A5B]/60 bg-[#D94A5B]/10 flex items-center justify-center text-white font-display text-xl font-bold tracking-wider mb-2 shadow-[0_0_20px_rgba(217,74,91,0.2)] group-hover:scale-105 transition-transform duration-300">
+                        {getInitials(officer.name)}
+                      </div>
+                      <span className="font-mono text-[10px] text-[#9EA6AF] uppercase tracking-wider">
+                        Portrait pending
+                      </span>
+                    </div>
+                  )}
 
                   <div className="p-4 flex flex-col flex-1 justify-between space-y-2">
                     <div>
@@ -364,15 +408,15 @@ export default function AboutPage() {
                 <div className="pt-6 border-t border-white/10 space-y-3 font-mono text-xs">
                   <div className="flex items-center justify-between">
                     <span className="text-[#9EA6AF] uppercase">Official Email:</span>
-                    <a className="text-[#D94A5B] font-bold hover:underline" href={`mailto:${EMAIL}`}>
-                      {EMAIL}
+                    <a className="text-[#D94A5B] font-bold hover:underline" href={`mailto:${currentEmail}`}>
+                      {currentEmail}
                     </a>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-[#9EA6AF] uppercase">GitHub Organization:</span>
                     <a
                       className="text-white hover:text-[#D94A5B] transition-colors inline-flex items-center gap-1.5"
-                      href={GITHUB}
+                      href={currentGithub}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
@@ -388,7 +432,7 @@ export default function AboutPage() {
                     <span className="text-[#9EA6AF] uppercase">Instagram:</span>
                     <a
                       className="text-white hover:text-[#D94A5B] transition-colors inline-flex items-center gap-1.5"
-                      href={INSTAGRAM}
+                      href={currentInstagram}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
@@ -405,7 +449,7 @@ export default function AboutPage() {
                     <span className="text-[#9EA6AF] uppercase">LinkedIn:</span>
                     <a
                       className="text-white hover:text-[#D94A5B] transition-colors inline-flex items-center gap-1.5"
-                      href={LINKEDIN}
+                      href={currentLinkedin}
                       rel="noopener noreferrer"
                       target="_blank"
                     >

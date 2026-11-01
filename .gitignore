@@ -46,8 +46,11 @@ next-env.d.ts
 
 # User-selected footage for local review. Rights not yet cleared for distribution.
 /public/media/local-preview/
+/public/media/*.mp3
+/public/media/f1-soundtrack.mp3
 
 # Local CMS database, private uploads and local-only notification output
 /.data/
 *.db-wal
 *.db-shm
+/public/posters/uploads/test-*

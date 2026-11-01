@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
 import { getAllResources, saveResource, deleteResource } from '@/lib/resources-store'
+import { verifyAdminToken } from '@/lib/auth'
 
 export async function GET(request) {
   try {
@@ -16,6 +18,12 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
+    const cookieStore = await cookies()
+    const token = cookieStore.get('flux_admin_token')?.value
+    if (!verifyAdminToken(token, 'editor')) {
+      return NextResponse.json({ ok: false, error: 'Unauthorized: Editor role required' }, { status: 401 })
+    }
+
     const body = await request.json()
     if (!body.title) {
       return NextResponse.json({ ok: false, error: 'Title is required' }, { status: 400 })
@@ -34,6 +42,12 @@ export async function POST(request) {
 
 export async function DELETE(request) {
   try {
+    const cookieStore = await cookies()
+    const token = cookieStore.get('flux_admin_token')?.value
+    if (!verifyAdminToken(token, 'admin')) {
+      return NextResponse.json({ ok: false, error: 'Unauthorized: Admin role required to delete' }, { status: 401 })
+    }
+
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
     if (!id) {

@@ -1,26 +1,26 @@
-# FLUX-ECS Club Website
+# FLUX-ECS Technical Portal & Secretariat Console
 
-The official web portal of **FLUX-ECS**, the technical collective of the Department of Electronics and Computer Science at **VESIT, Mumbai**.
+The official web platform of **FLUX-ECS**, the technical collective of the Department of Electronics and Computer Science at **VESIT, Mumbai**.
 
-Rebuilt with **Next.js (App Router)**, **JavaScript**, **Tailwind CSS v3.4**, **GSAP**, and **MongoDB / Mongoose**.
+Built with **Next.js (App Router)**, **JavaScript**, **Tailwind CSS v3.4**, **GSAP**, and a single unified **API Service Layer** with local mock resilience.
 
 ---
 
-
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & Key Features
 
 - **Framework**: Next.js (App Router)
-- **Language**: JavaScript (ES6+)
-- **Styling**: Tailwind CSS v3.4 with custom theme tokens & CSS variables
-- **Motion**: GSAP + `@gsap/react` (Hero headline reveal, complexity ledger stagger, why-the-club scroll brightening)
-- **Database**: MongoDB Atlas via cached singleton Mongoose connection
-- **Fonts**: EB Garamond, Newsreader, Space Mono (via `next/font/google`), Material Symbols Outlined
+- **Language**: JavaScript (ES6+ / React 19)
+- **Styling**: Tailwind CSS v3.4 + Custom tokens (`paper`, `card`, `tan`, `ink`, `brick`, `muted`)
+- **Theme-Adaptive Custom Cursor**: Smooth, interpolated dual-element cursor that dynamically shifts hue, glow, and scale between light mode and dark mode, with magnetic expansion on interactive targets.
+- **3D Council Flip Cards**: Interactive 3D perspective flip (`rotateY(180deg)`). The front displays the member photo, name, and post; clicking the card flips it in 3D to reveal their motto/quote, written biography, and back-side social coordinates (LinkedIn, GitHub, Instagram, Phone).
+- **Single API Service Layer**: Centralized under `services/api.js` using `NEXT_PUBLIC_API_BASE_URL`. Includes loading skeletons, empty states ("No upcoming events"), and error states with retry.
+- **Auth & Secretariat Admin Panel**: Accessible at `/admin` with token-based session handling, image previews, delete confirmation dialogs, and full CRUD for Events, Posts, Council Members, and Gallery.
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Clone & Install Dependencies
+### 1. Install Dependencies
 
 ```bash
 npm install
@@ -28,18 +28,19 @@ npm install
 
 ### 2. Configure Environment Variables
 
-Copy `.env.example` to `.env.local`:
+Create `.env.local`:
 
-```bash
-cp .env.example .env.local
+```env
+# Optional External Backend Base URL (defaults to Next.js API routes when empty)
+NEXT_PUBLIC_API_BASE_URL=
+
+# Administrative console credentials
+ADMIN_PASSWORD=flux2026
+ADMIN_SECRET=flux_ecs_local_dev_hmac_secret_key_32_bytes_long
+
+# Optional MongoDB connection (Atlas or local)
+MONGODB_URI=
 ```
-
-Edit `.env.local`:
-- `MONGODB_URI`: Your MongoDB Atlas connection URI (e.g. `mongodb+srv://...`)
-- `ADMIN_PASSWORD`: Password for `/admin` access
-- `ADMIN_SECRET`: HMAC signature secret for administrative session cookies
-
-*(Note: In local development, if `MONGODB_URI` is omitted, the app will gracefully log submissions to console without crashing).*
 
 ### 3. Run Development Server
 
@@ -49,54 +50,77 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 4. Build for Production
-
-```bash
-npm run build
-npm run start
-```
-
 ---
 
-## 🌐 Routes & Pages
+## 🌐 Routes & Public Pages
 
 - `/` — **Home**: Editorial Broadsheet Masthead, GSAP-animated Hero & Complexity Ledger, Why the Club, Tools & Topics, Featured Event card, IoTA Archives glimpse, CTA banner.
-- `/events` — **Events**: Upcoming / Past tab switch (`?tab=past` supported), Algorithm's Auction card, IoTA Archives card with real lab demonstration breakdown & archival plates.
-- `/about` — **About**: Department charter, Three Pillars, Council In-charge faculty card, Core Executive Bench (5 appointments), 7 Junior Officer lithographic cards, and Google Maps iframe embed.
-- `/blog` — **Blog**: Official broadsheet gazette *The Flux Dispatch*, lead story driven from `data/posts.js` (IoTA Archives write-up), and newsletter subscription widget.
-- `/contact` — **Contact**: Council secretariat coordinates, 5 verified phone numbers, direct submission form (POST `/api/contact`), and WhatsApp group banner.
-- `/admin` — **Admin Console**: Password-protected secretariat console (`noindex`) listing dispatches, subscribers, and CSV export.
+- `/events` — **Events**: Dynamic proceedings docket auto-sorted into upcoming vs past based on dates. Includes loading skeletons and empty states.
+- `/blog` — **Blog & News**: Official broadsheet gazette *The Flux Dispatch* with category filters and newsletter subscription widget.
+- `/gallery` — **Gallery**: Department media archives with category filtering (All, Exhibition, Robotics, Hardware, Competitions) and high-res lightbox inspection.
+- `/about` — **About & Council**: Department charter, Three Pillars, Faculty In-charge cards, and 3D flipping council cards (Senior & Junior Council with back-side social icons).
+- `/contact` — **Contact**: Council secretariat coordinates, verified phones, direct inquiry form (POST `/api/contact`), and WhatsApp group banner.
+- `/admin` — **Admin Console**: Password-protected administrative secretariat console for full CRUD operations on Events, Posts, Members, and Gallery items.
 
 ---
 
-## 📡 API Endpoints
+## 📡 API Service Layer & Endpoints
 
-- `POST /api/contact` — Submits student inquiries to MongoDB with honeypot and in-memory rate limiting (5 req/min per IP).
-- `POST /api/subscribe` — Registers emails to the subscriber collection with honeypot and rate limiting.
-- `POST /api/admin/login` — Authenticates admin password and sets an `httpOnly`, `sameSite=lax`, secure cookie.
-- `GET /api/admin/export` — Cookie-protected endpoint streaming all subscribers as a CSV file.
+| Endpoint | Method | Description |
+|---|---|---|
+| `POST /api/admin/login` | POST | Authenticates administrative passkey and returns session token |
+| `GET /api/events` | GET | Returns dynamic event list |
+| `POST /api/events` | POST | Creates a new event (Title, dates, venue, poster, etc.) |
+| `PUT /api/events/:id` | PUT | Modifies existing event details |
+| `DELETE /api/events/:id` | DELETE | Removes event from public schedule |
+| `GET /api/posts` | GET | Retrieves published dispatches and stories |
+| `POST /api/posts` | POST | Publishes new gazette story |
+| `PUT /api/posts/:id` | PUT | Updates existing post |
+| `DELETE /api/posts/:id` | DELETE | Deletes post |
+| `GET /api/members` | GET | Returns active council roster with social coordinates |
+| `POST /api/members` | POST | Adds council member |
+| `PUT /api/members/:id` | PUT | Updates member bio, role, or links |
+| `DELETE /api/members/:id` | DELETE | Removes member from roster |
+| `GET /api/gallery` | GET | Returns gallery images |
+| `POST /api/gallery` | POST | Uploads/registers new gallery item |
+| `DELETE /api/gallery/:id` | DELETE | Removes gallery item |
+| `POST /api/contact` | POST | Submits student inquiries to MongoDB with rate limiting |
+| `POST /api/subscribe` | POST | Registers email to newsletter subscriber collection |
+| `GET /api/admin/export` | GET | Streams CSV export of all newsletter subscribers |
 
 ---
 
-## ☁️ Deployment on Vercel
+## 📁 Folder Structure
 
-1. Push your repository to GitHub.
-2. Import the project into [Vercel](https://vercel.com).
-3. Set the following Environment Variables in the Vercel project settings:
-   - `MONGODB_URI`
-   - `ADMIN_PASSWORD`
-   - `ADMIN_SECRET`
-4. Deploy! Vercel automatically detects Next.js.
-
----
-
-## 📋 TODOs & Confirmed Items
-
-| Ref | Item | Status | Note |
-|---|---|---|---|
-| T-01 | `INSTAGRAM` | Placeholder | Set in `data/site.js` (currently `https://www.instagram.com/flux.ecs.vesit`) |
-| T-02 | `WHATSAPP_URL` | Configured | `https://chat.whatsapp.com/E4qVg7GYjMRAERBegTFyXP` in `data/site.js` |
-| T-03 | `COUNCIL_NAME` | Configured | `"FLUX-ECS Council"` in `data/site.js` |
-| T-04 | Poster image | In Place | References `/posters/algorithms-auction.jpg`. Drop official file into `public/posters/` |
-| T-05 | Junior officer photos | In Place | Real photos can be placed into `public/team/<name>.jpg` |
-| T-06 | No `app/template.js` | Confirmed | Component `<Reveal>` pass-through provided for future animation hooks |
+```
+├── app/
+│   ├── about/page.js              # About & Department charter + Flipping Council Cards
+│   ├── admin/page.js              # Full-featured CRUD Admin Dashboard
+│   ├── api/                       # API Route Handlers (events, posts, members, gallery, admin)
+│   ├── blog/page.js               # News, announcements, event write-ups
+│   ├── contact/page.js            # Secretariat contacts and submission form
+│   ├── events/page.js             # Auto-sorted upcoming/past events with dynamic data
+│   ├── gallery/page.js            # Interactive department gallery with filters & lightbox
+│   ├── globals.css                # Custom cursor classes, 3D flip card styles, theme variables
+│   ├── layout.js                  # Custom Cursor, Navbar, Footer, Google fonts
+│   └── page.js                    # Home page
+├── components/
+│   ├── CustomCursor.js            # Dynamic cursor that adapts to light/dark theme
+│   ├── CouncilMemberCard.js       # 3D Flip Card: Front (photo/name/role), Back (bio/quote/socials)
+│   ├── SmartImage.js              # Robust image component with loading skeleton & fallback
+│   ├── EventsView.js              # Connected to api.events with loading/empty/error states
+│   ├── BlogView.js                # Connected to api.posts with loading/empty/error states
+│   ├── GalleryView.js             # Dynamic gallery view with category filtering
+│   ├── AdminDashboard.js          # Interactive tabbed admin CRUD manager with live previews & toasts
+│   └── ...
+├── data/
+│   ├── team.js                    # Enriched with verified links (LinkedIn, Insta, GitHub)
+│   ├── events.js                  # Event store & schema
+│   ├── posts.js                   # Posts store & schema
+│   ├── gallery.js                 # Gallery items store & schema
+│   └── site.js                    # Site constants
+├── services/
+│   ├── api.js                     # Unified API service layer with env base URL & fallback
+│   ├── auth.js                    # AuthService interface for login/logout/token/session
+│   └── apiContracts.md            # Comprehensive API specification for backend developers
+```

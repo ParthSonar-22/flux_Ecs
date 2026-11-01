@@ -140,3 +140,85 @@ body {
 .sticker-6 { transform: rotate(0.5deg); }
 .sticker-7 { transform: rotate(-2deg); }
 .sticker-8 { transform: rotate(1deg); }
+
+/* 3D Flip Card Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Custom Cursor Classes */
+.custom-cursor-dot {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s ease-out, height 0.15s ease-out, background-color 0.2s ease, opacity 0.2s ease;
+  will-change: transform;
+}
+
+.custom-cursor-ring {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99998;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s cubic-bezier(0.25, 1, 0.5, 1), height 0.25s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.2s ease, background-color 0.2s ease, transform 0.08s ease-out;
+  will-change: transform;
+}
+
+
+/* ─── DataRain: FLUX-ECS themed particle field ──────────────────────────────
+   Calm  = warm amber gold   (echoes the tan/parchment)
+   Mid   = warm copper       (bridges amber to brick)
+   Hot   = brick red         (matches --brick accent)
+   Light mode: very faint — particles are subtle amber wisps
+   Dark mode:  glows at full intensity against dark paper
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --dr-calm:           #c8963a;
+  --dr-mid:            #b05a2f;
+  --dr-hot:            #a6301f;
+  --dr-core:           #f6eee1;
+  --dr-vignette:       0.45;
+  --dr-grain:          0.03;
+  --dr-bloom-blur:     14px;
+  --dr-bloom-opacity:  0.55;
+  --dr-canvas-opacity: 0.18;
+}
+.dark {
+  --dr-calm:           #d4a853;
+  --dr-mid:            #c8723a;
+  --dr-hot:            #e05535;
+  --dr-core:           #efe5d6;
+  --dr-vignette:       0.62;
+  --dr-grain:          0.05;
+  --dr-bloom-opacity:  0.70;
+  --dr-canvas-opacity: 0.65;
+}
+@keyframes dr-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.dr-root { position: fixed; inset: 0; z-index: 0; overflow: hidden; animation: dr-fade-in 2s ease both; pointer-events: none; }
+.dr-root--contained { position: absolute; inset: 0; }
+.dr-bloom, .dr-main { position: absolute; inset: 0; width: 100%; height: 100%; }
+.dr-bloom { filter: blur(var(--dr-bloom-blur)); opacity: var(--dr-bloom-opacity); mix-blend-mode: screen; }
+.dr-main  { opacity: var(--dr-canvas-opacity); mix-blend-mode: screen; }
+.dr-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, transparent 35%, rgba(0,0,0,var(--dr-vignette)) 100%); pointer-events: none; }
+.dr-grain { position: absolute; inset: 0; opacity: var(--dr-grain); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); background-size: 180px 180px; pointer-events: none; }

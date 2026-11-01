@@ -9,15 +9,10 @@ import { WHATSAPP_URL } from '@/data/site'
 export default function EventsView() {
   const searchParams = useSearchParams()
   const initialTab = searchParams.get('tab') === 'past' ? 'past' : 'upcoming'
-  const [activeTab, setActiveTab] = useState(initialTab)
+  const [userTab, setUserTab] = useState(null)
+  const activeTab = userTab || initialTab
+  const setActiveTab = setUserTab
   const [lightboxPhoto, setLightboxPhoto] = useState(null)
-
-  useEffect(() => {
-    const tab = searchParams.get('tab')
-    if (tab === 'past' || tab === 'upcoming') {
-      setActiveTab(tab)
-    }
-  }, [searchParams])
 
   const upcomingList = events.filter((e) => !isPast(e))
   const pastList = events.filter((e) => isPast(e))
@@ -582,16 +577,16 @@ export default function EventsView() {
                   style={{ transform: 'rotate(-1deg)' }}
                   onClick={() =>
                     setLightboxPhoto({
-                      src: '/photos/iota-robot-floor-test.jpg',
-                      label: 'Lab 201 — Seniors showcasing projects to FE students',
+                      src: '/photos/iota-lab201-robot-demo.jpg',
+                      label: 'Lab 201 — Seniors demonstrating robot chassis to FE students',
                       sub: 'IoTA Archives · FE Induction Exhibition 2026',
                     })
                   }
                 >
-                  <div className="relative w-full aspect-[1024/574] bg-tan border border-ink/30 overflow-hidden">
+                  <div className="relative w-full aspect-[1024/581] bg-tan border border-ink/30 overflow-hidden">
                     <Image
-                      src="/photos/iota-robot-floor-test.jpg"
-                      alt="Lab 201 — seniors showcasing to FE students"
+                      src="/photos/iota-lab201-robot-demo.jpg"
+                      alt="Lab 201 — seniors showcasing robot car demo to FE students"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 300px"
@@ -663,22 +658,22 @@ export default function EventsView() {
                   </div>
                 </div>
 
-                {/* Exhibition — Seniors with FE students */}
+                {/* Exhibition — Organizing Cohort in Lab 201 */}
                 <div
                   className="bg-card border-2 border-ink p-3 shadow-md flex flex-col justify-between cursor-pointer group hover:-translate-y-1 transition-transform"
                   style={{ transform: 'rotate(0.8deg)' }}
                   onClick={() =>
                     setLightboxPhoto({
-                      src: '/photos/iota-tinkerers-lab-cohort.jpg',
-                      label: 'IoTA Archives — Seniors with FE students during the exhibition',
-                      sub: '2nd, 3rd and 4th year ECS students explaining their projects to the incoming FE batch',
+                      src: '/photos/iota-lab201-group.jpg',
+                      label: 'IoTA Archives — FLUX-ECS organizing cohort in Lab 201',
+                      sub: 'Department exhibition organized for the incoming FE batch',
                     })
                   }
                 >
-                  <div className="relative w-full aspect-[1024/581] bg-tan border border-ink/30 overflow-hidden">
+                  <div className="relative w-full aspect-[1024/646] bg-tan border border-ink/30 overflow-hidden">
                     <Image
-                      src="/photos/iota-tinkerers-lab-cohort.jpg"
-                      alt="Seniors with FE students at IoTA Archives exhibition"
+                      src="/photos/iota-lab201-group.jpg"
+                      alt="FLUX-ECS cohort at IoTA Archives exhibition in Lab 201"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 300px"
@@ -687,7 +682,7 @@ export default function EventsView() {
                   <div className="pt-3 pb-1 text-center">
                     <p className="font-handwritten text-lg text-ink font-bold">IoTA Archives</p>
                     <p className="font-body-sm text-xs text-muted mt-0.5">
-                      Seniors with FE students
+                      Organizing cohort in Lab 201
                     </p>
                   </div>
                 </div>
@@ -852,7 +847,7 @@ export default function EventsView() {
                   </p>
                 </div>
                 <span className="font-complexity-notation text-xs font-bold text-ink">
-                  22nd August 2026 · Lab 201
+                  7th September 2026 · Lab 201
                 </span>
               </div>
 

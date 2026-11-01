@@ -1,29 +1,43 @@
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { events } from '@/data/events'
+import SmartImage from '@/components/SmartImage'
+import api from '@/services/api'
+import { events as initialEvents } from '@/data/events'
 import { WHATSAPP_URL } from '@/data/site'
 
 export default function FeaturedEvent() {
-  const algoEvent = events.find((e) => e.slug === 'algorithms-auction') || events[0]
+  const [algoEvent, setAlgoEvent] = useState(
+    initialEvents.find((e) => e.slug === 'algorithms-auction') || initialEvents[0]
+  )
   const [activePosterTab, setActivePosterTab] = useState('poster') // 'poster' | 'timeline'
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  useEffect(() => {
+    let mounted = true
+    api.events.getAll().then((list) => {
+      if (mounted && Array.isArray(list) && list.length > 0) {
+        const found = list.find((e) => e.slug === 'algorithms-auction') || list[0]
+        setAlgoEvent(found)
+      }
+    }).catch(() => {})
+    return () => { mounted = false }
+  }, [])
 
   const currentAsset =
     activePosterTab === 'poster'
       ? {
-          src: algoEvent.poster,
-          label: "Algorithm's Auction — Official Event Poster",
+          src: algoEvent.poster || '/posters/algorithms-auction.jpg',
+          label: `${algoEvent.title || 'Featured Event'} — Official Event Poster`,
           aspect: 'aspect-[723/1024]',
-          sub: 'Department of Electronics and Computer Science × FLUX-ECS · 2nd–3rd November 2026',
+          sub: 'Department of Electronics and Computer Science × FLUX-ECS',
         }
       : {
-          src: algoEvent.timelineImage,
-          label: "Algorithm's Auction — Official Schedule & Timeline",
+          src: algoEvent.timelineImage || algoEvent.poster || '/posters/algorithms-auction.jpg',
+          label: `${algoEvent.title || 'Featured Event'} — Schedule & Timeline`,
           aspect: 'aspect-[16/9]',
-          sub: 'Day 1: Learn the Logic · Day 2: Bid. Solve. Win.',
+          sub: algoEvent.shortLine || 'Tournament Pipeline',
         }
 
   const bigOTiers = [
@@ -132,7 +146,7 @@ export default function FeaturedEvent() {
 
                 {/* Poster Graphic Container with exact aspect ratio */}
                 <div className={`relative w-full ${currentAsset.aspect} bg-tan`}>
-                  <Image
+                  <SmartImage
                     src={currentAsset.src}
                     alt={currentAsset.label}
                     fill
@@ -395,7 +409,7 @@ export default function FeaturedEvent() {
 
             {/* Modal Asset Display */}
             <div className="relative w-full aspect-[723/1024] max-h-[78vh] bg-ink/5">
-              <Image
+              <SmartImage
                 src={currentAsset.src}
                 alt={currentAsset.label}
                 fill

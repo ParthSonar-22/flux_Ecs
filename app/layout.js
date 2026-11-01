@@ -2,6 +2,7 @@ import { EB_Garamond, Newsreader, Space_Mono, Caveat } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import CustomCursor from '@/components/CustomCursor'
 
 const ebGaramond = EB_Garamond({
   subsets: ['latin'],
@@ -70,7 +71,7 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/logo-mark.png" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
         <script
           dangerouslySetInnerHTML={{
@@ -91,6 +92,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-screen bg-paper text-ink font-body-md antialiased selection:bg-brick selection:text-white flex flex-col justify-between">
+        <CustomCursor />
         <Navbar />
         <main className="w-full pt-16 sm:pt-20 flex-1">{children}</main>
         <Footer />

@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import Reveal from '@/components/Reveal'
+import CouncilMemberCard from '@/components/CouncilMemberCard'
 import { faculty, seniorCouncil, juniorCouncil } from '@/data/team'
 import { ADDRESS, EMAIL, GITHUB, INSTAGRAM } from '@/data/site'
 
@@ -134,36 +134,7 @@ export default function AboutPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {seniorCouncil.map((member) => (
-                <article
-                  key={member.id}
-                  className="bg-paper border-2 border-ink shadow-[4px_4px_0px_var(--tan)] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1"
-                >
-                  <div className="relative w-full aspect-[4/5] bg-tan flex items-center justify-center overflow-hidden border-b-2 border-ink">
-                    <Image
-                      src={member.photo}
-                      alt={member.name}
-                      fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 768px) 100vw, 300px"
-                    />
-                  </div>
-
-                  <div className="p-4 flex flex-col flex-1 justify-between space-y-3">
-                    <div>
-                      <h3 className="font-headline-sm text-headline-sm text-ink leading-none font-bold">
-                        {member.name}
-                      </h3>
-                      <p className="font-label-smallcaps text-label-smallcaps uppercase tracking-wider text-brick font-bold mt-1">
-                        {member.role}
-                      </p>
-                    </div>
-                    {member.quote && (
-                      <p className="font-title-editorial italic text-sm text-muted">
-                        &ldquo;{member.quote}&rdquo;
-                      </p>
-                    )}
-                  </div>
-                </article>
+                <CouncilMemberCard key={member.id} member={member} />
               ))}
             </div>
           </div>
@@ -189,36 +160,7 @@ export default function AboutPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
               {juniorCouncil.map((officer) => (
-                <article
-                  key={officer.id}
-                  className="bg-card border-2 border-ink shadow-[4px_4px_0px_var(--tan)] overflow-hidden flex flex-col justify-between group transition-transform hover:-translate-y-1"
-                >
-                  <div className="relative w-full aspect-[4/5] bg-tan flex items-center justify-center overflow-hidden border-b-2 border-ink">
-                    <Image
-                      src={officer.photo}
-                      alt={officer.name}
-                      fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 768px) 100vw, 240px"
-                    />
-                  </div>
-
-                  <div className="p-4 flex flex-col flex-1 justify-between space-y-2">
-                    <div>
-                      <h3 className="font-headline-sm text-base text-ink leading-tight font-bold">
-                        {officer.name}
-                      </h3>
-                      <p className="font-label-smallcaps text-xs uppercase tracking-wider text-brick font-bold mt-1">
-                        {officer.role}
-                      </p>
-                    </div>
-                    {officer.quote && (
-                      <p className="font-title-editorial italic text-xs text-muted">
-                        &ldquo;{officer.quote}&rdquo;
-                      </p>
-                    )}
-                  </div>
-                </article>
+                <CouncilMemberCard key={officer.id} member={officer} />
               ))}
             </div>
           </div>

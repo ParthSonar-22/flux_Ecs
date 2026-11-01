@@ -27,10 +27,24 @@ export function getRadioAudio(): HTMLAudioElement | null {
   if (!globalAudio) {
     globalAudio = new Audio(radioTrack.src)
     globalAudio.preload = 'auto'
-    globalAudio.volume = 0.65
+    globalAudio.loop = true
+    globalAudio.volume = 0.85
     globalAudio.addEventListener('play', () => notify(true))
     globalAudio.addEventListener('pause', () => notify(false))
-    globalAudio.addEventListener('ended', () => notify(false))
+    globalAudio.addEventListener('ended', () => {
+      if (!globalAudio?.loop) notify(false)
+    })
+  } else {
+    // If the configured src differs from active audio src, refresh it
+    if (radioTrack.src && !globalAudio.src.includes(radioTrack.src)) {
+      const wasPlaying = !globalAudio.paused
+      globalAudio.src = radioTrack.src
+      globalAudio.loop = true
+      globalAudio.load()
+      if (wasPlaying) {
+        globalAudio.play().catch(() => {})
+      }
+    }
   }
   return globalAudio
 }
@@ -50,7 +64,18 @@ export async function playRadio(): Promise<boolean> {
   if (!audio) return false
   try {
     audio.muted = false
-    await audio.play()
+    audio.loop = true
+    if (audio.volume < 0.2) {
+      audio.volume = 0.85
+    }
+    if (audio.ended || isNaN(audio.currentTime) || (audio.duration && audio.currentTime >= audio.duration - 0.2)) {
+      audio.currentTime = 0
+    }
+    const promise = audio.play()
+    if (promise !== undefined) {
+      await promise
+    }
+    notify(true)
     return true
   } catch (err) {
     console.warn('Radio playback error:', err)
@@ -60,8 +85,9 @@ export async function playRadio(): Promise<boolean> {
 
 export function pauseRadio(): void {
   const audio = getRadioAudio()
-  if (audio && !audio.paused) {
+  if (audio) {
     audio.pause()
+    notify(false)
   }
 }
 
@@ -70,9 +96,10 @@ export async function toggleRadio(): Promise<boolean> {
   if (!audio) return false
   if (audio.paused) {
     return playRadio()
+  } else {
+    pauseRadio()
+    return false
   }
-  pauseRadio()
-  return false
 }
 
 export function isRadioPlaying(): boolean {

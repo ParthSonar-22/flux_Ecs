@@ -19,13 +19,13 @@ const previewClips = {
 const approvedIntro = {
   src: '', // e.g. /media/intro-approved.mp4
   poster: '/media/flux-emblem.svg',
-  audioSrc: process.env.NEXT_PUBLIC_RADIO_URL || '/media/ambient-pit.wav',
+  audioSrc: process.env.NEXT_PUBLIC_RADIO_URL || '/media/f1-soundtrack.mp3',
   source: '',
   originalStartSeconds: 0,
 }
 export const introMedia = {
   ...approvedIntro,
-  audioSrc: process.env.NEXT_PUBLIC_RADIO_URL || '/media/ambient-pit.wav',
+  audioSrc: process.env.NEXT_PUBLIC_RADIO_URL || '/media/f1-soundtrack.mp3',
   ...(preview
     ? {
         ...previewClips[previewClip],

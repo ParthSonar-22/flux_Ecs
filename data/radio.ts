@@ -8,7 +8,7 @@
  * or an authorized audio stream URL configured via NEXT_PUBLIC_RADIO_URL.
  */
 export const radioTrack = {
-  title: 'Flux Pit Transmission',
-  artist: 'FluxECS Engineering Audio · Ambient Synthesizer',
-  src: process.env.NEXT_PUBLIC_RADIO_URL || '/media/ambient-pit.wav',
+  title: 'Lose My Mind (feat. Doja Cat)',
+  artist: 'Don Toliver · F1® The Movie',
+  src: process.env.NEXT_PUBLIC_RADIO_URL || '/media/f1-soundtrack.mp3',
 }
